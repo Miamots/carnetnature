@@ -754,6 +754,21 @@ function calendarHTML(gid,g){const days=groupDays(gid);const plan=new Set(g.meet
   return `<section class="card"><div class="ordhead"><h3 style="font-size:1.35rem">Calendrier des rencontres</h3><span class="calnav"><button class="btn ghost small" data-act="calNav" data-id="${gid}" data-d="-1" aria-label="Mois précédent">‹</button><b class="calt">${esc(title)}</b><button class="btn ghost small" data-act="calNav" data-id="${gid}" data-d="1" aria-label="Mois suivant">›</button></span></div>
   <div class="cal"><span class="cdow">L</span><span class="cdow">M</span><span class="cdow">M</span><span class="cdow">J</span><span class="cdow">V</span><span class="cdow">S</span><span class="cdow">D</span>${cells.join("")}</div>
   <p class="muted small" style="margin:8px 0 0"><span class="cleg has"><i></i></span> rencontre avec des notes · <span class="cleg plan"><i></i></span> rencontre prévue · Touchez une date pour le journal du groupe et les notes de ce jour-là.${n?"":" Aucune note ce mois-ci."}</p></section>`}
+function importInfo(gid,d){const g=S.groups.get(gid);const kids=childrenOf(gid);let notes=0,cases=0;
+  kids.forEach(([cid,c])=>{notes+=(c.notes||[]).filter(n=>n.date===d&&n.src==="groupe").length+(c.explore||[]).filter(n=>n.date===d&&n.src==="groupe").length+(c.objectifs||[]).filter(n=>n.date===d&&n.src==="groupe").length+(((c.free||{})["portrait.famille"])||[]).filter(n=>n.date===d&&n.src==="groupe").length;
+    const im=(c.imports||{})[d];if(im)cases+=im.checks.length+im.ny.length;else{["checks","notyet"].forEach(f=>Object.values(c[f]||{}).forEach(l=>{if(l.includes(d))cases++}))}});
+  const jn=(g.journal||[]).filter(n=>n.date===d&&n.src==="groupe").length;return{notes,cases,jn,tagged:kids.some(([,c])=>(c.imports||{})[d])||!!(g.imports||{})[d]}}
+function undoImport(gid,d){const kids=childrenOf(gid);
+  kids.forEach(([cid,c])=>{const x=JSON.parse(JSON.stringify(c));const im=(x.imports||{})[d];const rmD=(o,k)=>{if(o&&o[k]){o[k]=o[k].filter(v=>v!==d);if(!o[k].length)delete o[k]}};
+    x.notes=(x.notes||[]).filter(n=>!(n.date===d&&n.src==="groupe"));x.explore=(x.explore||[]).filter(n=>!(n.date===d&&n.src==="groupe"));x.objectifs=(x.objectifs||[]).filter(n=>!(n.date===d&&n.src==="groupe"));
+    if(x.free&&x.free["portrait.famille"])x.free["portrait.famille"]=x.free["portrait.famille"].filter(n=>!(n.date===d&&n.src==="groupe"));
+    if(im){im.checks.forEach(k=>rmD(x.checks,k));im.ny.forEach(k=>rmD(x.notyet,k));im.facs.forEach(k=>rmD(x.facil,k));im.sout.forEach(v=>{const [r,t]=v.split("|");if(x.sout&&x.sout[r])x.sout[r]=x.sout[r].filter(e=>!(e.d===d&&e.t===t))});delete x.imports[d]}
+    else{["checks","notyet","facil"].forEach(f=>Object.keys(x[f]||{}).forEach(k=>rmD(x[f],k)));Object.keys(x.sout||{}).forEach(r=>{x.sout[r]=x.sout[r].filter(e=>e.d!==d)})}
+    S.children.set(cid,x);persist("children",cid)});
+  mutGroup(gid,g=>{g.journal=(g.journal||[]).filter(n=>!(n.date===d&&n.src==="groupe"));const gi=(g.imports||{})[d];
+    if(gi){if(g.presences&&g.presences[d])g.presences[d]=g.presences[d].filter(x=>!gi.pres.includes(x));(gi.obj||[]).forEach(v=>{const [o,cid]=v.split("|");if(g.objRes&&g.objRes[d]&&g.objRes[d][o])delete g.objRes[d][o][cid]});delete g.imports[d]}
+    else{if(g.presences)delete g.presences[d];if(g.objRes)delete g.objRes[d]}});
+  toast("Import du "+fmtD(d)+" annulé")}
 function calDaySheet(gid,d){const g=S.groups.get(gid);const info=groupDays(gid).get(d)||{};const pl=(g.meetings||[]).includes(d);
   const items=dayItems(gid,d).filter(it=>it.kind!=="j");const jl=(g.journal||[]).filter(n=>n.date===d&&n.theme!=="source"&&n.theme!=="jour");const pr=(presOf(g,d)||[]).map(id=>(S.children.get(id)||{}).name).filter(Boolean);const cx=ctxOf(gid,d);
   const jn=(g.journal||[]).filter(n=>n.date===d&&(n.theme==="source"||n.theme==="jour"));
@@ -766,12 +781,18 @@ function calDaySheet(gid,d){const g=S.groups.get(gid);const info=groupDays(gid).
   <label class="f">Ajouter au journal (climat, aménagement, à arrimer avec l'école)<textarea class="field" id="cdText" placeholder="Ex. : groupe calme à l'arrivée, belle entraide à la cabane."></textarea></label>
   <div class="row-actions"><select class="field" id="cdTheme" style="flex:0 0 auto">${Object.entries(JTHEMES).filter(([k])=>k!=="source"&&k!=="jour").map(([k,v])=>`<option value="${k}">${v}</option>`).join("")}</select><button class="btn primary" id="cdAdd">Ajouter</button>${micBtn("cdText")}</div>
   <div class="row-actions"><button class="btn" id="cdPaste">Note complète pour cette date</button><button class="btn" id="cdDay">Notes du jour</button></div>
+  ${(()=>{const ii=importInfo(gid,d);return ii.notes||ii.jn?`<div class="row-actions"><button class="btn danger" id="cdUndo">Annuler l'import de ce jour</button></div>`:""})()}
   <div class="row-actions"><button class="btn" id="cdObs">${d===S.obsDate?"✓ Date d'observation":"Observer à cette date"}</button><button class="btn" id="cdPlan">${pl?"Retirer la rencontre prévue":"Marquer comme rencontre prévue"}</button></div>
   <button class="btn" id="cdClose">Fermer</button>`,s=>{
     s.querySelector("#cdClose").onclick=closeSheet;
     s.querySelector("#cdAdd").onclick=()=>{const t=s.querySelector("#cdText").value.trim();if(!t){s.querySelector("#cdText").focus();return}const th=s.querySelector("#cdTheme").value;s.querySelector("#cdText").value="";mutGroup(gid,x=>{(x.journal=x.journal||[]).push({id:uid("j"),date:d,text:t,src:"manuel",theme:th,by:getMe()})});toast("Ajouté au journal du "+fmtD(d));calDaySheet(gid,d)};
     s.querySelectorAll("[data-jdel]").forEach(x=>x.onclick=()=>{const nid=x.dataset.jdel;confirmSheetCustom("Supprimer cette entrée du journal ?","Supprimer",()=>{mutGroup(gid,g2=>{g2.journal=(g2.journal||[]).filter(n=>n.id!==nid)});calDaySheet(gid,d)},()=>calDaySheet(gid,d))});
     s.querySelector("#cdPaste").onclick=()=>pasteSheet(gid,d);
+    const un=s.querySelector("#cdUndo");if(un)un.onclick=()=>{const ii=importInfo(gid,d);openSheet(`<h3>Annuler l'import du ${esc(fmtD(d,true))} ?</h3>
+      <p class="small" style="margin:0">Seront retirés : ${ii.notes} note${ii.notes>1?"s":""} importée${ii.notes>1?"s":""} des enfants, ${ii.jn?ii.jn+" note"+(ii.jn>1?"s":"")+" de groupe (dont la note originale)":"aucune note de groupe"}${ii.cases?`, ${ii.cases} case${ii.cases>1?"s":""} cochée${ii.cases>1?"s":""}`:""}, ${ii.tagged?"et les présences, soutiens et facilitateurs ajoutés par l'import":"ainsi que les présences, soutiens et facilitateurs de cette date"}.</p>
+      ${ii.tagged?"":`<p class="small" style="margin:0"><b>Attention :</b> cet import date d'avant le suivi des imports. Toutes les cases de cette date seront retirées, même celles cochées à la main.</p>`}
+      <p class="muted small" style="margin:0">Les notes que vous avez écrites vous-même dans l'app restent. Vous pourrez réimporter la note ensuite.</p>
+      <div class="row-actions"><button class="btn danger" id="uOk">Annuler l'import</button><button class="btn" id="uNo">Garder</button></div>`,s2=>{s2.querySelector("#uNo").onclick=()=>calDaySheet(gid,d);s2.querySelector("#uOk").onclick=()=>{undoImport(gid,d);calDaySheet(gid,d)}})};
     s.querySelector("#cdDay").onclick=()=>daySheet(gid,d);
     s.querySelector("#cdObs").onclick=()=>{S.obsDate=d;closeSheet();render();toast("Date d'observation : "+fmtD(d,true))};
     s.querySelector("#cdPlan").onclick=()=>{mutGroup(gid,x=>{const l=x.meetings||[];x.meetings=pl?l.filter(v=>v!==d):l.concat(d).sort()});calDaySheet(gid,d)};
@@ -1724,9 +1745,9 @@ function reviewItems(s,gid,date,bloc,kids,srcText,onNext){
     rows.forEach((r,i)=>{if(!s.querySelector("#rk"+i).checked)return;const cid=s.querySelector("#rc"+i).value,sec=s.querySelector("#rs"+i).value,rk=s.querySelector("#rr"+i).value,type=s.querySelector("#rt"+i+"t").value,text=s.querySelector("#rt"+i).value.trim();if(!text)return;if(!cid){missing++;return}
       if(cid==="__groupe"){toJournal.push({text,theme:s.querySelector("#rj"+i).value});return}
       const b=bucket(cid);
-      if(type==="explorer")b.explore.push({id:uid("x"),date,text,by});
-      else if(type==="prochain")b.next.push({id:uid("o"),label:text,k:rk||"",occ:sec==="portrait"?"":sec,date,marks:{}});
-      else if(type==="famille")b.famille.push({id:uid("f"),date,text,by});
+      if(type==="explorer")b.explore.push({id:uid("x"),date,text,by,src:"groupe"});
+      else if(type==="prochain")b.next.push({id:uid("o"),label:text,k:rk||"",occ:sec==="portrait"?"":sec,date,marks:{},src:"groupe"});
+      else if(type==="famille")b.famille.push({id:uid("f"),date,text,by,src:"groupe"});
       else b.notes.push(Object.assign({id:uid("n"),section:sec,date,text,src:"groupe",by},rk?{k:rk}:{},r.obj?{obj:r.obj.id}:{}));
       nNotes++;
       r.reps.forEach((k,j)=>{if(s.querySelector(`#rq${i}_${j}`)?.checked){b.checks.push(k);nChecks++}});
@@ -1739,15 +1760,19 @@ function reviewItems(s,gid,date,bloc,kids,srcText,onNext){
     byChild.forEach((b,cid)=>{const c=S.children.get(cid);const x=JSON.parse(JSON.stringify(c));
       x.notes=(x.notes||[]).concat(b.notes);x.explore=(x.explore||[]).concat(b.explore);x.objectifs=(x.objectifs||[]).concat(b.next);
       if(b.famille.length){x.free=x.free||{};x.free["portrait.famille"]=(x.free["portrait.famille"]||[]).concat(b.famille)}
-      x.checks=x.checks||{};b.checks.forEach(k=>{const a=x.checks[k]||[];if(!a.includes(date))a.push(date);x.checks[k]=a});
-      x.notyet=x.notyet||{};b.ny.forEach(k=>{const a=x.notyet[k]||[];if(!a.includes(date))a.push(date);x.notyet[k]=a});
-      x.sout=x.sout||{};b.eng.forEach(({row,ts})=>{const a=x.sout[row]||[];ts.forEach(t=>{if(!a.some(e=>e.d===date&&e.t===t))a.push({t,d:date})});x.sout[row]=a});
-      x.facil=x.facil||{};b.facs.forEach(k=>{const a=x.facil[k]||[];if(!a.includes(date))a.push(date);x.facil[k]=a});
-      repairKeys(x);S.children.set(cid,x);persist("children",cid)});
+      const im={checks:[],ny:[],sout:[],facs:[]};
+      x.checks=x.checks||{};b.checks.forEach(k=>{const a=x.checks[k]||[];if(!a.includes(date)){a.push(date);im.checks.push(k)}x.checks[k]=a});
+      x.notyet=x.notyet||{};b.ny.forEach(k=>{const a=x.notyet[k]||[];if(!a.includes(date)){a.push(date);im.ny.push(k)}x.notyet[k]=a});
+      x.sout=x.sout||{};b.eng.forEach(({row,ts})=>{const a=x.sout[row]||[];ts.forEach(t=>{if(!a.some(e=>e.d===date&&e.t===t)){a.push({t,d:date});im.sout.push(row+"|"+t)}});x.sout[row]=a});
+      x.facil=x.facil||{};b.facs.forEach(k=>{const a=x.facil[k]||[];if(!a.includes(date)){a.push(date);im.facs.push(k)}x.facil[k]=a});
+      repairKeys(x);im.checks=im.checks.map(k=>fixKey(x,k)||k);im.ny=im.ny.map(k=>fixKey(x,k)||k);im.sout=im.sout.map(v=>{const [r,t]=v.split("|");return (fixKey(x,r)||r)+"|"+t});
+      x.imports=x.imports||{};const pi=x.imports[date]||{checks:[],ny:[],sout:[],facs:[]};Object.keys(im).forEach(f=>pi[f]=[...new Set((pi[f]||[]).concat(im[f]))]);x.imports[date]=pi;S.children.set(cid,x);persist("children",cid)});
     const gg=JSON.parse(JSON.stringify(S.groups.get(gid)));
     if(toJournal.length)gg.journal=(gg.journal||[]).concat(toJournal.map(t=>({id:uid("j"),date,text:t.text,theme:t.theme,src:"groupe",by})));
     if(srcText)gg.journal=(gg.journal||[]).concat({id:uid("j"),date,text:srcText,theme:"source",src:"groupe",by});
-    const pr=[...s.querySelectorAll(".rpres:checked")].map(x=>x.value);if(pr.length){gg.presences=gg.presences||{};gg.presences[date]=[...new Set((gg.presences[date]||[]).concat(pr))]}
+    const pr=[...s.querySelectorAll(".rpres:checked")].map(x=>x.value);gg.imports=gg.imports||{};const gi=gg.imports[date]=gg.imports[date]||{pres:[],obj:[]};
+    if(pr.length){gg.presences=gg.presences||{};const before=gg.presences[date]||[];gi.pres=[...new Set(gi.pres.concat(pr.filter(x=>!before.includes(x))))];gg.presences[date]=[...new Set(before.concat(pr))]}
+    gi.obj=(gi.obj||[]).concat(objMarks.map(m=>m.id+"|"+m.cid));
     if(objMarks.length){gg.objRes=gg.objRes||{};const day=gg.objRes[date]=gg.objRes[date]||{};objMarks.forEach(m=>{(day[m.id]=day[m.id]||{})[m.cid]=m.v})}
     S.groups.set(gid,gg);persist("groups",gid);
     toast(`${fmtD(date)} : ${nNotes+toJournal.length} extraits${nChecks?" et "+nChecks+" cases":""} enregistrés`);if(onNext){render();onNext();return}closeSheet();render();
