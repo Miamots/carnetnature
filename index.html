@@ -80,9 +80,9 @@ main{max-width:980px;margin:0 auto;padding:12px 16px 80px;display:flex;flex-dire
 
 /* Enfant */
 .chead{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-.chead .av{width:76px;height:76px;object-fit:contain}
+.chead .av{width:58px;height:58px;object-fit:contain}.chead h2 .gear{width:30px;height:30px;margin-left:8px;vertical-align:middle}
 .chead .who{flex:1;min-width:160px}
-.chead h2{font-size:1.9rem}
+.chead h2{font-size:1.7rem;display:flex;align-items:center}.chead{padding-top:12px;padding-bottom:12px}
 .obsdate{display:flex;flex-direction:column;gap:4px}
 .obsdate input{border:1px solid var(--line);border-radius:10px;padding:6px 10px;background:#fff}
 .secgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
@@ -283,6 +283,13 @@ details.pdet[open]>summary .ptitle::before{content:"▾ "}
 .cpres{flex:1 1 100%;font-size:.9rem;margin-top:6px}.pdots{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}.pdots span{min-width:24px;height:24px;border-radius:7px;border:1px dashed #ccc;color:#aaa;font-size:.72rem;display:inline-flex;align-items:center;justify-content:center}.pdots span.on{background:#E6F2E1;border:1px solid #9CC596;color:#2C5A38;font-weight:700}
 .ahand.alink{padding:2px 6px;border:1px solid var(--line);border-radius:10px;background:#FBF8F1}
 .rphotos{margin:6px 0 2px}.rphotos .label{display:block;margin-bottom:4px}
+.kpills{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:6px;margin-top:8px}
+.kpill{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:3px 10px 3px 3px;color:inherit;text-decoration:none;font-weight:600;font-size:.9rem;min-width:0}
+.kpill img{width:30px;height:30px;flex:none}.kpill span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ibtn{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;margin-left:6px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--muted,#777);font:italic 700 .75rem Georgia,serif;cursor:pointer;vertical-align:2px;padding:0}.ibtn.on{background:var(--forest,#2C5A38);color:#fff;border-color:var(--forest,#2C5A38)}
+.ricons .ibtn{width:32px;height:32px;margin:0}
+.ogdet>summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:6px}.ogdet>summary::-webkit-details-marker{display:none}.ogdet>summary::before{content:"▸";color:var(--forest,#2C5A38);font-size:1rem}.ogdet[open]>summary::before{content:"▾"}
+.cdj{border:1px solid var(--line);border-radius:12px;padding:8px 10px;background:#FDFBF6}
 .step.hid{opacity:.5;border-style:dashed;background:#F6F4EE}.hidlink{color:var(--muted,#777)}
 .step.ag-watch{box-shadow:inset 4px 0 0 #E2B65A;background:#FFFBF0}
 .step.ag-later .ag{opacity:.7}
@@ -721,18 +728,12 @@ function viewGroup(gid){
   <div class="label" style="margin:14px 0 6px">Mode activité · une observation pour tous</div><div class="secnav wrap">${OCCS.map(o=>`<a href="#g-${gid}--${o.subs[0]}"><img src="${img(o.img)}" alt="">${esc(o.n)}. ${esc(shortT(o.titre))}</a>`).join("")}</div>
   </section>`;
   h+=calendarHTML(gid,g);
-  h+=`<section class="card"><h3 style="font-size:1.35rem;margin-bottom:10px">Enfants</h3><div class="grid">`;
-  kids.forEach(([id,c])=>{const ld=lastDate(c);const nChk=Object.values(c.checks||{}).filter(a=>a.length).length;
-    h+=`<a class="tile" href="#e-${id}"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><h3>${esc(c.name)}</h3><span class="meta">${c.dob?esc(ageAt(c.dob))+" · ":""}${nChk} repère${nChk>1?"s":""}${(()=>{const pd=presDates(g);return pd.length?"<br>Présences "+pd.filter(d=>g.presences[d].includes(id)).length+"/"+pd.length:""})()}${ld?"<br>Dernière obs. "+fmtD(ld):""}</span></a>`});
-  h+=`<button class="tile add" data-act="newChild" data-id="${gid}"><span class="plus">+</span>Ajouter un enfant</button></div></section>`;
+  {const pd=presDates(g);const sk=kids.slice().sort((x,y)=>x[1].name.localeCompare(y[1].name,"fr",{sensitivity:"base"}));
+  h+=`<section class="card"><div class="ordhead"><h3 style="font-size:1.35rem">Enfants <span class="muted small" style="font-family:var(--font-body);font-weight:400">(${kids.length})</span></h3><span class="row-actions"><button class="btn small" data-act="newChild" data-id="${gid}">+ Un enfant</button><button class="btn small" data-act="bulkKids" data-id="${gid}">+ Plusieurs</button></span></div>
+  <div class="kpills">${sk.map(([id,c])=>`<a class="kpill" href="#e-${id}" title="${esc(c.name)}${c.dob?" · "+esc(ageAt(c.dob)):""}${pd.length?" · présences "+pd.filter(d=>g.presences[d].includes(id)).length+"/"+pd.length:""}"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><span>${esc(c.name)}</span></a>`).join("")}</div>${kids.length?"":`<p class="muted small">Aucun enfant pour l'instant.</p>`}</section>`}
   if(kids.length)h+=presenceHTML(gid,g,kids);
   h+=objectivesHTML(gid,g,kids);
 
-  const j=(g.journal||[]).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));
-  h+=`<section class="card"><h3 style="font-size:1.35rem">Journal du groupe</h3><p class="muted small" style="margin:2px 0 10px">Climat et dynamique, aménagement de l'environnement, ce qui est à arrimer avec l'école.</p>
-  <div class="addnote"><textarea class="field" id="jtext" placeholder="Ex. : Journée froide et venteuse, groupe calme à l'arrivée, belle entraide à la cabane."></textarea>
-  <div class="row-actions"><input type="date" class="field" id="jdate" value="${S.obsDate}" style="flex:0 0 auto"><select class="field" id="jtheme" style="flex:0 0 auto">${Object.entries(JTHEMES).filter(([k])=>k!=="source"&&k!=="jour").map(([k,v])=>`<option value="${k}">${v}</option>`).join("")}</select><button class="btn primary" data-act="addJournal" data-id="${gid}">Ajouter au journal</button></div></div>
-  <div class="entries" style="margin-top:10px">${j.map(n=>n.theme==="source"||n.theme==="jour"?det("src-"+n.id,`<span class="when">${fmtD(n.date)}</span> ${n.theme==="jour"?"Note complète de la journée":"Note originale complète"}`,`<div class="entry"><span class="txt">${esc(n.text)}</span><button class="x" title="Supprimer" aria-label="Supprimer" data-act="delJournal" data-id="${gid}" data-n="${n.id}">✕</button></div>`):`<div class="entry"><span class="when">${fmtD(n.date)}</span><span class="txt">${n.theme&&JTHEMES[n.theme]?`<span class="tag" style="margin:0 6px 0 0">${JTHEMES[n.theme]}</span>`:""}${esc(n.text)}${n.src==="groupe"?'<span class="tag">notes collées</span>':""}${byTag(n)}</span><button class="x" title="Supprimer" aria-label="Supprimer" data-act="delJournal" data-id="${gid}" data-n="${n.id}">✕</button></div>`).join("")||'<p class="muted small">Aucune entrée pour l\'instant.</p>'}</div></section>`;
   if(kids.length)h+=covHTML(gid,g,kids);else h+=`<section class="card"><h3 style="font-size:1.35rem">Récapitulatif du groupe</h3><button class="btn" data-act="recap" data-id="${gid}">Ouvrir le récapitulatif</button></section>`;
   return h;
 }
@@ -752,21 +753,24 @@ function calendarHTML(gid,g){const days=groupDays(gid);const plan=new Set(g.meet
   const n=[...days.keys()].filter(d=>d.startsWith(ym)).length;
   return `<section class="card"><div class="ordhead"><h3 style="font-size:1.35rem">Calendrier des rencontres</h3><span class="calnav"><button class="btn ghost small" data-act="calNav" data-id="${gid}" data-d="-1" aria-label="Mois précédent">‹</button><b class="calt">${esc(title)}</b><button class="btn ghost small" data-act="calNav" data-id="${gid}" data-d="1" aria-label="Mois suivant">›</button></span></div>
   <div class="cal"><span class="cdow">L</span><span class="cdow">M</span><span class="cdow">M</span><span class="cdow">J</span><span class="cdow">V</span><span class="cdow">S</span><span class="cdow">D</span>${cells.join("")}</div>
-  <p class="muted small" style="margin:8px 0 0"><span class="cleg has"><i></i></span> rencontre avec des notes · <span class="cleg plan"><i></i></span> rencontre prévue · Touchez une date pour y ajouter une note.${n?"":" Aucune note ce mois-ci."}</p></section>`}
+  <p class="muted small" style="margin:8px 0 0"><span class="cleg has"><i></i></span> rencontre avec des notes · <span class="cleg plan"><i></i></span> rencontre prévue · Touchez une date pour le journal du groupe et les notes de ce jour-là.${n?"":" Aucune note ce mois-ci."}</p></section>`}
 function calDaySheet(gid,d){const g=S.groups.get(gid);const info=groupDays(gid).get(d)||{};const pl=(g.meetings||[]).includes(d);
-  const items=dayItems(gid,d);const pr=(presOf(g,d)||[]).map(id=>(S.children.get(id)||{}).name).filter(Boolean);const cx=ctxOf(gid,d);
+  const items=dayItems(gid,d).filter(it=>it.kind!=="j");const jl=(g.journal||[]).filter(n=>n.date===d&&n.theme!=="source"&&n.theme!=="jour");const pr=(presOf(g,d)||[]).map(id=>(S.children.get(id)||{}).name).filter(Boolean);const cx=ctxOf(gid,d);
   const jn=(g.journal||[]).filter(n=>n.date===d&&(n.theme==="source"||n.theme==="jour"));
   openSheet(`<h3>${esc(fmtD(d,true))}</h3>
   ${pr.length||cx?`<p class="small" style="margin:0">${pr.length?`<b>Présences :</b> ${esc(pr.join(", "))}`:""}${pr.length&&cx?"<br>":""}${cx?`<b>Contexte :</b> ${esc(cx)}`:""}</p>`:""}
-  <p class="muted small" style="margin:0">${items.length?`${items.length} note${items.length>1?"s":""} ce jour-là`:"Aucune note ce jour-là."}${info.chk?` · ${info.chk} étape${info.chk>1?"s":""} cochée${info.chk>1?"s":""}`:""}${jn.length?" · note complète gardée":""}</p>
+  <p class="muted small" style="margin:0">${items.length?`${items.length} note${items.length>1?"s":""} ce jour-là`:"Aucune note ce jour-là."}${info.chk?` · ${info.chk} étape${info.chk>1?"s":""} cochée${info.chk>1?"s":""}`:""}</p>
   ${items.length?`<details class="more"><summary>Voir les notes</summary><div class="entries">${items.map(it=>`<div class="entry"><span class="txt"><b class="small">${esc(it.who)} · ${esc(it.where)}</b><br>${esc(it.text)}</span></div>`).join("")}</div></details>`:""}
-  <label class="f">Note au journal du groupe pour cette date<textarea class="field" id="cdText" placeholder="Ex. : groupe calme à l'arrivée, belle entraide à la cabane."></textarea></label>
+  <div class="cdj"><span class="label">Journal du groupe</span>${jl.length?`<div class="entries">${jl.map(n=>`<div class="entry"><span class="txt">${n.theme&&JTHEMES[n.theme]?`<span class="tag" style="margin:0 6px 0 0">${JTHEMES[n.theme]}</span>`:""}${esc(n.text)}${byTag(n)}</span><button class="x" aria-label="Supprimer" data-jdel="${n.id}">✕</button></div>`).join("")}</div>`:`<p class="muted small" style="margin:2px 0 0">Rien encore pour ce jour-là.</p>`}
+  ${jn.map(n=>`<details class="more"><summary>${n.theme==="jour"?"Note complète de la journée":"Note originale complète"}</summary><div class="entry"><span class="txt" style="white-space:pre-wrap">${esc(n.text)}</span><button class="x" aria-label="Supprimer" data-jdel="${n.id}">✕</button></div></details>`).join("")}</div>
+  <label class="f">Ajouter au journal (climat, aménagement, à arrimer avec l'école)<textarea class="field" id="cdText" placeholder="Ex. : groupe calme à l'arrivée, belle entraide à la cabane."></textarea></label>
   <div class="row-actions"><select class="field" id="cdTheme" style="flex:0 0 auto">${Object.entries(JTHEMES).filter(([k])=>k!=="source"&&k!=="jour").map(([k,v])=>`<option value="${k}">${v}</option>`).join("")}</select><button class="btn primary" id="cdAdd">Ajouter</button>${micBtn("cdText")}</div>
   <div class="row-actions"><button class="btn" id="cdPaste">Note complète pour cette date</button><button class="btn" id="cdDay">Notes du jour</button></div>
   <div class="row-actions"><button class="btn" id="cdObs">${d===S.obsDate?"✓ Date d'observation":"Observer à cette date"}</button><button class="btn" id="cdPlan">${pl?"Retirer la rencontre prévue":"Marquer comme rencontre prévue"}</button></div>
   <button class="btn" id="cdClose">Fermer</button>`,s=>{
     s.querySelector("#cdClose").onclick=closeSheet;
     s.querySelector("#cdAdd").onclick=()=>{const t=s.querySelector("#cdText").value.trim();if(!t){s.querySelector("#cdText").focus();return}const th=s.querySelector("#cdTheme").value;s.querySelector("#cdText").value="";mutGroup(gid,x=>{(x.journal=x.journal||[]).push({id:uid("j"),date:d,text:t,src:"manuel",theme:th,by:getMe()})});toast("Ajouté au journal du "+fmtD(d));calDaySheet(gid,d)};
+    s.querySelectorAll("[data-jdel]").forEach(x=>x.onclick=()=>{const nid=x.dataset.jdel;confirmSheetCustom("Supprimer cette entrée du journal ?","Supprimer",()=>{mutGroup(gid,g2=>{g2.journal=(g2.journal||[]).filter(n=>n.id!==nid)});calDaySheet(gid,d)},()=>calDaySheet(gid,d))});
     s.querySelector("#cdPaste").onclick=()=>pasteSheet(gid,d);
     s.querySelector("#cdDay").onclick=()=>daySheet(gid,d);
     s.querySelector("#cdObs").onclick=()=>{S.obsDate=d;closeSheet();render();toast("Date d'observation : "+fmtD(d,true))};
@@ -819,18 +823,20 @@ const OBJ_SUGG=[["Arrivée","groupe"],["Départ","groupe"],["Transition vers la 
 function objRes(g,d){return ((g.objRes||{})[d])||{}}
 function objectivesHTML(gid,g,kids){
   const objs=g.objectifs||[];const res=objRes(g,S.obsDate);const ed=S.objEdit===gid;
-  let h=`<section class="card"><div class="ordhead"><h3 style="font-size:1.35rem">Objectifs de groupe</h3><button class="btn${ed?" primary":""}" data-act="objEdit" data-id="${gid}">${ed?"Terminer":"Modifier les objectifs"}</button></div>`;
-  if(!objs.length&&!ed){h+=`<p class="muted small" style="margin:6px 0 10px">Ajoutez les moments à suivre pour tout le groupe, puis cochez chaque enfant d'un geste.</p><div class="row-actions">${OBJ_SUGG.map(([l])=>`<button class="btn" data-act="objSugg" data-id="${gid}" data-l="${esc(l)}">+ ${esc(l)}</button>`).join("")}</div></section>`;return h}
+  S.ogInit=S.ogInit||new Set();if(objs.length&&!S.ogInit.has(gid)){openDetails.add("og-"+gid);S.ogInit.add(gid)}if(ed)openDetails.add("og-"+gid);
+  let h=`<section class="card objcard"><details class="ogdet" data-dk="og-${gid}" ${openDetails.has("og-"+gid)?"open":""}><summary><h3 style="font-size:1.35rem;display:inline">Objectifs de groupe</h3> <span class="muted small">${objs.length?"("+objs.length+")":"aucun"}</span></summary>
+  <div class="row-actions" style="margin-top:8px"><button class="btn small${ed?" primary":""}" data-act="objEdit" data-id="${gid}">${ed?"Terminer":objs.length?"Modifier les objectifs":"Ajouter un objectif"}</button></div>`;
+  if(!objs.length&&!ed){h+=`<p class="muted small" style="margin:6px 0 0">Des moments à suivre pour tout le groupe (arrivée, transitions, dîner…), puis on coche chaque enfant d'un geste.</p></details></section>`;return h}
   if(ed){h+=`<div class="entries" style="margin-top:10px">${objs.map(o=>`<div class="entry"><span class="txt">${esc(o.label)}</span><button class="x" aria-label="Retirer" data-act="objDel" data-id="${gid}" data-o="${o.id}">✕</button></div>`).join("")}</div>
     <div class="addline" style="margin-top:8px"><input class="field" id="objNew" placeholder="Nouvel objectif (ex. : Ranger son matériel)"><button class="btn primary" data-act="objAdd" data-id="${gid}">Ajouter</button></div>
-    <div class="row-actions" style="margin-top:8px">${OBJ_SUGG.filter(([l])=>!objs.some(o=>o.label===l)).map(([l])=>`<button class="btn" data-act="objSugg" data-id="${gid}" data-l="${esc(l)}">+ ${esc(l)}</button>`).join("")}</div></section>`;return h}
+    </details></section>`;return h}
   h+=`<div class="toolbar" style="margin:6px 0 4px"><label class="obsdate small"><span class="label">Date</span><input type="date" value="${S.obsDate}" data-act="obsDate"></label><span class="muted small">Touchez un enfant : réussi ✓, puis pas encore ✗, puis vide. Touchez le nom pour une note.</span></div>`;
   objs.forEach(o=>{const r=res[o.id]||{};const ok=kids.filter(([cid])=>r[cid]==="ok").length,no=kids.filter(([cid])=>r[cid]==="no").length;
     h+=`<div class="objrow"><div class="objhead"><b>${esc(o.label)}</b><span class="muted small">${ok} réussi${ok>1?"s":""}${no?" · "+no+" pas encore":""}</span></div><div class="kids">${kids.map(([cid,c])=>{const v=r[cid]||"";const hasNote=(c.notes||[]).some(n=>n.obj===o.id&&n.date===S.obsDate);
       return `<div class="kchip ${v}"><button class="kmark" data-act="objMark" data-id="${gid}" data-o="${o.id}" data-c="${cid}" aria-label="${esc(c.name)} : ${v==="ok"?"réussi":v==="no"?"pas encore":"non noté"}"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><span class="sym">${v==="ok"?"✓":v==="no"?"✗":""}</span></button><button class="kname" data-act="objNote" data-id="${gid}" data-o="${o.id}" data-c="${cid}">${esc(c.name)}${hasNote?" •":""}</button></div>`}).join("")}</div></div>`});
   const dates=Object.keys(g.objRes||{}).filter(d=>Object.values(g.objRes[d]||{}).some(x=>Object.keys(x).length)).sort().reverse();
   if(dates.length)h+=det("oh-"+gid,`Historique (${dates.length} jour${dates.length>1?"s":""})`,`<div class="cov-wrap"><table class="cov"><thead><tr><th></th>${objs.map(o=>`<th><span>${esc(o.label)}</span></th>`).join("")}</tr></thead><tbody>${dates.map(d=>`<tr><th>${fmtD(d)}</th>${objs.map(o=>{const r=(g.objRes[d]||{})[o.id]||{};const ok=Object.values(r).filter(v=>v==="ok").length,tot=Object.values(r).filter(Boolean).length;return `<td class="${tot?ok/tot>=.75?"c3":ok/tot>=.4?"c2":"c1":"c0"}"><span style="display:block;padding:6px 4px">${tot?ok+"/"+tot:"—"}</span></td>`}).join("")}</tr>`).join("")}</tbody></table></div>`);
-  return h+`</section>`;
+  return h+`</details></section>`;
 }
 function objNoteSheet(gid,oid,cid){const g=S.groups.get(gid);const o=(g.objectifs||[]).find(x=>x.id===oid);const c=S.children.get(cid);if(!o||!c)return;
   const list=(c.notes||[]).filter(n=>n.obj===oid).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,5);const v=(objRes(g,S.obsDate)[oid]||{})[cid]||"";
@@ -940,11 +946,11 @@ function viewChild(cid,secId){
   const c=S.children.get(cid);if(!c){crumbs([]);return`<div class="card empty">Cette fiche n'existe plus. <a href="#accueil">Retour aux groupes</a></div>`}
   const g=S.groups.get(c.groupId)||{name:"Groupe"};const T={nom:tpl(g).nom,sections:childSections(c)};
   crumbs([`<a href="#g-${c.groupId}">${esc(g.name)}</a>`,secId?`<a href="#e-${cid}">${esc(c.name)}</a>`:`<span>${esc(c.name)}</span>`].concat(secId?[`<span>${esc(secId==="portrait"?"Portrait":secId==="synthese"?"Synthèse":(occOf(secId)||{titre:secId}).titre)}</span>`]:[]));
-  let h=`<section class="card chead"><img class="av" src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><div class="who"><h2>${esc(c.name)}</h2><div class="muted small">${esc(g.name)}${c.dob?" · "+esc(ageAt(c.dob,S.obsDate)):""}${c.langues?" · "+esc(c.langues):""}</div></div>
-  <button class="btn ghost small" data-act="editChild" data-id="${cid}" style="align-self:flex-start">Réglages de l'enfant</button>
+  let h="";{const sib=childrenOf(c.groupId).slice().sort((x,y)=>x[1].name.localeCompare(y[1].name,"fr",{sensitivity:"base"}));if(sib.length>1)h+=`<nav class="kidsw" aria-label="Enfants du groupe">${sib.map(([id,k])=>`<a href="#e-${id}${secId?"--"+secId:""}" class="${id===cid?"on":""}" title="${esc(k.name)}"><img src="${img("avatar-"+(k.avatar||"renard"))}" alt=""><span>${esc(k.name)}</span></a>`).join("")}</nav>`}
+  h+=`<section class="card chead"><img class="av" src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><div class="who"><h2>${esc(c.name)}<button class="ico gear" data-act="editChild" data-id="${cid}" title="Réglages de l'enfant" aria-label="Réglages de l'enfant">${GEAR}</button></h2><div class="muted small">${esc(g.name)}${c.dob?" · "+esc(ageAt(c.dob,S.obsDate)):""}${c.langues?" · "+esc(c.langues):""}</div></div>
   ${(()=>{const pd=presDates(g);if(!pd.length)return "";const n=pd.filter(d=>g.presences[d].includes(cid)).length;const last=pd.slice(-12);
     return `<div class="cpres"><span class="label">Présences</span> <b>${n} / ${pd.length}</b> rencontre${pd.length>1?"s":""}${n<pd.length?` · absent${n<pd.length-1?"":""} : ${pd.filter(d=>!g.presences[d].includes(cid)).slice(-4).map(d=>fmtD(d)).join(", ")}`:""}<div class="pdots">${last.map(d=>{const on=g.presences[d].includes(cid);return `<span class="${on?"on":""}" title="${fmtD(d,true)} : ${on?"présent":"absent"}">${parseISO(d).getDate()}</span>`}).join("")}</div></div>`})()}
-  <div class="toolbar"><label class="obsdate small"><span class="label">Date d'observation</span><input type="date" id="obsDate" value="${S.obsDate}" data-act="obsDate"></label>${ctxInput(c.groupId)}</div></section>`;
+  <div class="toolbar"><label class="obsdate small"><span class="label">Date d'observation</span><input type="date" id="obsDate" value="${S.obsDate}" data-act="obsDate"></label></div></section>`;
   const OO=orderedOccs(c);const hasSP=!!(c.prio&&c.prio.occs);
   if(!secId){
     const om=S.orderMode;
@@ -963,7 +969,6 @@ function viewChild(cid,secId){
       <div class="row-actions" style="margin-top:12px"><button class="btn" data-act="exportChild" data-id="${cid}">Exporter la fiche</button></div></section>`;
     return h;
   }
-  {const sib=childrenOf(c.groupId);if(sib.length>1)h+=`<nav class="kidsw" aria-label="Enfants du groupe">${sib.map(([id,k])=>`<a href="#e-${id}--${secId}" class="${id===cid?"on":""}" title="${esc(k.name)}"><img src="${img("avatar-"+(k.avatar||"renard"))}" alt=""><span>${esc(k.name)}</span></a>`).join("")}</nav>`}
   const hf=x=>`#e-${cid}--${x}`;hf.extra=cur=>`<a href="#e-${cid}--portrait" class="${cur==="portrait"?"on":""}"><img src="${img("roue-medecine")}" alt="">Portrait</a>`;hf.tail=cur=>`<a href="#e-${cid}--synthese" class="${cur==="synthese"?"on":""}"><img src="${img("icone-synthese")}" alt="">Synthèse</a>`;
   h+=occNav(c,cid,secId,hf);
   if(secId==="portrait")return h+viewPortrait(cid,c);
@@ -997,9 +1002,9 @@ function rowHTML(cid,c,s,r,rank){
   const nk=cid+"|"+key;const isSch=s.id==="schemas";const schOpen=!isSch||openRows.has("s|"+nk)||S.schAll;
   const nOnRow=(r.steps||[]).filter((st,i)=>(((c.checks||{})[key+"."+stK(st,i)])||[]).length).length;
   const icons=r.free||s.id==="portrait"?"":`<span class="ricons"><button class="ico" data-act="toggleNote" data-k="${nk}" title="Écrire une note" aria-label="Écrire une note sur ce repère">${PEN}</button>${SR?`<button class="ico" data-act="noteDictate" data-k="${nk}" title="Dicter une note" aria-label="Dicter une note sur ce repère">${MIC}</button>`:""}</span>`;
-  let h=`<div class="obsrow${r.rep?" rep":""}${isSch?" sch":""}${isSch&&schOpen?" open":""}" id="row-${cid}-${key.replace(/\./g,"-")}"><div class="rhead">${isSch?`<button class="schtog" data-act="schTog" data-k="s|${nk}" aria-expanded="${schOpen}"><span class="car">${schOpen?"▾":"▸"}</span><h4>${esc(r.label)}${nOnRow?` <span class="cnt">${nOnRow}</span>`:""}</h4></button>`:`<h4>${rank?`<span class="rank">${rank}</span>`:""}${esc(r.label)}</h4>`}${isSch&&!schOpen?"":icons}</div>`;
+  let h=`<div class="obsrow${r.rep?" rep":""}${isSch?" sch":""}${isSch&&schOpen?" open":""}" id="row-${cid}-${key.replace(/\./g,"-")}"><div class="rhead">${isSch?`<button class="schtog" data-act="schTog" data-k="s|${nk}" aria-expanded="${schOpen}"><span class="car">${schOpen?"▾":"▸"}</span><h4>${esc(r.label)}${nOnRow?` <span class="cnt">${nOnRow}</span>`:""}</h4></button>`:`<h4>${rank?`<span class="rank">${rank}</span>`:""}${esc(r.label)}${r.hint?`<button class="ibtn${openRows.has("i|"+nk)?" on":""}" data-act="toggleRow" data-k="i|${nk}" aria-label="Description" title="Description">i</button>`:""}</h4>`}${isSch&&!schOpen?"":(isSch&&r.hint?`<span class="ricons"><button class="ibtn${openRows.has("i|"+nk)?" on":""}" data-act="toggleRow" data-k="i|${nk}" aria-label="Description">i</button></span>`:"")+icons}</div>`;
   if(isSch&&!schOpen)return h+`</div>`;
-  if(r.hint)h+=`<div class="hint">${esc(r.hint)}</div>`;
+  if(r.hint&&openRows.has("i|"+nk))h+=`<div class="hint">${esc(r.hint)}</div>`;
   if(r.free){
     const list=((c.free||{})[key]||[]).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));
     h+=`<div class="addline"><input class="field" id="free-${cid}-${key.replace(".","-")}" placeholder="Ajouter une observation"><button class="btn" data-act="addFree" data-id="${cid}" data-k="${key}">Ajouter</button></div>
@@ -1284,6 +1289,7 @@ footer{margin-top:30px;padding-top:10px;border-top:1px solid var(--line);font-si
 /* ---------- Notes par repère + dictée ---------- */
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 const micBtn=ta=>SR?`<button class="btn ghost mic" data-act="dictate" data-ta="${ta}" title="Dicter">${MIC} Dicter</button>`:"";
+const GEAR=`<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.5 7.5 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7 7 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.5 7.5 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7 7 0 0 0 1.7-1l2.4 1 2-3.4-2-1.6zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg>`;
 const PEN=`<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75L3 17.25zm17.7-10.2a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>`;
 const MIC=`<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>`;
 let recog=null;
@@ -1442,6 +1448,7 @@ document.addEventListener("click",e=>{
   else if(a==="newGroup")groupSheet();
   else if(a==="editGroup")groupSheet(id);
   else if(a==="newChild")childSheet(null,id);
+  else if(a==="bulkKids")bulkKidsSheet(id);
   else if(a==="editChild")childSheet(id);
   else if(a==="delChild"){const c=S.children.get(id);confirmSheet(`Supprimer la fiche de ${c.name} ? Toutes ses observations seront effacées.`,()=>{S.children.delete(id);persist("children",id);go("g-"+c.groupId)})}
   else if(a==="paste")pasteSheet(id);
@@ -1545,6 +1552,7 @@ function groupSheet(gid){const g=gid?S.groups.get(gid):{name:"",template:"0-4",e
   <label class="f">Nom du groupe<input class="field" id="gName" value="${esc(g.name)}" placeholder="Ex. : Les Mésanges"></label>
   <label class="f">Fiche utilisée<select class="field" id="gTpl">${Object.entries(TEMPLATES).map(([k,t])=>`<option value="${k}" ${g.template===k?"selected":""}>${esc(t.nom)}</option>`).join("")}</select></label>
   ${gid?`<p class="muted small" style="margin:-4px 0 0">Changer de fiche garde les observations communes ; les repères propres à l'autre fiche restent enregistrés mais ne s'affichent plus.</p>`:""}
+  ${gid?"":`<label class="f">Enfants (facultatif)<textarea class="field" id="gKids" style="min-height:110px" placeholder="Un prénom par ligne, ou séparés par des virgules"></textarea></label>`}
   <label class="f">Équipe (facultatif)<input class="field" id="gEq" value="${esc(g.equipe||"")}" placeholder="Ex. : ergo + TES"></label>
   <div class="f"><span style="font-weight:600;font-size:.92rem">Emblème</span><div class="avpick" style="grid-template-columns:repeat(4,1fr)">${Object.entries(EMBLEMS).map(([k,em])=>`<button type="button" data-em="${k}" class="${g.emblem===k?"on":""}" title="${em.nom}"><img src="${img(em.img)}" alt="${em.nom}"></button>`).join("")}</div></div>
   <div class="row-actions"><button class="btn primary" id="gSave">${gid?"Enregistrer":"Créer le groupe"}</button><button class="btn" id="gCancel">Annuler</button>${gid?`<button class="btn danger" id="gDel" style="margin-left:auto">Supprimer</button>`:""}</div>`,s=>{
@@ -1552,10 +1560,18 @@ function groupSheet(gid){const g=gid?S.groups.get(gid):{name:"",template:"0-4",e
     s.querySelector("#gCancel").onclick=closeSheet;
     s.querySelector("#gSave").onclick=()=>{const name=s.querySelector("#gName").value.trim();if(!name){s.querySelector("#gName").focus();return}
       const id=gid||uid("g");const obj=Object.assign({journal:[],createdAt:todayISO()},gid?JSON.parse(JSON.stringify(g)):{},{name,template:s.querySelector("#gTpl").value,emblem:em,equipe:s.querySelector("#gEq").value.trim()});
-      S.groups.set(id,obj);persist("groups",id);closeSheet();gid?render():go("g-"+id)};
+      S.groups.set(id,obj);persist("groups",id);if(!gid)addKids(id,(s.querySelector("#gKids")||{}).value||"");closeSheet();gid?render():go("g-"+id)};
     if(gid)s.querySelector("#gDel").onclick=()=>{const kids=childrenOf(gid);confirmSheet(`Supprimer le groupe ${g.name}${kids.length?" et ses "+kids.length+" fiches":""} ?`,()=>{kids.forEach(([cid])=>{S.children.delete(cid);persist("children",cid)});S.groups.delete(gid);persist("groups",gid);go("accueil")})};
   })}
 
+function splitNames(t){return [...new Set(String(t).split(/[\n,;]+/).map(x=>x.trim()).filter(Boolean))]}
+function addKids(gid,text){const names=splitNames(text);const n0=childrenOf(gid).length;const have=new Set(childrenOf(gid).map(([,c])=>norm(c.name)));let n=0;
+  names.forEach(name=>{if(have.has(norm(name)))return;const id=uid("c");S.children.set(id,{groupId:gid,name,avatar:AVATARS[(n0+n)%AVATARS.length],alias:"",dob:"",langues:"",checks:{},sout:{},free:{},notes:[],synth:{},facil:{},next:[],createdAt:todayISO(),ballonMig:true,priseMig:true});persist("children",id);n++});
+  if(n)toast(n+" enfant"+(n>1?"s":"")+" ajouté"+(n>1?"s":""));return n}
+function bulkKidsSheet(gid){openSheet(`<h3>Ajouter plusieurs enfants</h3><label class="f">Prénoms<textarea class="field" id="bkNames" style="min-height:150px" placeholder="Un prénom par ligne, ou séparés par des virgules"></textarea></label>
+  <p class="muted small" style="margin:0">Chaque enfant reçoit un avatar. La date de naissance et le reste se complètent plus tard, dans ses réglages.</p>
+  <div class="row-actions"><button class="btn primary" id="bkGo">Ajouter</button><button class="btn" id="bkCancel">Annuler</button></div>`,s=>{
+    s.querySelector("#bkCancel").onclick=closeSheet;s.querySelector("#bkGo").onclick=()=>{const v=s.querySelector("#bkNames").value;if(!splitNames(v).length){s.querySelector("#bkNames").focus();return}addKids(gid,v);closeSheet();render()}})}
 function childSheet(cid,gid){const c=cid?S.children.get(cid):{name:"",avatar:AVATARS[childrenOf(gid).length%AVATARS.length],dob:"",langues:""};
   openSheet(`<h3>${cid?"Modifier l'identité":"Ajouter un enfant"}</h3>
   <label class="f">Prénom ou code<input class="field" id="cName" value="${esc(c.name)}" placeholder="Ex. : J.T. ou Renard"></label>
