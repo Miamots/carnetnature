@@ -1,0 +1,14 @@
+// Carnet d'observation nature : fonctionne hors ligne en forêt.
+// Changez VERSION à chaque mise à jour du carnet pour que les appareils prennent la nouvelle version.
+const VERSION="carnet-v2";
+const SHELL=["./", "index.html", "manifest.webmanifest", "img/avatar-castor.png", "img/avatar-cerf.png", "img/avatar-ecureuil.png", "img/avatar-herisson.png", "img/avatar-hibou.png", "img/avatar-lievre.png", "img/avatar-loup.png", "img/avatar-ours.png", "img/avatar-raton.png", "img/avatar-renard.png", "img/banniere-foret.jpg", "img/groupe-mesanges.png", "img/icon-192.png", "img/icon-512.png", "img/icone-coller-notes.png", "img/icone-synthese.png", "img/occ-avec-autres.png", "img/occ-bouger-nature.png", "img/occ-communiquer.png", "img/occ-dessiner-bricoler.png", "img/occ-jouer-explorer.png", "img/occ-manipuler-creer.png", "img/occ-prendre-soin-soi.png", "img/occ-vivre-groupe.png", "img/roue-medecine.png", "img/sphere-coeur.png", "img/sphere-corps.png", "img/sphere-esprit-liens.png", "img/sphere-tete.png"];
+self.addEventListener("install",e=>{e.waitUntil(caches.open(VERSION).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()))});
+self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==VERSION).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
+self.addEventListener("fetch",e=>{
+  const req=e.request;if(req.method!=="GET")return;
+  const url=new URL(req.url);
+  const isFont=url.hostname==="fonts.googleapis.com"||url.hostname==="fonts.gstatic.com";
+  if(url.origin!==location.origin&&!isFont)return;
+  // Réseau d'abord (pour recevoir les mises à jour), cache si pas de réseau.
+  e.respondWith(fetch(req).then(res=>{const copy=res.clone();caches.open(VERSION).then(c=>c.put(req,copy));return res}).catch(()=>caches.match(req,{ignoreSearch:true}).then(r=>r||caches.match("index.html"))));
+});
