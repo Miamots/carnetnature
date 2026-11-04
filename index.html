@@ -111,7 +111,7 @@ main{max-width:980px;margin:0 auto;padding:12px 16px 80px;display:flex;flex-dire
 .obsrow h4{font-size:1.15rem}
 .obsrow .hint{font-size:.88rem;color:var(--muted);margin-top:2px}
 .steps{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch}
-.step{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 10px 7px 30px;cursor:pointer;max-width:100%;flex:1 1 150px}
+.step{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 10px 7px 30px;cursor:pointer;max-width:100%;flex:1 1 100%;width:100%}
 .step::before{content:"";position:absolute;left:9px;top:10px;width:14px;height:14px;border:1.5px solid #B8AF9C;border-radius:4px;background:#fff}
 .step .n{font-size:.72rem;font-weight:700;color:var(--muted);letter-spacing:.05em}
 .step .t{font-size:.93rem;line-height:1.3}
@@ -143,7 +143,7 @@ main{max-width:980px;margin:0 auto;padding:12px 16px 80px;display:flex;flex-dire
 .kidhead img{width:48px;height:48px;object-fit:contain}
 .kidhead h3{font-size:1.35rem}
 .act .obsrow{padding:10px 0}
-.act .step{flex:1 1 120px;padding:6px 8px 6px 28px}
+.act .step{padding:6px 8px 6px 28px}
 .act .step .n{display:none}
 .act .step::before{top:8px}.act .step.on::after{top:10px}
 .quick{display:flex;gap:6px;align-items:flex-start}
@@ -152,7 +152,7 @@ main{max-width:980px;margin:0 auto;padding:12px 16px 80px;display:flex;flex-dire
 .toolbar select{border:1px solid var(--line);border-radius:10px;padding:7px 10px;background:#fff}
 .sugg{display:flex;flex-direction:column;gap:4px;font-size:.88rem;background:var(--forest-tint);border-radius:8px;padding:6px 8px}
 .sugg label{display:flex;gap:6px;align-items:flex-start}
-.obsrow.rep .step{flex:0 1 auto;border-style:dashed}
+.obsrow.rep .step{border-style:dashed}
 .obsrow.rep .step.on{border-style:solid}
 .step .d em{font-style:normal;font-weight:500;color:var(--muted)}
 .ctx input{min-width:200px}
@@ -241,6 +241,32 @@ details.pdet[open]>summary .ptitle::before{content:"▾ "}
 .obsrow.sch{gap:4px}
 .step .ag{font-size:.72rem;font-weight:600;color:var(--muted)}
 .step.ag-now{box-shadow:inset 4px 0 0 #8DBE7E}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px}.cdow{text-align:center;font-size:.75rem;color:var(--muted,#777);font-weight:600}
+.cday{position:relative;height:38px;border:1px solid var(--line);background:#fff;border-radius:9px;font:inherit;font-size:.95rem;cursor:pointer;padding:0}
+.cday.has{background:#E6F2E1;border-color:#9CC596;font-weight:700}.cday.plan:not(.has){border:1.5px dashed #6F9A68}.cday.today{outline:2px solid #E2B65A;outline-offset:-2px}.cday.sel{box-shadow:inset 0 0 0 2px #2C5A38}
+.cday i,.cleg i{position:absolute;left:50%;bottom:4px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:#2C5A38}.cday.plan:not(.has) i{background:#fff;border:1.5px solid #6F9A68;width:6px;height:6px}
+.cleg{position:relative;display:inline-block;width:12px;height:12px;vertical-align:-1px}.cleg.has i{bottom:3px}.cleg.plan i{background:#fff;border:1.5px solid #6F9A68;bottom:2px}
+.calnav{display:flex;align-items:center;gap:4px}.calt{min-width:120px;text-align:center;text-transform:capitalize}
+.achips .label{display:block;margin:10px 0 4px}.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font:inherit;font-size:.9rem;cursor:pointer;min-height:34px}
+.chip.on{background:#2C5A38;border-color:#2C5A38;color:#fff;font-weight:600}.chip.ghost{border-style:dashed;margin-top:8px}
+.aleg{margin:8px 0 0;padding-left:22px;font-size:.92rem;line-height:1.35}.aleg li{margin:2px 0}.aleg.rep{list-style:none;padding-left:0}
+.akids{display:flex;flex-direction:column}
+.akid{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:9px 0;border-top:1px solid var(--line)}
+.akid.hidrow{opacity:.75}
+.akname{display:flex;align-items:center;gap:6px;min-width:92px;flex:0 0 auto;color:inherit;text-decoration:none;font-weight:600}.akname img{width:30px;height:30px}
+.apills{display:flex;flex-wrap:wrap;gap:5px;flex:1 1 auto}
+.apill{min-width:36px;height:36px;border:1px solid var(--line);border-radius:10px;background:#fff;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:700;cursor:pointer;-webkit-touch-callout:none;user-select:none;padding:0 6px}
+.apill.wide{justify-content:flex-start;font-weight:400;font-size:.85rem;max-width:100%}.apill .tt{line-height:1.15;text-align:left}
+.apill.ok{background:#EEF6EA;border-color:#9CC596;color:#2C5A38}.apill.okT{background:#3C7A4A;border-color:#3C7A4A;color:#fff}
+.apill.ny{border-style:dashed;border-color:#D99A9A}.apill.nyT{background:#F6DADA;border-color:#C86A6A;color:#8A2E2E}
+.apill.ag-watch:not(.ok):not(.okT){box-shadow:inset 0 -3px 0 #E2B65A}.apill.ag-now:not(.ok):not(.okT){box-shadow:inset 0 -3px 0 #8FBF86}
+.atools{display:flex;align-items:center;gap:4px;margin-left:auto;flex-wrap:wrap}.atools .sbtn{padding:3px 7px;font-size:.78rem}
+.atools label.ico{cursor:pointer}
+.ahands{display:flex;flex-wrap:wrap;gap:6px 12px;flex:1 1 auto}.ahand{display:inline-flex;align-items:center;gap:3px}.ahand .hn{font-size:.85rem;margin-right:2px}.ahand .hbtn{min-width:32px;padding:4px 6px}
+.anotes{flex:1 1 100%;font-size:.88rem;color:#444;padding-left:36px}.anotes span{display:block}
+.akid .rnotes,.akid .thumbs{flex:1 1 100%}
+.step.hid{opacity:.5;border-style:dashed;background:#F6F4EE}.hidlink{color:var(--muted,#777)}
 .step.ag-watch{box-shadow:inset 4px 0 0 #E2B65A;background:#FFFBF0}
 .step.ag-later .ag{opacity:.7}
 .agleg{display:inline-block;font-size:.78rem;font-weight:600;border-radius:6px;padding:0 6px;margin-right:4px}
@@ -367,7 +393,9 @@ const TEMPLATES={
    {"id": "equil", "label": "Équilibre", "steps": ["Assis stable sur un tronc ou une roche", "Debout sans appui sur sol mou (sable, neige)", "Se tient sur la pointe des pieds quelques instants", "Marche sur un tronc large ou une planche au sol", "Se tient sur un pied quelques secondes", "Marche seul sur un tronc étroit ou une poutre", "Traverse une slackline basse en se tenant à une corde haute"]},
    {"id": "sauter", "label": "Sauter", "steps": ["Saute sur place avec aide", "Saute sur place, les deux pieds ensemble", "Saute d'une petite hauteur (une marche, une roche)", "Saute par-dessus une corde ou une branche au sol", "Saute en longueur, pieds joints", "Saute à cloche-pied", "Galope, sautille"]},
    {"id": "grimp", "label": "Grimper et se suspendre", "steps": ["Grimpe une butte à quatre pattes", "Grimpe sur un tronc bas, un banc", "Grimpe sur un module, une échelle", "Grimpe des rochers, de petits arbres", "Grimpe la glissade à l'envers", "Se suspend par les mains (branche, corde)", "Planifie son trajet et redescend seul"]},
-   {"id": "lancer", "label": "Lancer, attraper, botter", "steps": ["Lance un ballon à deux mains (avec tout le corps)", "Botte un ballon sans se tenir", "Lance vers l'adulte sans perdre l'équilibre", "Attrape un ballon (peut s'aider du corps)", "Lance vers une cible", "Attrape avec les mains seulement"]},
+   {"id": "lancer", "label": "Lancer", "steps": ["Lance un ballon à deux mains (avec tout le corps)", "Lance vers l'adulte sans perdre l'équilibre", "Lance vers une cible", "Lance par-dessus l'épaule, d'une main, en transférant son poids"]},
+   {"id": "attraper", "label": "Attraper", "steps": ["Arrête un ballon qui roule vers lui", "Attrape un gros ballon, bras tendus (s'aide du corps)", "Attrape un ballon lancé de près", "Attrape avec les mains seulement", "Attrape une petite balle ou un ballon qui rebondit"]},
+   {"id": "botter", "label": "Botter", "steps": ["Pousse un ballon avec le pied en marchant", "Botte un ballon sans se tenir", "Botte en visant une direction", "Botte un ballon qui roule vers lui"]},
    {"id": "transp", "label": "Transporter, pousser, tirer", "steps": ["Traîne un seau", "Porte une branche à deux mains", "Pelle, creuse, transporte la terre", "Pousse une brouette, tire un traîneau", "Transporte à deux en se coordonnant"]},
    {"id": "balancer", "label": "Balancer, glisser, rouler", "steps": ["Aime être bercé ou balancé par l'adulte", "Descend la glissade avec aide", "Descend la glissade seul", "Monte seul sur la balançoire", "Se balance seul (pompe avec les jambes)", "Roule sur lui-même, fait une roulade"]},
    {"id": "confiance", "label": "Confiance et prise de risque", "steps": ["Hésite, demande les bras", "Essaie si l'adulte est proche", "Prend des risques mesurés", "Évalue lui-même (« c'est trop haut »)"]},
@@ -474,7 +502,7 @@ const TEMPLATES={
   });
   TEMPLATES["4-5"]={nom:"4-5 ans",sections:secs};
 })();
-const AGEREF={"manipuler.prendre.0": [4, 7, "a"], "manipuler.prendre.1": [9, 12, "T"], "manipuler.prendre.2": [12, 18, "T"], "manipuler.deuxmains.0": [6, 12, "a"], "manipuler.deuxmains.1": [18, 24, "a"], "manipuler.deuxmains.2": [24, 48, "T"], "manipuler.outils.0": [12, 18, "T"], "manipuler.outils.1": [24, 36, "a"], "manipuler.outils.2": [36, 60, "a"], "manipuler.outils45.0": [24, 36, "a"], "manipuler.outils45.1": [36, 60, "a"], "manipuler.outils45.2": [48, 60, "a"], "manipuler.outils45.3": [60, 72, "a"], "manipuler.construire.0": [15, 18, "T"], "manipuler.construire.1": [18, 30, "T"], "manipuler.construire.2": [36, 60, "a"], "manipuler.construire45.0": [18, 30, "T"], "manipuler.construire45.1": [36, 60, "a"], "manipuler.construire45.2": [48, 60, "a"], "manipuler.construire45.3": [60, 72, "a"], "dessiner.main.0": [12, 36, "a"], "dessiner.main.1": [24, 48, "a"], "dessiner.main.2": [48, 72, "a"], "dessiner.prise.0": [12, 24, "T"], "dessiner.prise.1": [24, 36, "T"], "dessiner.prise.2": [36, 48, "T"], "dessiner.prise.3": [48, 72, "T"], "dessiner.prise45.0": [36, 48, "T"], "dessiner.prise45.1": [48, 60, "T"], "dessiner.prise45.2": [60, 72, "T"], "dessiner.prise45.3": [60, 84, "a"], "dessiner.tracer.0": [12, 18, "T"], "dessiner.tracer.1": [24, 30, "T"], "dessiner.tracer.2": [30, 36, "a"], "dessiner.tracer.3": [36, 48, "a"], "dessiner.tracer45.0": [30, 36, "a"], "dessiner.tracer45.1": [36, 48, "a"], "dessiner.tracer45.2": [48, 60, "a"], "dessiner.tracer45.3": [60, 72, "a"], "dessiner.copier.0": [18, 24, "a"], "dessiner.copier.1": [24, 36, "a"], "dessiner.copier.2": [36, 48, "a"], "dessiner.copier45.0": [36, 48, "a"], "dessiner.copier45.1": [48, 60, "a"], "dessiner.copier45.2": [60, 72, "a"], "dessiner.copier45.3": [60, 72, "a"], "dessiner.ciseaux.0": [24, 30, "a"], "dessiner.ciseaux.1": [30, 36, "T"], "dessiner.ciseaux.2": [36, 48, "T"], "dessiner.ciseaux.3": [48, 60, "T"], "dessiner.ciseaux45.0": [36, 48, "T"], "dessiner.ciseaux45.1": [48, 60, "T"], "dessiner.ciseaux45.2": [48, 72, "T"], "dessiner.ciseaux45.3": [60, 72, "T"], "dessiner.colle.0": [18, 24, "a"], "dessiner.colle.1": [24, 36, "a"], "dessiner.colle.2": [36, 48, "a"], "dessiner.colle.3": [48, 60, "a"], "dessiner.ecrire.0": [36, 48, "a"], "dessiner.ecrire.1": [48, 60, "a"], "dessiner.ecrire.2": [48, 60, "a"], "dessiner.ecrire.3": [54, 72, "a"], "soin.habillage.0": [12, 15, "T"], "soin.habillage.1": [12, 24, "T"], "soin.habillage.2": [24, 36, "a"], "soin.habillage.3": [48, 60, "a"], "soin.habillage45.0": [24, 36, "a"], "soin.habillage45.1": [48, 60, "a"], "soin.habillage45.2": [48, 60, "a"], "soin.habillage45.3": [60, 72, "a"], "soin.repas.0": [9, 12, "T"], "soin.repas.1": [12, 18, "T"], "soin.repas.2": [24, 36, "a"], "soin.repas.3": [36, 48, "a"], "soin.repas45.0": [24, 36, "a"], "soin.repas45.1": [36, 48, "a"], "soin.repas45.2": [36, 48, "a"], "soin.repas45.3": [48, 60, "a"], "soin.hygiene.1": [18, 30, "a"], "soin.hygiene.2": [36, 48, "a"], "soin.hygiene.3": [36, 48, "a"], "soin.hygiene45.0": [36, 48, "a"], "soin.hygiene45.1": [36, 48, "a"], "soin.hygiene45.2": [48, 60, "a"], "soin.hygiene45.3": [48, 72, "a"], "bouger.deplacer.0": [8, 12, "a"], "bouger.deplacer.1": [9, 13, "T"], "bouger.deplacer.2": [12, 15, "T"], "bouger.deplacer.3": [18, 24, "T"], "bouger.deplacer.4": [24, 36, "T"], "bouger.deplacer.5": [36, 48, "T"], "bouger.denivele.0": [12, 15, "T"], "bouger.denivele.1": [15, 18, "T"], "bouger.denivele.2": [24, 36, "T"], "bouger.denivele.3": [36, 48, "T"], "bouger.denivele.4": [36, 48, "T"], "bouger.denivele.5": [48, 60, "T"], "bouger.obstacles.0": [15, 18, "T"], "bouger.obstacles.1": [18, 24, "T"], "bouger.obstacles.2": [12, 24, "a"], "bouger.obstacles.3": [24, 36, "a"], "bouger.equil.0": [9, 12, "a"], "bouger.equil.1": [12, 18, "T"], "bouger.equil.2": [24, 36, "T"], "bouger.equil.3": [24, 36, "T"], "bouger.equil.4": [36, 60, "T"], "bouger.equil.5": [48, 60, "T"], "bouger.equil.6": [54, 72, "a"], "bouger.sauter.0": [18, 24, "T"], "bouger.sauter.1": [24, 36, "T"], "bouger.sauter.2": [24, 36, "T"], "bouger.sauter.3": [24, 36, "T"], "bouger.sauter.4": [36, 48, "T"], "bouger.sauter.5": [48, 60, "T"], "bouger.sauter.6": [48, 72, "T"], "bouger.grimp.0": [12, 15, "T"], "bouger.grimp.1": [18, 24, "T"], "bouger.grimp.2": [36, 48, "T"], "bouger.grimp.3": [36, 48, "a"], "bouger.grimp.4": [36, 54, "a"], "bouger.grimp.5": [36, 60, "a"], "bouger.grimp.6": [48, 72, "a"], "bouger.lancer.0": [24, 36, "T"], "bouger.lancer.1": [24, 36, "T"], "bouger.lancer.2": [36, 48, "T"], "bouger.lancer.3": [36, 48, "T"], "bouger.lancer.4": [48, 60, "a"], "bouger.lancer.5": [48, 72, "T"], "bouger.transp.0": [12, 18, "T"], "bouger.transp.1": [18, 24, "T"], "bouger.transp.2": [24, 36, "a"], "bouger.transp.3": [24, 36, "a"], "bouger.transp.4": [36, 48, "a"], "bouger.balancer.0": [6, 18, "a"], "bouger.balancer.1": [18, 24, "a"], "bouger.balancer.2": [24, 36, "a"], "bouger.balancer.3": [36, 48, "a"], "bouger.balancer.4": [48, 72, "a"], "bouger.balancer.5": [36, 60, "a"], "manipuler.mainh.0": [10, 14, "T"], "manipuler.mainh.1": [36, 60, "T"], "manipuler.mainh.2": [36, 60, "a"], "dessiner.creer.0": [12, 18, "a"], "dessiner.creer.1": [24, 36, "T"], "dessiner.creer.2": [30, 42, "a"], "dessiner.creer.3": [36, 48, "a"], "dessiner.creer.4": [48, 72, "a"]};
+const AGEREF={"bouger.lancer.0": [24, 36, "T"], "bouger.lancer.1": [36, 48, "T"], "bouger.lancer.2": [48, 60, "a"], "bouger.lancer.3": [48, 60, "a"], "bouger.attraper.0": [18, 24, "a"], "bouger.attraper.1": [36, 48, "T"], "bouger.attraper.2": [48, 60, "T"], "bouger.attraper.3": [48, 60, "T"], "bouger.attraper.4": [60, 72, "T"], "bouger.botter.0": [18, 24, "T"], "bouger.botter.1": [24, 36, "T"], "bouger.botter.2": [36, 48, "a"], "bouger.botter.3": [48, 72, "a"], "manipuler.prendre.0": [4, 7, "a"], "manipuler.prendre.1": [9, 12, "T"], "manipuler.prendre.2": [12, 18, "T"], "manipuler.deuxmains.0": [6, 12, "a"], "manipuler.deuxmains.1": [18, 24, "a"], "manipuler.deuxmains.2": [24, 48, "T"], "manipuler.outils.0": [12, 18, "T"], "manipuler.outils.1": [24, 36, "a"], "manipuler.outils.2": [36, 60, "a"], "manipuler.outils45.0": [24, 36, "a"], "manipuler.outils45.1": [36, 60, "a"], "manipuler.outils45.2": [48, 60, "a"], "manipuler.outils45.3": [60, 72, "a"], "manipuler.construire.0": [15, 18, "T"], "manipuler.construire.1": [18, 30, "T"], "manipuler.construire.2": [36, 60, "a"], "manipuler.construire45.0": [18, 30, "T"], "manipuler.construire45.1": [36, 60, "a"], "manipuler.construire45.2": [48, 60, "a"], "manipuler.construire45.3": [60, 72, "a"], "dessiner.main.0": [12, 36, "a"], "dessiner.main.1": [24, 48, "a"], "dessiner.main.2": [48, 72, "a"], "dessiner.prise.0": [12, 24, "T"], "dessiner.prise.1": [24, 36, "T"], "dessiner.prise.2": [36, 48, "T"], "dessiner.prise.3": [48, 72, "T"], "dessiner.prise45.0": [36, 48, "T"], "dessiner.prise45.1": [48, 60, "T"], "dessiner.prise45.2": [60, 72, "T"], "dessiner.prise45.3": [60, 84, "a"], "dessiner.tracer.0": [12, 18, "T"], "dessiner.tracer.1": [24, 30, "T"], "dessiner.tracer.2": [30, 36, "a"], "dessiner.tracer.3": [36, 48, "a"], "dessiner.tracer45.0": [30, 36, "a"], "dessiner.tracer45.1": [36, 48, "a"], "dessiner.tracer45.2": [48, 60, "a"], "dessiner.tracer45.3": [60, 72, "a"], "dessiner.copier.0": [18, 24, "a"], "dessiner.copier.1": [24, 36, "a"], "dessiner.copier.2": [36, 48, "a"], "dessiner.copier45.0": [36, 48, "a"], "dessiner.copier45.1": [48, 60, "a"], "dessiner.copier45.2": [60, 72, "a"], "dessiner.copier45.3": [60, 72, "a"], "dessiner.ciseaux.0": [24, 30, "a"], "dessiner.ciseaux.1": [30, 36, "T"], "dessiner.ciseaux.2": [36, 48, "T"], "dessiner.ciseaux.3": [48, 60, "T"], "dessiner.ciseaux45.0": [36, 48, "T"], "dessiner.ciseaux45.1": [48, 60, "T"], "dessiner.ciseaux45.2": [48, 72, "T"], "dessiner.ciseaux45.3": [60, 72, "T"], "dessiner.colle.0": [18, 24, "a"], "dessiner.colle.1": [24, 36, "a"], "dessiner.colle.2": [36, 48, "a"], "dessiner.colle.3": [48, 60, "a"], "dessiner.ecrire.0": [36, 48, "a"], "dessiner.ecrire.1": [48, 60, "a"], "dessiner.ecrire.2": [48, 60, "a"], "dessiner.ecrire.3": [54, 72, "a"], "soin.habillage.0": [12, 15, "T"], "soin.habillage.1": [12, 24, "T"], "soin.habillage.2": [24, 36, "a"], "soin.habillage.3": [48, 60, "a"], "soin.habillage45.0": [24, 36, "a"], "soin.habillage45.1": [48, 60, "a"], "soin.habillage45.2": [48, 60, "a"], "soin.habillage45.3": [60, 72, "a"], "soin.repas.0": [9, 12, "T"], "soin.repas.1": [12, 18, "T"], "soin.repas.2": [24, 36, "a"], "soin.repas.3": [36, 48, "a"], "soin.repas45.0": [24, 36, "a"], "soin.repas45.1": [36, 48, "a"], "soin.repas45.2": [36, 48, "a"], "soin.repas45.3": [48, 60, "a"], "soin.hygiene.1": [18, 30, "a"], "soin.hygiene.2": [36, 48, "a"], "soin.hygiene.3": [36, 48, "a"], "soin.hygiene45.0": [36, 48, "a"], "soin.hygiene45.1": [36, 48, "a"], "soin.hygiene45.2": [48, 60, "a"], "soin.hygiene45.3": [48, 72, "a"], "bouger.deplacer.0": [8, 12, "a"], "bouger.deplacer.1": [9, 13, "T"], "bouger.deplacer.2": [12, 15, "T"], "bouger.deplacer.3": [18, 24, "T"], "bouger.deplacer.4": [24, 36, "T"], "bouger.deplacer.5": [36, 48, "T"], "bouger.denivele.0": [12, 15, "T"], "bouger.denivele.1": [15, 18, "T"], "bouger.denivele.2": [24, 36, "T"], "bouger.denivele.3": [36, 48, "T"], "bouger.denivele.4": [36, 48, "T"], "bouger.denivele.5": [48, 60, "T"], "bouger.obstacles.0": [15, 18, "T"], "bouger.obstacles.1": [18, 24, "T"], "bouger.obstacles.2": [12, 24, "a"], "bouger.obstacles.3": [24, 36, "a"], "bouger.equil.0": [9, 12, "a"], "bouger.equil.1": [12, 18, "T"], "bouger.equil.2": [24, 36, "T"], "bouger.equil.3": [24, 36, "T"], "bouger.equil.4": [36, 60, "T"], "bouger.equil.5": [48, 60, "T"], "bouger.equil.6": [54, 72, "a"], "bouger.sauter.0": [18, 24, "T"], "bouger.sauter.1": [24, 36, "T"], "bouger.sauter.2": [24, 36, "T"], "bouger.sauter.3": [24, 36, "T"], "bouger.sauter.4": [36, 48, "T"], "bouger.sauter.5": [48, 60, "T"], "bouger.sauter.6": [48, 72, "T"], "bouger.grimp.0": [12, 15, "T"], "bouger.grimp.1": [18, 24, "T"], "bouger.grimp.2": [36, 48, "T"], "bouger.grimp.3": [36, 48, "a"], "bouger.grimp.4": [36, 54, "a"], "bouger.grimp.5": [36, 60, "a"], "bouger.grimp.6": [48, 72, "a"], "bouger.transp.0": [12, 18, "T"], "bouger.transp.1": [18, 24, "T"], "bouger.transp.2": [24, 36, "a"], "bouger.transp.3": [24, 36, "a"], "bouger.transp.4": [36, 48, "a"], "bouger.balancer.0": [6, 18, "a"], "bouger.balancer.1": [18, 24, "a"], "bouger.balancer.2": [24, 36, "a"], "bouger.balancer.3": [36, 48, "a"], "bouger.balancer.4": [48, 72, "a"], "bouger.balancer.5": [36, 60, "a"], "manipuler.mainh.0": [10, 14, "T"], "manipuler.mainh.1": [36, 60, "T"], "manipuler.mainh.2": [36, 60, "a"], "dessiner.creer.0": [12, 18, "a"], "dessiner.creer.1": [24, 36, "T"], "dessiner.creer.2": [30, 42, "a"], "dessiner.creer.3": [36, 48, "a"], "dessiner.creer.4": [48, 72, "a"]};
 function ageOn(){try{return localStorage.getItem("carnet-ages")!=="0"}catch(e){return true}}
 function ageOf(k){const ov=(CUSTOM&&CUSTOM._ages)||{};if(k in ov)return ov[k];const base=k.replace(/^([^.]+\.[^.]+)\.(\d+)$/,"$1.$2");return AGEREF[base]||null}
 function monthsAt(dob,at){if(!dob)return null;const a=parseISO(dob),b=parseISO(at||todayISO());let m=(b.getFullYear()-a.getFullYear())*12+(b.getMonth()-a.getMonth());if(b.getDate()<a.getDate())m--;return m}
@@ -674,6 +702,7 @@ function viewGroup(gid){
   let h=`<section class="card"><div class="ghead"><img src="${img(em.img)}" alt=""><div style="flex:1"><h2>${esc(g.name)}</h2><div class="muted small">Fiche ${esc(tpl(g).nom)}${g.equipe?" · "+esc(g.equipe):""}</div></div><button class="btn ghost" data-act="editGroup" data-id="${gid}">Modifier</button></div>
   <div class="row-actions" style="margin-top:12px"><button class="btn big primary" data-act="paste" data-id="${gid}"><img src="${img("icone-coller-notes")}" alt="">Note complète du groupe</button><button class="btn" data-act="dayNotes" data-id="${gid}">Notes du jour</button><button class="btn" data-act="recap" data-id="${gid}">Récapitulatif du groupe</button></div>
   </section>`;
+  h+=calendarHTML(gid,g);
   h+=`<section class="card"><h3 style="font-size:1.35rem;margin-bottom:10px">Enfants</h3><div class="grid">`;
   kids.forEach(([id,c])=>{const ld=lastDate(c);const nChk=Object.values(c.checks||{}).filter(a=>a.length).length;
     h+=`<a class="tile" href="#e-${id}"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><h3>${esc(c.name)}</h3><span class="meta">${c.dob?esc(ageAt(c.dob))+" · ":""}${nChk} repère${nChk>1?"s":""}${(()=>{const pd=presDates(g);return pd.length?"<br>Présences "+pd.filter(d=>g.presences[d].includes(id)).length+"/"+pd.length:""})()}${ld?"<br>Dernière obs. "+fmtD(ld):""}</span></a>`});
@@ -695,6 +724,41 @@ function viewGroup(gid){
   return h;
 }
 
+/* ---------- Calendrier des rencontres ---------- */
+function groupDays(gid){const g=S.groups.get(gid);const m=new Map();const add=(d,f)=>{if(!d||!/^\d{4}-\d{2}-\d{2}$/.test(d))return;const o=m.get(d)||{n:0};o[f]=(o[f]||0)+1;o.n++;m.set(d,o)};
+  presDates(g).forEach(d=>add(d,"pres"));(g.journal||[]).forEach(n=>add(n.date,"jn"));Object.keys(g.ctx||{}).forEach(d=>g.ctx[d]&&add(d,"ctx"));
+  Object.keys(g.objRes||{}).forEach(d=>Object.values(g.objRes[d]||{}).some(x=>Object.keys(x).length)&&add(d,"obj"));
+  childrenOf(gid).forEach(([cid,c])=>{(c.notes||[]).forEach(n=>add(n.date,"notes"));(c.explore||[]).forEach(n=>add(n.date,"notes"));Object.values(c.checks||{}).forEach(l=>[...new Set(l)].forEach(d=>add(d,"chk")))});
+  return m}
+function calendarHTML(gid,g){const days=groupDays(gid);const plan=new Set(g.meetings||[]);const ym=S.calM&&S.calM.gid===gid?S.calM.ym:S.obsDate.slice(0,7);
+  const [Y,M]=ym.split("-").map(Number);const first=new Date(Y,M-1,1);const nd=new Date(Y,M,0).getDate();const off=(first.getDay()+6)%7;const today=todayISO();
+  const title=first.toLocaleDateString("fr-CA",{month:"long",year:"numeric"});
+  const cells=[];for(let i=0;i<off;i++)cells.push(`<span></span>`);
+  for(let d=1;d<=nd;d++){const iso=ym+"-"+String(d).padStart(2,"0");const has=days.get(iso);const pl=plan.has(iso);
+    cells.push(`<button class="cday${has?" has":""}${pl?" plan":""}${iso===today?" today":""}${iso===S.obsDate?" sel":""}" data-act="calDay" data-id="${gid}" data-d="${iso}" aria-label="${fmtD(iso,true)}${has?" : notes":""}${pl?" : rencontre prévue":""}">${d}${has||pl?`<i></i>`:""}</button>`)}
+  const n=[...days.keys()].filter(d=>d.startsWith(ym)).length;
+  return `<section class="card"><div class="ordhead"><h3 style="font-size:1.35rem">Calendrier des rencontres</h3><span class="calnav"><button class="btn ghost small" data-act="calNav" data-id="${gid}" data-d="-1" aria-label="Mois précédent">‹</button><b class="calt">${esc(title)}</b><button class="btn ghost small" data-act="calNav" data-id="${gid}" data-d="1" aria-label="Mois suivant">›</button></span></div>
+  <div class="cal"><span class="cdow">L</span><span class="cdow">M</span><span class="cdow">M</span><span class="cdow">J</span><span class="cdow">V</span><span class="cdow">S</span><span class="cdow">D</span>${cells.join("")}</div>
+  <p class="muted small" style="margin:8px 0 0"><span class="cleg has"><i></i></span> rencontre avec des notes · <span class="cleg plan"><i></i></span> rencontre prévue · Touchez une date pour y ajouter une note.${n?"":" Aucune note ce mois-ci."}</p></section>`}
+function calDaySheet(gid,d){const g=S.groups.get(gid);const info=groupDays(gid).get(d)||{};const pl=(g.meetings||[]).includes(d);
+  const items=dayItems(gid,d);const pr=(presOf(g,d)||[]).map(id=>(S.children.get(id)||{}).name).filter(Boolean);const cx=ctxOf(gid,d);
+  const jn=(g.journal||[]).filter(n=>n.date===d&&(n.theme==="source"||n.theme==="jour"));
+  openSheet(`<h3>${esc(fmtD(d,true))}</h3>
+  ${pr.length||cx?`<p class="small" style="margin:0">${pr.length?`<b>Présences :</b> ${esc(pr.join(", "))}`:""}${pr.length&&cx?"<br>":""}${cx?`<b>Contexte :</b> ${esc(cx)}`:""}</p>`:""}
+  <p class="muted small" style="margin:0">${items.length?`${items.length} note${items.length>1?"s":""} ce jour-là`:"Aucune note ce jour-là."}${info.chk?` · ${info.chk} étape${info.chk>1?"s":""} cochée${info.chk>1?"s":""}`:""}${jn.length?" · note complète gardée":""}</p>
+  ${items.length?`<details class="more"><summary>Voir les notes</summary><div class="entries">${items.map(it=>`<div class="entry"><span class="txt"><b class="small">${esc(it.who)} · ${esc(it.where)}</b><br>${esc(it.text)}</span></div>`).join("")}</div></details>`:""}
+  <label class="f">Note au journal du groupe pour cette date<textarea class="field" id="cdText" placeholder="Ex. : groupe calme à l'arrivée, belle entraide à la cabane."></textarea></label>
+  <div class="row-actions"><select class="field" id="cdTheme" style="flex:0 0 auto">${Object.entries(JTHEMES).filter(([k])=>k!=="source"&&k!=="jour").map(([k,v])=>`<option value="${k}">${v}</option>`).join("")}</select><button class="btn primary" id="cdAdd">Ajouter</button>${micBtn("cdText")}</div>
+  <div class="row-actions"><button class="btn" id="cdPaste">Note complète pour cette date</button><button class="btn" id="cdDay">Notes du jour</button></div>
+  <div class="row-actions"><button class="btn" id="cdObs">${d===S.obsDate?"✓ Date d'observation":"Observer à cette date"}</button><button class="btn" id="cdPlan">${pl?"Retirer la rencontre prévue":"Marquer comme rencontre prévue"}</button></div>
+  <button class="btn" id="cdClose">Fermer</button>`,s=>{
+    s.querySelector("#cdClose").onclick=closeSheet;
+    s.querySelector("#cdAdd").onclick=()=>{const t=s.querySelector("#cdText").value.trim();if(!t){s.querySelector("#cdText").focus();return}const th=s.querySelector("#cdTheme").value;s.querySelector("#cdText").value="";mutGroup(gid,x=>{(x.journal=x.journal||[]).push({id:uid("j"),date:d,text:t,src:"manuel",theme:th,by:getMe()})});toast("Ajouté au journal du "+fmtD(d));calDaySheet(gid,d)};
+    s.querySelector("#cdPaste").onclick=()=>pasteSheet(gid,d);
+    s.querySelector("#cdDay").onclick=()=>daySheet(gid,d);
+    s.querySelector("#cdObs").onclick=()=>{S.obsDate=d;closeSheet();render();toast("Date d'observation : "+fmtD(d,true))};
+    s.querySelector("#cdPlan").onclick=()=>{mutGroup(gid,x=>{const l=x.meetings||[];x.meetings=pl?l.filter(v=>v!==d):l.concat(d).sort()});calDaySheet(gid,d)};
+  })}
 const JTHEMES={climat:"Climat et dynamique",environnement:"Aménagement",ecole:"À arrimer avec l'école",autre:"Autre",source:"Note originale",jour:"Note de la journée"};
 /* ---------- Présences ---------- */
 function presOf(g,d){return ((g.presences||{})[d])||null}
@@ -708,13 +772,15 @@ function childObjs(c){return (c.objectifs||[])}
 function objMarksHTML(o){const m=Object.entries(o.marks||{}).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,10);return m.map(([d,v])=>`<span class="opill ${v}">${v==="ok"?"✓":"✗"} ${fmtD(d)}</span>`).join("")}
 function childObjHTML(cid,c,O,compact){const list=childObjs(c).filter(o=>!o.done&&(!O||O.subs.includes((o.k||o.occ||"").split(".")[0])));if(!list.length)return "";
   return `<section class="${compact?"cobj compact":"card cobj"}">${compact?"":`<h3 style="font-size:1.25rem;margin-bottom:6px">Objectifs de ${esc(c.name)}</h3>`}${list.map(o=>{const v=(o.marks||{})[S.obsDate]||"";return `<div class="cobjrow"><button class="omark ${v}" data-act="cObjMark" data-id="${cid}" data-o="${o.id}" aria-label="${esc(o.label)} : ${v==="ok"?"réussi":v==="no"?"pas encore":"non noté"}">${v==="ok"?"✓":v==="no"?"✗":""}</button><span class="txt"><b>${esc(o.label)}</b>${o.k?`<span class="muted small"> · ${esc(stepLabel(c,o.k)||"")}</span>`:""}<span class="ehist">${objMarksHTML(o)}</span></span></div>`}).join("")}</section>`}
+function isHidStep(c,k){return (c.hideSteps||[]).includes(k)}
 function objSuggestions(c){const out=[];const mo=monthsAt(c.dob,todayISO());
   childSections(c).forEach(sec=>sec.rows.forEach(r=>{if(!r.steps||r.rep)return;const key=sec.id+"."+r.id;
     const ok=r.steps.map((st,i)=>((c.checks||{})[key+"."+stK(st,i)]||[]).length>0),ny=r.steps.map((st,i)=>((c.notyet||{})[key+"."+stK(st,i)]||[]).length>0);
     if(!ok.some(Boolean)&&!ny.some(Boolean))return;
     const hi=ok.lastIndexOf(true);let pick=null;
-    r.steps.forEach((st,i)=>{if(!pick&&ny[i]&&!ok[i])pick={k:key,label:stT(st),why:"pas encore"}});
-    if(!pick&&hi>=0&&hi+1<r.steps.length){const st=r.steps[hi+1];const ag=ageOf(key+"."+stK(st,hi+1));pick={k:key,label:stT(st),why:ag&&mo!==null&&mo>=ag[0]?"prochaine étape, de son âge":"prochaine étape"}}
+    r.steps.forEach((st,i)=>{if(!pick&&ny[i]&&!ok[i]&&!isHidStep(c,key+"."+stK(st,i)))pick={k:key,label:stT(st),why:"pas encore"}});
+    let nx=hi+1;while(nx<r.steps.length&&isHidStep(c,key+"."+stK(r.steps[nx],nx)))nx++;
+    if(!pick&&hi>=0&&nx<r.steps.length){const st=r.steps[nx];const ag=ageOf(key+"."+stK(st,nx));pick={k:key,label:stT(st),why:ag&&mo!==null&&mo>=ag[0]?"prochaine étape, de son âge":"prochaine étape"}}
     if(pick&&!childObjs(c).some(o=>o.k===pick.k&&o.label===pick.label))out.push(pick)}));
   return out.slice(0,8)}
 function portraitObjHTML(cid,c){const T=TEMPLATES[baseTpl(c)];const all=childObjs(c).slice().sort((a,b)=>(a.done?1:0)-(b.done?1:0));const sug=objSuggestions(c);
@@ -760,17 +826,27 @@ function viewActivity(gid,secId){
   const g=S.groups.get(gid);if(!g){crumbs([]);return`<div class="card empty">Ce groupe n'existe plus. <a href="#accueil">Retour aux groupes</a></div>`}
   const O=occOf(secId);const T=tpl(g);if(!O)return`<div class="card empty">Section introuvable.</div>`;
   crumbs([`<a href="#g-${gid}">${esc(g.name)}</a>`,`<span>Mode activité</span>`]);
-  if(!S.rowFilter||S.rowFilter.occ!==O.id)S.rowFilter={occ:O.id,row:""};
   const kids=childrenOf(gid);const gsecs=O.subs.map(id=>T.sections.find(x=>x.id===id)).filter(Boolean);
-  let h=`<section class="card"><div class="sechead"><img src="${img(O.img)}" alt=""><div style="flex:1"><h2>Mode activité · ${esc(O.titre)}</h2><div class="sph">Tous les enfants de ${esc(g.name)} sur une seule page. Choisissez un repère pour aller encore plus vite.</div></div></div>
+  const allRows=gsecs.flatMap(sec=>sec.rows.map(r=>({sec,r,v:sec.id+"."+r.id})));
+  if(!S.rowFilter||S.rowFilter.occ!==O.id||(S.rowFilter.row!=="*"&&!allRows.some(x=>x.v===S.rowFilter.row)))S.rowFilter={occ:O.id,row:(allRows.find(x=>!x.r.free)||allRows[0]||{v:"*"}).v};
+  const cur=S.rowFilter.row;const sel=allRows.find(x=>x.v===cur);
+  let h=`<section class="card"><div class="sechead"><img src="${img(O.img)}" alt=""><div style="flex:1"><h2>Mode activité · ${esc(O.titre)}</h2><div class="sph">Une observation simple pour tous les enfants de ${esc(g.name)}.</div></div></div>
   <div class="toolbar" style="margin-top:12px">
    <label class="obsdate small"><span class="label">Date d'observation</span><input type="date" value="${S.obsDate}" data-act="obsDate"></label>
    ${ctxInput(gid)}
-   <label class="obsdate small"><span class="label">Repère</span><select data-act="rowFilter"><option value="">Tous les repères</option>${gsecs.map(sec=>`<optgroup label="${esc(sec.titre)}">${sec.rows.map(r=>`<option value="${sec.id}.${r.id}" ${S.rowFilter.row===sec.id+"."+r.id?"selected":""}>${esc(r.label)}</option>`).join("")}</optgroup>`).join("")}</select></label>
   </div>
+  <div class="achips">${gsecs.map(sec=>`${gsecs.length>1?`<span class="label">${esc(sec.titre)}</span>`:""}<div class="chips">${sec.rows.map(r=>`<button class="chip${cur===sec.id+"."+r.id?" on":""}" data-act="actRow" data-k="${sec.id}.${r.id}">${esc(r.label)}</button>`).join("")}</div>`).join("")}
+   <div class="chips"><button class="chip ghost${cur==="*"?" on":""}" data-act="actRow" data-k="*">Fiche complète de chacun (tout dérouler)</button></div></div>
   <div style="margin-top:12px">${occNav({prio:null},null,secId,x=>`#g-${gid}--${x}`)}</div></section>`;
-  if(!kids.length)h+=`<div class="card empty">Aucun enfant dans ce groupe. <a href="#g-${gid}">Ajouter des enfants</a></div>`;
-  const f=S.rowFilter.row;const [fs,fr]=f?f.split("."):["",""];
+  if(!kids.length)return h+`<div class="card empty">Aucun enfant dans ce groupe. <a href="#g-${gid}">Ajouter des enfants</a></div>`;
+  if(sel){const {sec,r}=sel;const key=sel.v;
+    h+=`<section class="card act-c"><h3 style="font-size:1.3rem;margin:0">${esc(r.label)}</h3>${r.hint?`<div class="hint">${esc(r.hint)}</div>`:""}
+    ${r.steps&&!r.rep?`<ol class="aleg">${r.steps.map(st=>`<li>${esc(stT(st))}</li>`).join("")}</ol>`:""}
+    ${r.steps&&r.rep?`<ul class="aleg rep">${r.steps.map((st,i)=>`<li><b>${i+1}</b> ${esc(stT(st))}</li>`).join("")}</ul>`:""}
+    <p class="muted small" style="margin:6px 0 4px">Toucher un numéro : ✓ → ✗ → vide · appui long : historique, cacher pour un enfant${assets?" · 📷 photo du jour":""}</p>
+    <div class="akids">${kids.map(([cid,c])=>actKidHTML(cid,c,sec,r,key,O)).join("")}</div></section>`;
+    return h}
+  const f="";const [fs,fr]=["",""];
   kids.forEach(([cid,c])=>{let inner="";let nh=0;
     occSecs(c,O).forEach(ks=>{if(f&&ks.id!==fs)return;const same=r=>!f||r.id===fr||r.id===fr+"45"||r.id+"45"===fr;const list=orderedRows(c,ks).filter(same);const vis=f?list:list.filter(r=>!isHidRow(c,ks.id,r.id));nh+=list.length-vis.length;inner+=vis.map(r=>rowHTML(cid,c,ks,r)).join("")});
     h+=`<section class="card act kid"><a class="kidhead" href="#e-${cid}--${O.subs[0]}"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><h3>${esc(c.name)}</h3></a>
@@ -779,6 +855,33 @@ function viewActivity(gid,secId){
   return h;
 }
 
+function actKidHTML(cid,c,gsec,gr,gkey,O){
+  const ks=occSecs(c,O).find(x=>x.id===gsec.id);const fr=gr.id.replace(/45$/,"");
+  const r=ks&&ks.rows.find(x=>x.id===gr.id||x.id.replace(/45$/,"")===fr);
+  const head=`<a class="akname" href="#e-${cid}--${gsec.id}"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><span>${esc(c.name)}</span></a>`;
+  if(!r)return `<div class="akid">${head}<span class="muted small">Pas dans sa fiche.</span></div>`;
+  const key=ks.id+"."+r.id;const nk=cid+"|"+key;const d=S.obsDate;
+  const hidRow=isHidRow(c,ks.id,r.id);
+  let body="";
+  if(r.hands){const hd=(c.hand||{})[key]||{};
+    body+=`<div class="ahands">${r.hands.map(it=>{const cur=(hd[it]||[]).find(e=>e.d===d);const last=(hd[it]||[]).filter(e=>e.d!==d).sort((a,b)=>(b.d||"").localeCompare(a.d||""))[0];
+      return `<span class="ahand"><span class="hn">${esc(it)}</span>${[["G","Gauche"],["D","Droite"],["2","2 mains"]].map(([v,l])=>`<button class="hbtn${cur&&cur.c===v?" on":""}" data-act="hand" data-id="${cid}" data-k="${key}" data-h="${esc(it)}" data-c="${v}" title="${l}" aria-pressed="${!!(cur&&cur.c===v)}">${v==="2"?"2":v}</button>`).join("")}${!cur&&last?`<span class="muted small">(${last.c==="2"?"2 mains":last.c} ${fmtD(last.d)})</span>`:""}</span>`}).join("")}</div>`}
+  if(r.steps){const same=JSON.stringify(r.steps)===JSON.stringify(gr.steps);const AON=ageOn();const mo=AON?monthsAt(c.dob,d):null;
+    body+=`<div class="apills">${r.steps.map((st,i)=>{const sk=stK(st,i),kk=key+"."+sk;if(isHidStep(c,kk))return "";const t=stT(st);
+      const a=(c.checks||{})[kk]||[],ny=(c.notyet||{})[kk]||[];const okT=a.includes(d),nyT=ny.includes(d);const on=a.length>0,nyo=!on&&ny.length>0;
+      const ag=AON?ageOf(kk):null;const agc=ag?ageClass(ag,mo,on):"";
+      return `<div class="apill${okT?" okT":on?" ok":""}${nyT?" nyT":nyo?" ny":""}${agc?" "+agc:""}${same?"":" wide"}" role="button" tabindex="0" data-act="step" data-id="${cid}" data-k="${kk}" title="${esc(t)}" aria-label="${esc(c.name)} : ${esc(t)}${okT?", réussi aujourd'hui":nyT?", pas encore aujourd'hui":""}"><span class="n">${okT?"✓":nyT?"✗":i+1}</span>${same?"":`<span class="tt">${esc(t)}</span>`}<span class="t" hidden>${esc(t)}</span></div>`}).join("")}</div>`}
+  if(r.free){const fid=`free-${cid}-${key.replace(".","-")}`;const today=((c.free||{})[key]||[]).filter(n=>n.date===d);
+    body+=`<div class="addline"><input class="field" id="${fid}" placeholder="Observation"><button class="btn small" data-act="addFree" data-id="${cid}" data-k="${key}">Ajouter</button></div>${today.map(n=>`<div class="muted small">${esc(n.text)}</div>`).join("")}`}
+  const sh=((c.sout||{})[key]||[]).filter(e=>e.d===d).map(e=>e.t);
+  const tools=`<span class="atools">${r.steps&&!r.nosout?Object.entries(SOUT).map(([k2,v])=>`<button class="sbtn small${sh.includes(k2)?" on":""}" data-act="sout" data-id="${cid}" data-k="${key}" data-t="${k2}" title="Soutien ${esc(v.nom.toLowerCase())} : ${esc(v.desc)}" aria-pressed="${sh.includes(k2)}">${esc(v.nom)}</button>`).join(""):""}
+    <button class="ico" data-act="toggleNote" data-k="${nk}" title="Note" aria-label="Écrire une note pour ${esc(c.name)}">${PEN}</button>${SR?`<button class="ico" data-act="noteDictate" data-k="${nk}" title="Dicter" aria-label="Dicter une note pour ${esc(c.name)}">${MIC}</button>`:""}
+    ${assets?`<label class="ico" title="Photo" aria-label="Ajouter une photo pour ${esc(c.name)}">${CAM}<input type="file" accept="image/*" hidden data-act="actPhoto" data-id="${cid}" data-k="${key}"></label>`:""}</span>`;
+  const ph=photosOf(c,p=>p.d===d&&(p.k===key||String(p.k).startsWith(key+".")));
+  const notesT=(c.notes||[]).filter(n=>n.k===key&&n.date===d);
+  const open=openNotes.has(nk);
+  return `<div class="akid${hidRow?" hidrow":""}">${head}${body}${tools}${hidRow?`<span class="muted small">repère masqué dans sa fiche</span>`:""}
+  ${notesT.length&&!open?`<div class="anotes">${notesT.map(n=>`<span>${esc(n.text)}</span>`).join("")}</div>`:""}${open?rowNotes(cid,c,key):""}${thumbs(c,ph,cid)}</div>`}
 function ctxOf(gid,d){const g=S.groups.get(gid);return g&&g.ctx?g.ctx[d]||"":""}
 function hidden(c){return c.hide||{sections:[],rows:{}}}
 function isHidSec(c,id){return (hidden(c).sections||[]).includes(id)}
@@ -787,6 +890,8 @@ function secLast(c,s){let m="";const up=d=>{if(d&&d>m)m=d};Object.entries(c.noty
 function daysSince(d){if(!d)return null;return Math.round((parseISO(todayISO())-parseISO(d))/86400000)}
 function migrate(c){if(!c)return c;if((c.next||[]).length&&!c.nextMigrated){c.objectifs=(c.objectifs||[]).concat(c.next.map(n=>({id:n.id||uid("o"),label:n.pas+(n.act?" (activité : "+n.act+")":""),k:"",occ:n.occ||"",date:n.date,marks:{}})));c.nextMigrated=true}const ch=c.checks||{};let mod=false;const map={0:0,1:2,2:4,3:4};
   Object.keys(ch).forEach(k=>{const m=k.match(/^autres\.communiquer\.(\d)$/);if(m){const nk="communiquer.expression."+map[m[1]];ch[nk]=[...new Set([...(ch[nk]||[]),...ch[k]])];delete ch[k];mod=true}});
+  const LM={0:"lancer.0",1:"botter.1",2:"lancer.1",3:"attraper.1",4:"lancer.2",5:"attraper.3"};
+  if(!c.ballonMig){["checks","notyet"].forEach(f=>{const o=c[f];if(!o)return;Object.keys(o).forEach(k=>{const m=k.match(/^bouger\.lancer\.(\d)$/);if(m&&LM[m[1]]){const nk="bouger."+LM[m[1]];o[nk]=[...new Set([...(o[nk]||[]),...(o[k]||[])])];delete o[k]}})});c.ballonMig=true}
   if(c.sout&&c.sout["autres.communiquer"]){c.sout["communiquer.expression"]=(c.sout["communiquer.expression"]||[]).concat(c.sout["autres.communiquer"]);delete c.sout["autres.communiquer"]}
   return c}
 function orderBy(list,ids){if(!ids)return list.slice();const pos=new Map(ids.map((id,i)=>[id,i]));return list.slice().sort((a,b)=>(pos.has(a.id)?pos.get(a.id):999+list.indexOf(a))-(pos.has(b.id)?pos.get(b.id):999+list.indexOf(b)))}
@@ -872,11 +977,13 @@ function rowHTML(cid,c,s,r,rank){
   const rk=cid+"|"+key;const long=!isSch&&r.steps.length>LONG;const open=!long||openRows.has(rk);
   const isOn=(st,i)=>(((c.checks||{})[key+"."+stK(st,i)])||[]).length>0||(((c.notyet||{})[key+"."+stK(st,i)])||[]).length>0;
   const nOn=r.steps.filter(isOn).length;
-  const shown=open?r.steps.map((st,i)=>i):(nOn?r.steps.map((st,i)=>i).filter(i=>isOn(r.steps[i],i)):[0,1,2]);
+  const hidK=i=>isHidStep(c,key+"."+stK(r.steps[i],i));const showHid=openRows.has("h|"+rk);
+  const vis=r.steps.map((st,i)=>i).filter(i=>showHid||!hidK(i));const nHid=r.steps.filter((st,i)=>hidK(i)).length;
+  const shown=open?vis:(nOn?vis.filter(i=>isOn(r.steps[i],i)):vis.slice(0,3));
   const AON=ageOn();const mo=AON?monthsAt(c.dob,S.obsDate):null;
   h+=`<div class="steps">${shown.map(i=>{const st=r.steps[i];const t=stT(st);const sk=stK(st,i);const a=((c.checks||{})[key+"."+sk]||[]).slice().sort();const on=a.length>0;const nyd=((c.notyet||{})[key+"."+sk]||[]).slice().sort();const ny=!on&&nyd.length>0;const ag=AON?ageOf(key+"."+sk):null;const agc=ag?ageClass(ag,mo,on):"";
     const todayS=a.includes(S.obsDate)?"ok":nyd.includes(S.obsDate)?"ny":"";const anyMark=a.length||nyd.length;
-    return `<div class="step${on?" on":""}${ny?" ny":""}${agc?" "+agc:""}" role="button" tabindex="0" data-act="step" data-id="${cid}" data-k="${key}.${sk}" aria-label="${esc(t)}${todayS==="ok"?" : réussi aujourd'hui":todayS==="ny"?" : pas encore aujourd'hui":""}">${anyMark?`<button class="hist" data-act="stepHist" data-id="${cid}" data-k="${key}.${sk}" title="Historique, autres dates, photos" aria-label="Historique">${CLOCK}</button>`:""}${r.rep?"":`<span class="n">ÉTAPE ${i+1}</span>`}<span class="t">${esc(t)}</span>${on?a.map(d=>{const cx=ctxOf(c.groupId,d);return `<span class="d">${fmtD(d)}${cx?`<em> · ${esc(cx)}</em>`:""}</span>`}).join(""):""}${nyd.length?`<span class="dny">pas encore · ${nyd.map(d=>fmtD(d)).join(", ")}</span>`:""}${(()=>{const n=photosOf(c,p=>p.k===key+"."+sk).length;return n?`<span class="phc">${CAM} ${n}</span>`:""})()}</div>`}).join("")}${long?`<button class="more-btn" data-act="toggleRow" data-k="${rk}">${open?"Réduire":nOn?`Voir tout (${r.steps.length})`:`Voir les ${r.steps.length} éléments`}</button>`:""}</div>`;
+    return `<div class="step${on?" on":""}${ny?" ny":""}${agc&&!hidK(i)?" "+agc:""}${hidK(i)?" hid":""}" role="button" tabindex="0" data-act="step" data-id="${cid}" data-k="${key}.${sk}" aria-label="${esc(t)}${todayS==="ok"?" : réussi aujourd'hui":todayS==="ny"?" : pas encore aujourd'hui":""}">${anyMark?`<button class="hist" data-act="stepHist" data-id="${cid}" data-k="${key}.${sk}" title="Historique, autres dates, photos" aria-label="Historique">${CLOCK}</button>`:""}${r.rep?"":`<span class="n">ÉTAPE ${i+1}</span>`}<span class="t">${esc(t)}</span>${on?a.map(d=>{const cx=ctxOf(c.groupId,d);return `<span class="d">${fmtD(d)}${cx?`<em> · ${esc(cx)}</em>`:""}</span>`}).join(""):""}${nyd.length?`<span class="dny">pas encore · ${nyd.map(d=>fmtD(d)).join(", ")}</span>`:""}${(()=>{const n=photosOf(c,p=>p.k===key+"."+sk).length;return n?`<span class="phc">${CAM} ${n}</span>`:""})()}</div>`}).join("")}${long?`<button class="more-btn" data-act="toggleRow" data-k="${rk}">${open?"Réduire":nOn?`Voir tout (${r.steps.length})`:`Voir les ${r.steps.length} éléments`}</button>`:""}${nHid?`<button class="more-btn hidlink" data-act="toggleRow" data-k="h|${rk}">${showHid?"Masquer les étapes cachées":`${nHid} cachée${nHid>1?"s":""} · afficher`}</button>`:""}</div>`;
   if(r.nosout)return h+rowNotes(cid,c,key)+`</div>`;
   const sh=(c.sout||{})[key]||[];const today=new Set(sh.filter(e=>e.d===S.obsDate).map(e=>e.t));
   const byDate={};sh.forEach(e=>{(byDate[e.d]=byDate[e.d]||[]).push(e.t)});
@@ -933,6 +1040,13 @@ function getAI(){try{return AIS[localStorage.getItem("carnet-ai")]?localStorage.
 async function copyText(t,msg){try{await navigator.clipboard.writeText(t);toast(msg||"Copié")}catch(e){openSheet(`<h3>Copiez ce texte</h3><p class="muted small" style="margin:0">Sélectionnez tout le texte, puis copiez-le.</p><textarea class="field" readonly style="min-height:240px">${esc(t)}</textarea><button class="btn" id="ctClose">Fermer</button>`,s=>{s.querySelector("#ctClose").onclick=closeSheet;const ta=s.querySelector("textarea");ta.focus();ta.select()})}}
 /* ---------- Spécification du bloc carnet (partagée : IA du carnet et projet IA) ---------- */
 const norm=t=>String(t||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/g,"");
+function lev(a,b){if(a===b)return 0;const m=a.length,n=b.length;let pr=Array.from({length:n+1},(_,j)=>j);for(let i=1;i<=m;i++){const cu=[i];for(let j=1;j<=n;j++)cu[j]=Math.min(pr[j]+1,cu[j-1]+1,pr[j-1]+(a[i-1]===b[j-1]?0:1));pr=cu}return pr[n]}
+function matchKid(n,map,strict){const x=norm(n);if(!x)return "";if(map.has(x))return map.get(x);
+  const first=norm(String(n).trim().split(/\s+/)[0]);if(!strict&&map.has(first))return map.get(first);
+  let best="",bd=9,tie=false;for(const [k,id] of map){if(k.length<(strict?5:3)||(strict&&x.length<4))continue;const d=lev(strict?x:first,k);const lim=strict?1:(k.length<=4?1:2);if(d<=lim){if(d<bd){bd=d;best=id;tie=false}else if(d===bd&&id!==best)tie=true}}
+  if(best&&!tie)return best;
+  if(!strict&&first.length>=3){const pre=[...map].filter(([k])=>k.startsWith(first)||first.startsWith(k));const ids=[...new Set(pre.map(p=>p[1]))];if(ids.length===1)return ids[0]}
+  return ""}
 function kidNames(c){return [c.name].concat(String(c.alias||"").split(",")).map(x=>x.trim()).filter(Boolean)}
 function carnetSpec(g,kids){const T=tpl(g);
   const kl=kids.map(([,c])=>{const al=kidNames(c).slice(1);return `- ${c.name}${al.length?" (aussi écrit : "+al.join(", ")+")":""}`}).join("\n");
@@ -976,6 +1090,7 @@ Présences : …
 Observations générales du groupe (par thèmes courts : dynamique, aménagement de l'environnement, à arrimer avec l'école…)
 Puis, pour chaque enfant : son prénom, des titres thématiques courts, les faits observés, et au besoin :
 « Stratégie de succès : … » · « À explorer : … » (hypothèses, questions) · « Prochain pas : … »
+Prénoms : remplace d'emblée chaque prénom mal écrit ou mal transcrit par le bon prénom de la liste ENFANTS DU GROUPE, partout (dans la note ET dans le bloc), sans le signaler. Si tu ne peux vraiment pas savoir de quel enfant il s'agit, garde le mot tel quel et ajoute « (?) ».
 Garde mes mots et mes observations. N'invente rien, n'interprète pas au-delà de ce que je dis. Ton professionnel, simple, centré sur les forces, l'occupation et ce qui aide l'enfant (environnement, soutien), plutôt que sur le comportement seul.
 
 2. À la toute fin, ajoute le bloc pour mon carnet, exactement entre ces deux lignes :
@@ -1134,12 +1249,27 @@ const micBtn=ta=>SR?`<button class="btn ghost mic" data-act="dictate" data-ta="$
 const PEN=`<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75L3 17.25zm17.7-10.2a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>`;
 const MIC=`<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>`;
 let recog=null;
+function dedupeWords(t){let w=t.split(/\s+/).filter(Boolean);for(let n=6;n>=1;n--){const o=[];for(let i=0;i<w.length;i++){if(i>=n&&o.length>=n&&!(n===1&&/^(nous|vous)$/i.test(w[i]))&&w.slice(i,i+n).join(" ").toLowerCase()===o.slice(o.length-n).join(" ").toLowerCase()&&i+n<=w.length){i+=n-1;continue}o.push(w[i])}w=o}return w.join(" ")}
+function tidySpeech(t){t=" "+t+" ";
+  t=t.replace(/\s+(point à la ligne|nouvelle ligne|à la ligne)\s+/gi,".\n").replace(/\s+point d'interrogation\s+/gi,"? ").replace(/\s+point d'exclamation\s+/gi,"! ").replace(/\s+(point final|point)\s+(?=[A-ZÀ-Ü]|$)/g,". ").replace(/\s+virgule\s+/gi,", ").replace(/\s+deux points\s+/gi," : ");
+  t=dedupeWords(t.replace(/\n/g," ⏎ ")).replace(/ ?⏎ ?/g,"\n").replace(/\s+([,.])/g,"$1").replace(/[ \t]+/g," ").trim();
+  t=t.replace(/(^|[.!?]\s+|\n)([a-zà-ÿ])/g,(m,a,b)=>a+b.toUpperCase());if(t&&!/[.!?…]$/.test(t))t+=".";return t}
 function dictate(taId,btn){const ta=document.getElementById(taId);if(!ta)return;
   if(recog){try{recog.stop()}catch(e){}return}
-  try{recog=new SR();recog.lang="fr-CA";recog.interimResults=true;recog.continuous=true;const base=ta.value?ta.value.replace(/\s*$/," "):"";let fin="";
-    recog.onresult=ev=>{let tmp="";for(let i=ev.resultIndex;i<ev.results.length;i++){const t=ev.results[i][0].transcript;if(ev.results[i].isFinal)fin+=t+" ";else tmp+=t}ta.value=base+fin+tmp};
-    recog.onerror=ev=>{toast(ev.error==="not-allowed"||ev.error==="service-not-allowed"?"Le micro n'est pas permis ici : utilisez le micro du clavier de votre téléphone.":"La dictée s'est arrêtée.")};
-    recog.onend=()=>{recog=null;btn.classList.remove("on");btn.innerHTML=MIC+" Dicter"};
+  try{recog=new SR();recog.lang="fr-CA";recog.interimResults=true;recog.continuous=true;const base=ta.value?ta.value.replace(/\s*$/," "):"";let said="";
+    const low=x=>x.toLowerCase().replace(/[^\p{L}\p{N} ]/gu,"").replace(/\s+/g," ").trim();
+    recog.onresult=ev=>{const fin=[];let tmp="";
+      for(let i=0;i<ev.results.length;i++){const t=String(ev.results[i][0].transcript||"").trim();if(!t)continue;
+        if(ev.results[i].isFinal){const last=fin[fin.length-1];
+          if(last!==undefined&&low(t).startsWith(low(last)))fin[fin.length-1]=t; /* Android : le résultat répète le précédent */
+          else if(last!==undefined&&low(last).startsWith(low(t))){}
+          else if(fin.length&&low(fin.join(" ")).endsWith(low(t))){}
+          else fin.push(t)}
+        else tmp=t}
+      const f=fin.join(" ");if(tmp&&f&&low(tmp).startsWith(low(f)))tmp=tmp.slice(f.length).trim();
+      said=f;ta.value=base+f+(tmp?" "+tmp:"")};
+    recog.onerror=ev=>{if(ev.error==="no-speech"||ev.error==="aborted")return;toast(ev.error==="not-allowed"||ev.error==="service-not-allowed"?"Le micro n'est pas permis ici : utilisez le micro du clavier de votre téléphone.":"La dictée s'est arrêtée.")};
+    recog.onend=()=>{recog=null;btn.classList.remove("on");btn.innerHTML=MIC+" Dicter";if(said){ta.value=base+tidySpeech(said);ta.dispatchEvent(new Event("input",{bubbles:true}))}};
     recog.start();btn.classList.add("on");btn.innerHTML=MIC+" Arrêter";ta.focus()}
   catch(e){recog=null;toast("Utilisez le micro du clavier de votre téléphone pour dicter.")}}
 const openNotes=new Set();
@@ -1223,6 +1353,9 @@ document.addEventListener("click",e=>{
   else if(a==="delFacil"){confirmSheet("Retirer ce facilitateur ? Ce qui a déjà été coché reste enregistré.",()=>{CUSTOM._facil=(CUSTOM._facil||[]).filter(x=>x.id!==b.dataset.x);saveCustom()})}
   else if(a==="recap")recapSheet(id);
   else if(a==="dayNotes")daySheet(id);
+  else if(a==="actRow"){S.rowFilter=Object.assign({},S.rowFilter,{row:k});render()}
+  else if(a==="calDay")calDaySheet(id,b.dataset.d);
+  else if(a==="calNav"){const g=S.groups.get(id);const cur=S.calM&&S.calM.gid===id?S.calM.ym:S.obsDate.slice(0,7);const [y,m]=cur.split("-").map(Number);const dt=new Date(y,m-1+Number(b.dataset.d),1);S.calM={gid:id,ym:dt.getFullYear()+"-"+String(dt.getMonth()+1).padStart(2,"0")};render()}
   else if(a==="objEdit"){S.objEdit=S.objEdit===id?null:id;render()}
   else if(a==="objSugg"){S.objEdit=id;const l=b.dataset.l;const sg=OBJ_SUGG.find(x=>x[0]===l);mutGroup(id,g=>{g.objectifs=g.objectifs||[];if(!g.objectifs.some(o=>o.label===l))g.objectifs.push({id:uid("o"),label:l,sec:sg?sg[1]:"groupe"})})}
   else if(a==="objAdd"){const inp=$("#objNew");const l=inp.value.trim();if(!l){inp.focus();return}inp.value="";mutGroup(id,g=>{(g.objectifs=g.objectifs||[]).push({id:uid("o"),label:l,sec:"groupe"})})}
@@ -1278,6 +1411,9 @@ document.addEventListener("contextmenu",e=>{if(e.target.closest('[data-act="step
 document.addEventListener("change",e=>{
   const t=e.target;
   if(t.dataset.act==="mergeFile"||t.dataset.act==="restoreFile"){const f=t.files&&t.files[0];const m=t.dataset.act==="mergeFile";t.value="";if(f)(m?LOCAL.merge(f):LOCAL.restore(f));return}
+  if(t.dataset.act==="actPhoto"){const f=t.files&&t.files[0];const cid=t.dataset.id,key=t.dataset.k;const c=S.children.get(cid);const d=S.obsDate;
+    const okT=Object.keys((c&&c.checks)||{}).filter(x=>x.startsWith(key+".")&&(c.checks[x]||[]).includes(d));
+    addPhoto(cid,okT.length===1?okT[0]:key,d,f);t.value="";return}
   if(t.dataset.act==="photoSec"){const f=t.files&&t.files[0];addPhoto(t.dataset.id,t.dataset.s,S.obsDate,f);t.value="";return}
   if(t.dataset.act==="ageToggle"){try{localStorage.setItem("carnet-ages",t.checked?"1":"0")}catch(e){}toast(t.checked?"Repères d'âge affichés":"Repères d'âge masqués");return}
   if(t.dataset.act==="obsDate"){S.obsDate=t.value||todayISO();render()}
@@ -1332,7 +1468,8 @@ function stepSheet(cid,k,label){
     <div class="entries">${ent.map(e=>{const ph=photosOf(c,p=>p.k===k&&p.d===e.d);return `<div class="entry col"><div class="erow"><span class="txt"><b>${fmtD(e.d,true)}</b> · ${e.s==="ok"?'<span class="okt">✓ réussi</span>':'<span class="nyt">pas encore</span>'}${ctxOf(c.groupId,e.d)?" · "+esc(ctxOf(c.groupId,e.d)):""}</span>${assets?`<label class="btn ghost">${CAM} Photo<input type="file" accept="image/*" hidden data-pd="${e.d}"></label>`:""}<button class="btn ghost danger" data-rm="${e.s}|${e.d}">Retirer</button></div>${thumbs(c,ph,cid)}</div>`}).join("")}</div>
     <label class="f">Autre date<div class="addline"><input type="date" class="field" id="dAdd" value="${S.obsDate}"><button class="btn" id="dOk">✓ Réussi</button><button class="btn" id="dNy">Pas encore</button></div></label>
     <p class="muted small" style="margin:0">Sur la fiche, un toucher fait le cycle ✓ réussi → ✗ pas encore → vide pour la date du jour.</p>
-    <button class="btn" id="dClose">Fermer</button>`,s=>{
+    <div class="row-actions"><button class="btn" id="dHide">${isHidStep(c,k)?"Afficher de nouveau pour "+esc(c.name):"Cacher pour "+esc(c.name)+" (ne s'applique pas)"}</button><button class="btn" id="dClose">Fermer</button></div>`,s=>{
+      s.querySelector("#dHide").onclick=()=>{const was=isHidStep(S.children.get(cid),k);mutChild(cid,x=>{const l=x.hideSteps||[];x.hideSteps=was?l.filter(v=>v!==k):l.concat(k)});toast(was?"Étape affichée de nouveau":"Étape cachée pour cet enfant. « afficher » sous le repère pour la revoir.");closeSheet()};
       const tog=(fld,d)=>mutChild(cid,x=>{x[fld]=x[fld]||{};const l=x[fld][k]||[];x[fld][k]=l.includes(d)?l.filter(v=>v!==d):l.concat(d)});
       s.querySelector("#sOk").onclick=()=>{tog("checks",S.obsDate);draw()};
       s.querySelector("#sNy").onclick=()=>{tog("notyet",S.obsDate);draw()};
@@ -1397,7 +1534,7 @@ function childSheet(cid,gid){const c=cid?S.children.get(cid):{name:"",avatar:AVA
 function parseBloc(raw){if(!raw)return null;let t=raw;const m=raw.match(/===\s*BLOC CARNET\s*===([\s\S]*?)(===\s*FIN BLOC\s*===|$)/i);if(m)t=m[1];
   t=t.replace(/```(json)?/g,"");const a=t.indexOf("{"),b=t.lastIndexOf("}");if(a<0||b<a)return null;try{const o=JSON.parse(t.slice(a,b+1));return Array.isArray(o.extraits)?o:null}catch(e){return null}}
 function stripBloc(raw){return String(raw||"").replace(/===\s*BLOC CARNET\s*===[\s\S]*?(===\s*FIN BLOC\s*===|$)/i,"").trim()}
-function buildSplitPrompt(g,kids,date,text){return `Tu aides une ergothérapeute qui anime une classe nature avec une éducatrice spécialisée. Voici sa note d'observation du ${date}. Classe tout son contenu dans le bloc JSON décrit plus bas, et réponds SEULEMENT avec ce JSON.
+function buildSplitPrompt(g,kids,date,text){return `Tu aides une ergothérapeute qui anime une classe nature avec une éducatrice spécialisée. Voici sa note d'observation du ${date}. Classe tout son contenu dans le bloc JSON décrit plus bas, et réponds SEULEMENT avec ce JSON. Les prénoms peuvent être mal écrits ou mal transcrits par la dictée : remplace-les par le bon prénom de la liste, aussi dans les textes.
 
 ${carnetSpec(g,kids)}
 
@@ -1405,15 +1542,15 @@ NOTE :
 """
 ${text}
 """`}
-function pasteSheet(gid){
+function pasteSheet(gid,atDate){
   const g=S.groups.get(gid);const kids=childrenOf(gid);const ai=AIS[getAI()];
   openSheet(`<h3>Note complète du groupe</h3>
   <p class="muted small" style="margin:0">Collez la note de la rencontre : votre note dictée en vrac, ou la note rédigée par votre IA avec son bloc carnet à la fin. Tout sera classé par enfant, occupation et repère. Vous relisez avant d'enregistrer.</p>
-  <label class="f">Date de la rencontre<input type="date" class="field" id="pDate" value="${S.obsDate}"></label>
-  <label class="f">Contexte du jour (facultatif)<input class="field" id="pCtx" value="${esc((g.ctx||{})[S.obsDate]||"")}" placeholder="Ex. : cueillette sur le sentier"></label>
+  <label class="f">Date de la rencontre<input type="date" class="field" id="pDate" value="${atDate||S.obsDate}"></label>
+  <label class="f">Contexte du jour (facultatif)<input class="field" id="pCtx" value="${esc((g.ctx||{})[atDate||S.obsDate]||"")}" placeholder="Ex. : cueillette sur le sentier"></label>
   <label class="f">Note<textarea class="field" id="pText" style="min-height:180px" placeholder="Collez ici la note de la rencontre…"></textarea></label>
   ${kids.length?"":`<div class="notice">Ajoutez d'abord les enfants du groupe pour que les notes puissent leur être attribuées.</div>`}
-  <label class="chk"><input type="checkbox" id="pSug" ${S.sugPref?"checked":""}> Proposer aussi les cases, le soutien, les facilitateurs et les objectifs (proposés non cochés : vous décidez)</label>
+  <label class="chk"><input type="checkbox" id="pSug" ${S.sugPref!==false?"checked":""}> Proposer aussi les cases, le soutien, les facilitateurs et les objectifs</label>
   <label class="chk"><input type="checkbox" id="pSrc" checked> Garder la note originale complète dans le journal du groupe</label>
   <div class="row-actions"><button class="btn primary" id="pGo" ${kids.length?"":"disabled"}>Lire la note</button><button class="btn" id="pCancel">Annuler</button></div>
   <div id="pOut"></div>`,s=>{
@@ -1446,13 +1583,14 @@ function pasteSheet(gid){
 function reviewItems(s,gid,date,bloc,kids,srcText){
   const g=S.groups.get(gid);
   const nameToId=new Map();kids.forEach(([id,c])=>kidNames(c).forEach(n=>nameToId.set(norm(n),id)));
-  const findKid=n=>nameToId.get(norm(n))||"";
+  const findKid=n=>matchKid(n,nameToId);const canon=id=>(kids.find(k=>k[0]===id)||[,{}])[1].name||"";
+  const fixNames=t=>String(t).replace(/[\p{L}][\p{L}'’-]*/gu,w=>{if(w[0]!==w[0].toUpperCase()||w[0]===w[0].toLowerCase())return w;if(nameToId.has(norm(w)))return w;const id=matchKid(w,nameToId,true);return id?canon(id):w});
   const STEP={};Object.values(TEMPLATES).flatMap(t=>t.sections).forEach(x=>x.rows.forEach(r=>(r.steps||[]).forEach((st,i)=>{STEP[x.id+"."+r.id+"."+stK(st,i)]={row:x.id+"."+r.id,label:r.label,t:stT(st),i}})));
   const FAC=Object.fromEntries(facils());const OBJ=Object.fromEntries((g.objectifs||[]).map(o=>[o.id,o]));
   const T=tpl(g);const secOpts=[["portrait","Portrait"],...T.sections.map(x=>[x.id,x.n+". "+x.titre])];
   const rowOpts=sid=>{const sec=T.sections.find(x=>x.id===sid);return `<option value="">Note générale de l'occupation</option>`+(sec?sec.rows.filter(r=>!r.free).map(r=>`<option value="${sid}.${r.id}">${esc(r.label)}</option>`).join(""):"")};
   const pres=new Set((bloc.presences||[]).map(findKid).filter(Boolean));
-  const groupe=(bloc.groupe||[]).filter(x=>x&&x.texte).map(x=>({nys:[],cid:"__groupe",theme:JTHEMES[x.theme]?x.theme:"climat",text:String(x.texte),on:true,reps:[],eng:[],facs:[],obj:null,sec:"",rk:"",type:"note"}));
+  const groupe=(bloc.groupe||[]).filter(x=>x&&x.texte).map(x=>({nys:[],cid:"__groupe",theme:JTHEMES[x.theme]?x.theme:"climat",text:fixNames(x.texte),on:true,reps:[],eng:[],facs:[],obj:null,sec:"",rk:"",type:"note"}));
   const items=(bloc.extraits||[]).filter(x=>x&&x.texte).map(it=>{const nm=String(it.enfant||"");const cid=findKid(nm)||(nm.toUpperCase()==="GROUPE"?"__groupe":"");
     let sec=secOpts.some(o=>o[0]===it.section)?it.section:"";const rk=String(it.repere||"");if(!sec&&rk)sec=rk.split(".")[0];if(!secOpts.some(o=>o[0]===sec))sec=T.sections[0].id;
     const reps=[...new Set([].concat(it.cases||[],it.reperes||[]).map(String))].filter(k=>STEP[k]);
@@ -1461,11 +1599,13 @@ function reviewItems(s,gid,date,bloc,kids,srcText){
     const facs=[...new Set((Array.isArray(it.facilitateurs)?it.facilitateurs:[]).map(String))].filter(k=>FAC[k]);
     const obj=it.objectif&&OBJ[it.objectif.id]&&/^(ok|no)$/.test(it.objectif.resultat)?{id:it.objectif.id,v:it.objectif.resultat}:null;
     const type=/^(note|explorer|prochain|famille)$/.test(it.type)?it.type:"note";
+    if(cid&&cid!=="__groupe"&&nm&&norm(nm)!==norm(canon(cid))&&!nameToId.has(norm(nm))){const re=new RegExp("(^|[^\\p{L}])"+nm.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"(?![\\p{L}])","giu");it.texte=String(it.texte).replace(re,(m0,pre)=>pre+canon(cid))}
+    it.texte=fixNames(it.texte);
     return{nys,cid,sec,rk:rk&&T.sections.some(x=>x.id===rk.split(".")[0]&&x.rows.some(r=>sec+"."+r.id===rk))?rk:"",text:String(it.texte),on:!!cid,reps,eng,facs,obj,type,theme:"climat"}});
   const rows=groupe.concat(items);
   const childOpts=`<option value="">— Choisir —</option><option value="__groupe">Journal du groupe</option>`+kids.map(([id,c])=>`<option value="${id}">${esc(c.name)}</option>`).join("");
   const nSug=rows.reduce((a,r)=>a+r.reps.length+r.nys.length+(r.eng.length?1:0)+r.facs.length+(r.obj?1:0),0);
-  s.innerHTML=`<h3>Relire avant d'enregistrer</h3><p class="muted small" style="margin:0">${rows.length} extrait${rows.length>1?"s":""} pour le ${fmtD(date,true)}${nSug?`, avec ${nSug} proposition${nSug>1?"s":""} à cocher`:""}. Corrigez au besoin, décochez ce qui ne doit pas être gardé.</p>
+  s.innerHTML=`<h3>Relire avant d'enregistrer</h3><p class="muted small" style="margin:0">${rows.length} extrait${rows.length>1?"s":""} pour le ${fmtD(date,true)}${nSug?`, avec ${nSug} proposition${nSug>1?"s":""} à cocher`:""}. Tout est coché : décochez ce qui ne doit pas être gardé.</p>${nSug?`<div class="row-actions"><button class="btn small" id="rAll">Tout décocher les propositions</button></div>`:""}
   ${kids.length?`<div class="ritem"><b>Présences</b><div class="presl">${kids.map(([id,c])=>`<label class="chk"><input type="checkbox" class="rpres" value="${id}" ${pres.has(id)?"checked":""}> ${esc(c.name)}</label>`).join("")}</div></div>`:""}
   <div class="review">${rows.map((r,i)=>`<div class="ritem${r.on?"":" off"}" data-i="${i}"><div class="sel"><input type="checkbox" id="rk${i}" ${r.on?"checked":""} aria-label="Garder cet extrait">
   <select id="rc${i}" aria-label="Enfant">${childOpts}</select>
@@ -1474,10 +1614,10 @@ function reviewItems(s,gid,date,bloc,kids,srcText){
   <select id="rt${i}t" aria-label="Type"><option value="note">Note</option><option value="explorer">À explorer</option><option value="prochain">Objectif</option><option value="famille">Ce que dit la famille</option></select>
   <select id="rj${i}" aria-label="Thème">${Object.entries(JTHEMES).filter(([k])=>k!=="source").map(([k,v])=>`<option value="${k}">${v}</option>`).join("")}</select></div>
   <textarea class="field" id="rt${i}">${esc(r.text)}</textarea>
-  ${r.reps.length||r.nys.length||r.eng.length||r.facs.length||r.obj?`<div class="sugg">${r.reps.map((k,j)=>`<label><input type="checkbox" id="rq${i}_${j}"> Cocher : ${esc(STEP[k].label)}${STEP[k].i!==undefined?", "+esc(STEP[k].t):""}</label>`).join("")}${r.nys.map((k,j)=>`<label><input type="checkbox" id="rn${i}_${j}"> Pas encore : ${esc(STEP[k].label)}, ${esc(STEP[k].t)}</label>`).join("")}
-   ${r.eng.length&&(r.rk||r.reps.length)?`<label><input type="checkbox" id="re${i}"> Soutien ${r.eng.map(t=>SOUT[t].nom.toLowerCase()).join(", ")}</label>`:""}
-   ${r.facs.map((k,j)=>`<label><input type="checkbox" id="rf${i}_${j}"> Facilitateur : ${esc(FAC[k])}</label>`).join("")}
-   ${r.obj?`<label><input type="checkbox" id="ro${i}"> Objectif « ${esc(OBJ[r.obj.id].label)} » : ${r.obj.v==="ok"?"✓ réussi":"✗ pas encore"}</label>`:""}</div>`:""}</div>`).join("")||'<p class="muted">Aucun extrait trouvé.</p>'}</div>
+  ${r.reps.length||r.nys.length||r.eng.length||r.facs.length||r.obj?`<div class="sugg">${r.reps.map((k,j)=>`<label><input type="checkbox" id="rq${i}_${j}" class="rsug" checked> Cocher : ${esc(STEP[k].label)}${STEP[k].i!==undefined?", "+esc(STEP[k].t):""}</label>`).join("")}${r.nys.map((k,j)=>`<label><input type="checkbox" id="rn${i}_${j}" class="rsug" checked> Pas encore : ${esc(STEP[k].label)}, ${esc(STEP[k].t)}</label>`).join("")}
+   ${r.eng.length&&(r.rk||r.reps.length)?`<label><input type="checkbox" id="re${i}" class="rsug" checked> Soutien ${r.eng.map(t=>SOUT[t].nom.toLowerCase()).join(", ")}</label>`:""}
+   ${r.facs.map((k,j)=>`<label><input type="checkbox" id="rf${i}_${j}" class="rsug" checked> Facilitateur : ${esc(FAC[k])}</label>`).join("")}
+   ${r.obj?`<label><input type="checkbox" id="ro${i}" class="rsug" checked> Objectif « ${esc(OBJ[r.obj.id].label)} » : ${r.obj.v==="ok"?"✓ réussi":"✗ pas encore"}</label>`:""}</div>`:""}</div>`).join("")||'<p class="muted">Aucun extrait trouvé.</p>'}</div>
   ${srcText?`<p class="muted small" style="margin:0">La note originale complète sera gardée dans le journal du groupe.</p>`:""}
   <div class="row-actions"><button class="btn primary" id="rSave">Enregistrer</button><button class="btn" id="rCancel">Annuler</button></div>`;
   rows.forEach((r,i)=>{const cs=s.querySelector("#rc"+i),ss=s.querySelector("#rs"+i),rr=s.querySelector("#rr"+i),tt=s.querySelector("#rt"+i+"t"),jj=s.querySelector("#rj"+i),ck=s.querySelector("#rk"+i),box=s.querySelector(`[data-i="${i}"]`);
@@ -1486,6 +1626,7 @@ function reviewItems(s,gid,date,bloc,kids,srcText){
     cs.onchange=()=>{vis();if(cs.value&&!ck.checked){ck.checked=true;box.classList.remove("off")}};
     ss.onchange=()=>{rr.innerHTML=rowOpts(ss.value)};tt.onchange=vis;ck.onchange=()=>box.classList.toggle("off",!ck.checked)});
   s.querySelector("#rCancel").onclick=closeSheet;
+  const rAll=s.querySelector("#rAll");if(rAll)rAll.onclick=()=>{const bx=[...s.querySelectorAll(".rsug")];const on=!bx.every(b=>b.checked);bx.forEach(b=>b.checked=on);rAll.textContent=on?"Tout décocher les propositions":"Tout cocher les propositions"};
   s.querySelector("#rSave").onclick=()=>{
     const by=getMe();const byChild=new Map();const toJournal=[];let missing=0,nChecks=0,nNotes=0;
     const bucket=cid=>byChild.get(cid)||byChild.set(cid,{notes:[],explore:[],next:[],famille:[],checks:[],ny:[],eng:[],facs:[]}).get(cid);
