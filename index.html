@@ -856,6 +856,7 @@ function viewActivity(gid,secId){
   const g=S.groups.get(gid);if(!g){crumbs([]);return`<div class="card empty">Ce groupe n'existe plus. <a href="#accueil">Retour aux groupes</a></div>`}
   const O=occOf(secId);const T=tpl(g);if(!O)return`<div class="card empty">Section introuvable.</div>`;
   crumbs([`<a href="#g-${gid}">${esc(g.name)}</a>`,`<span>Mode activité</span>`]);
+  childrenOf(gid).forEach(([id])=>ensureRepaired(id));
   const kids=childrenOf(gid);const gsecs=O.subs.map(id=>T.sections.find(x=>x.id===id)).filter(Boolean);
   const allRows=gsecs.flatMap(sec=>sec.rows.map(r=>({sec,r,v:sec.id+"."+r.id})));
   if(!S.rowFilter||S.rowFilter.occ!==O.id||(S.rowFilter.row!=="*"&&!allRows.some(x=>x.v===S.rowFilter.row)))S.rowFilter={occ:O.id,row:(allRows.find(x=>!x.r.free)||allRows[0]||{v:"*"}).v};
@@ -942,7 +943,7 @@ function orderedRows(c,s){return orderBy(s.rows,c.prio&&c.prio.rows&&c.prio.rows
 function secStats(c,sec){let tot=0,on=0,last="";(sec.rows||[]).forEach(r=>{if(!r.steps)return;r.steps.forEach((st,i)=>{tot++;const a=(c.checks||{})[sec.id+"."+r.id+"."+stK(st,i)]||[];if(a.length){on++;a.forEach(d=>{if(d>last)last=d})}})});
   const nn=(c.notes||[]).filter(n=>n.section===sec.id).length;return{tot,on,last,nn}}
 
-function viewChild(cid,secId){
+function viewChild(cid,secId){ensureRepaired(cid);
   const c=S.children.get(cid);if(!c){crumbs([]);return`<div class="card empty">Cette fiche n'existe plus. <a href="#accueil">Retour aux groupes</a></div>`}
   const g=S.groups.get(c.groupId)||{name:"Groupe"};const T={nom:tpl(g).nom,sections:childSections(c)};
   crumbs([`<a href="#g-${c.groupId}">${esc(g.name)}</a>`,secId?`<a href="#e-${cid}">${esc(c.name)}</a>`:`<span>${esc(c.name)}</span>`].concat(secId?[`<span>${esc(secId==="portrait"?"Portrait":secId==="synthese"?"Synthèse":(occOf(secId)||{titre:secId}).titre)}</span>`]:[]));
@@ -1113,7 +1114,8 @@ FORMAT DU BLOC (JSON valide) :
 
 RÈGLES DU BLOC :
 - Tout le texte de la note doit se retrouver dans les extraits ou dans "groupe" : rien ne se perd, rien ne s'invente. Garde les mots de la note.
-- Un extrait par enfant et par sujet. Mets "repere" quand l'extrait porte clairement sur une ligne (ex. attendre son tour → groupe.attente ; rester assis au repas → groupe.assis s'il existe, sinon soin.repas).
+- Utilise EXACTEMENT les codes listés ci-dessus (ne les modifie pas, ne les invente pas).
+- Un extrait par enfant et par sujet. Mets toujours "repere" quand l'extrait porte clairement sur une ligne (ex. attendre son tour → groupe.attente ; rester assis au repas → groupe.assis s'il existe, sinon soin.repas).
 - "type" : "explorer" pour une hypothèse, une question ou un élément à surveiller ; "prochain" pour une piste ou un objectif à poursuivre ; "famille" pour ce que disent les parents ; sinon "note".
 - Les stratégies de succès restent dans le texte de l'extrait ET leurs codes vont dans "facilitateurs".
 - "cases" : les étapes clairement réussies. "pasencore" : les étapes que l'enfant a essayées ou qu'on a observées sans qu'il les réussisse encore. Sinon des listes vides.
@@ -1134,7 +1136,7 @@ Puis, pour chaque enfant : son prénom, des titres thématiques courts, les fait
 Prénoms : remplace d'emblée chaque prénom mal écrit ou mal transcrit par le bon prénom de la liste ENFANTS DU GROUPE, partout (dans la note ET dans le bloc), sans le signaler. Si tu ne peux vraiment pas savoir de quel enfant il s'agit, garde le mot tel quel et ajoute « (?) ».
 Garde mes mots et mes observations. N'invente rien, n'interprète pas au-delà de ce que je dis. Ton professionnel, simple, centré sur les forces, l'occupation et ce qui aide l'enfant (environnement, soutien), plutôt que sur le comportement seul.
 
-2. À la toute fin, ajoute le bloc pour mon carnet, exactement entre ces deux lignes :
+2. À la toute fin, ajoute le bloc pour mon carnet, exactement entre ces deux lignes (si la note couvre plusieurs dates, un bloc par date, chacun entre ses deux lignes) :
 === BLOC CARNET ===
 (le JSON)
 === FIN BLOC ===
@@ -1490,6 +1492,22 @@ function blobSrc(id){if(!window.CARNET_LOCAL)return "/_blob/"+id;if(photoURLs.ha
   LOCAL.getPhoto(id).then(b=>{if(!b)return;const u=URL.createObjectURL(b);photoURLs.set(id,u);document.querySelectorAll(`img[data-pid="${id}"]`).forEach(im=>{im.src=u})}).catch(()=>{});
   return "data:image/gif;base64,R0lGODlhAQABAAAAACw="}
 function photosOf(c,pred){return (c.photos||[]).filter(pred)}
+function rowIn(rows,rid){if(!rows)return null;const base=String(rid).replace(/45$/,"");return rows.find(r=>r.id===rid)||rows.find(r=>r.id.replace(/45$/,"")===base)||null}
+function srcRow(sid,rid){for(const t of Object.values(TEMPLATES)){const sec=t.sections.find(x=>x.id===sid);const r=sec&&sec.rows.find(x=>x.id===rid);if(r)return r}return null}
+/* Ramène un code (repère ou étape) vers le repère réel de l'enfant : fiche 0-4 / 4-5, repères adaptés. null = introuvable. */
+function fixKey(c,k){const p=String(k||"").split(".");if(p.length<2||p[0]==="portrait")return k;const sid=p[0];
+  const sec=childSec(c,sid);if(!sec)return null;const r=rowIn(sec.rows,p[1]);if(!r)return null;if(p.length===2)return sid+"."+r.id;
+  const sk=p.slice(2).join(".");if(r.id===p[1]&&(r.steps||[]).some((st,i)=>stK(st,i)===sk))return k;
+  const src=srcRow(sid,p[1]);if(!src||!src.steps)return null;const i=src.steps.findIndex((st,j)=>stK(st,j)===sk);if(i<0)return null;const t=norm(stT(src.steps[i]));
+  const j=(r.steps||[]).findIndex(st=>norm(stT(st))===t);return j>=0?sid+"."+r.id+"."+stK(r.steps[j],j):null}
+function repairKeys(c){if(!c||!S.groups.get(c.groupId))return false;let ch=false;
+  ["checks","notyet"].forEach(f=>{const o=c[f];if(!o)return;Object.keys(o).forEach(k=>{const nk=fixKey(c,k);if(nk&&nk!==k){o[nk]=[...new Set([...(o[nk]||[]),...(o[k]||[])])];delete o[k];ch=true}})});
+  ["sout","hand"].forEach(f=>{const o=c[f];if(!o)return;Object.keys(o).forEach(k=>{const nk=fixKey(c,k);if(nk&&nk!==k){o[nk]=f==="sout"?(o[nk]||[]).concat(o[k]):Object.assign({},o[k],o[nk]||{});delete o[k];ch=true}})});
+  [c.notes,c.photos,c.objectifs].forEach(l=>(l||[]).forEach(n=>{if(!n.k)return;const nk=fixKey(c,n.k);if(nk&&nk!==n.k){n.k=nk;ch=true}}));
+  if(c.hideSteps){const h=c.hideSteps.map(k=>fixKey(c,k)||k);if(h.join()!==c.hideSteps.join()){c.hideSteps=[...new Set(h)];ch=true}}
+  return ch}
+const repaired=new Set();
+function ensureRepaired(cid){if(repaired.has(cid))return;const c=S.children.get(cid);if(!c||!S.groups.get(c.groupId))return;repaired.add(cid);const x=JSON.parse(JSON.stringify(c));if(repairKeys(x)){S.children.set(cid,x);persist("children",cid)}}
 function stepLabel(c,k){const [sid,rid,i]=k.split(".");const sec=childSec(c,sid);const r=sec&&sec.rows.find(x=>x.id===rid);if(!r)return "";if(i===undefined||!r.steps)return r.label;const idx=r.steps.findIndex((st,j)=>stK(st,j)===i);return idx>=0?r.label+" : "+stT(r.steps[idx]):r.label}
 async function shrink(file){
   try{const bmp=await createImageBitmap(file);const m=1600,sc=Math.min(1,m/Math.max(bmp.width,bmp.height));const cv=document.createElement("canvas");cv.width=Math.round(bmp.width*sc);cv.height=Math.round(bmp.height*sc);cv.getContext("2d").drawImage(bmp,0,0,cv.width,cv.height);
@@ -1594,8 +1612,13 @@ function childSheet(cid,gid){const c=cid?S.children.get(cid):{name:"",avatar:AVA
 /* ---------- Coller les notes du groupe ---------- */
 function parseBloc(raw){if(!raw)return null;let t=raw;const m=raw.match(/===\s*BLOC CARNET\s*===([\s\S]*?)(===\s*FIN BLOC\s*===|$)/i);if(m)t=m[1];
   t=t.replace(/```(json)?/g,"");const a=t.indexOf("{"),b=t.lastIndexOf("}");if(a<0||b<a)return null;try{const o=JSON.parse(t.slice(a,b+1));return Array.isArray(o.extraits)?o:null}catch(e){return null}}
-function stripBloc(raw){return String(raw||"").replace(/===\s*BLOC CARNET\s*===[\s\S]*?(===\s*FIN BLOC\s*===|$)/i,"").trim()}
-function buildSplitPrompt(g,kids,date,text){return `Tu aides une ergothérapeute qui anime une classe nature avec une éducatrice spécialisée. Voici sa note d'observation du ${date}. Classe tout son contenu dans le bloc JSON décrit plus bas, et réponds SEULEMENT avec ce JSON. Les prénoms peuvent être mal écrits ou mal transcrits par la dictée : remplace-les par le bon prénom de la liste, aussi dans les textes.
+function stripBloc(raw){return String(raw||"").replace(/===\s*BLOC CARNET\s*===[\s\S]*?(===\s*FIN BLOC\s*===|$)/gi,"").trim()}
+function parseBlocs(raw){if(!raw)return null;const out=[];const re=/===\s*BLOC CARNET\s*===([\s\S]*?)(===\s*FIN BLOC\s*===|$)/gi;let m;
+  while((m=re.exec(raw))){const b=parseBloc("=== BLOC CARNET ==="+m[1]+"=== FIN BLOC ===");if(b)out.push(b);if(!m[0].length)break}
+  if(out.length)return out;
+  const t=String(raw).replace(/```(json)?/g,"");const a=t.indexOf("{"),z=t.lastIndexOf("}");if(a>=0&&z>a){try{const o=JSON.parse(t.slice(a,z+1));if(Array.isArray(o.rencontres))return o.rencontres.filter(x=>x&&Array.isArray(x.extraits));if(Array.isArray(o.extraits))return [o]}catch(e){}}
+  return null}
+function buildSplitPrompt(g,kids,date,text){return `Tu aides une ergothérapeute qui anime une classe nature avec une éducatrice spécialisée. Voici sa note d'observation du ${date}. Classe tout son contenu dans le bloc JSON décrit plus bas, et réponds SEULEMENT avec ce JSON. Si la note couvre plusieurs rencontres (plusieurs dates), réponds avec {"rencontres":[ un bloc par date ]}. Les prénoms peuvent être mal écrits ou mal transcrits par la dictée : remplace-les par le bon prénom de la liste, aussi dans les textes.
 
 ${carnetSpec(g,kids)}
 
@@ -1620,14 +1643,16 @@ function pasteSheet(gid,atDate){
       const text=s.querySelector("#pText").value.trim();if(!text){s.querySelector("#pText").focus();return}
       const sugOn=s.querySelector("#pSug").checked;const keepSrc=s.querySelector("#pSrc").checked;S.sugPref=sugOn;
       let date=s.querySelector("#pDate").value||todayISO();const pc=s.querySelector("#pCtx").value.trim();const out=s.querySelector("#pOut");const btn=s.querySelector("#pGo");
-      const go=bloc=>{if(bloc.date&&/^\d{4}-\d{2}-\d{2}$/.test(bloc.date))date=bloc.date;
+      const goAll=list=>{const q=list.slice().sort((a,b)=>String(a.date||"").localeCompare(String(b.date||"")));let i=0;
+        const next=()=>{if(i>=q.length){closeSheet();render();return}const b=q[i];const n=q.length;b.__step=n>1?`Rencontre ${i+1} sur ${n}`:"";b.__next=i<n-1?next:null;i++;go(b,i>1)};next()};
+      const go=(bloc,noSrc)=>{if(bloc.date&&/^\d{4}-\d{2}-\d{2}$/.test(bloc.date))date=bloc.date;
         if(pc&&((S.groups.get(gid).ctx||{})[date]||"")!==pc){const gg=JSON.parse(JSON.stringify(S.groups.get(gid)));gg.ctx=gg.ctx||{};gg.ctx[date]=pc;S.groups.set(gid,gg);persist("groups",gid)}
         if(!sugOn)(bloc.extraits||[]).forEach(x=>{x.cases=[];x.pasencore=[];x.reperes=[];x.soutien=[];x.facilitateurs=[];x.objectif=null});
-        reviewItems(s,gid,date,bloc,kids,keepSrc?stripBloc(text):"")};
-      const direct=parseBloc(text);if(direct){go(direct);return}
+        reviewItems(s,gid,date,bloc,kids,keepSrc&&!noSrc?stripBloc(text):"",bloc.__next)};
+      const direct=parseBlocs(text);if(direct&&direct.length){goAll(direct);return}
       const prompt=buildSplitPrompt(g,kids,date,text);
       if(sample){btn.disabled=true;btn.innerHTML=`<span class="spinner"></span> Lecture en cours…`;
-        try{const res=await sample.json(prompt,{modelTier:"default"});if(!res||!Array.isArray(res.extraits))throw {code:"format"};go(res)}
+        try{const res=await sample.json(prompt,{modelTier:"default"});const L=res&&Array.isArray(res.rencontres)?res.rencontres:res&&Array.isArray(res.extraits)?[res]:null;if(!L||!L.length)throw {code:"format"};goAll(L)}
         catch(err){btn.disabled=false;btn.textContent="Lire la note";if(err&&err.code==="not_granted")sample=null;
           out.innerHTML=`<div class="notice err">${err&&err.code==="rate_limited"?"Trop de demandes. Réessayez dans une minute.":"La lecture automatique n'a pas fonctionné. Vous pouvez passer par votre IA (ci-dessous)."}</div>`;showCopy()}
         return}
@@ -1637,11 +1662,11 @@ function pasteSheet(gid,atDate){
         <div class="cpstep"><b>2.</b> Collez ici la réponse au complet.</div><textarea class="field" id="pAns" style="min-height:110px"></textarea>
         <div class="row-actions"><button class="btn primary" id="pRead">Lire la réponse</button></div></div>`);
         out.querySelector("#pCopy").onclick=()=>copyText(prompt,"Demande copiée");
-        out.querySelector("#pRead").onclick=()=>{const b=parseBloc(out.querySelector("#pAns").value);if(!b){toast("Je ne reconnais pas la réponse. Copiez-la au complet, du { au }.");return}go(b)}}
+        out.querySelector("#pRead").onclick=()=>{const b=parseBlocs(out.querySelector("#pAns").value);if(!b||!b.length){toast("Je ne reconnais pas la réponse. Copiez-la au complet, du { au }.");return}goAll(b)}}
     };
   })}
 
-function reviewItems(s,gid,date,bloc,kids,srcText){
+function reviewItems(s,gid,date,bloc,kids,srcText,onNext){
   const g=S.groups.get(gid);
   const nameToId=new Map();kids.forEach(([id,c])=>kidNames(c).forEach(n=>nameToId.set(norm(n),id)));
   const findKid=n=>matchKid(n,nameToId);const canon=id=>(kids.find(k=>k[0]===id)||[,{}])[1].name||"";
@@ -1653,20 +1678,24 @@ function reviewItems(s,gid,date,bloc,kids,srcText){
   const pres=new Set((bloc.presences||[]).map(findKid).filter(Boolean));
   const groupe=(bloc.groupe||[]).filter(x=>x&&x.texte).map(x=>({nys:[],cid:"__groupe",theme:JTHEMES[x.theme]?x.theme:"climat",text:fixNames(x.texte),on:true,reps:[],eng:[],facs:[],obj:null,sec:"",rk:"",type:"note"}));
   const items=(bloc.extraits||[]).filter(x=>x&&x.texte).map(it=>{const nm=String(it.enfant||"");const cid=findKid(nm)||(nm.toUpperCase()==="GROUPE"?"__groupe":"");
-    let sec=secOpts.some(o=>o[0]===it.section)?it.section:"";const rk=String(it.repere||"");if(!sec&&rk)sec=rk.split(".")[0];if(!secOpts.some(o=>o[0]===sec))sec=T.sections[0].id;
-    const reps=[...new Set([].concat(it.cases||[],it.reperes||[]).map(String))].filter(k=>STEP[k]);
-    const nys=[...new Set((Array.isArray(it.pasencore)?it.pasencore:[]).map(String))].filter(k=>STEP[k]&&!reps.includes(k));
+    const toT=k=>{const p=String(k||"").split(".");if(p.length<2)return "";const sc=T.sections.find(x=>x.id===p[0]);const r=sc&&rowIn(sc.rows,p[1]);if(!r)return "";if(p.length===2)return p[0]+"."+r.id;
+      if(STEP[k]&&r.id===p[1])return k;const src=srcRow(p[0],p[1]);const sk=p.slice(2).join(".");const i=src&&src.steps?src.steps.findIndex((st,j)=>stK(st,j)===sk):-1;
+      if(i<0)return "";const t=norm(stT(src.steps[i]));const j=(r.steps||[]).findIndex(st=>norm(stT(st))===t);return j>=0?p[0]+"."+r.id+"."+stK(r.steps[j],j):(STEP[k]?k:"")};
+    const reps=[...new Set([].concat(it.cases||[],it.reperes||[]).map(toT))].filter(k=>STEP[k]);
+    const nys=[...new Set((Array.isArray(it.pasencore)?it.pasencore:[]).map(toT))].filter(k=>STEP[k]&&!reps.includes(k));
+    let rk0=toT(String(it.repere||"").split(".").slice(0,2).join("."));if(!rk0&&(reps[0]||nys[0]))rk0=(reps[0]||nys[0]).split(".").slice(0,2).join(".");
+    let sec=rk0?rk0.split(".")[0]:(secOpts.some(o=>o[0]===it.section)?it.section:"");if(!secOpts.some(o=>o[0]===sec))sec=T.sections[0].id;const rk=rk0;
     const eng=[...new Set((Array.isArray(it.soutien)?it.soutien:[]).map(String))].filter(k=>SOUT[k]);
     const facs=[...new Set((Array.isArray(it.facilitateurs)?it.facilitateurs:[]).map(String))].filter(k=>FAC[k]);
     const obj=it.objectif&&OBJ[it.objectif.id]&&/^(ok|no)$/.test(it.objectif.resultat)?{id:it.objectif.id,v:it.objectif.resultat}:null;
     const type=/^(note|explorer|prochain|famille)$/.test(it.type)?it.type:"note";
     if(cid&&cid!=="__groupe"&&nm&&norm(nm)!==norm(canon(cid))&&!nameToId.has(norm(nm))){const re=new RegExp("(^|[^\\p{L}])"+nm.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"(?![\\p{L}])","giu");it.texte=String(it.texte).replace(re,(m0,pre)=>pre+canon(cid))}
     it.texte=fixNames(it.texte);
-    return{nys,cid,sec,rk:rk&&T.sections.some(x=>x.id===rk.split(".")[0]&&x.rows.some(r=>sec+"."+r.id===rk))?rk:"",text:String(it.texte),on:!!cid,reps,eng,facs,obj,type,theme:"climat"}});
+    return{nys,cid,sec,rk:rk&&T.sections.some(x=>x.id===rk.split(".")[0]&&x.rows.some(r=>sec+"."+r.id===rk&&!r.free))?rk:"",text:String(it.texte),on:!!cid,reps,eng,facs,obj,type,theme:"climat"}});
   const rows=groupe.concat(items);
   const childOpts=`<option value="">— Choisir —</option><option value="__groupe">Journal du groupe</option>`+kids.map(([id,c])=>`<option value="${id}">${esc(c.name)}</option>`).join("");
   const nSug=rows.reduce((a,r)=>a+r.reps.length+r.nys.length+(r.eng.length?1:0)+r.facs.length+(r.obj?1:0),0);
-  s.innerHTML=`<h3>Relire avant d'enregistrer</h3><p class="muted small" style="margin:0">${rows.length} extrait${rows.length>1?"s":""} pour le ${fmtD(date,true)}${nSug?`, avec ${nSug} proposition${nSug>1?"s":""} à cocher`:""}. Tout est coché : décochez ce qui ne doit pas être gardé.</p>${nSug?`<div class="row-actions"><button class="btn small" id="rAll">Tout décocher les propositions</button></div>`:""}
+  s.innerHTML=`<h3>Relire avant d'enregistrer${bloc.__step?` <span class="muted small" style="font-family:var(--font-body);font-weight:400">· ${bloc.__step}</span>`:""}</h3><p class="muted small" style="margin:0">${rows.length} extrait${rows.length>1?"s":""} pour le ${fmtD(date,true)}${nSug?`, avec ${nSug} proposition${nSug>1?"s":""} à cocher`:""}. Tout est coché : décochez ce qui ne doit pas être gardé.</p>${nSug?`<div class="row-actions"><button class="btn small" id="rAll">Tout décocher les propositions</button></div>`:""}
   ${kids.length?`<div class="ritem"><b>Présences</b><div class="presl">${kids.map(([id,c])=>`<label class="chk"><input type="checkbox" class="rpres" value="${id}" ${pres.has(id)?"checked":""}> ${esc(c.name)}</label>`).join("")}</div></div>`:""}
   <div class="review">${rows.map((r,i)=>`<div class="ritem${r.on?"":" off"}" data-i="${i}"><div class="sel"><input type="checkbox" id="rk${i}" ${r.on?"checked":""} aria-label="Garder cet extrait">
   <select id="rc${i}" aria-label="Enfant">${childOpts}</select>
@@ -1680,7 +1709,7 @@ function reviewItems(s,gid,date,bloc,kids,srcText){
    ${r.facs.map((k,j)=>`<label><input type="checkbox" id="rf${i}_${j}" class="rsug" checked> Facilitateur : ${esc(FAC[k])}</label>`).join("")}
    ${r.obj?`<label><input type="checkbox" id="ro${i}" class="rsug" checked> Objectif « ${esc(OBJ[r.obj.id].label)} » : ${r.obj.v==="ok"?"✓ réussi":"✗ pas encore"}</label>`:""}</div>`:""}</div>`).join("")||'<p class="muted">Aucun extrait trouvé.</p>'}</div>
   ${srcText?`<p class="muted small" style="margin:0">La note originale complète sera gardée dans le journal du groupe.</p>`:""}
-  <div class="row-actions"><button class="btn primary" id="rSave">Enregistrer</button><button class="btn" id="rCancel">Annuler</button></div>`;
+  <div class="row-actions"><button class="btn primary" id="rSave">${onNext?"Enregistrer et passer à la suivante":"Enregistrer"}</button><button class="btn" id="rCancel">${onNext?"Arrêter":"Annuler"}</button></div>`;
   rows.forEach((r,i)=>{const cs=s.querySelector("#rc"+i),ss=s.querySelector("#rs"+i),rr=s.querySelector("#rr"+i),tt=s.querySelector("#rt"+i+"t"),jj=s.querySelector("#rj"+i),ck=s.querySelector("#rk"+i),box=s.querySelector(`[data-i="${i}"]`);
     cs.value=r.cid;ss.value=r.sec;rr.value=r.rk;tt.value=r.type;jj.value=r.theme;
     const vis=()=>{const gr=cs.value==="__groupe";ss.hidden=gr;rr.hidden=gr||tt.value!=="note";tt.hidden=gr;jj.hidden=!gr};vis();
@@ -1714,14 +1743,14 @@ function reviewItems(s,gid,date,bloc,kids,srcText){
       x.notyet=x.notyet||{};b.ny.forEach(k=>{const a=x.notyet[k]||[];if(!a.includes(date))a.push(date);x.notyet[k]=a});
       x.sout=x.sout||{};b.eng.forEach(({row,ts})=>{const a=x.sout[row]||[];ts.forEach(t=>{if(!a.some(e=>e.d===date&&e.t===t))a.push({t,d:date})});x.sout[row]=a});
       x.facil=x.facil||{};b.facs.forEach(k=>{const a=x.facil[k]||[];if(!a.includes(date))a.push(date);x.facil[k]=a});
-      S.children.set(cid,x);persist("children",cid)});
+      repairKeys(x);S.children.set(cid,x);persist("children",cid)});
     const gg=JSON.parse(JSON.stringify(S.groups.get(gid)));
     if(toJournal.length)gg.journal=(gg.journal||[]).concat(toJournal.map(t=>({id:uid("j"),date,text:t.text,theme:t.theme,src:"groupe",by})));
     if(srcText)gg.journal=(gg.journal||[]).concat({id:uid("j"),date,text:srcText,theme:"source",src:"groupe",by});
     const pr=[...s.querySelectorAll(".rpres:checked")].map(x=>x.value);if(pr.length){gg.presences=gg.presences||{};gg.presences[date]=[...new Set((gg.presences[date]||[]).concat(pr))]}
     if(objMarks.length){gg.objRes=gg.objRes||{};const day=gg.objRes[date]=gg.objRes[date]||{};objMarks.forEach(m=>{(day[m.id]=day[m.id]||{})[m.cid]=m.v})}
     S.groups.set(gid,gg);persist("groups",gid);
-    closeSheet();render();toast(`${nNotes+toJournal.length} extraits${nChecks?" et "+nChecks+" cases":""} enregistrés`);
+    toast(`${fmtD(date)} : ${nNotes+toJournal.length} extraits${nChecks?" et "+nChecks+" cases":""} enregistrés`);if(onNext){render();onNext();return}closeSheet();render();
   };
 }
 
