@@ -211,6 +211,10 @@ label.btn{cursor:pointer}
 .objrow:first-of-type{border-top:0}
 .objhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
 .kids{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px 4px}
+.alpick{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-height:52vh;overflow:auto}.alitem{display:flex;flex-direction:column;gap:4px}.alth{position:relative;display:block;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:#eee}.alth img{width:100%;height:100%;object-fit:cover}.alth input{position:absolute;top:6px;right:6px;width:22px;height:22px}
+.kids.kp{gap:5px}.kpill{position:relative;display:flex;align-items:center;justify-content:center;gap:3px;min-width:0;height:34px;padding:0 3px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font:inherit;font-size:.78rem;letter-spacing:-.1px;font-weight:600;color:var(--ink,#2a2a2a);cursor:pointer;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.kpill .kn{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.kpill .sym{font-weight:700}.kpill .nd{position:absolute;top:2px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--forest,#2C5A38)}
+.kpill.ok{border-color:#4E8A5C;background:#E4F0E0;color:#2F5E3A}.kpill.no{border-color:#C66A5A;background:#F8E3DE;color:#8A3B2E}
 .kchip{display:flex;flex-direction:column;align-items:center;min-width:0}
 .kmark{position:relative;width:50px;height:50px;border-radius:50%;border:2px solid var(--line);background:#fff;padding:3px;cursor:pointer}
 .kmark img{width:100%;height:100%;object-fit:contain}
@@ -292,11 +296,11 @@ details.pdet[open]>summary .ptitle::before{content:"▾ "}
 .cdj{border:1px solid var(--line);border-radius:12px;padding:8px 10px;background:#FDFBF6}
 .terrainbtn{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;background:#E2B65A;border-color:#C99A3C;color:#2b2b2b;font-weight:700;font-size:1.05rem;padding:12px}.terrainbtn img{width:28px;height:28px}
 .tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:0 0 14px}
-.tkid{display:flex;flex-direction:column;align-items:center;gap:4px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 8px;font:inherit;cursor:pointer;text-align:center;min-height:150px}
+.tkid{display:flex;flex-direction:column;align-items:center;gap:4px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 8px;font:inherit;cursor:pointer;text-align:center;min-height:150px;min-width:0;overflow:hidden}
 .tkid.abs{opacity:.55}.tkid.done{border-color:#9CC596;background:#F4FAF1}
 .tav{position:relative}.tav img{width:64px;height:64px}.tav i{position:absolute;right:-4px;top:-2px;width:20px;height:20px;border-radius:50%;font-style:normal;font-size:.75rem;display:flex;align-items:center;justify-content:center}
 .tav i.ok{background:#3C7A4A;color:#fff}.tav i.todo{background:#E8A33D;width:12px;height:12px;right:0;top:2px;border:2px solid #fff}
-.tkid b{font-size:1.05rem}.tao{display:flex;flex-direction:column;gap:2px;font-size:.78rem;color:#555;line-height:1.2}.tao .obj{color:#2C5A38;font-weight:600}
+.tkid b{font-size:1.05rem}.tao{display:flex;flex-direction:column;gap:2px;width:100%;min-width:0;max-width:100%;font-size:.78rem;color:#555;line-height:1.2}.tao .obj{color:#2C5A38;font-weight:600}.tao>span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.tao>span.obj{-webkit-line-clamp:1;display:block;white-space:nowrap;text-overflow:ellipsis}
 .thead{display:flex;align-items:center;gap:10px}.thead img{width:52px;height:52px}
 .tobjs{display:flex;flex-direction:column;gap:6px}.tobj{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:12px;padding:6px 6px 6px 10px;background:#FDFBF6}.tobj span{flex:1;font-size:.92rem}
 .tm{width:46px;height:42px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:1.2rem;font-weight:700;cursor:pointer}.tm.ok.on{background:#3C7A4A;color:#fff;border-color:#3C7A4A}.tm.no.on{background:#F6DADA;color:#8A2E2E;border-color:#C86A6A}
@@ -322,7 +326,7 @@ textarea.drop{outline:3px dashed var(--forest,#2C5A38);outline-offset:2px}
 .tm.prog.on{background:#FFF1C9;border-color:#E2B65A;color:#8A6500}.omark.prog{background:#FFF1C9;border-color:#E2B65A;color:#8A6500}.opill.prog{background:#FFF1C9;color:#8A6500}
 .cqml{display:flex;flex-direction:column;gap:6px}.cqmi{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 12px;font:inherit;cursor:pointer;line-height:1.5}
 .backbtn{display:flex;justify-content:center;margin:0 0 10px;font-weight:700;background:#fff;border:1.5px solid var(--forest,#2C5A38);color:var(--forest,#2C5A38)}
-.eclair .ehead{display:flex;align-items:center;gap:8px;margin-bottom:4px}.eclair .ehead img{width:34px;height:34px}.eclair .ehead b{font-size:1.1rem;flex:1}.eclair .el{font-size:.92rem;margin:3px 0;line-height:1.35}
+.eclair .ehead{display:flex;align-items:center;gap:8px;margin-bottom:4px}.eclair .ehead img{width:34px;height:34px}.eclair .ehead b{font-size:1.1rem;flex:1}.eclair .el{font-size:.92rem;margin:3px 0;line-height:1.35}.eclair .el1{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .eclairs{display:flex;flex-direction:column;gap:8px}.ecl{display:block;color:inherit;text-decoration:none;border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:#fff}
 .nmenu{display:flex;flex-direction:column;gap:8px}.nmi{display:flex;flex-direction:column;gap:2px;text-align:left;border:1px solid var(--line);background:#fff;border-radius:14px;padding:12px 14px;font:inherit;cursor:pointer}.nmi span{font-size:.85rem;color:#666}.nmi[disabled]{opacity:.5;cursor:default}
 .scl .chk{display:flex}
@@ -766,11 +770,11 @@ function viewHome(){
   gs.forEach(([id,g])=>{const n=[...S.children.values()].filter(c=>c.groupId===id).length;const em=EMBLEMS[g.emblem]||EMBLEMS.roue;
     h+=`<a class="tile" href="#g-${id}"><img src="${img(em.img)}" alt=""><h3>${esc(g.name)}</h3><span class="meta">Fiche ${esc(tpl(g).nom)} · ${n} enfant${n>1?"s":""}</span></a>`});
   h+=`<button class="tile add" data-act="newGroup"><span class="plus">+</span>Nouveau groupe</button></div></section>`;
-  if(window.CARNET_LOCAL){const ba=LOCAL.meta.backupAt;h+=`<section class="card"><h3 style="font-size:1.35rem">Sauvegarde et partage</h3><p class="muted small" style="margin:2px 0 10px">Le carnet garde tout sur cet appareil, sans rien envoyer en ligne. Sauvegardez régulièrement et gardez le fichier en lieu sûr. Pour travailler à deux : envoyez votre sauvegarde à votre collègue, qui la <b>fusionne</b> avec son carnet. ${ba?"Dernière sauvegarde : "+fmtD(ba,true)+".":"Aucune sauvegarde pour l'instant."}</p>
+  if(window.CARNET_LOCAL){const ba=LOCAL.meta.backupAt;h+=`<section class="card"><details class="ogdet" data-dk="backup" ${openDetails.has("backup")?"open":""}><summary><h3 style="font-size:1.35rem;display:inline">Sauvegarde et partage</h3> <span class="muted small">${ba?"dernière : "+fmtD(String(ba).slice(0,10)):"aucune encore"}</span></summary><p class="muted small" style="margin:2px 0 10px">Le carnet garde tout sur cet appareil, sans rien envoyer en ligne. Sauvegardez régulièrement et gardez le fichier en lieu sûr. Pour travailler à deux : envoyez votre sauvegarde à votre collègue, qui la <b>fusionne</b> avec son carnet. ${ba?"Dernière sauvegarde : "+fmtD(ba,true)+".":"Aucune sauvegarde pour l'instant."}</p>
   <div class="row-actions"><button class="btn primary" data-act="backupLight">Sauvegarde texte</button><button class="btn" data-act="backupPh">Sauvegarde des photos${(()=>{const n=newPhotoCount();return n?" ("+n+" nouvelle"+(n>1?"s":"")+")":""})()}</button><button class="btn ghost small" data-act="backup">Tout en un fichier</button></div>
   <p class="muted small" style="margin:6px 0 0">La <b>sauvegarde texte</b> est légère : faites-la souvent (toutes les notes, cases, objectifs). La <b>sauvegarde des photos</b> ne prend que les photos ajoutées depuis la dernière fois. ${LOCAL.meta.photoAt?"Dernière sauvegarde des photos : "+fmtD(LOCAL.meta.photoAt,true)+".":""}</p>
   <p class="muted small" id="storeInfo" style="margin:4px 0 0"></p>
-  <div class="row-actions" style="margin-top:8px"><label class="btn">Fusionner une sauvegarde<input type="file" accept=".json,application/json" hidden data-act="mergeFile"></label><label class="btn">Restaurer (remplacer tout)<input type="file" accept=".json,application/json" hidden data-act="restoreFile"></label></div></section>`}
+  <div class="row-actions" style="margin-top:8px"><label class="btn">Fusionner une sauvegarde<input type="file" accept=".json,application/json" hidden data-act="mergeFile"></label><label class="btn">Restaurer (remplacer tout)<input type="file" accept=".json,application/json" hidden data-act="restoreFile"></label></div></details></section>`}
   return h;
 }
 
@@ -778,7 +782,7 @@ function childrenOf(gid){return [...S.children.entries()].filter(([,c])=>c.group
 function lastDate(c){let m="";const up=d=>{if(d&&d>m)m=d};
   Object.values(c.checks||{}).forEach(a=>a.forEach(up));Object.values(c.sout||{}).forEach(a=>a.forEach(e=>up(e.d)));(c.notes||[]).forEach(n=>up(n.date));return m}
 
-function viewGroup(gid){S.fromTerrain=null;
+function viewGroup(gid){S.fromTerrain=null;S.scOnly=null;
   const g=S.groups.get(gid);if(!g){crumbs([]);return`<div class="card empty">Ce groupe n'existe plus. <a href="#accueil">Retour aux groupes</a></div>`}
   crumbs([`<span>${esc(g.name)}</span>`]);
   const em=EMBLEMS[g.emblem]||EMBLEMS.roue;const kids=childrenOf(gid);
@@ -1048,13 +1052,68 @@ function rapportSheet(cid){const c=S.children.get(cid);const R=rapportFull(cid);
     s.querySelector("#rpCopy").onclick=()=>{copyText(rapportPrompt(cid),"Demande copiée");const box=s.querySelector("#rpPaste");box.innerHTML=`<div class="cpstep">Collez ici la réponse de ${ai.nom} :</div><textarea class="field" id="rpAns" style="min-height:100px"></textarea><div class="row-actions"><a class="btn" href="${ai.url}" target="_blank" rel="noopener">Ouvrir ${ai.nom}</a><button class="btn primary" id="rpRead">Insérer les brouillons</button></div>`;
       box.querySelector("#rpRead").onclick=()=>{const raw=box.querySelector("#rpAns").value;const a=raw.indexOf("{"),z=raw.lastIndexOf("}");let o=null;try{o=JSON.parse(raw.slice(a,z+1))}catch(e){}fill(o)}};
   })}
-function wheelSVG(){const C=300,R=292,ri=78;const pt=(a,r)=>[C+r*Math.cos(a*Math.PI/180),C+r*Math.sin(a*Math.PI/180)];
-  const sec=(a0,a1,fill)=>{const [x0,y0]=pt(a0,R),[x1,y1]=pt(a1,R),[x2,y2]=pt(a1,ri),[x3,y3]=pt(a0,ri);return `<path d="M${x0},${y0} A${R},${R} 0 0 1 ${x1},${y1} L${x2},${y2} A${ri},${ri} 0 0 0 ${x3},${y3} Z" fill="${fill}"/>`};
-  return `<svg viewBox="0 0 600 600" class="wsvg" xmlns="http://www.w3.org/2000/svg">${sec(-135,-45,"#F4F1EA")}${sec(-45,45,"#FBEFCB")}${sec(45,135,"#F8DCDB")}${sec(135,225,"#E2E2E0")}
-  ${[-135,-45,45,135].map(a=>{const [x0,y0]=pt(a,ri),[x1,y1]=pt(a,R);return `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="#3a3a3a" stroke-width="2"/>`}).join("")}
-  <circle cx="${C}" cy="${C}" r="${R}" fill="none" stroke="#3a3a3a" stroke-width="2.5"/><circle cx="${C}" cy="${C}" r="${ri}" fill="#fff" stroke="#3a3a3a" stroke-width="2"/></svg>`}
-async function buildRapport(cid){const c=S.children.get(cid);const R=rapportFull(cid);const T=R.t;const sg=getSign();const E=esc;
-  const A={};const need=["logo-coclinique","logo-caal","hd-facil","hd-analyse"].concat(["tete","esprit","coeur","corps"].map(k=>"sph-"+k),RBOX.map(x=>x[2]));
+function wheelSVG(){const C=300,R=292;const pt=(a,r)=>[C+r*Math.cos(a*Math.PI/180),C+r*Math.sin(a*Math.PI/180)];
+  const ri=90;const sec=(a0,a1,fill)=>{const [x0,y0]=pt(a0,R),[x1,y1]=pt(a1,R),[x2,y2]=pt(a1,ri),[x3,y3]=pt(a0,ri);return `<path d="M${x0},${y0} A${R},${R} 0 0 1 ${x1},${y1} L${x2},${y2} A${ri},${ri} 0 0 0 ${x3},${y3} Z" fill="${fill}"/>`};
+  return `<svg viewBox="0 0 600 600" class="wsvg" xmlns="http://www.w3.org/2000/svg">${sec(-135,-45,"#F7F4EC")}${sec(-45,45,"#F2C335")}${sec(45,135,"#D63B3F")}${sec(135,225,"#2E2E2E")}
+  ${[-135,-45,45,135].map(a=>{const [x0,y0]=pt(a,ri),[x1,y1]=pt(a,R);return `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="#222" stroke-width="3"/>`}).join("")}
+  <circle cx="${C}" cy="${C}" r="${R}" fill="none" stroke="#222" stroke-width="4"/><circle cx="${C}" cy="${C}" r="${ri}" fill="#fff" stroke="#222" stroke-width="3"/></svg>`}
+/* ---------- Album photos ---------- */
+async function photoDataURL(id){try{if(window.CARNET_LOCAL){const b=await LOCAL.getPhoto(id);if(!b)return "";return await new Promise(res=>{const fr=new FileReader();fr.onload=()=>res(fr.result);fr.onerror=()=>res("");fr.readAsDataURL(b)})}return await toDataURL(blobSrc(id))}catch(e){return ""}}
+function photoLabel(c,p){const T=tpl(S.groups.get(c.groupId));let lab="";try{lab=(p.k&&(stepLabel(c,p.k)||secTitle(T,p.k.split(".")[0])))||""}catch(e){}return lab}
+function photoObs(c,p){if(!p.k)return "";const parts=String(p.k).split(".");const sec=parts[0],row=parts[1];const out=[];
+  const near=d=>d===p.d;
+  if(row){const pre=sec+"."+row+".";const ok=Object.entries(c.checks||{}).filter(([k,l])=>k.startsWith(pre)&&l.some(near)).map(([k])=>k);const ny=Object.entries(c.notyet||{}).filter(([k,l])=>k.startsWith(pre)&&l.some(near)).map(([k])=>k);
+    const lab=k=>{const t=stepLabel(c,k);return t.replace(/^[^:]*:\s*/,"")};
+    let rl="";try{rl=stepLabel(c,sec+"."+row).replace(/\s*\(.*?\)/,"")}catch(e){}
+    if(ok.length)out.push((rl?rl+" : ":"")+ok.map(lab).join(", ").replace(/\s*\(.*?\)/g,""));
+    if(ny.length)out.push("Pas encore : "+ny.map(lab).join(", ").replace(/\s*\(.*?\)/g,""))}
+  const nt=(c.notes||[]).filter(n=>n.date===p.d&&n.k&&(row?String(n.k).startsWith(sec+"."+row):String(n.k).split(".")[0]===sec)).map(n=>String(n.text||"").trim()).filter(Boolean);
+  if(!nt.length){const n2=(c.notes||[]).filter(n=>n.date===p.d&&(n.section===sec)).map(n=>String(n.text||"").trim()).filter(Boolean);if(n2.length)nt.push(n2[0])}
+  if(nt.length){let t=nt[0];if(t.length>220)t=t.slice(0,215).replace(/\s+\S*$/,"")+"…";out.push(t)}
+  return out.join(". ").replace(/\.\./g,".")}
+function albumSheet(cid){const c=S.children.get(cid);if(!c)return;const L=(c.photos||[]).slice().sort((a,b)=>(a.d||"").localeCompare(b.d||""));
+  if(!L.length){toast("Aucune photo pour "+c.name+" pour l'instant.");return}
+  openSheet(`<h3>Album photos · ${esc(c.name)}</h3><p class="muted small" style="margin:0 0 8px">Un document à part du rapport. Cochez les photos à inclure. La légende reprend ce qui a été noté ce jour-là pour ce repère ; modifiez-la au besoin.</p>
+  <label class="f">Titre<input class="field" id="alT" value="Album d'observation"></label>
+  <div class="lvl" style="border:0;margin:6px 0;padding:0"><span class="label">Par page</span><span class="hbtns"><button class="hbtn" data-n="2">2 grandes</button><button class="hbtn on" data-n="4">4</button><button class="hbtn" data-n="6">6</button></span></div>
+  <div class="row-actions" style="margin:4px 0 8px"><button class="btn small" id="alAll">Tout cocher</button><button class="btn small" id="alNone">Tout décocher</button><span class="muted small" id="alCount"></span></div>
+  <div class="alpick">${L.map(p=>`<label class="alitem"><span class="alth"><img src="${blobSrc(p.id)}" data-pid="${p.id}" alt="" loading="lazy"><input type="checkbox" data-p="${p.id}" checked></span><span class="small"><b>${fmtD(p.d)}</b> ${esc(photoLabel(c,p))}</span><textarea class="field small" data-cap="${p.id}" rows="2" placeholder="Ce qu'on voit (facultatif)">${esc(photoObs(c,p))}</textarea></label>`).join("")}</div>
+  <div class="row-actions" style="margin-top:10px"><button class="btn primary" id="alMake">Créer l'album</button><button class="btn" id="alClose">Fermer</button></div>`,s=>{
+    let per=4;const cnt=()=>{s.querySelector("#alCount").textContent=s.querySelectorAll("[data-p]:checked").length+" photo(s)"};cnt();
+    s.querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>{per=+b.dataset.n;s.querySelectorAll("[data-n]").forEach(x=>x.classList.toggle("on",x===b))});
+    s.querySelectorAll("[data-p]").forEach(x=>x.onchange=cnt);
+    s.querySelector("#alAll").onclick=()=>{s.querySelectorAll("[data-p]").forEach(x=>x.checked=true);cnt()};
+    s.querySelector("#alNone").onclick=()=>{s.querySelectorAll("[data-p]").forEach(x=>x.checked=false);cnt()};
+    s.querySelector("#alClose").onclick=closeSheet;
+    s.querySelector("#alMake").onclick=async()=>{const ids=[...s.querySelectorAll("[data-p]:checked")].map(x=>x.dataset.p);if(!ids.length){toast("Cochez au moins une photo.");return}
+      const caps={};s.querySelectorAll("[data-cap]").forEach(x=>{if(x.value.trim())caps[x.dataset.cap]=x.value.trim()});
+      const b=s.querySelector("#alMake");b.disabled=true;b.innerHTML='<span class="spinner"></span> Préparation…';
+      try{const html=await buildAlbum(cid,ids,caps,per,s.querySelector("#alT").value.trim()||"Album d'observation");const fn=`album-${(c.name||"enfant").replace(/[^\p{L}\p{N}]+/gu,"-").toLowerCase()}-${todayISO()}.html`;
+        if(typeof downloads!=="undefined"&&downloads)await downloads.save({filename:fn,data:new Blob([html],{type:"text/html"})});else{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([html],{type:"text/html"}));a.download=fn;a.click()}
+        toast("Album créé : ouvrez-le pour l'imprimer ou l'enregistrer en PDF")}catch(e){console.error(e);toast("L'album n'a pas pu être créé.")}b.disabled=false;b.textContent="Créer l'album"}})}
+async function buildAlbum(cid,ids,caps,per,titre){const c=S.children.get(cid);const E=esc;const A={};
+  for(const n of ["logo-coclinique","logo-caal","frise-1","frise-2","frise-3","frise-4","frise-5","frise-6"])A[n]=await toDataURL(`img/rapport/${n}.webp`);
+  const P=(c.photos||[]).filter(p=>ids.includes(p.id)).sort((a,b)=>(a.d||"").localeCompare(b.d||""));const U={};for(const p of P)U[p.id]=await photoDataURL(p.id);
+  const items=P.filter(p=>U[p.id]);const pages=[];const first=Math.max(1,per-(per===2?1:2));pages.push(items.slice(0,first));for(let i=first;i<items.length;i+=per)pages.push(items.slice(i,i+per));
+  const N=pages.length;const d0=items.length?items[0].d:"",d1=items.length?items[items.length-1].d:"";
+  const fig=p=>{const cx=ctxOf(c.groupId,p.d);const lab=photoLabel(c,p);return `<figure><div class="ph"><img src="${U[p.id]}" alt=""></div><figcaption><b>${E(fmtD(p.d,true))}</b>${cx?" · "+E(cx):""}${caps[p.id]?`<br>${E(caps[p.id])}`:lab?`<br><span>${E(lab)}</span>`:""}</figcaption></figure>`};
+  const body=pages.map((pg,i)=>`<section class="page g${per}${i===0?" first":""}">${i===0?`<header class="logos"><img src="${A["logo-coclinique"]}" class="lg1" alt=""><img src="${A["logo-caal"]}" class="lg2" alt=""></header><div class="ttl"><h1>${E(titre)}</h1><p class="sub">${E(c.name)}${d0?` · ${E(fmtD(d0,true))}${d1&&d1!==d0?" au "+E(fmtD(d1,true)):""}`:""}</p></div>`:`<div class="tag">${E(c.name)} · ${E(titre)}</div>`}
+    <div class="grid">${pg.map(fig).join("")}</div><div class="foot">${N<=6&&A["frise-"+(i+1)]?`<img class="frise" src="${A["frise-"+(i+1)]}" alt="${i+1}">`:`<span>${i+1} / ${N}</span>`}</div></section>`).join("");
+  return `<!DOCTYPE html><html lang="fr-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${E(titre)} · ${E(c.name)}</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+<style>@page{size:Letter;margin:0}*{box-sizing:border-box}body{margin:0;background:#e8e6e1;font-family:Barlow,Arial,sans-serif;color:#2a2a2a;font-size:10pt}
+.page{position:relative;width:8.5in;height:11in;margin:18px auto;background:#fff;padding:.6in .7in 1in;box-shadow:0 1px 10px rgba(0,0,0,.12);break-after:page;page-break-after:always;overflow:hidden;display:flex;flex-direction:column}
+.logos{display:flex;justify-content:space-between;align-items:center}.lg1{height:60px}.lg2{height:70px}.ttl{text-align:center;margin:.08in 0 .22in}h1{font-family:Lora,Georgia,serif;font-weight:500;font-size:24pt;margin:0}.sub{margin:4px 0 0;color:#555;font-size:11.5pt}
+.tag{text-align:right;font-size:8.5pt;color:#777;margin:-.2in 0 .15in}
+.grid{flex:1;display:grid;gap:.22in;min-height:0}.g2 .grid{grid-template-columns:1fr;grid-template-rows:repeat(2,minmax(0,1fr))}.g4 .grid{grid-template-columns:1fr 1fr;grid-template-rows:repeat(2,minmax(0,1fr))}.g6 .grid{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,minmax(0,1fr))}
+.g2.first .grid{grid-template-rows:minmax(0,1fr)}.g4.first .grid{grid-template-columns:1fr}.g6.first .grid{grid-template-rows:repeat(2,minmax(0,1fr))}
+figure{margin:0;display:flex;flex-direction:column;min-height:0;background:#FAF8F3;border:1px solid #ECE6DA;border-radius:10px;padding:.1in}
+.ph{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}.ph img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px}
+figcaption{margin-top:6px;font-size:9pt;line-height:1.35;color:#444}figcaption span{color:#777}
+.foot{position:absolute;left:0;right:0;bottom:.3in;display:flex;justify-content:center;font-size:9pt;color:#777}.foot .frise{height:.5in}
+@media print{body{background:#fff}.page{margin:0;box-shadow:none}}</style></head><body>${body}</body></html>`}
+async function buildRapport(cid,opt){opt=opt||{};const c=S.children.get(cid);const R=rapportFull(cid);const T=Object.assign({},R.t);if(opt.equipe){const g=S.groups.get(c.groupId)||{};T.titre="Fiche d'équipe";T.sous="Discussion d'équipe · "+(g.name||"");T.ctx="en ergothérapie et en éducation spécialisée";T.facT="Facilitateurs"}const sg=getSign();const E=esc;
+  const A={};const need=["logo-coclinique","logo-caal","hd-facil","hd-analyse","frise-1","frise-2","frise-3","frise-4","frise-5","frise-6"].concat(["tete","esprit","coeur","corps"].map(k=>"sph-"+k),RBOX.map(x=>x[2]));
   for(const n of need)A[n]=await toDataURL(`img/rapport/${n}.webp`);
   const age=c.dob?ageAt(c.dob):"";const P=t=>E(t||"").replace(/\n/g,"<br>");const K=kwAgg(c);
   const kws=sph=>{const F=K.filter(x=>x.sph===sph&&x.t==="force").sort((a,b)=>b.n-a.n).slice(0,7);const D=R.defis?K.filter(x=>x.sph===sph&&x.t==="defi"&&!x.became).sort((a,b)=>b.n-a.n).slice(0,3):[];return F.map(x=>`<span class="k">${E(x.mot)}</span>`).join("")+(D.length?`<span class="kd">À soutenir : ${D.map(x=>E(x.mot)).join(", ")}</span>`:"")};
@@ -1063,15 +1122,16 @@ async function buildRapport(cid){const c=S.children.get(cid);const R=rapportFull
     <div class="ttl"><h1>${E(T.titre)}</h1><p class="sub">${E(T.sous)}</p><p class="ctx">${E(T.ctx)}</p></div>
     <div class="wheel">${wheelSVG()}<img src="${A["sph-tete"]}" class="wi n" alt=""><img src="${A["sph-esprit"]}" class="wi e" alt=""><img src="${A["sph-coeur"]}" class="wi s" alt=""><img src="${A["sph-corps"]}" class="wi w" alt="">
       <div class="q qn">${kws("tete")}</div><div class="q qe">${kws("esprit")}</div><div class="q qs">${kws("coeur")}</div><div class="q qw">${kws("corps")}</div>
-      <div class="center"><b>${E(c.name)}</b>${c.dob?`<span>${E(fmtD(c.dob,true))}</span><span>${E(age)}</span>`:""}</div></div>
-    <div class="legend">${["tete","esprit","coeur","corps"].map(k=>`<div><i style="background:${SC[k]}"></i><b>${SPHERES[k].nom}</b> <small>${E(k==="tete"?"fonctions mentales":k==="esprit"?"affectif et social":k==="coeur"?"émotions et régulation":"sensoriel et moteur")}</small></div>`).join("")}</div>
+      <div class="center"><b style="${c.name.length>13?"font-size:9.5pt":c.name.length>9?"font-size:11pt":""}">${E(c.name)}</b>${c.dob?`<span>${E(fmtD(c.dob,true))}</span><span>${E(age)}</span>`:""}</div></div>
+    <div class="legend">${["tete","esprit","coeur","corps"].map(k=>`<div><img class="li" src="${A["sph-"+k]}" alt=""><b>${SPHERES[k].nom}</b><small>${E(k==="tete"?"fonctions mentales":k==="esprit"?"affectif et social":k==="coeur"?"émotions et régulation":"sensoriel et moteur")}</small></div>`).join("")}</div>
     <p class="dc">Date de création : ${E(fmtD(todayISO(),true))}</p></section>`;
   const sections=[
-    {head:`<div class="phead"><img src="${A["hd-facil"]}" class="hdi" alt=""><div><h2>${E(T.facT)}</h2><p class="intro">${P(T.facI)}</p></div></div>`,blocks:R.ordF.map(k=>`<div class="blk fbox" style="--c:${SC[k]};--b:${SB[k]}"><img src="${A["sph-"+k]}" class="bi" alt=""><div class="bt"><h3>${E(SPHERES[k].nom)}</h3><div>${P(R.facil[k])}</div></div></div>`)},
+    {head:`<div class="phead"><img src="${A["hd-facil"]}" class="hdi" alt=""><div><h2>${E(T.facT)}</h2><p class="intro">${P(T.facI)}</p></div></div>`,blocks:R.ordF.filter(k=>!opt.equipe||String(R.facil[k]||"").trim()).map(k=>`<div class="blk fbox" style="--c:${SC[k]};--b:${SB[k]}"><h3 class="ih"><img src="${A["sph-"+k]}" alt="">${E(SPHERES[k].nom)}</h3><div>${P(R.facil[k])}</div></div>`)},
     {head:`<div class="phead plain"><h2>${E(T.titre)}</h2><p class="sub">${E(T.sous)} · ${E(T.ctx)}</p></div>`,blocks:[[T.datesT,R.dates],[T.ctxT,R.contexte],[T.demT,R.demarche]].map(([h,t])=>`<div class="blk tbox"><h3>${E(h)}</h3><p>${P(t)}</p></div>`)},
     {head:`<div class="phead plain"><h2>${E(T.occT)}</h2></div>`,blocks:R.ordO.map(k=>{const im=RBOX.find(x=>x[0]===k)[2];return `<div class="blk obox"><img src="${A[im]}" class="bi" alt=""><div class="bt"><h3>${E(T["o_"+k])}</h3><p>${P(R[k])}</p></div></div>`})},
     {head:`<div class="phead"><img src="${A["hd-analyse"]}" class="hdi" alt=""><div><h2>${E(T.anaT)}</h2></div></div>`,blocks:[`<div class="blk tbox"><p>${P(R.analyse)}</p><p class="dr">Date de rédaction : ${E(fmtD(todayISO(),true))}</p></div>`,`<div class="blk signs">${sg.map(x=>`<div><div class="line"></div><i>${E(x.nom)}</i><br><i>${E(x.titre)}</i><br><span>${E(x.courriel)}</span></div>`).join("")}</div>`]}];
-  const data=JSON.stringify({sections,opt:!!R.opt,name:c.name+(c.dob?" · "+fmtD(c.dob,true)+" · "+age:"")}).replace(/</g,"\\u003c");
+  if(opt.equipe){if(!sections[0].blocks.length)sections[0].blocks=[`<div class="blk tbox"><p>Aucun facilitateur noté pour l'instant.</p></div>`];sections.splice(1,sections.length-1,...opt.equipe.sections)}
+  const data=JSON.stringify({sections,opt:!!R.opt,frise:[1,2,3,4,5,6].map(i=>A["frise-"+i]),name:c.name+(c.dob?" · "+fmtD(c.dob,true)+" · "+age:"")}).replace(/</g,"\\u003c");
   return `<!DOCTYPE html><html lang="fr-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${E(T.titre)} · ${E(c.name)}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
@@ -1083,24 +1143,24 @@ h1,h2,h3{font-family:Lora,Georgia,serif;font-weight:500;margin:0;color:#262626}h
 .tag{position:absolute;top:.38in;right:.75in;font-size:8.5pt;color:#777;letter-spacing:.3px}
 .cover .logos{display:flex;justify-content:space-between;align-items:center}.lg1{height:70px}.lg2{height:80px}
 .cover .ttl{text-align:center;margin:.15in 0 0}.cover .ttl .ctx{margin-top:4px}
-.wheel{position:relative;width:6.1in;height:6.1in;margin:.45in auto 0}.wsvg{width:100%;height:100%;display:block}
-.wi{position:absolute;width:.85in}.wi.n{left:50%;top:-.42in;transform:translateX(-50%)}.wi.s{left:50%;bottom:-.42in;transform:translateX(-50%)}.wi.e{right:-.45in;top:50%;transform:translateY(-50%)}.wi.w{left:-.45in;top:50%;transform:translateY(-50%)}
+.wheel{position:relative;width:5.9in;height:5.9in;margin:.3in auto 0}.wsvg{width:100%;height:100%;display:block}
+.wi{position:absolute;width:.5in;z-index:3}.wi.n{left:50%;top:30.8%;transform:translateX(-50%)}.wi.s{left:50%;bottom:30.8%;transform:translateX(-50%)}.wi.e{right:30.8%;top:50%;transform:translateY(-50%)}.wi.w{left:30.8%;top:50%;transform:translateY(-50%)}
 .q{position:absolute;display:flex;flex-wrap:wrap;gap:4px 8px;justify-content:center;align-content:center;text-align:center}
-.qn{left:22%;right:22%;top:9%;height:23%}.qs{left:22%;right:22%;bottom:9%;height:23%}.qe{right:5%;top:30%;width:22%;height:40%}.qw{left:5%;top:30%;width:22%;height:40%}
-.k{font-size:10pt;font-weight:500;color:#2a2a2a}.k:not(:last-child)::after{content:"";}
-.kd{display:block;width:100%;font-size:8.5pt;color:#666;font-style:italic}
-.center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:1.35in;text-align:center;display:flex;flex-direction:column;font-size:9pt;color:#555}.center b{font-size:12.5pt;color:#222;font-family:Lora,Georgia,serif;font-weight:500}
-.legend{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:.5in;font-size:9pt}.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:0}.legend small{color:#777}
+.qn{left:22%;right:22%;top:7%;height:21%}.qs{left:22%;right:22%;bottom:7%;height:21%}.qe{right:4.5%;top:30%;width:22%;height:40%}.qw{left:4.5%;top:30%;width:22%;height:40%}
+.k{background:rgba(255,255,255,.93);border-radius:999px;padding:1px 9px;font-size:9.5pt;font-weight:600;color:#222}
+.kd{display:block;width:100%;font-size:8.5pt;color:#333;font-style:italic;background:rgba(255,255,255,.85);border-radius:8px;padding:1px 6px}
+.center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:1.12in;text-align:center;display:flex;flex-direction:column;font-size:8pt;line-height:1.25;color:#555;z-index:2}.center b{font-size:12.5pt;line-height:1.15;color:#222;font-family:Lora,Georgia,serif;font-weight:500}
+.legend{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:.24in;font-size:9pt}.legend>div{display:flex;flex-direction:column;align-items:center;text-align:center;line-height:1.2}.legend .li{height:.6in;margin-bottom:3px}.legend small{display:block;color:#777}
 .dc{position:absolute;left:.75in;bottom:.5in;margin:0;font-size:9pt;color:#666}
 .phead{display:flex;gap:.2in;align-items:center;padding-bottom:.12in;border-bottom:1px solid #e3ddd0;margin-bottom:.06in}.phead .hdi{height:.95in}.phead.plain{display:block;text-align:left}.phead .intro{margin:6px 0 0;color:#555;font-size:10pt}.phead.cont h2{font-size:13pt;color:#666}.phead.cont .hdi{height:.45in}
 .blk{break-inside:avoid;position:relative;border-radius:10px}
-.fbox{background:var(--b);border-left:4px solid var(--c);padding:.14in .2in .14in 1.15in;min-height:1.15in}
+.fbox{background:var(--b);border-left:4px solid var(--c);padding:.12in .2in}.ih{display:flex;align-items:center;gap:8px}.ih img{width:.45in;height:.45in;object-fit:contain}
 .bi{position:absolute;left:.14in;top:.12in;width:.85in}
-.obox{border:1px solid #e3ddd0;background:#FCFBF8;padding:.14in .2in .14in 1.3in;min-height:1.2in}.obox .bi{width:1in;left:.12in}
-.tbox{border:1px solid #e3ddd0;background:#FCFBF8;padding:.14in .22in}.tbox p,.obox p{margin:0;text-align:justify}
+.obox{border:1px solid #e3ddd0;background:#FCFBF8;padding:.14in .22in;margin:.2in 0 0 .12in}.obox .bi{width:.9in;left:-.2in;top:-.26in}.obox h3{margin-left:.66in;min-height:.32in}
+.tbox{border:1px solid #e3ddd0;background:#FCFBF8;padding:.14in .22in}.eq ul{margin:4px 0 0;padding-left:18px}.eq li{margin:2px 0}.eq p{text-align:left}.eq .mut{color:#777}.eq .kv{display:flex;gap:10px;margin:3px 0}.eq .kv b{min-width:1.3in}.eq .notes .d{color:#777;font-size:9pt;margin-right:4px}.eq .ph{display:grid;grid-template-columns:1fr 1fr;gap:8px}.eq .ph figure{margin:0}.eq .ph img{width:100%;height:2.1in;object-fit:cover;border-radius:6px}.eq .ph figcaption{font-size:8.5pt;color:#777}.tbox p,.obox p{margin:0;text-align:justify}
 .dr{margin-top:.15in!important;font-style:italic;color:#555}
 .signs{display:flex;justify-content:space-between;margin-top:.3in;text-align:center;font-size:9.5pt}.signs>div{width:44%}.signs .line{border-top:1px solid #8a8a8a;margin:.35in 0 4px}.signs span{color:#7a6a3d}
-.foot{position:absolute;left:.75in;right:.75in;bottom:.4in;display:flex;align-items:center;justify-content:space-between;font-size:8pt;color:#888}
+.foot{position:absolute;left:.75in;right:.75in;bottom:.3in;display:flex;align-items:center;justify-content:center;font-size:8pt;color:#888}.foot .frise{height:.5in}
 .dots{display:flex;gap:6px;align-items:center}.dots i{width:16px;height:16px;border-radius:50%;font-style:normal;font-size:7.5pt;display:flex;align-items:center;justify-content:center;color:#666;border:1px solid #d6d0c4;background:#fff}.dots i.on{color:#fff;border-color:transparent}
 @media print{body{background:#fff}.page{margin:0;box-shadow:none}}
 </style></head><body><div id="out">${cover}</div><div id="meas" style="position:absolute;left:-9999px;top:0"></div>
@@ -1112,7 +1172,7 @@ D.sections.forEach(sec=>{let c=newPage(sec.head);let q=sec.blocks.slice();
     for(let i=0;i<(D.opt?q.length:1);i++){c.insertAdjacentHTML("beforeend",q[i]);const el=c.lastElementChild;if(fits(c)){q.splice(i,1);placed=true;break}el.remove()}
     if(!placed){if(c.children.length<=1){c.insertAdjacentHTML("beforeend",q.shift());continue}c=newPage(sec.head.replace('class="phead','class="phead cont').replace(/<p class="intro">[^]*?<\\/p>/,""))}}});
 const pages=[...out.querySelectorAll(".page")];const N=pages.length;
-pages.forEach((p,i)=>{const f=document.createElement("div");f.className="foot";f.innerHTML='<span></span><span class="dots">'+pages.map((_,j)=>'<i class="'+(j===i?"on":"")+'" style="'+(j===i?"background:"+COL[j%COL.length]:"")+'">'+(j+1)+'</i>').join("")+'</span>';p.appendChild(f)});
+pages.forEach((p,i)=>{const f=document.createElement("div");f.className="foot";if(N<=6&&D.frise[i]){f.innerHTML='<img class="frise" src="'+D.frise[i]+'" alt="">'}else{f.innerHTML='<span class="dots">'+pages.map((_,j)=>'<i class="'+(j===i?"on":"")+'" style="'+(j===i?"background:"+COL[j%COL.length]:"")+'">'+(j+1)+'</i>').join("")+'</span>'}p.appendChild(f)});
 });<\/script></body></html>`}
 function calDaySheet(gid,d){const g=S.groups.get(gid);const info=groupDays(gid).get(d)||{};const pl=(g.meetings||[]).includes(d);
   const items=dayItems(gid,d).filter(it=>it.kind!=="j");const jl=(g.journal||[]).filter(n=>n.date===d&&n.theme!=="source"&&n.theme!=="jour");const pr=(presOf(g,d)||[]).map(id=>(S.children.get(id)||{}).name).filter(Boolean);const cx=ctxOf(gid,d);
@@ -1145,11 +1205,11 @@ function calDaySheet(gid,d){const g=S.groups.get(gid);const info=groupDays(gid).
     s.querySelector("#cdPlan").onclick=()=>{mutGroup(gid,x=>{const l=x.meetings||[];x.meetings=pl?l.filter(v=>v!==d):l.concat(d).sort()});calDaySheet(gid,d)};
   })}
 function covHTML(gid,g,kids){let h="";const T=tpl(g);
-    h+=`<section class="card"><div class="ordhead"><h3 style="font-size:1.35rem">Récapitulatif du groupe</h3><span class="row-actions"><button class="btn primary small" data-act="cqmGroup" data-id="${gid}">Ce qui marche</button><button class="btn small" data-act="eclairs" data-id="${gid}">Fiches éclair</button></span></div><h4 style="margin:12px 0 2px">Couverture des observations</h4><p class="muted small" style="margin:2px 0 10px">Jours depuis la dernière observation, par enfant et par occupation. Avec les présences, la couleur tient compte des rencontres où l'enfant était là : vert = rien de manqué, jaune = une rencontre sans observation, rose = plusieurs.</p>
+    h+=`<section class="card"><details class="ogdet" data-dk="rec-${gid}" ${openDetails.has("rec-"+gid)?"open":""}><summary><h3 style="font-size:1.35rem;display:inline">Récapitulatif du groupe</h3></summary><div class="row-actions" style="margin-top:8px"><button class="btn primary small" data-act="cqmGroup" data-id="${gid}">Ce qui marche</button><button class="btn small" data-act="eclairs" data-id="${gid}">Fiches éclair</button></div><h4 style="margin:12px 0 2px">Couverture des observations</h4><p class="muted small" style="margin:2px 0 10px">Jours depuis la dernière observation, par enfant et par occupation. Avec les présences, la couleur tient compte des rencontres où l'enfant était là : vert = rien de manqué, jaune = une rencontre sans observation, rose = plusieurs.</p>
     <div class="cov-wrap"><table class="cov"><thead><tr><th></th>${OCCS.map(o=>`<th title="${esc(o.titre)}"><img src="${img(o.img)}" alt="${esc(o.titre)}"><span>${esc(shortT(o.titre))}</span></th>`).join("")}</tr></thead><tbody>
     ${kids.map(([cid,c])=>`<tr><th><a href="#e-${cid}">${esc(c.name)}</a></th>${OCCS.map(o=>{const last=o.subs.map(id=>secLast(c,{id})).sort().pop();const d=daysSince(last);const pd=presDates(g);let cls;
       if(pd.length){const missed=pd.filter(x=>(!last||x>last)&&g.presences[x].includes(cid)).length;cls=last?(missed===0?"c3":missed===1?"c2":"c1"):(missed?"c1":"c0")}else cls=d===null?"c0":d<=14?"c3":d<=35?"c2":"c1";return `<td class="${cls}"><a href="#e-${cid}--${o.subs[0]}">${d===null?"—":d===0?"auj.":d+" j"}</a></td>`}).join("")}</tr>`).join("")}
-    </tbody></table></div></section>`
+    </tbody></table></div></details></section>`
   return h}
 const JTHEMES={climat:"Climat et dynamique",environnement:"Aménagement",ecole:"À arrimer avec l'école",autre:"Autre",source:"Note originale",jour:"Note de la journée"};
 /* ---------- Présences ---------- */
@@ -1188,6 +1248,7 @@ function portraitObjHTML(cid,c){const T=TEMPLATES[baseTpl(c)];const all=childObj
   ${sug.length?det("osug-"+cid,`Suggestions (${sug.length})`,`<div class="row-actions" style="margin-top:6px">${sug.map(x=>`<button class="sugchip" data-act="cObjSugg" data-id="${cid}" data-k="${x.k}" data-l="${esc(x.label)}" title="${esc(x.why)}">+ ${esc(x.label)}</button>`).join("")}</div>`):""}</section>`}
 /* ---------- Objectifs de groupe ---------- */
 const OBJ_SUGG=[["Arrivée","groupe"],["Départ","groupe"],["Transition vers la collation","groupe"],["Transition vers le dîner","groupe"],["Dîner : rester assis","groupe"]];
+function shortName(n){n=String(n||"").replace(/\s*-\s*/g,"-").trim();const f=n.split(/\s+/)[0];return f.length>9?f.slice(0,8)+"…":f}
 function objRes(g,d){return ((g.objRes||{})[d])||{}}
 function objectivesHTML(gid,g,kids){
   const objs=g.objectifs||[];const res=objRes(g,S.obsDate);const ed=S.objEdit===gid;
@@ -1198,10 +1259,10 @@ function objectivesHTML(gid,g,kids){
   if(ed){h+=`<div class="entries" style="margin-top:10px">${objs.map(o=>`<div class="entry"><span class="txt">${esc(o.label)}</span><button class="x" aria-label="Retirer" data-act="objDel" data-id="${gid}" data-o="${o.id}">✕</button></div>`).join("")}</div>
     <div class="addline" style="margin-top:8px"><input class="field" id="objNew" placeholder="Nouvel objectif (ex. : Ranger son matériel)"><button class="btn primary" data-act="objAdd" data-id="${gid}">Ajouter</button></div>
     </details></section>`;return h}
-  h+=`<div class="toolbar" style="margin:6px 0 4px"><label class="obsdate small"><span class="label">Date</span><input type="date" value="${S.obsDate}" data-act="obsDate"></label><span class="muted small">Touchez un enfant : réussi ✓, puis pas encore ✗, puis vide. Touchez le nom pour une note.</span></div>`;
+  h+=`<div class="toolbar" style="margin:6px 0 4px"><label class="obsdate small"><span class="label">Date</span><input type="date" value="${S.obsDate}" data-act="obsDate"></label><span class="muted small">Touchez un prénom : réussi ✓, puis pas encore ✗, puis vide. Appui long : une note.</span></div>`;
   objs.forEach(o=>{const r=res[o.id]||{};const ok=kids.filter(([cid])=>r[cid]==="ok").length,no=kids.filter(([cid])=>r[cid]==="no").length;
-    h+=`<div class="objrow"><div class="objhead"><b>${esc(o.label)}</b><span class="muted small">${ok} réussi${ok>1?"s":""}${no?" · "+no+" pas encore":""}</span></div><div class="kids">${kids.map(([cid,c])=>{const v=r[cid]||"";const hasNote=(c.notes||[]).some(n=>n.obj===o.id&&n.date===S.obsDate);
-      return `<div class="kchip ${v}"><button class="kmark" data-act="objMark" data-id="${gid}" data-o="${o.id}" data-c="${cid}" aria-label="${esc(c.name)} : ${v==="ok"?"réussi":v==="no"?"pas encore":"non noté"}"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><span class="sym">${v==="ok"?"✓":v==="no"?"✗":""}</span></button><button class="kname" data-act="objNote" data-id="${gid}" data-o="${o.id}" data-c="${cid}">${esc(c.name)}${hasNote?" •":""}</button></div>`}).join("")}</div></div>`});
+    h+=`<div class="objrow"><div class="objhead"><b>${esc(o.label)}</b><span class="muted small">${ok} réussi${ok>1?"s":""}${no?" · "+no+" pas encore":""}</span></div><div class="kids kp">${kids.map(([cid,c])=>{const v=r[cid]||"";const hasNote=(c.notes||[]).some(n=>n.obj===o.id&&n.date===S.obsDate);
+      return `<button class="kpill ${v}" data-act="objMark" data-id="${gid}" data-o="${o.id}" data-c="${cid}" aria-label="${esc(c.name)} : ${v==="ok"?"réussi":v==="no"?"pas encore":"non noté"}"><span class="kn">${esc(shortName(c.name))}</span>${v?`<span class="sym">${v==="ok"?"✓":"✗"}</span>`:""}${hasNote?'<span class="nd"></span>':""}</button>`}).join("")}</div></div>`});
   const dates=Object.keys(g.objRes||{}).filter(d=>Object.values(g.objRes[d]||{}).some(x=>Object.keys(x).length)).sort().reverse();
   if(dates.length)h+=det("oh-"+gid,`Historique (${dates.length} jour${dates.length>1?"s":""})`,`<div class="cov-wrap"><table class="cov"><thead><tr><th></th>${objs.map(o=>`<th><span>${esc(o.label)}</span></th>`).join("")}</tr></thead><tbody>${dates.map(d=>`<tr><th>${fmtD(d)}</th>${objs.map(o=>{const r=(g.objRes[d]||{})[o.id]||{};const ok=Object.values(r).filter(v=>v==="ok").length,tot=Object.values(r).filter(Boolean).length;return `<td class="${tot?ok/tot>=.75?"c3":ok/tot>=.4?"c2":"c1":"c0"}"><span style="display:block;padding:6px 4px">${tot?ok+"/"+tot:"—"}</span></td>`}).join("")}</tr>`).join("")}</tbody></table></div>`);
   return h+`</details></section>`;
@@ -1234,9 +1295,9 @@ function viewActivity(gid,secId){
    <label class="obsdate small"><span class="label">Date d'observation</span><input type="date" value="${S.obsDate}" data-act="obsDate"></label>
    ${ctxInput(gid)}
   </div>
-  <div class="achips">${gsecs.map(sec=>`${gsecs.length>1?`<span class="label">${esc(sec.titre)}</span>`:""}<div class="chips">${sec.rows.map(r=>`<button class="chip${cur===sec.id+"."+r.id?" on":""}" data-act="actRow" data-k="${sec.id}.${r.id}">${esc(r.label)}</button>`).join("")}</div>`).join("")}
+  ${S.scOnly===gid&&sel?`<div class="row-actions" style="margin-top:10px"><button class="linkbtn small" data-act="scAll">Voir les autres repères</button></div></section>`:`<div class="achips">${gsecs.map(sec=>`${gsecs.length>1?`<span class="label">${esc(sec.titre)}</span>`:""}<div class="chips">${sec.rows.map(r=>`<button class="chip${cur===sec.id+"."+r.id?" on":""}" data-act="actRow" data-k="${sec.id}.${r.id}">${esc(r.label)}</button>`).join("")}</div>`).join("")}
    <div class="chips"><button class="chip ghost${cur==="*"?" on":""}" data-act="actRow" data-k="*">Fiche complète de chacun (tout dérouler)</button></div></div>
-  <div style="margin-top:12px">${occNav({prio:null},null,secId,x=>`#g-${gid}--${x}`)}</div></section>`;
+  <div style="margin-top:12px">${occNav({prio:null},null,secId,x=>`#g-${gid}--${x}`)}</div></section>`}`;
   if(!kids.length)return h+`<div class="card empty">Aucun enfant dans ce groupe. <a href="#g-${gid}">Ajouter des enfants</a></div>`;
   if(sel){const {sec,r}=sel;const key=sel.v;
     h+=`<section class="card act-c"><h3 style="font-size:1.3rem;margin:0">${esc(r.label)}</h3>${r.hint?`<div class="hint">${esc(r.hint)}</div>`:""}
@@ -1533,6 +1594,7 @@ function settingsTop(){const ai=getAI();const gs=[...S.groups.entries()];
 function newPhotoCount(){if(!window.CARNET_LOCAL)return 0;const done=new Set(LOCAL.meta.photoIds||[]);let n=0;S.children.forEach(c=>(c.photos||[]).forEach(p=>{if(!done.has(p.id))n++}));return n}
 async function storeInfo(){const el=document.getElementById("storeInfo");if(!el||!navigator.storage||!navigator.storage.estimate)return;try{const e=await navigator.storage.estimate();const per=navigator.storage.persisted?await navigator.storage.persisted():false;
   el.textContent=`Espace utilisé : ${(e.usage/1048576).toFixed(1)} Mo${e.quota?" sur environ "+Math.round(e.quota/1048576/1024*10)/10+" Go disponibles":""}. ${per?"Stockage protégé : le navigateur ne l'effacera pas de lui-même.":"Stockage non protégé : installez l'app sur l'écran d'accueil pour que le navigateur ne l'efface jamais."}`}catch(e){}}
+function setColl(html,pre){let i=0;return html.replace(/<section class="card"><h3 style="font-size:1\.35rem[^"]*">([^]*?)<\/h3>([^]*?)<\/section>/g,(m,t,body)=>{const k="set-"+pre+"-"+(i++)+"-"+t.replace(/<[^>]+>/g,"").slice(0,20);return `<section class="card setc"><details class="ogdet" data-dk="${esc(k)}" ${openDetails.has(k)?"open":""}><summary><h3 style="font-size:1.25rem;display:inline">${t}</h3></summary><div style="margin-top:8px">${body}</div></details></section>`})}
 function viewSettings(){
   crumbs([`<span>Paramètres</span>`]);
   const tk=TEMPLATES[S.setTpl]?S.setTpl:"0-4";const T=TEMPLATES[tk];const o=OCCS.find(x=>x.id===S.setOcc)||OCCS[0];
@@ -1542,16 +1604,16 @@ function viewSettings(){
   o.subs.forEach(sid=>{const sec=T.sections.find(x=>x.id===sid);if(!sec)return;
     h+=`<section class="card"><h3 style="font-size:1.35rem;margin-bottom:6px">${esc(sec.n)}. ${esc(sec.titre)}</h3>`;
     sec.rows.forEach(r=>{
-      h+=`<div class="prow"><h4>${esc(r.label)}${r.custom?'<span class="custtag">ajoutée</span>':""} <span class="muted small" style="font-family:var(--font-body);font-weight:400">${r.free?"note libre":r.rep?"répertoire":"progression"}</span></h4>`;
+      const rk="setr-"+tk+"-"+sid+"-"+r.id;h+=`<div class="prow">${r.free?"":`<details class="ogdet" data-dk="${rk}" ${openDetails.has(rk)?"open":""}><summary>`}<h4 style="display:inline">${esc(r.label)}${r.custom?'<span class="custtag">ajoutée</span>':""} <span class="muted small" style="font-family:var(--font-body);font-weight:400">${r.free?"note libre":(r.rep?"répertoire":"progression")+" · "+r.steps.length}</span></h4>${r.free?"":"</summary>"}`;
       if(r.free){h+=`</div>`;return}
-      h+=`<ol class="plist">${r.steps.map((st,i)=>`<li>${r.rep?"·":(i+1)+"."} ${esc(stT(st))}${(()=>{const k=sid+"."+r.id+"."+stK(st,i);const ag=ageOf(k);return `<button class="agedit" data-act="ageEdit" data-k="${k}" data-l="${esc(stT(st))}">${ag?ageLabel(ag)+(ag[2]==="T"?" · Talbot":ag[2]==="a"?" approx.":""):"+ âge"}</button>`})()}${typeof st!=="string"?`<span class="custtag">ajouté</span><button class="x" aria-label="Retirer" data-act="delCustStep" data-t="${tk}" data-s="${sid}" data-r="${r.id}" data-x="${st.id}">✕</button>`:""}</li>`).join("")}</ol>
+      h+=`<ol class="plist">${r.steps.map((st,i)=>`<li>${r.rep?"·":(i+1)+"."} ${esc(stT(st))}${(()=>{const k=sid+"."+r.id+"."+stK(st,i);const ag=ageOf(k);return ag?`<button class="agedit" data-act="ageEdit" data-k="${k}" data-l="${esc(stT(st))}">${ageLabel(ag)+(ag[2]==="T"?" · Talbot":ag[2]==="a"?" approx.":"")}</button>`:""})()}${typeof st!=="string"?`<span class="custtag">ajouté</span><button class="x" aria-label="Retirer" data-act="delCustStep" data-t="${tk}" data-s="${sid}" data-r="${r.id}" data-x="${st.id}">✕</button>`:""}</li>`).join("")}</ol>
       <div class="addline"><input class="field" id="cs-${sid}-${r.id}" placeholder="Ajouter un élément à cette ligne"><button class="btn" data-act="addCustStep" data-t="${tk}" data-s="${sid}" data-r="${r.id}">Ajouter</button></div>
-      ${r.custom?`<button class="btn ghost danger" style="margin-top:6px" data-act="delCustRow" data-t="${tk}" data-s="${sid}" data-r="${r.id}">Retirer cette ligne</button>`:""}</div>`});
+      ${r.custom?`<button class="btn ghost danger" style="margin-top:6px" data-act="delCustRow" data-t="${tk}" data-s="${sid}" data-r="${r.id}">Retirer cette ligne</button>`:""}</details></div>`});
     h+=`<div class="prow"><h4>Nouvelle ligne d'observation</h4><div class="addnote" style="margin-top:6px"><input class="field" id="nr-l-${sid}" placeholder="Titre (ex. : Jeu dans l'eau)">
       <select class="field" id="nr-t-${sid}"><option value="rep">Répertoire : des cases sans ordre</option><option value="prog">Progression : des étapes en ordre</option></select>
       <textarea class="field" id="nr-s-${sid}" placeholder="Un élément par ligne"></textarea>
       <div class="row-actions"><button class="btn primary" data-act="addCustRow" data-t="${tk}" data-s="${sid}">Ajouter la ligne</button></div></div></div></section>`});
-  return settingsTop()+h;
+  return setColl(settingsTop(),"top")+setColl(h,tk+o.id);
 }
 function ageSheet(k,label){const ag=ageOf(k);const toYM=m=>m==null?"":(Math.floor(m/12)+"."+String(m%12).padStart(2,"0"));
   openSheet(`<h3>Âge attendu</h3><p class="muted small" style="margin:0">${esc(label)}</p><p class="muted small" style="margin:0">Notation années.mois, comme la Talbot : 2.06 = 2 ans 6 mois.</p>
@@ -1603,7 +1665,7 @@ const toDataURL=async src=>{try{const r=await fetch(src);if(!r.ok)return "";cons
 async function buildExport(cid,kind,withPhotos){
   const c=S.children.get(cid);const g=S.groups.get(c.groupId)||{name:""};const full=kind==="dossier";
   const icons={};const icon=async n=>{if(!(n in icons))icons[n]=await toDataURL(img(n));return icons[n]};
-  const phURL={};if(withPhotos)for(const p of (c.photos||[])){phURL[p.id]=await toDataURL(blobSrc(p.id))}
+  const phURL={};if(withPhotos)for(const p of (c.photos||[])){phURL[p.id]=await photoDataURL(p.id)}
   const E=esc;const allDates=[];Object.values(c.checks||{}).forEach(a=>a.forEach(d=>allDates.push(d)));(c.notes||[]).forEach(n=>allDates.push(n.date));allDates.sort();
   const period=allDates.length?`${fmtD(allDates[0],true)} au ${fmtD(allDates[allDates.length-1],true)}`:"";
   let body=`<header class="hd">${(x=>x?`<img class="av" src="${x}" alt="">`:"")(await icon("avatar-"+(c.avatar||"renard")))}<div><h1>${E(c.name)}</h1><p>${E(g.name)}${c.dob?" · "+E(ageAt(c.dob)):""}${c.langues?" · "+E(c.langues):""}</p>${period?`<p class="mut">Observations du ${period}</p>`:""}</div></header>`;
@@ -1620,6 +1682,8 @@ async function buildExport(cid,kind,withPhotos){
     body+=`<section><h2>Forces (roue)</h2>${kf||`<p class="mut">—</p>`}</section><section><h2>Défis</h2>${kd||`<p class="mut">—</p>`}${ex.length?`<p><b>À explorer :</b></p><ul>${ex.map(x=>`<li>${E(x.text)}</li>`).join("")}</ul>`:""}</section>`;
     body+=`<section><h2>Observations récentes</h2><ul class="notes">${recent.map(n=>`<li><span class="d">${fmtD(n.date)}</span> ${E(n.text)}</li>`).join("")}</ul></section>`;
     if(withPhotos){const phs=(c.photos||[]).slice().sort((x,y)=>(y.d||"").localeCompare(x.d||"")).slice(0,4).filter(p=>phURL[p.id]);if(phs.length)body+=`<section><h2>Photos</h2><div class="ph">${phs.map(p=>`<figure><img src="${phURL[p.id]}" alt=""><figcaption>${fmtD(p.d)}</figcaption></figure>`).join("")}</div></section>`}
+    const blocks=[...body.matchAll(/<section><h2>([^]*?)<\/h2>([^]*?)<\/section>/g)].filter(m=>!/^Forces/.test(m[1])).map(m=>`<div class="blk tbox eq"><h3>${m[1]}</h3>${m[2]}</div>`);
+    return await buildRapport(cid,{equipe:{sections:[{head:`<div class="phead plain"><h2>Pour la discussion d'équipe</h2><p class="sub">${E(c.name)}${period?" · observations du "+E(period):""}</p></div>`,blocks}]}});
   }else{
   const pr=PORTRAIT_ROWS.map(r=>{const l=((c.free||{})["portrait."+r.id]||[]).slice().sort((a,b)=>b.date.localeCompare(a.date));return l.length?`<div class="kv"><b>${E(r.label.replace(/ \(répertoire\)/,""))}</b><span>${l.map(n=>E(n.text)).join(" · ")}</span></div>`:""}).join("");
   if(pr)body+=`<section><h2>Qui il est</h2>${pr}</section>`;
@@ -1736,7 +1800,7 @@ function viewPortrait(cid,c){
   h+=pistesHTML(cid,c);
   h+=syntheseCore(cid,c);
   {const tp=photosOf(c,p=>p.k==="portrait").sort((a,b)=>(b.d||"").localeCompare(a.d||""));h+=notesHTML(cid,c,["portrait"],"Notes du terrain et notes libres","Note libre…");if(tp.length)h+=`<section class="card"><span class="label">Photos du terrain (${tp.length})</span>${thumbs(c,tp,cid)}</section>`}
-  h+=`<section class="card"><div class="row-actions"><button class="btn primary" data-act="rapport" data-id="${cid}">Rapport d'évaluation</button><button class="btn" data-act="exportChild" data-id="${cid}">Fiche d'équipe et exports</button></div></section>`;
+  h+=`<section class="card"><div class="row-actions"><button class="btn primary" data-act="rapport" data-id="${cid}">Rapport d'évaluation</button><button class="btn" data-act="album" data-id="${cid}">Album photos</button><button class="btn" data-act="exportChild" data-id="${cid}">Fiche d'équipe et exports</button></div></section>`;
   h+=`<section class="card"><button class="btn danger" data-act="delChild" data-id="${cid}">Supprimer cette fiche</button></section>`;
   return h;
 }
@@ -1763,7 +1827,8 @@ function kwSheet(cid,key){const c=S.children.get(cid);const [sph,t,...mm]=key.sp
     s.querySelector("#kwClose").onclick=closeSheet;
     s.querySelectorAll("[data-kdel]").forEach(b=>b.onclick=()=>{mutChild(cid,x=>{x.kw=(x.kw||[]).filter(k=>k.id!==b.dataset.kdel)});const left=(S.children.get(cid).kw||[]).some(k=>k.sph===sph&&k.t===t&&norm(k.mot)===norm(mot));left?kwSheet(cid,key):closeSheet()});
     const bc=s.querySelector("#kwBecome");if(bc)bc.onclick=()=>{mutChild(cid,x=>{(x.kw=x.kw||[]).push({id:uid("w"),mot,sph,t:"force",date:S.obsDate,src:"manuel"})});closeSheet();toast("« "+mot+" » est maintenant une force")}})}
-function objShort(o){if(o.titre)return o.titre;let t=String(o.label||"").trim();const m=t.match(/^([^:]{3,60})\s*:\s*/);if(m&&t.length>70)t=m[1];else t=t.split(/(?<=[.!?])\s/)[0];const w=t.split(/\s+/);return w.length>9?w.slice(0,8).join(" ")+"…":t}
+const OBJHEAD=/^\s*(pistes d['’]accompagnement(\s+et\s+objectifs?(\s+à\s+poursuivre)?)?|pistes d['’]intervention|objectifs?(\s+(à\s+poursuivre|visés?|ciblés?|suggérés?))?|interventions?\s+à\s+privilégier|recommandations?|stratégies?\s+à\s+privilégier|moyens?\s+à\s+privilégier)\s*:\s*/i;
+function objShort(o){if(o.titre)return o.titre;let t=String(o.label||"").trim().replace(OBJHEAD,"");const m=t.match(/^([^:]{3,60})\s*:\s*/);if(m&&t.length>70)t=m[1];else t=t.split(/(?<=[.!?])\s/)[0];const w=t.split(/\s+/);return w.length>9?w.slice(0,8).join(" ")+"…":t}
 function pistesHTML(cid,c){const L=(c.pistes||[]).slice().sort((a,b)=>(a.done?1:0)-(b.done?1:0)||(b.date||"").localeCompare(a.date||""));
   return `<section class="card"><h3 style="font-size:1.3rem;margin-bottom:4px">Pistes et prochains pas</h3><p class="muted small" style="margin:0 0 8px">À lire et garder en tête, pas à cocher. Une piste peut devenir un objectif.</p>
   <div class="addline"><input class="field" id="piNew" placeholder="Ex. : offrir le hamac avant le dîner"><button class="btn primary" data-act="piAdd" data-id="${cid}">Ajouter</button></div>
@@ -1777,7 +1842,7 @@ function eclairData(c){const g=S.groups.get(c.groupId)||{};const pd=presDates(g)
   const ao=aObserver(c).find(x=>x.t!=="obj");return {pd,objs,aide,surv,reussite:kwF,ao}}
 function eclairHTML(cid,c,inPage){const g=S.groups.get(c.groupId)||{};const pd=presDates(g);const np=pd.filter(d=>(g.presences[d]||[]).includes(cid)).length;const E=eclairData(c);
   return `<section class="${inPage?"card ":""}eclair"><div class="ehead"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><b>${esc(c.name)}</b>${pd.length?`<span class="muted small">présent ${np}/${pd.length}</span>`:""}</div>
-  ${E.objs.length?`<div class="el">🎯 ${E.objs.map(o=>esc(o.t)+(o.v?` <span class="opill ${o.v}">${OMARK[o.v]}</span>`:"")).join(" · ")}</div>`:""}
+  ${E.objs.map(o=>`<div class="el el1">🎯 ${esc(o.t)}${o.v?` <span class="opill ${o.v}">${OMARK[o.v]}</span>`:""}</div>`).join("")}
   ${E.aide.length?`<div class="el">✓ <b>Ce qui l'aide :</b> ${E.aide.map(esc).join(", ")}</div>`:""}
   ${E.surv.length?`<div class="el">⚠️ <b>À surveiller :</b> ${E.surv.map(esc).join(", ")}</div>`:""}
   ${E.reussite?`<div class="el">🌱 <b>Belle réussite :</b> ${esc(E.reussite.mot)} <span class="muted small">(${fmtD(E.reussite.date)})</span></div>`:""}
@@ -1798,7 +1863,9 @@ function notesMenu(gid){const g=S.groups.get(gid);const d=S.obsDate;const nT=chi
    <button class="nmi" id="nmImp"><b>Importer une note faite ailleurs</b><span>Coller une note ou ouvrir un fichier (dictée, note de l'IA, bloc carnet). Elle est rangée dans la fiche de chaque enfant.</span></button>
    <button class="nmi" id="nmRan" ${nT?"":"disabled"}><b>Ranger les notes du terrain${nT?" ("+nT+")":""}</b><span>Classer sous les bons repères les notes prises en vrac en mode terrain.</span></button>
    <button class="nmi" id="nmBil"><b>Mettre au propre et rédiger la note de la journée</b><span>Ponctuation et répétitions, puis la note complète pour le dossier ou l'équipe. ${nD} note${nD>1?"s":""} ce jour-là.</span></button>
+   <button class="nmi" id="nmIA"><b>Instructions pour mon IA</b><span>À coller une fois dans votre projet Claude (ou Gem, GPT) : votre IA transforme alors vos notes orales en note prête à importer ici. Recopiez-les quand vous ajoutez un enfant ou un objectif.</span></button>
   </div><button class="btn" id="nmC">Fermer</button>`,s=>{
+    s.querySelector("#nmIA").onclick=()=>copyText(instrText(gid),"Instructions copiées : collez-les dans votre IA");
     const dd=()=>s.querySelector("#nmD").value||todayISO();
     s.querySelector("#nmD").onchange=()=>{S.obsDate=dd();notesMenu(gid)};
     s.querySelector("#nmC").onclick=closeSheet;s.querySelector("#nmImp").onclick=()=>pasteSheet(gid,dd());
@@ -1830,7 +1897,7 @@ function viewSynthese(cid,c,T){
   const sy=c.synth||{};
   let h=`<section class="card"><div class="sechead"><img src="${img("roue-medecine")}" alt=""><div><h2>Roue de ${esc(c.name)}</h2><div class="sph">Forces et défis par sphère, au fil des rencontres. Plus gros = revient souvent.</div></div></div>
   ${roueHTML(cid,c)}
-  <div class="row-actions" style="margin-top:8px"><button class="btn primary small" data-act="rapport" data-id="${cid}">Rapport d'évaluation</button><button class="btn small" data-act="exportChild" data-id="${cid}">Fiche d'équipe et exports</button></div>
+  <div class="row-actions" style="margin-top:8px"><button class="btn primary small" data-act="rapport" data-id="${cid}">Rapport d'évaluation</button><button class="btn small" data-act="album" data-id="${cid}">Album photos</button><button class="btn small" data-act="exportChild" data-id="${cid}">Fiche d'équipe et exports</button></div>
   <div class="addline" style="margin-top:10px;flex-wrap:wrap"><input class="field" id="kwNew" placeholder="Mot-clé (ex. : persévérance)" style="flex:1 1 140px"><select class="field" id="kwSph" style="flex:0 0 auto">${Object.entries(SPHERES).map(([k,v])=>`<option value="${k}">${v.nom}</option>`).join("")}</select><select class="field" id="kwT" style="flex:0 0 auto"><option value="force">Force</option><option value="defi">Défi</option></select><button class="btn primary" data-act="kwAdd" data-id="${cid}">Ajouter</button></div>
   <p class="muted small" style="margin:6px 0 0">${Object.entries(SPHERES).map(([k,v])=>`<b>${v.nom}</b> : ${esc(v.desc)}`).join(" · ")}</p></section>`;
   {const L=cqm(c);h+=`<section class="card"><h3 style="font-size:1.3rem;margin-bottom:4px">Ce qui marche pour ${esc(c.name)}</h3><p class="muted small" style="margin:0 0 8px">Les facilitateurs qui ont fonctionné, du plus fréquent au moins fréquent, avec des exemples tirés des notes.</p>
@@ -1858,7 +1925,7 @@ function mutGroup(gid,fn){const g=S.groups.get(gid);if(!g)return;const copy=JSON
 document.addEventListener("click",e=>{
   const b=e.target.closest("[data-act]");if(!b||b.tagName==="TEXTAREA"||b.tagName==="INPUT")return;
   const a=b.dataset.act,id=b.dataset.id,k=b.dataset.k;
-  if(a==="step"&&lpFired){lpFired=false;return}
+  if((a==="step"||a==="objMark")&&lpFired){lpFired=false;return}
   if(a==="step"&&S.hideMode&&S.hideMode===id&&b.classList.contains("step")){mutChild(id,x=>{const l=x.hideSteps||[];x.hideSteps=l.includes(k)?l.filter(v=>v!==k):l.concat(k)});return}
   if(a==="hideMode"){S.hideMode=S.hideMode===id?null:id;render();return}
   if(a==="jumpRow"){const el=document.getElementById(k);if(el){const y=el.getBoundingClientRect().top+scrollY-64;scrollTo({top:y,behavior:"smooth"})}return}
@@ -1902,6 +1969,7 @@ document.addEventListener("click",e=>{
   else if(a==="regExport")regExport(id);
   else if(a==="regPrint")regPrint(id);
   else if(a==="rapport")rapportSheet(id);
+  else if(a==="album")albumSheet(id);
   else if(a==="exportChild")exportSheet(id);
   else if(a==="cqmGroup")cqmGroupSheet(id);
   else if(a==="piAdd"){const t=($("#piNew")||{}).value;if(!t||!t.trim())return;mutChild(id,x=>{(x.pistes=x.pistes||[]).push({id:uid("p"),text:t.trim(),date:S.obsDate,src:"manuel",by:getMe()})})}
@@ -1914,7 +1982,8 @@ document.addEventListener("click",e=>{
   else if(a==="eclairs")eclairGroupSheet(id);
   else if(a==="notesMenu")notesMenu(id);
   else if(a==="scEdit")scSheet(id);
-  else if(a==="scGo"){const sec=k.split(".")[0];const o=occOf(sec);S.fromTerrain=id;const T=tpl(S.groups.get(id));const sc=T.sections.find(x=>x.id===sec);const r=sc&&rowIn(sc.rows,k.split(".")[1]);S.rowFilter={occ:o.id,row:r?sec+"."+r.id:"*"};go("g-"+id+"--"+o.subs[0])}
+  else if(a==="scAll"){S.scOnly=null;render()}
+  else if(a==="scGo"){const sec=k.split(".")[0];const o=occOf(sec);S.fromTerrain=id;const T=tpl(S.groups.get(id));const sc=T.sections.find(x=>x.id===sec);const r=sc&&rowIn(sc.rows,k.split(".")[1]);S.rowFilter={occ:o.id,row:r?sec+"."+r.id:"*"};S.scOnly=r?id:null;go("g-"+id+"--"+o.subs[0])}
   else if(a==="cqmOpen")cqmSheet(id,k);
   else if(a==="kwOpen")kwSheet(id,k);
   else if(a==="kwAdd"){const m=($("#kwNew")||{}).value;if(!m||!m.trim()){$("#kwNew").focus();return}const sph=$("#kwSph").value,t=$("#kwT").value;mutChild(id,x=>{(x.kw=x.kw||[]).push({id:uid("w"),mot:m.trim().toLowerCase(),sph,t,date:S.obsDate,src:"manuel"})});toast("Mot-clé ajouté")}
@@ -1970,10 +2039,10 @@ document.addEventListener("click",e=>{
 });
 let lpTimer=null,lpFired=false;
 let lpX=0,lpY=0;
-document.addEventListener("pointerdown",e=>{const b=e.target.closest('[data-act="step"]');if(!b||S.hideMode)return;lpX=e.clientX;lpY=e.clientY;clearTimeout(lpTimer);lpTimer=setTimeout(()=>{lpFired=true;stepSheet(b.dataset.id,b.dataset.k,(b.querySelector(".t")||{}).textContent||"");if(navigator.vibrate)try{navigator.vibrate(30)}catch(er){}},550)});
+document.addEventListener("pointerdown",e=>{const q=e.target.closest('.kpill[data-act="objMark"]');if(q){lpX=e.clientX;lpY=e.clientY;clearTimeout(lpTimer);lpTimer=setTimeout(()=>{lpFired=true;objNoteSheet(q.dataset.id,q.dataset.o,q.dataset.c);if(navigator.vibrate)try{navigator.vibrate(30)}catch(er){}},550);return}const b=e.target.closest('[data-act="step"]');if(!b||S.hideMode)return;lpX=e.clientX;lpY=e.clientY;clearTimeout(lpTimer);lpTimer=setTimeout(()=>{lpFired=true;stepSheet(b.dataset.id,b.dataset.k,(b.querySelector(".t")||{}).textContent||"");if(navigator.vibrate)try{navigator.vibrate(30)}catch(er){}},550)});
 ["pointerup","pointercancel"].forEach(ev=>document.addEventListener(ev,()=>{clearTimeout(lpTimer);if(lpFired)setTimeout(()=>{lpFired=false},350)},true));
 document.addEventListener("pointermove",e=>{if(Math.abs(e.clientX-lpX)+Math.abs(e.clientY-lpY)>12)clearTimeout(lpTimer)},true);
-document.addEventListener("contextmenu",e=>{if(e.target.closest('[data-act="step"]'))e.preventDefault()});
+document.addEventListener("contextmenu",e=>{if(e.target.closest('[data-act="step"],.kpill'))e.preventDefault()});
 document.addEventListener("change",e=>{
   const t=e.target;
   if(t.dataset.act==="mergeFile"||t.dataset.act==="restoreFile"){const f=t.files&&t.files[0];const m=t.dataset.act==="mergeFile";t.value="";if(f)(m?LOCAL.merge(f):LOCAL.restore(f));return}
@@ -2021,7 +2090,20 @@ function repairKeys(c){if(!c||!S.groups.get(c.groupId))return false;let ch=false
   if(c.hideSteps){const h=c.hideSteps.map(k=>fixKey(c,k)||k);if(h.join()!==c.hideSteps.join()){c.hideSteps=[...new Set(h)];ch=true}}
   return ch}
 const repaired=new Set();
-function ensureRepaired(cid){if(repaired.has(cid))return;const c=S.children.get(cid);if(!c||!S.groups.get(c.groupId))return;repaired.add(cid);const x=JSON.parse(JSON.stringify(c));if(repairKeys(x)){S.children.set(cid,x);persist("children",cid)}}
+/* objectifs importés en blocs (« Objectifs à poursuivre : … ») : découpés une fois, doublons retirés, interventions → pistes */
+function fixObjs(c){if(c.objFix>=1)return false;c.objFix=1;const L=c.objectifs||[];if(!L.length)return true;const seen=new Map();const out=[];const pistes=c.pistes=c.pistes||[];const pSeen=new Set(pistes.map(p=>String(p.text||"").trim()));
+  const addP=(t,o)=>{t=t.trim();if(!t||pSeen.has(t))return;pSeen.add(t);pistes.push({id:uid("p"),text:t,k:o.k||"",date:o.date||todayISO(),src:"groupe"})};
+  const addO=(o,lab,titre)=>{lab=lab.trim().replace(/\s+/g," ");const key=lab.toLowerCase();if(seen.has(key)){const e=seen.get(key);e.marks=Object.assign({},o.marks||{},e.marks||{});return}const n=Object.assign({},o,{label:lab});if(n!==o)n.id=o._used?uid("o"):o.id;o._used=1;if(titre)n.titre=titre;delete n._used;seen.set(key,n);out.push(n)};
+  const sent=t=>t.split(/(?<=[.!?])\s+(?=[A-ZÀ-ÖÉÈÊ«])/).map(x=>x.trim()).filter(x=>x.length>3);
+  L.forEach(o=>{const lab=String(o.label||"").trim();const m=lab.match(OBJHEAD);
+    if(o.titre||(!m&&lab.length<=110)){addO(o,lab,o.titre);return}
+    const head=m?m[1].toLowerCase():"";const body=m?lab.slice(m[0].length):lab;
+    if(/intervention|recommandation|stratégie|moyen/.test(head)){sent(body).forEach(t=>addP(t,o));return}
+    const S2=sent(body);const withT=S2.filter(t=>/^[^:]{3,60}\s*:\s*\S/.test(t));
+    if(withT.length){S2.forEach(t=>{const mm=t.match(/^([^:]{3,60})\s*:\s*(.+)$/);if(mm&&!/^(observer|vérifier|porter attention|noter)\b/i.test(mm[1]))addO(o,t,mm[1].trim());else addP(t,o)})}
+    else S2.forEach(t=>{let tt=t.replace(/[.!?]+$/,"");const m2=tt.match(/^(.{12,}?)\s+(lors d[eu]|à l['’]aide|afin|pour|par|dans|autrement|avec|en)\s/i);if(m2&&m2[1].split(/\s+/).length>=3)tt=m2[1];const w=tt.split(/\s+/);addO(o,t,w.length>8?w.slice(0,7).join(" ")+"…":tt)})});
+  out.forEach(o=>delete o._used);c.objectifs=out;return true}
+function ensureRepaired(cid){if(repaired.has(cid))return;const c=S.children.get(cid);if(!c||!S.groups.get(c.groupId))return;repaired.add(cid);const x=JSON.parse(JSON.stringify(c));if(repairKeys(x)|fixObjs(x)){S.children.set(cid,x);persist("children",cid)}}
 function stepLabel(c,k){const [sid,rid,i]=k.split(".");const sec=childSec(c,sid);const r=sec&&sec.rows.find(x=>x.id===rid);if(!r)return "";if(i===undefined||!r.steps)return r.label;const idx=r.steps.findIndex((st,j)=>stK(st,j)===i);return idx>=0?r.label+" : "+stT(r.steps[idx]):r.label}
 async function shrink(file){
   try{const bmp=await createImageBitmap(file);const m=1600,sc=Math.min(1,m/Math.max(bmp.width,bmp.height));const cv=document.createElement("canvas");cv.width=Math.round(bmp.width*sc);cv.height=Math.round(bmp.height*sc);cv.getContext("2d").drawImage(bmp,0,0,cv.width,cv.height);
