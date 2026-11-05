@@ -47,7 +47,7 @@ img{max-width:100%;display:block}
 .crumbs{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;padding:10px 16px 0;font-size:.92rem;color:var(--muted)}
 .crumbs a{color:var(--forest);text-decoration:none;font-weight:600}
 .crumbs span.sep{opacity:.5}
-main{max-width:980px;margin:0 auto;padding:12px 16px 80px;display:flex;flex-direction:column;gap:16px}
+main{max-width:980px;margin:0 auto;padding:12px 16px 100px;display:flex;flex-direction:column;gap:16px}
 .notice{background:#FFF4D9;border:1px solid #EBD49B;border-radius:10px;padding:8px 12px;font-size:.92rem}
 .notice.err{background:#FBE6E2;border-color:#E9B3A9}
 
@@ -241,6 +241,9 @@ details.pdet[open]>summary .ptitle::before{content:"▾ "}
 .ico:hover{border-color:var(--forest)}
 .schtog{display:flex;align-items:center;gap:6px;border:0;background:transparent;padding:0;cursor:pointer;text-align:left;color:inherit;flex:1}
 .schtog .car{color:var(--forest);font-size:1rem;width:14px}
+.obsrow.coll{border:1px solid var(--line);border-radius:999px;padding:8px 14px;background:#fff;margin:6px 0;gap:6px}.obsrow.coll.open{border-radius:16px;background:#FDFBF6;padding:12px 14px}
+.obsrow.coll h4,.obsrow.sch h4{font-size:1rem;margin:0}.schtog h4{flex:1}.rsum{font-size:.75rem;color:#777;white-space:nowrap;font-family:var(--font-body)}.obsrow.coll+.obsrow.coll{border-top:1px solid var(--line)}
+.hidlink{font-size:.75rem!important;color:#8a8a8a!important;padding:2px 0!important;background:none!important;border:0!important;text-decoration:underline;min-height:0!important}
 .cnt{font-family:var(--font-body);font-size:.75rem;font-weight:700;color:var(--forest);background:var(--forest-tint);border-radius:999px;padding:1px 7px;vertical-align:middle}
 .obsrow.sch{gap:4px}
 .step .ag{font-size:.72rem;font-weight:600;color:var(--muted)}
@@ -254,6 +257,9 @@ details.pdet[open]>summary .ptitle::before{content:"▾ "}
 .achips .label{display:block;margin:10px 0 4px}.chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px;font:inherit;font-size:.9rem;cursor:pointer;min-height:34px}
 .chip.on{background:#2C5A38;border-color:#2C5A38;color:#fff;font-weight:600}.chip.ghost{border-style:dashed;margin-top:8px}
+.alegbox{position:sticky;top:0;z-index:5;background:#FDFBF6;border:1px solid var(--line);border-radius:12px;padding:6px 10px 8px;margin-top:8px;box-shadow:0 3px 8px rgba(0,0,0,.06);max-height:34vh;overflow:auto}.alegbox .aleg{font-size:.8rem;line-height:1.28;margin-top:2px}.alegbox.combo{display:grid;grid-template-columns:1fr 1fr;gap:8px}.alt{font-size:.9rem}
+.akgrp{border-top:1px solid var(--line);padding:6px 0}.akgrp .akid{border-top:0;padding:3px 0 3px 8px}.acl{font-size:.8rem;font-weight:700;color:#555;min-width:62px}
+.combin .obsrow{border:0;padding:6px 0;margin:0;background:none}.combin .obsrow+.obsrow{border-top:1px dashed var(--line)}
 .aleg{margin:8px 0 0;padding-left:22px;font-size:.92rem;line-height:1.35}.aleg li{margin:2px 0}.aleg.rep{list-style:none;padding-left:0}
 .akids{display:flex;flex-direction:column}
 .akid{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:9px 0;border-top:1px solid var(--line)}
@@ -353,6 +359,14 @@ textarea.drop{outline:3px dashed var(--forest,#2C5A38);outline-offset:2px}
 h3.subh{font-size:1.25rem;color:var(--forest)}
 .cobj.compact{background:var(--forest-tint);border-radius:10px;padding:6px 8px;margin:4px 0}
 .cobjrow{display:flex;gap:8px;align-items:flex-start;padding:4px 0}
+.otiles{display:grid;gap:10px}.onote{border:1px solid var(--line);background:#fff;border-radius:999px;padding:3px 10px;font:inherit;font-size:.78rem;color:var(--forest,#2C5A38);font-weight:600;cursor:pointer;margin-left:4px}.obtns{margin:6px 0 0 56px}.olast{margin:6px 0 0 56px;font-size:.82rem;color:#555;font-style:italic;line-height:1.35}.olast span{font-style:normal;color:#999;font-size:.72rem}
+.fab{position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:40;display:flex;align-items:center;gap:6px;border:0;border-radius:999px;padding:12px 16px;background:var(--forest,#2C5A38);color:#fff;font:inherit;font-weight:600;font-size:.9rem;box-shadow:0 4px 14px rgba(0,0,0,.22);cursor:pointer}.fab svg{width:18px;height:18px}
+.qkids{display:flex;flex-wrap:wrap;gap:6px}.qkids .hbtn{border:1px solid var(--line);border-radius:999px}.inbox{border-left:4px solid #E2B65A}.otile{border:1px solid var(--line);border-radius:16px;background:#fff;padding:12px 14px}.otile.done{opacity:.6}
+.otop{display:flex;gap:12px;align-items:center}.omark.big{width:44px;height:44px;font-size:1.15rem}.otxt{flex:1;min-width:0}.otxt b{font-size:1.02rem;line-height:1.3;display:block}
+.oocc{display:flex;align-items:center;gap:5px;font-size:.75rem;color:#777;margin-bottom:2px}.oocc img{width:20px;height:20px;object-fit:contain}
+.odots{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin:8px 0 0 56px}.od{width:11px;height:11px;border-radius:50%;background:#ddd}.od.ok{background:#4E8A5C}.od.no{background:#C66A5A}.od.prog{background:#E2B65A}.odots .small{margin-left:4px}
+.omenu{margin:6px 0 0 56px!important;padding-top:4px!important;border-top:0!important}.omenu>summary{font-size:.8rem;color:#888!important;font-weight:500!important;padding:2px 0!important}
+.sugw{display:inline-flex;flex-direction:column;align-items:flex-start;text-align:left;line-height:1.25}.sugw small{font-size:.72rem;color:#888;font-weight:400}
 .omark{flex:none;width:32px;height:32px;border-radius:50%;border:2px solid var(--line);background:#fff;font-weight:700;cursor:pointer;color:#fff}
 .omark.ok{background:#4E8A5C;border-color:#4E8A5C}.omark.no{background:#C66A5A;border-color:#C66A5A}
 .ordhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
@@ -758,7 +772,11 @@ function render(){
   else if(r.v==="settings")html+=viewSettings();
   else html+=viewChild(r.cid,r.sec);
   const keep={};main.querySelectorAll("textarea[id],input[id]:not([type=date])").forEach(el=>{if(el.value&&!el.dataset.act)keep[el.id]=el.value});
+  const fg=r.gid||(r.cid&&S.children.get(r.cid)?S.children.get(r.cid).groupId:null);
+  if(fg&&(r.v==="group"||r.v==="terrain")){const ib=inboxHTML(fg);if(ib){const i=html.indexOf("</section>");html=i>0?html.slice(0,i+10)+ib+html.slice(i+10):ib+html}}
   main.innerHTML=html;if(r.v==="settings")setTimeout(storeInfo,0);
+  let fab=document.getElementById("fab");if(!fab){fab=document.createElement("button");fab.id="fab";fab.className="fab";fab.innerHTML=MIC+"<span>Note rapide</span>";fab.setAttribute("aria-label","Note rapide à classer plus tard");document.body.appendChild(fab);fab.onclick=()=>{const rr=route();const g2=rr.gid||(rr.cid&&S.children.get(rr.cid)?S.children.get(rr.cid).groupId:null);if(g2)quickNote(g2,rr.cid||null)}}
+  fab.style.display=fg&&r.v!=="settings"?"":"none";
   Object.entries(keep).forEach(([i,v])=>{const el=document.getElementById(i);if(el&&!el.value)el.value=v});
 }
 function crumbs(list){$("#crumbs").innerHTML=[`<a href="#accueil">Groupes</a>`,...list].join(`<span class="sep">›</span>`)}
@@ -798,7 +816,6 @@ function viewGroup(gid){S.fromTerrain=null;S.scOnly=null;
   h+=calendarHTML(gid,g);
   h+=objectivesHTML(gid,g,kids);
 
-  h+=registreHTML(gid,g);
   if(kids.length)h+=covHTML(gid,g,kids);else h+=`<section class="card"><h3 style="font-size:1.35rem">Récapitulatif du groupe</h3><button class="btn" data-act="recap" data-id="${gid}">Ouvrir le récapitulatif</button></section>`;
   return h;
 }
@@ -930,11 +947,17 @@ const RTYPES={groupe:"Classe nature (groupe)",indiv:"Intervention individuelle",
 const LOCK_H=24;
 function regLocked(e){return e.created&&(Date.now()-new Date(e.created).getTime())>LOCK_H*3600e3}
 function regTodo(g){const have=new Set((g.registre||[]).filter(e=>e.type==="groupe").map(e=>e.date));const ds=new Set([...presDates(g),...Object.keys(g.activites||{})]);return [...ds].filter(d=>!have.has(d)&&d<=todayISO()).sort().reverse()}
-function registreHTML(gid,g){const L=(g.registre||[]).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||"")||(b.created||"").localeCompare(a.created||""));const todo=regTodo(g);
+function regSettings(){const gs=[...S.groups.entries()];if(!gs.length)return "";const cur=gs.find(([k])=>k===S.regG)||gs[0];S.regG=cur[0];const L=cur[1].registre||[];
+  return `<section class="card"><details class="ogdet" data-dk="set-reg" ${openDetails.has("set-reg")?"open":""}><summary><h3 style="font-size:1.25rem;display:inline">Registre des interventions</h3></summary>
+  <p class="muted small" style="margin:6px 0 0">Une entrée par intervention, datée. Elle se verrouille ${LOCK_H} h après sa création ; une correction s'ajoute ensuite comme addenda, sans effacer l'original.</p>
+  ${gs.length>1?`<div class="lvl" style="border:0;margin:8px 0 0;padding:0"><span class="label">Groupe</span><span class="hbtns">${gs.map(([k,g])=>`<button class="hbtn${k===cur[0]?" on":""}" data-act="regG" data-k="${k}">${esc(g.name)}</button>`).join("")}</span></div>`:""}
+  ${registreHTML(cur[0],cur[1],true)}</details></section>`}
+function registreHTML(gid,g,bare){const L=(g.registre||[]).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||"")||(b.created||"").localeCompare(a.created||""));const todo=regTodo(g);
   const name=id=>(S.children.get(id)||{}).name||"?";
   const inner=`${todo.length?`<div class="cdj" style="margin-top:8px"><span class="label">À compléter</span><div class="tchips">${todo.slice(0,8).map(d=>`<button class="sugchip" data-act="regNew" data-id="${gid}" data-d="${d}">+ ${fmtD(d)}</button>`).join("")}</div><p class="muted small" style="margin:4px 0 0">Rencontres avec des présences ou des activités, sans entrée au registre.</p></div>`:""}
   <div class="row-actions" style="margin-top:8px"><button class="btn small" data-act="regNew" data-id="${gid}">+ Nouvelle entrée</button><button class="btn small" data-act="regExport" data-id="${gid}" ${L.length?"":"disabled"}>Exporter (tableau)</button><button class="btn small" data-act="regPrint" data-id="${gid}" ${L.length?"":"disabled"}>Version imprimable</button></div>
   <div class="entries" style="margin-top:8px">${L.map(e=>`<div class="entry col"><div class="erow"><span class="when">${fmtD(e.date)}</span><span class="txt"><b>${esc(RTYPES[e.type]||e.type)}</b>${e.duree?` · ${e.duree} min`:""}${e.by?` · ${esc(e.by)}`:""}${regLocked(e)?' <span class="tag">🔒 verrouillée</span>':""}<br><span class="small">${(e.enfants||[]).map(name).map(esc).join(", ")}</span>${e.note?`<br><span class="small muted">${esc(e.note)}</span>`:""}${(e.addenda||[]).map(a=>`<br><span class="small"><b>Addenda ${fmtD(a.date)}${a.by?" ("+esc(a.by)+")":""} :</b> ${esc(a.text)}</span>`).join("")}</span><button class="btn ghost small" data-act="regEdit" data-id="${gid}" data-k="${e.id}">${regLocked(e)?"Addenda":"Modifier"}</button></div></div>`).join("")||'<p class="muted small">Aucune entrée.</p>'}</div>`;
+  if(bare)return inner;
   return `<section class="card"><details class="ogdet" data-dk="reg-${gid}" ${openDetails.has("reg-"+gid)?"open":""}><summary><h3 style="font-size:1.35rem;display:inline">Registre des interventions</h3> <span class="muted small">${L.length} entrée${L.length>1?"s":""}${todo.length?" · "+todo.length+" à compléter":""}</span></summary>
   <p class="muted small" style="margin:6px 0 0">Une entrée par intervention, datée. Elle se verrouille ${LOCK_H} h après sa création ; une correction s'ajoute ensuite comme addenda, sans effacer l'original.</p>${inner}</details></section>`}
 function regSheet(gid,eid,date){const g=S.groups.get(gid);const e=eid?(g.registre||[]).find(x=>x.id===eid):null;const kids=childrenOf(gid).slice().sort((x,y)=>x[1].name.localeCompare(y[1].name,"fr",{sensitivity:"base"}));
@@ -1237,15 +1260,22 @@ function objSuggestions(c){const out=[];const mo=monthsAt(c.dob,todayISO());
     r.steps.forEach((st,i)=>{if(!pick&&ny[i]&&!ok[i]&&!isHidStep(c,key+"."+stK(st,i)))pick={k:key,label:stT(st),why:"pas encore"}});
     let nx=hi+1;while(nx<r.steps.length&&isHidStep(c,key+"."+stK(r.steps[nx],nx)))nx++;
     if(!pick&&hi>=0&&nx<r.steps.length){const st=r.steps[nx];const ag=ageOf(key+"."+stK(st,nx));pick={k:key,label:stT(st),why:ag&&mo!==null&&mo>=ag[0]?"prochaine étape, de son âge":"prochaine étape"}}
-    if(pick&&!childObjs(c).some(o=>o.k===pick.k&&o.label===pick.label))out.push(pick)}));
-  return out.slice(0,8)}
+    if(pick&&!childObjs(c).some(o=>o.k===pick.k&&o.label===pick.label)){pick.row=r.label.replace(/\s*\(.*?\)/g,"");out.push(pick)}}));
+  const have=new Set(childObjs(c).map(o=>norm(o.label)));
+  const D=kwAgg(c).filter(x=>x.t==="defi"&&!x.became&&x.n>=1&&!have.has(norm(x.mot))).sort((a,b)=>b.n-a.n||(b.last||"").localeCompare(a.last||"")).slice(0,4).map(x=>({k:"",label:x.mot.charAt(0).toUpperCase()+x.mot.slice(1),why:"défi noté "+x.n+" fois",row:SPHERES[x.sph]?SPHERES[x.sph].nom:""}));
+  return D.concat(out).slice(0,10)}
 function portraitObjHTML(cid,c){const T=TEMPLATES[baseTpl(c)];const all=childObjs(c).slice().sort((a,b)=>(a.done?1:0)-(b.done?1:0));const longI=all.filter(o=>String(o.label||"").length>90&&!o.titre);const oo=isObjOnly(c);const sug=oo?OBJ612.filter(([l])=>!childObjs(c).some(o=>o.label===l)).slice(0,6).map(([l,sec])=>({k:sec,label:l,why:"suggestion 6-12 ans"})):objSuggestions(c);
   return `<section class="card"><h3 style="font-size:1.3rem">Objectifs de ${esc(c.name)}</h3><p class="muted small" style="margin:2px 0 10px">Deux ou trois objectifs prioritaires, liés à une occupation ou un repère. ${oo?"À chaque rencontre, touchez la case : ✓ réussi, ↗ en progrès, ✗ difficile.":"Ils s'affichent aussi dans l'occupation et en mode activité, où l'on coche ✓ ou ✗ à la date."}</p>
-  ${longI.length?`<div class="hidebar" style="position:static;margin-bottom:8px"><span>${longI.length} objectif${longI.length>1?"s":""} importé${longI.length>1?"s":""} ressemble${longI.length>1?"nt":""} plutôt à des pistes (texte long).</span><button class="btn small primary" data-act="convPistes" data-id="${cid}">Convertir en pistes</button></div>`:""}<div class="entries">${all.map(o=>`<div class="entry col${o.done?" done":""}"><div class="erow"><button class="omark ${(o.marks||{})[S.obsDate]||""}" data-act="cObjMark" data-id="${cid}" data-o="${o.id}" ${o.done?"disabled":""}>${OMARK[(o.marks||{})[S.obsDate]]||""}</button><span class="txt"><b>${esc(objShort(o))}</b> <button class="linkbtn small" data-act="cObjRen" data-id="${cid}" data-o="${o.id}">renommer</button>${objShort(o)!==o.label?`<details class="more"><summary>texte complet</summary><span class="small">${esc(o.label)}</span></details>`:""}<span class="muted small">${esc((occOf((o.k||o.occ||"").split(".")[0])||{titre:""}).titre)}${o.k?" · "+esc(stepLabel(c,o.k)||""):""}</span></span><button class="btn ghost small" data-act="cObjDone" data-id="${cid}" data-o="${o.id}">${o.done?"Rouvrir":"Atteint"}</button><button class="x" aria-label="Retirer" data-act="cObjDel" data-id="${cid}" data-o="${o.id}">✕</button></div><div class="ehist">${objMarksHTML(o)}</div></div>`).join("")||'<p class="muted small">Aucun objectif pour l\'instant.</p>'}</div>
-  <div class="addnote" style="margin-top:10px"><input class="field" id="coLabel" placeholder="Ex. : Attendre son tour à la balançoire avec le sablier">
+  ${longI.length?`<div class="hidebar" style="position:static;margin-bottom:8px"><span>${longI.length} objectif${longI.length>1?"s":""} importé${longI.length>1?"s":""} ressemble${longI.length>1?"nt":""} plutôt à des pistes (texte long).</span><button class="btn small primary" data-act="convPistes" data-id="${cid}">Convertir en pistes</button></div>`:""}<div class="otiles">${all.map(o=>{const v=(o.marks||{})[S.obsDate]||"";const M=Object.entries(o.marks||{}).sort((a,b)=>a[0].localeCompare(b[0]));const okN=M.filter(x=>x[1]==="ok").length;const O2=occOf((o.k||o.occ||"").split(".")[0]);const rl=o.k?stepLabel(c,o.k):"";
+    return `<div class="otile${o.done?" done":""}"><div class="otop"><button class="omark big ${v}" data-act="cObjMark" data-id="${cid}" data-o="${o.id}" ${o.done?"disabled":""} aria-label="Aujourd'hui : ${ONAME[v]||"non noté"}">${OMARK[v]||""}</button>
+    <div class="otxt">${O2||rl?`<div class="oocc">${O2?`<img src="${img(O2.img)}" alt="">${esc(shortT(O2.titre))}`:""}${rl?`${O2?" · ":""}${esc(rl.replace(/\s*\(.*?\)/g,""))}`:""}</div>`:""}<b>${esc(objShort(o))}</b>${o.done?' <span class="tag">atteint</span>':""}</div></div>
+    ${M.length?`<div class="odots">${M.slice(-12).map(([d,x])=>`<i class="od ${x}" title="${fmtD(d)}"></i>`).join("")}<span class="muted small">${okN}/${M.length} réussi${okN>1?"s":""} · dernière fois ${fmtD(M[M.length-1][0])}</span></div>`:`<div class="odots"><span class="muted small">Pas encore noté · touchez le rond à la prochaine rencontre</span></div>`}
+    ${(()=>{const ln=(c.notes||[]).filter(n=>n.cobj===o.id).sort((a,b)=>b.date.localeCompare(a.date))[0];return ln?`<p class="olast">« ${esc(ln.text.replace(/^[^:]{0,80}:\s*/,""))} » <span>${fmtD(ln.date)}</span></p>`:""})()}
+    <div class="obtns"><button class="onote" data-act="cObjNote" data-id="${cid}" data-o="${o.id}">✎ Note</button></div><details class="more omenu"><summary>Options</summary>${objShort(o)!==o.label?`<p class="small" style="margin:4px 0">${esc(o.label)}</p>`:""}<div class="row-actions"><button class="btn ghost small" data-act="cObjRen" data-id="${cid}" data-o="${o.id}">Renommer</button><button class="btn ghost small" data-act="cObjDone" data-id="${cid}" data-o="${o.id}">${o.done?"Rouvrir":"Atteint"}</button><button class="btn ghost small danger" data-act="cObjDel" data-id="${cid}" data-o="${o.id}">Retirer</button></div>${M.length?`<div class="ehist" style="margin-top:6px">${objMarksHTML(o)}</div>`:""}</details></div>`}).join("")||'<p class="muted small">Aucun objectif pour l\'instant.</p>'}</div>
+  ${det("oadd-"+cid,"+ Ajouter un objectif",`<div class="addnote" style="margin-top:10px"><input class="field" id="coLabel" placeholder="Ex. : Attendre son tour à la balançoire avec le sablier">
   <select class="field" id="coLink"><option value="">Lier à une occupation ou un repère (facultatif)</option>${OCCS.map(o=>`<optgroup label="${esc(o.n+". "+o.titre)}"><option value="${o.subs[0]}">${esc(o.titre)} (général)</option>${occSecs(c,o).flatMap(sec=>sec.rows.filter(r=>!r.free).map(r=>`<option value="${sec.id}.${r.id}">${esc(r.label)}</option>`)).join("")}</optgroup>`).join("")}</select>
-  <div class="row-actions"><button class="btn primary" data-act="cObjAdd" data-id="${cid}">Ajouter l'objectif</button></div></div>
-  ${sug.length?det("osug-"+cid,`Suggestions (${sug.length})`,`<div class="row-actions" style="margin-top:6px">${sug.map(x=>`<button class="sugchip" data-act="cObjSugg" data-id="${cid}" data-k="${x.k}" data-l="${esc(x.label)}" title="${esc(x.why)}">+ ${esc(x.label)}</button>`).join("")}</div>`):""}${(c.pistes||[]).filter(n=>!n.done).length?det("opi-"+cid,`Pistes notées (${(c.pistes||[]).filter(n=>!n.done).length})`,`<div class="entries">${(c.pistes||[]).filter(n=>!n.done).map(n=>`<div class="entry col"><div class="erow"><span class="when">${fmtD(n.date)}</span><span class="txt">${esc(n.text)}</span></div><div class="row-actions" style="margin-top:2px"><button class="btn ghost small" data-act="piObj" data-id="${cid}" data-n="${n.id}">→ Objectif</button><button class="x" aria-label="Supprimer" data-act="piDel" data-id="${cid}" data-n="${n.id}">✕</button></div></div>`).join("")}</div>`):""}</section>`}
+  <div class="row-actions"><button class="btn primary" data-act="cObjAdd" data-id="${cid}">Ajouter l'objectif</button></div></div>`)}
+  ${sug.length?det("osug-"+cid,`Suggestions (${sug.length})`,`<div class="row-actions" style="margin-top:6px">${sug.map(x=>`<button class="sugchip sugw" data-act="cObjSugg" data-id="${cid}" data-k="${x.k}" data-l="${esc(x.label)}"><span>+ ${esc(x.label)}</span><small>${esc(x.why)}${x.row?" · "+esc(x.row):""}</small></button>`).join("")}</div>`):""}${(c.pistes||[]).filter(n=>!n.done).length?det("opi-"+cid,`Pistes notées (${(c.pistes||[]).filter(n=>!n.done).length})`,`<div class="entries">${(c.pistes||[]).filter(n=>!n.done).map(n=>`<div class="entry col"><div class="erow"><span class="when">${fmtD(n.date)}</span><span class="txt">${esc(n.text)}</span></div><div class="row-actions" style="margin-top:2px"><button class="btn ghost small" data-act="piObj" data-id="${cid}" data-n="${n.id}">→ Objectif</button><button class="x" aria-label="Supprimer" data-act="piDel" data-id="${cid}" data-n="${n.id}">✕</button></div></div>`).join("")}</div>`):""}</section>`}
 /* ---------- Objectifs de groupe ---------- */
 const OBJ_SUGG=[["Arrivée","groupe"],["Départ","groupe"],["Transition vers la collation","groupe"],["Transition vers le dîner","groupe"],["Dîner : rester assis","groupe"]];
 function shortName(n){n=String(n||"").replace(/\s*-\s*/g,"-").trim();const f=n.split(/\s+/)[0];return f.length>9?f.slice(0,8)+"…":f}
@@ -1261,12 +1291,58 @@ function objectivesHTML(gid,g,kids){
     </details></section>`;return h}
   h+=`<div class="toolbar" style="margin:6px 0 4px"><label class="obsdate small"><span class="label">Date</span><input type="date" value="${S.obsDate}" data-act="obsDate"></label><span class="muted small">Touchez un prénom : réussi ✓, puis pas encore ✗, puis vide. Appui long : une note.</span></div>`;
   objs.forEach(o=>{const r=res[o.id]||{};const ok=kids.filter(([cid])=>r[cid]==="ok").length,no=kids.filter(([cid])=>r[cid]==="no").length;
-    h+=`<div class="objrow"><div class="objhead"><b>${esc(o.label)}</b><span class="muted small">${ok} réussi${ok>1?"s":""}${no?" · "+no+" pas encore":""}</span></div><div class="kids kp">${kids.map(([cid,c])=>{const v=r[cid]||"";const hasNote=(c.notes||[]).some(n=>n.obj===o.id&&n.date===S.obsDate);
+    h+=`<div class="objrow"><div class="objhead"><b>${esc(o.label)}</b><span class="muted small">${ok} réussi${ok>1?"s":""}${no?" · "+no+" pas encore":""} <button class="onote" data-act="gObjNote" data-id="${gid}" data-o="${o.id}" aria-label="Note pour l'objectif">✎ Note${(g.objNotes||[]).some(n=>n.obj===o.id&&n.date===S.obsDate)?" •":""}</button></span></div><div class="kids kp">${kids.map(([cid,c])=>{const v=r[cid]||"";const hasNote=(c.notes||[]).some(n=>n.obj===o.id&&n.date===S.obsDate);
       return `<button class="kpill ${v}" data-act="objMark" data-id="${gid}" data-o="${o.id}" data-c="${cid}" aria-label="${esc(c.name)} : ${v==="ok"?"réussi":v==="no"?"pas encore":"non noté"}"><span class="kn">${esc(shortName(c.name))}</span>${v?`<span class="sym">${v==="ok"?"✓":"✗"}</span>`:""}${hasNote?'<span class="nd"></span>':""}</button>`}).join("")}</div></div>`});
   const dates=Object.keys(g.objRes||{}).filter(d=>Object.values(g.objRes[d]||{}).some(x=>Object.keys(x).length)).sort().reverse();
   if(dates.length)h+=det("oh-"+gid,`Historique (${dates.length} jour${dates.length>1?"s":""})`,`<div class="cov-wrap"><table class="cov"><thead><tr><th></th>${objs.map(o=>`<th><span>${esc(o.label)}</span></th>`).join("")}</tr></thead><tbody>${dates.map(d=>`<tr><th>${fmtD(d)}</th>${objs.map(o=>{const r=(g.objRes[d]||{})[o.id]||{};const ok=Object.values(r).filter(v=>v==="ok").length,tot=Object.values(r).filter(Boolean).length;return `<td class="${tot?ok/tot>=.75?"c3":ok/tot>=.4?"c2":"c1":"c0"}"><span style="display:block;padding:6px 4px">${tot?ok+"/"+tot:"—"}</span></td>`}).join("")}</tr>`).join("")}</tbody></table></div>`);
   return h+`</details></section>`;
 }
+/* ---------- Notes rapides à classer ---------- */
+function linkOptions(c){return `<option value="">Occupation ou repère (facultatif)</option>${OCCS.map(o=>`<optgroup label="${esc(o.n+". "+o.titre)}"><option value="${o.subs[0]}">${esc(o.titre)} (général)</option>${occSecs(c,o).flatMap(sec=>sec.rows.filter(r=>!r.free).map(r=>`<option value="${sec.id}.${r.id}">${esc(r.label)}</option>`)).join("")}</optgroup>`).join("")}`}
+function quickNote(gid,cid){const kids=childrenOf(gid);const sel=new Set(cid?[cid]:[]);
+  openSheet(`<h3>Note rapide</h3><p class="muted small" style="margin:0 0 6px">Dites ou écrivez l'essentiel ; vous la classerez plus tard (page du groupe, « À classer »).</p>
+  <textarea class="field" id="qnText" rows="4" placeholder="Ex. : Léo a traversé le ruisseau seul, il a demandé la main au retour."></textarea>
+  <div class="row-actions">${micBtn("qnText")}</div>
+  <p class="label" style="margin:8px 0 4px">Enfants (facultatif)</p><div class="qkids">${kids.map(([k,c])=>`<button class="hbtn${sel.has(k)?" on":""}" data-qk="${k}">${esc(c.name)}</button>`).join("")}</div>
+  <div class="row-actions" style="margin-top:10px"><button class="btn primary" id="qnSave">Garder pour plus tard</button><button class="btn" id="qnClose">Fermer</button></div>`,s=>{
+    s.querySelectorAll("[data-qk]").forEach(b=>b.onclick=()=>{const k=b.dataset.qk;sel.has(k)?sel.delete(k):sel.add(k);b.classList.toggle("on")});
+    s.querySelector("#qnClose").onclick=()=>{if(recog)try{recog.stop()}catch(e){}closeSheet()};
+    s.querySelector("#qnSave").onclick=()=>{const t=s.querySelector("#qnText").value.trim();if(!t){toast("La note est vide.");return}if(recog)try{recog.stop()}catch(e){}
+      mutGroup(gid,g=>{(g.inbox=g.inbox||[]).push({id:uid("q"),text:t,date:S.obsDate||todayISO(),at:new Date().toISOString(),kids:[...sel],by:getMe()})});closeSheet();toast("Note gardée dans « À classer »")};
+    const mb=s.querySelector('[data-act="dictate"]');if(mb&&SR)setTimeout(()=>dictate("qnText",mb),250)})}
+function inboxHTML(gid){const g=S.groups.get(gid);const L=(g&&g.inbox||[]).slice().sort((a,b)=>(a.at||"").localeCompare(b.at||""));if(!L.length)return "";
+  const nm=k=>{const c=S.children.get(k);return c?c.name:"?"};
+  return `<section class="card inbox"><details class="ogdet" data-dk="inbox-${gid}" ${openDetails.has("inbox-"+gid)||L.length<=3?"open":""}><summary><h3 style="font-size:1.25rem;display:inline">À classer</h3> <span class="cnt">${L.length}</span></summary>
+  <div class="entries" style="margin-top:8px">${L.map(q=>`<div class="entry col"><div class="erow"><span class="when">${fmtD(q.date)}</span><span class="txt">${q.kids&&q.kids.length?`<b>${q.kids.map(k=>esc(nm(k))).join(", ")}</b> · `:""}${esc(q.text)}</span></div><div class="row-actions" style="margin-top:4px"><button class="btn small primary" data-act="qnSort" data-id="${gid}" data-q="${q.id}">Classer</button><button class="x" aria-label="Supprimer" data-act="qnDel" data-id="${gid}" data-q="${q.id}">✕</button></div></div>`).join("")}</div>
+  <div class="row-actions" style="margin-top:8px"><button class="btn small" data-act="qnAI" data-id="${gid}">Copier pour mon IA</button><button class="btn small ghost" data-act="qnClear" data-id="${gid}">Tout effacer</button></div>
+  <p class="muted small" style="margin:6px 0 0">« Copier pour mon IA » : votre IA les classe et vous redonne un bloc carnet à importer (Notes › Importer une note). Effacez ensuite la liste.</p></details></section>`}
+function qnSortSheet(gid,qid){const g=S.groups.get(gid);const q=(g.inbox||[]).find(x=>x.id===qid);if(!q)return;const kids=childrenOf(gid);const sel=new Set(q.kids||[]);
+  openSheet(`<h3>Classer la note</h3><textarea class="field" id="qsText" rows="3">${esc(q.text)}</textarea>
+  <label class="f">Date<input type="date" class="field" id="qsDate" value="${q.date}"></label>
+  <p class="label" style="margin:8px 0 4px">Dans la fiche de</p><div class="qkids">${kids.map(([k,c])=>`<button class="hbtn${sel.has(k)?" on":""}" data-qk="${k}">${esc(c.name)}</button>`).join("")}</div>
+  <select class="field" id="qsLink" style="margin-top:8px">${kids.length?linkOptions(kids[0][1]):""}</select>
+  <div class="row-actions" style="margin-top:10px"><button class="btn primary" id="qsOk">Classer</button><button class="btn" id="qsClose">Fermer</button></div>`,s=>{
+    s.querySelectorAll("[data-qk]").forEach(b=>b.onclick=()=>{const k=b.dataset.qk;sel.has(k)?sel.delete(k):sel.add(k);b.classList.toggle("on")});
+    s.querySelector("#qsClose").onclick=closeSheet;
+    s.querySelector("#qsOk").onclick=()=>{if(!sel.size){toast("Choisissez au moins un enfant.");return}const t=s.querySelector("#qsText").value.trim();if(!t)return;const d=s.querySelector("#qsDate").value||q.date;const v=s.querySelector("#qsLink").value;const sec=v?v.split(".")[0]:"groupe";
+      sel.forEach(k=>mutChild(k,x=>{(x.notes=x.notes||[]).push(Object.assign({id:uid("n"),section:sec,date:d,text:t,src:"manuel",by:q.by||getMe()},v.includes(".")?{k:v}:{}))}));
+      mutGroup(gid,x=>{x.inbox=(x.inbox||[]).filter(y=>y.id!==qid)});closeSheet();toast("Note classée ("+sel.size+" fiche"+(sel.size>1?"s":"")+")")}})}
+function objNote2Sheet(cid,oid){const c=S.children.get(cid);const o=(c.objectifs||[]).find(x=>x.id===oid);if(!o)return;const L=(c.notes||[]).filter(n=>n.cobj===oid).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,6);
+  openSheet(`<h3>${esc(objShort(o))}</h3><p class="muted small" style="margin:0">Note pour cet objectif · ${fmtD(S.obsDate,true)}</p>
+  <textarea class="field" id="o2Text" rows="3" placeholder="Ce qui s'est passé, ce qui a aidé…"></textarea>
+  <div class="row-actions"><button class="btn primary" id="o2Save">Ajouter la note</button>${micBtn("o2Text")}<button class="btn" id="o2Close">Fermer</button></div>
+  ${L.length?`<div class="entries">${L.map(n=>`<div class="entry"><span class="when">${fmtD(n.date)}</span><span class="txt">${esc(n.text.replace(/^[^:]{0,80}:\s*/,""))}</span></div>`).join("")}</div>`:""}`,s=>{
+    s.querySelector("#o2Close").onclick=closeSheet;
+    s.querySelector("#o2Save").onclick=()=>{const t=s.querySelector("#o2Text").value.trim();if(!t)return;const sec=o.k?o.k.split(".")[0]:(o.occ||"groupe");mutChild(cid,x=>{(x.notes=x.notes||[]).push(Object.assign({id:uid("n"),section:sec,cobj:oid,date:S.obsDate,text:objShort(o)+" : "+t,src:"manuel",by:getMe()},o.k&&o.k.includes(".")?{k:o.k}:{}))});closeSheet();toast("Note ajoutée")}})}
+function gObjNoteSheet(gid,oid){const g=S.groups.get(gid);const o=(g.objectifs||[]).find(x=>x.id===oid);if(!o)return;const L=(g.objNotes||[]).filter(n=>n.obj===oid).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,6);
+  openSheet(`<h3>${esc(o.label)}</h3><p class="muted small" style="margin:0">Note pour le groupe · ${fmtD(S.obsDate,true)}</p>
+  <textarea class="field" id="g2Text" rows="3" placeholder="Comment ça s'est passé pour le groupe, ce qui a aidé…"></textarea>
+  <div class="row-actions"><button class="btn primary" id="g2Save">Ajouter la note</button>${micBtn("g2Text")}<button class="btn" id="g2Close">Fermer</button></div>
+  <p class="muted small" style="margin:4px 0 0">Pour un enfant en particulier : appui long sur son prénom.</p>
+  ${L.length?`<div class="entries">${L.map(n=>`<div class="entry"><span class="when">${fmtD(n.date)}</span><span class="txt">${esc(n.text)}</span><button class="x" aria-label="Supprimer" data-gn="${n.id}">✕</button></div>`).join("")}</div>`:""}`,s=>{
+    s.querySelector("#g2Close").onclick=closeSheet;
+    s.querySelectorAll("[data-gn]").forEach(b=>b.onclick=()=>{mutGroup(gid,x=>{x.objNotes=(x.objNotes||[]).filter(n=>n.id!==b.dataset.gn)});closeSheet();gObjNoteSheet(gid,oid)});
+    s.querySelector("#g2Save").onclick=()=>{const t=s.querySelector("#g2Text").value.trim();if(!t)return;mutGroup(gid,x=>{(x.objNotes=x.objNotes||[]).push({id:uid("gn"),obj:oid,date:S.obsDate,text:t,by:getMe()})});closeSheet();toast("Note ajoutée à l'objectif de groupe")}})}
 function objNoteSheet(gid,oid,cid){const g=S.groups.get(gid);const o=(g.objectifs||[]).find(x=>x.id===oid);const c=S.children.get(cid);if(!o||!c)return;
   const list=(c.notes||[]).filter(n=>n.obj===oid).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,5);const v=(objRes(g,S.obsDate)[oid]||{})[cid]||"";
   openSheet(`<h3>${esc(c.name)} · ${esc(o.label)}</h3><p class="muted small" style="margin:0">${fmtD(S.obsDate,true)}${v?" · "+(v==="ok"?"réussi":"pas encore"):""}</p>
@@ -1281,13 +1357,19 @@ function objHistHTML(c,secId,cid){const g=S.groups.get(c.groupId);if(!g)return "
   const rows=objs.map(o=>{const marks=dates.map(d=>({d,v:((g.objRes[d]||{})[o.id]||{})[cid]})).filter(x=>x.v);return {o,marks}});
   return `<section class="card"><h3 style="font-size:1.3rem;margin-bottom:6px">Objectifs de groupe</h3>${rows.map(({o,marks})=>`<div class="objrow"><div class="objhead"><b>${esc(o.label)}</b><span class="muted small">${marks.filter(m=>m.v==="ok").length}/${marks.length} réussi</span></div><div class="ehist">${marks.slice(0,12).map(m=>`<span class="opill ${m.v}">${m.v==="ok"?"✓":"✗"} ${fmtD(m.d)}</span>`).join("")||'<span class="muted small">Pas encore noté.</span>'}</div></div>`).join("")}</section>`}
 function ctxInput(gid){const g=S.groups.get(gid)||{};return `<label class="obsdate small ctx"><span class="label">Contexte du jour</span><input type="text" value="${esc((g.ctx||{})[S.obsDate]||"")}" data-act="ctx" data-g="${gid}" placeholder="Ex. : parcours dans les roches"></label>`}
+const COMBOS=[{id:"ballon",label:"Habiletés de ballon",rows:["lancer","attraper"]}];
+const rb=id=>String(id).replace(/45$/,"");
+function comboOf(r){return COMBOS.find(cb=>cb.rows.includes(rb(r.id)))}
+/* remplace les repères d'un combo par une seule entrée {combo, rows} à la place du premier */
+function withCombos(rows){const out=[];const done=new Set();rows.forEach(r=>{const cb=comboOf(r);if(!cb){out.push(r);return}if(done.has(cb.id))return;const mem=cb.rows.map(id=>rows.find(x=>rb(x.id)===id)).filter(Boolean);if(mem.length<2){out.push(r);return}done.add(cb.id);out.push({id:"@"+cb.id,label:cb.label,combo:mem})});return out}
 function viewActivity(gid,secId){
   const g=S.groups.get(gid);if(!g){crumbs([]);return`<div class="card empty">Ce groupe n'existe plus. <a href="#accueil">Retour aux groupes</a></div>`}
   const O=occOf(secId);const T=tpl(g);if(!O)return`<div class="card empty">Section introuvable.</div>`;
   crumbs([`<a href="#g-${gid}">${esc(g.name)}</a>`,`<span>Mode activité</span>`]);
   childrenOf(gid).forEach(([id])=>ensureRepaired(id));
   const kids=childrenOf(gid);const gsecs=O.subs.map(id=>T.sections.find(x=>x.id===id)).filter(Boolean);
-  const allRows=gsecs.flatMap(sec=>sec.rows.map(r=>({sec,r,v:sec.id+"."+r.id})));
+  const allRows=gsecs.flatMap(sec=>withCombos(sec.rows).map(r=>({sec,r,v:sec.id+"."+r.id})));
+  if(S.rowFilter&&S.rowFilter.row&&S.rowFilter.row!=="*"){const [rs,rr]=S.rowFilter.row.split(".");const cb=rr&&COMBOS.find(x=>x.rows.includes(rb(rr)));if(cb&&allRows.some(x=>x.v===rs+".@"+cb.id))S.rowFilter.row=rs+".@"+cb.id}
   if(!S.rowFilter||S.rowFilter.occ!==O.id||(S.rowFilter.row!=="*"&&!allRows.some(x=>x.v===S.rowFilter.row)))S.rowFilter={occ:O.id,row:(allRows.find(x=>!x.r.free)||allRows[0]||{v:"*"}).v};
   const cur=S.rowFilter.row;const sel=allRows.find(x=>x.v===cur);
   let h=(S.fromTerrain===gid?`<a class="btn backbtn" href="#t-${gid}" data-act="backTerrain">← Retour au terrain</a>`:"")+`<section class="card"><div class="sechead"><img src="${img(O.img)}" alt=""><div style="flex:1"><h2>Mode activité · ${esc(O.titre)}</h2><div class="sph">Une observation simple pour tous les enfants de ${esc(g.name)}.</div></div></div>
@@ -1295,14 +1377,20 @@ function viewActivity(gid,secId){
    <label class="obsdate small"><span class="label">Date d'observation</span><input type="date" value="${S.obsDate}" data-act="obsDate"></label>
    ${ctxInput(gid)}
   </div>
-  ${S.scOnly===gid&&sel?`<div class="row-actions" style="margin-top:10px"><button class="linkbtn small" data-act="scAll">Voir les autres repères</button></div></section>`:`<div class="achips">${gsecs.map(sec=>`${gsecs.length>1?`<span class="label">${esc(sec.titre)}</span>`:""}<div class="chips">${sec.rows.map(r=>`<button class="chip${cur===sec.id+"."+r.id?" on":""}" data-act="actRow" data-k="${sec.id}.${r.id}">${esc(r.label)}</button>`).join("")}</div>`).join("")}
+  ${S.scOnly===gid&&sel?`<div class="row-actions" style="margin-top:10px"><button class="linkbtn small" data-act="scAll">Voir les autres repères</button></div></section>`:`<div class="achips">${gsecs.map(sec=>`${gsecs.length>1?`<span class="label">${esc(sec.titre)}</span>`:""}<div class="chips">${withCombos(sec.rows).map(r=>`<button class="chip${cur===sec.id+"."+r.id?" on":""}" data-act="actRow" data-k="${sec.id}.${r.id}">${esc(r.label)}</button>`).join("")}</div>`).join("")}
    <div class="chips"><button class="chip ghost${cur==="*"?" on":""}" data-act="actRow" data-k="*">Fiche complète de chacun (tout dérouler)</button></div></div>
   <div style="margin-top:12px">${occNav({prio:null},null,secId,x=>`#g-${gid}--${x}`)}</div></section>`}`;
   if(!kids.length)return h+`<div class="card empty">Aucun enfant dans ce groupe. <a href="#g-${gid}">Ajouter des enfants</a></div>`;
+  if(sel&&sel.r.combo){const {sec,r}=sel;
+    h+=`<section class="card act-c"><h3 style="font-size:1.3rem;margin:0">${esc(r.label)}</h3>
+    <div class="alegbox combo">${r.combo.map(m=>`<div><b class="alt">${esc(m.label)}</b><ol class="aleg">${m.steps.map(st=>`<li>${esc(stT(st))}</li>`).join("")}</ol></div>`).join("")}</div>
+    <p class="muted small" style="margin:6px 0 4px">Toucher un numéro : ✓ → ✗ → vide · appui long : historique</p>
+    <div class="akids">${kids.map(([cid,c])=>`<div class="akgrp"><a class="akname" href="#e-${cid}--${sec.id}"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><span>${esc(c.name)}</span></a>${r.combo.map(m=>actKidHTML(cid,c,sec,m,sec.id+"."+m.id,O,m.label)).join("")}</div>`).join("")}</div></section>`;
+    return h}
   if(sel){const {sec,r}=sel;const key=sel.v;
     h+=`<section class="card act-c"><h3 style="font-size:1.3rem;margin:0">${esc(r.label)}</h3>${r.hint?`<div class="hint">${esc(r.hint)}</div>`:""}
-    ${r.steps&&!r.rep?`<ol class="aleg">${r.steps.map(st=>`<li>${esc(stT(st))}</li>`).join("")}</ol>`:""}
-    ${r.steps&&r.rep?`<ul class="aleg rep">${r.steps.map((st,i)=>`<li><b>${i+1}</b> ${esc(stT(st))}</li>`).join("")}</ul>`:""}
+    ${r.steps?`<div class="alegbox">`:""}${r.steps&&!r.rep?`<ol class="aleg">${r.steps.map(st=>`<li>${esc(stT(st))}</li>`).join("")}</ol>`:""}
+    ${r.steps&&r.rep?`<ul class="aleg rep">${r.steps.map((st,i)=>`<li><b>${i+1}</b> ${esc(stT(st))}</li>`).join("")}</ul>`:""}${r.steps?`</div>`:""}
     ${/^(prise|ciseaux)/.test(r.id)?`<p class="small" style="margin:6px 0 0"><b>Main :</b> G, D ou 2 mains pour ${r.id.startsWith("prise")?"le crayon":"les ciseaux"} (va dans la préférence manuelle).</p>`:""}
     <p class="muted small" style="margin:6px 0 4px">Toucher un numéro : ✓ → ✗ → vide · appui long : historique, cacher pour un enfant${assets?" · 📷 photo du jour":""}</p>
     <div class="akids">${kids.map(([cid,c])=>actKidHTML(cid,c,sec,r,key,O)).join("")}</div></section>`;
@@ -1316,10 +1404,10 @@ function viewActivity(gid,secId){
   return h;
 }
 
-function actKidHTML(cid,c,gsec,gr,gkey,O){
+function actKidHTML(cid,c,gsec,gr,gkey,O,lab){
   const ks=occSecs(c,O).find(x=>x.id===gsec.id);const fr=gr.id.replace(/45$/,"");
   const r=ks&&ks.rows.find(x=>x.id===gr.id||x.id.replace(/45$/,"")===fr);
-  const head=`<a class="akname" href="#e-${cid}--${gsec.id}"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><span>${esc(c.name)}</span></a>`;
+  const head=lab?`<span class="acl">${esc(lab)}</span>`:`<a class="akname" href="#e-${cid}--${gsec.id}"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><span>${esc(c.name)}</span></a>`;
   if(!r)return `<div class="akid">${head}<span class="muted small">Pas dans sa fiche.</span></div>`;
   const key=ks.id+"."+r.id;const nk=cid+"|"+key;const d=S.obsDate;
   const hidRow=isHidRow(c,ks.id,r.id);
@@ -1372,6 +1460,9 @@ function orderedRows(c,s){return orderBy(s.rows,c.prio&&c.prio.rows&&c.prio.rows
 function secStats(c,sec){let tot=0,on=0,last="";(sec.rows||[]).forEach(r=>{if(!r.steps)return;r.steps.forEach((st,i)=>{tot++;const a=(c.checks||{})[sec.id+"."+r.id+"."+stK(st,i)]||[];if(a.length){on++;a.forEach(d=>{if(d>last)last=d})}})});
   const nn=(c.notes||[]).filter(n=>n.section===sec.id).length;return{tot,on,last,nn}}
 
+function comboRowHTML(cid,c,s,cb){const nk="s|"+cid+"|"+s.id+"."+cb.id;const op=openRows.has(nk)||S.hideMode===cid;
+  const sum=cb.combo.map(m=>{const key=s.id+"."+m.id;const n=(m.steps||[]).filter((st,i)=>((c.checks||{})[key+"."+stK(st,i)]||[]).length).length;return `${m.label} ${n}/${m.steps.length}`}).join(" · ");
+  return `<div class="obsrow coll combo${op?" open":""}"><div class="rhead"><button class="schtog" data-act="schTog" data-k="${nk}" aria-expanded="${op}"><span class="car">${op?"▾":"▸"}</span><h4>${esc(cb.label)}</h4><span class="rsum">${sum}</span></button></div>${op?`<div class="combin">${cb.combo.map(m=>rowHTML(cid,c,s,Object.assign({},m,{nocoll:true}))).join("")}</div>`:""}</div>`}
 function viewChild(cid,secId){ensureRepaired(cid);
   const c=S.children.get(cid);if(!c){crumbs([]);return`<div class="card empty">Cette fiche n'existe plus. <a href="#accueil">Retour aux groupes</a></div>`}
   const g=S.groups.get(c.groupId)||{name:"Groupe"};const T={nom:tpl(g).nom,sections:childSections(c)};
@@ -1410,16 +1501,15 @@ function viewChild(cid,secId){ensureRepaired(cid);
   ${AON&&!c.dob?`<p class="small muted" style="margin:8px 0 0">Ajoutez sa date de naissance (Réglages de l'enfant) pour voir les repères d'âge.</p>`:""}
   ${AON&&c.dob?`<p class="small" style="margin:8px 0 0"><span class="agleg ag-now">de son âge</span><span class="agleg ag-watch">attendu à son âge, à observer</span> <span class="muted">· toucher : ✓ → ✗ → vide · appui long : historique</span></p>`:`<p class="small muted" style="margin:8px 0 0">Toucher une étape : ✓ réussi → ✗ pas encore → vide.</p>`}</section>`;
   {const tabs=secs.flatMap(s=>orderedRows(c,s).filter(r=>!isHidRow(c,s.id,r.id)).map(r=>({k:s.id+"."+r.id,l:r.label})));
-   if(tabs.length>1)h+=`<nav class="rowtabs" aria-label="Repères">${tabs.map(t=>`<button data-act="jumpRow" data-k="row-${cid}-${t.k.replace(/\./g,"-")}">${esc(t.l.replace(/\s*\((répertoire)\)/,""))}</button>`).join("")}</nav>`}
+   if(false)h+=`<nav class="rowtabs" aria-label="Repères">${tabs.map(t=>`<button data-act="jumpRow" data-k="row-${cid}-${t.k.replace(/\./g,"-")}">${esc(t.l.replace(/\s*\((répertoire)\)/,""))}</button>`).join("")}</nav>`}
   if(S.hideMode===cid)h+=`<div class="hidebar"><span>Touchez les étapes qui ne s'appliquent pas à ${esc(c.name)}. Touchez de nouveau pour les remettre.</span><button class="btn primary small" data-act="hideMode" data-id="${cid}">Terminé</button></div>`;
   h+=childObjHTML(cid,c,O);
   secs.forEach(s=>{const OR=orderedRows(c,s);const hasRP=!!(c.prio&&c.prio.rows&&c.prio.rows[s.id]);
     h+=`<section class="card"><div class="ordhead"><h3 class="subh">${secs.length>1?esc(s.titre):(hasRP?"Repères par ordre de priorité":"Repères")}</h3><span class="row-actions">${s.id==="schemas"&&!om?`<button class="btn" data-act="schAll">${S.schAll?"Tout fermer":"Tout ouvrir"}</button>`:""}${ordOn()||om?`<button class="btn${om?" primary":""}" data-act="orderMode">${om?"Terminer":"Ordonner"}</button>`:""}${om?"":`<button class="btn${S.hideMode===cid?" primary":""}" data-act="hideMode" data-id="${cid}">${S.hideMode===cid?"Terminé":"Cacher des étapes"}</button>`}</span></div>`;
     if(om)h+=`<p class="muted small" style="margin:6px 0">Montez ou descendez les observations. La première est la plus prioritaire. Masquez celles qui ne sont pas une priorité pour l'instant.</p><div class="entries">${OR.map((r,idx)=>`<div class="entry ordrow"><span class="rank">${idx+1}</span><span class="txt"><b>${esc(r.label)}</b></span><span class="mv"><button class="btn ghost hidebtn" data-act="hideRow" data-id="${cid}" data-s="${s.id}" data-k="${r.id}">${isHidRow(c,s.id,r.id)?"Afficher":"Masquer"}</button><button class="btn ghost" data-act="moveRow" data-id="${cid}" data-s="${s.id}" data-k="${r.id}" data-dir="-1" aria-label="Monter" ${idx===0?"disabled":""}>▲</button><button class="btn ghost" data-act="moveRow" data-id="${cid}" data-s="${s.id}" data-k="${r.id}" data-dir="1" aria-label="Descendre" ${idx===OR.length-1?"disabled":""}>▼</button></span></div>`).join("")}</div></section>`;
     else{const vis=OR.filter(r=>!isHidRow(c,s.id,r.id)),hid=OR.filter(r=>isHidRow(c,s.id,r.id));
-      h+=`${s.id==="schemas"?`<div class="schgrid">`:""}${vis.map(r=>rowHTML(cid,c,s,r,hasRP?OR.indexOf(r)+1:0)).join("")}${s.id==="schemas"?`</div>`:""}${hid.length?det("hr-"+cid+"-"+s.id,`Autres observations (${hid.length})`,hid.map(r=>rowHTML(cid,c,s,r)).join("")):""}</section>`}
+      h+=`${s.id==="schemas"?`<div class="schgrid">`:""}${withCombos(vis).map(r=>r.combo?comboRowHTML(cid,c,s,r):rowHTML(cid,c,s,r,hasRP?OR.indexOf(r)+1:0)).join("")}${s.id==="schemas"?`</div>`:""}${hid.length?det("hr-"+cid+"-"+s.id,`Autres observations (${hid.length})`,hid.map(r=>rowHTML(cid,c,s,r)).join("")):""}</section>`}
   });
-  h+=portraitHTML(cid,c,{id:O.subs[0],titre:O.titre});
   secs.forEach(s=>{h+=objHistHTML(c,s.id,cid)});
   h+=notesHTML(cid,c,O.subs,"Notes générales","Ex. : A grimpé le gros tronc trois fois, fier. A aidé : l'adulte proche au début, puis s'est retiré.");
   return h;
@@ -1429,11 +1519,12 @@ function secTitle(T,id){if(id==="portrait")return"Portrait";if(id==="synthese")r
 
 function rowHTML(cid,c,s,r,rank){
   const key=s.id+"."+r.id;
-  const nk=cid+"|"+key;const isSch=s.id==="schemas";const schOpen=!isSch||openRows.has("s|"+nk)||S.schAll;
+  const nk=cid+"|"+key;const isSch=s.id==="schemas";const coll=!r.free&&!r.nocoll&&s.id!=="portrait";const schOpen=!coll||openRows.has("s|"+nk)||(isSch&&S.schAll)||S.hideMode===cid;
   const nOnRow=(r.steps||[]).filter((st,i)=>(((c.checks||{})[key+"."+stK(st,i)])||[]).length).length;
   const icons=r.free||s.id==="portrait"?"":`<span class="ricons"><button class="ico" data-act="toggleNote" data-k="${nk}" title="Écrire une note" aria-label="Écrire une note sur ce repère">${PEN}</button>${SR?`<button class="ico" data-act="noteDictate" data-k="${nk}" title="Dicter une note" aria-label="Dicter une note sur ce repère">${MIC}</button>`:""}</span>`;
-  let h=`<div class="obsrow${r.rep?" rep":""}${isSch?" sch":""}${isSch&&schOpen?" open":""}" id="row-${cid}-${key.replace(/\./g,"-")}"><div class="rhead">${isSch?`<button class="schtog" data-act="schTog" data-k="s|${nk}" aria-expanded="${schOpen}"><span class="car">${schOpen?"▾":"▸"}</span><h4>${esc(r.label)}${nOnRow?` <span class="cnt">${nOnRow}</span>`:""}</h4></button>`:`<h4>${rank?`<span class="rank">${rank}</span>`:""}${esc(r.label)}${r.hint?`<button class="ibtn${openRows.has("i|"+nk)?" on":""}" data-act="toggleRow" data-k="i|${nk}" aria-label="Description" title="Description">i</button>`:""}</h4>`}${isSch&&!schOpen?"":(isSch&&r.hint?`<span class="ricons"><button class="ibtn${openRows.has("i|"+nk)?" on":""}" data-act="toggleRow" data-k="i|${nk}" aria-label="Description">i</button></span>`:"")+icons}</div>`;
-  if(isSch&&!schOpen)return h+`</div>`;
+  const rLast=(r.steps||[]).flatMap((st,i)=>[...(((c.checks||{})[key+"."+stK(st,i)])||[]),...(((c.notyet||{})[key+"."+stK(st,i)])||[])]).concat((c.notes||[]).filter(n=>n.k===key||String(n.k||"").startsWith(key+".")).map(n=>n.date)).sort().pop();
+  let h=`<div class="obsrow${r.rep?" rep":""}${isSch?" sch":""}${coll&&!isSch?" coll":""}${coll&&schOpen?" open":""}" id="row-${cid}-${key.replace(/\./g,"-")}"><div class="rhead">${coll?`<button class="schtog" data-act="schTog" data-k="s|${nk}" aria-expanded="${schOpen}"><span class="car">${schOpen?"▾":"▸"}</span><h4>${rank?`<span class="rank">${rank}</span>`:""}${esc(r.label.replace(/\s*\((répertoire)\)/,""))}</h4><span class="rsum">${r.steps?`${nOnRow}/${r.steps.length}`:""}${rLast?" · "+fmtD(rLast):""}</span></button>`:`<h4>${rank?`<span class="rank">${rank}</span>`:""}${esc(r.label)}${r.hint?`<button class="ibtn${openRows.has("i|"+nk)?" on":""}" data-act="toggleRow" data-k="i|${nk}" aria-label="Description" title="Description">i</button>`:""}</h4>`}${coll&&!schOpen?"":(coll&&r.hint?`<span class="ricons"><button class="ibtn${openRows.has("i|"+nk)?" on":""}" data-act="toggleRow" data-k="i|${nk}" aria-label="Description">i</button></span>`:"")+icons}</div>`;
+  if(coll&&!schOpen)return h+`</div>`;
   if(r.hint&&openRows.has("i|"+nk))h+=`<div class="hint">${esc(r.hint)}</div>`;
   if(r.free){
     const list=((c.free||{})[key]||[]).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));
@@ -1445,7 +1536,7 @@ function rowHTML(cid,c,s,r,rank){
     h+=`<div class="hands">${r.hands.map(it=>{const hist=(hd[it]||[]).slice().sort((a,b)=>(b.d||"").localeCompare(a.d||""));const cur=hist.find(e=>e.d===S.obsDate);
       return `<div class="hitem"><span class="hname">${esc(it)}</span><span class="hbtns">${[["G","Gauche"],["D","Droite"],["2","2 mains"]].map(([v,l])=>`<button class="hbtn${cur&&cur.c===v?" on":""}" data-act="hand" data-id="${cid}" data-k="${key}" data-h="${esc(it)}" data-c="${v}" title="${l}" aria-pressed="${!!(cur&&cur.c===v)}">${v==="2"?"2 mains":v}</button>`).join("")}</span>
       <span class="ehist">${hist.map(e=>`<span class="hpill">${e.c==="2"?"2 mains":e.c} · ${fmtD(e.d)}<button aria-label="Retirer" data-act="delHand" data-id="${cid}" data-k="${key}" data-h="${esc(it)}" data-d="${e.d}">×</button></span>`).join("")}</span></div>`}).join("")}</div>`}
-  const rk=cid+"|"+key;const long=!isSch&&r.steps.length>LONG;const open=!long||openRows.has(rk)||S.hideMode===cid;
+  const rk=cid+"|"+key;const long=!isSch&&r.steps.length>LONG;const open=!long||coll||openRows.has(rk)||S.hideMode===cid;
   const isOn=(st,i)=>(((c.checks||{})[key+"."+stK(st,i)])||[]).length>0||(((c.notyet||{})[key+"."+stK(st,i)])||[]).length>0;
   const nOn=r.steps.filter(isOn).length;
   const hidK=i=>isHidStep(c,key+"."+stK(r.steps[i],i));const showHid=openRows.has("h|"+rk)||S.hideMode===cid;
@@ -1454,7 +1545,7 @@ function rowHTML(cid,c,s,r,rank){
   const AON=ageOn();const mo=AON?monthsAt(c.dob,S.obsDate):null;
   h+=`<div class="steps">${shown.map(i=>{const st=r.steps[i];const t=stT(st);const sk=stK(st,i);const a=((c.checks||{})[key+"."+sk]||[]).slice().sort();const on=a.length>0;const nyd=((c.notyet||{})[key+"."+sk]||[]).slice().sort();const ny=!on&&nyd.length>0;const ag=AON?ageOf(key+"."+sk):null;const agc=ag?ageClass(ag,mo,on):"";
     const todayS=a.includes(S.obsDate)?"ok":nyd.includes(S.obsDate)?"ny":"";const anyMark=a.length||nyd.length;
-    return `<div class="step${on?" on":""}${ny?" ny":""}${agc&&!hidK(i)?" "+agc:""}${hidK(i)?" hid":""}" role="button" tabindex="0" data-act="step" data-id="${cid}" data-k="${key}.${sk}" aria-label="${esc(t)}${todayS==="ok"?" : réussi aujourd'hui":todayS==="ny"?" : pas encore aujourd'hui":""}">${anyMark?`<button class="hist" data-act="stepHist" data-id="${cid}" data-k="${key}.${sk}" title="Historique, autres dates, photos" aria-label="Historique">${CLOCK}</button>`:""}${r.rep?"":`<span class="n">ÉTAPE ${i+1}</span>`}<span class="t">${esc(t)}</span>${on?a.map(d=>{const cx=ctxOf(c.groupId,d);return `<span class="d">${fmtD(d)}${cx?`<em> · ${esc(cx)}</em>`:""}</span>`}).join(""):""}${nyd.length?`<span class="dny">pas encore · ${nyd.map(d=>fmtD(d)).join(", ")}</span>`:""}${(()=>{const n=photosOf(c,p=>p.k===key+"."+sk).length;return n?`<span class="phc">${CAM} ${n}</span>`:""})()}</div>`}).join("")}${long?`<button class="more-btn" data-act="toggleRow" data-k="${rk}">${open?"Réduire":nOn?`Voir tout (${r.steps.length})`:`Voir les ${r.steps.length} éléments`}</button>`:""}${nHid&&S.hideMode!==cid?`<button class="more-btn hidlink" data-act="toggleRow" data-k="h|${rk}">${showHid?"Masquer les étapes cachées":`${nHid} cachée${nHid>1?"s":""} · afficher`}</button>`:""}</div>`;
+    return `<div class="step${on?" on":""}${ny?" ny":""}${agc&&!hidK(i)?" "+agc:""}${hidK(i)?" hid":""}" role="button" tabindex="0" data-act="step" data-id="${cid}" data-k="${key}.${sk}" aria-label="${esc(t)}${todayS==="ok"?" : réussi aujourd'hui":todayS==="ny"?" : pas encore aujourd'hui":""}">${anyMark?`<button class="hist" data-act="stepHist" data-id="${cid}" data-k="${key}.${sk}" title="Historique, autres dates, photos" aria-label="Historique">${CLOCK}</button>`:""}${r.rep?"":`<span class="n">ÉTAPE ${i+1}</span>`}<span class="t">${esc(t)}</span>${on?a.map(d=>{const cx=ctxOf(c.groupId,d);return `<span class="d">${fmtD(d)}${cx?`<em> · ${esc(cx)}</em>`:""}</span>`}).join(""):""}${nyd.length?`<span class="dny">pas encore · ${nyd.map(d=>fmtD(d)).join(", ")}</span>`:""}${(()=>{const n=photosOf(c,p=>p.k===key+"."+sk).length;return n?`<span class="phc">${CAM} ${n}</span>`:""})()}</div>`}).join("")}${long&&!coll?`<button class="more-btn" data-act="toggleRow" data-k="${rk}">${open?"Réduire":nOn?`Voir tout (${r.steps.length})`:`Voir les ${r.steps.length} éléments`}</button>`:""}${nHid&&S.hideMode!==cid?`<button class="more-btn hidlink" data-act="toggleRow" data-k="h|${rk}">${showHid?"Masquer les étapes cachées":`${nHid} cachée${nHid>1?"s":""} · afficher`}</button>`:""}</div>`;
   if(r.nosout)return h+rowNotes(cid,c,key)+`</div>`;
   const sh=(c.sout||{})[key]||[];const today=new Set(sh.filter(e=>e.d===S.obsDate).map(e=>e.t));
   const byDate={};sh.forEach(e=>{(byDate[e.d]=byDate[e.d]||[]).push(e.t)});
@@ -1613,7 +1704,7 @@ function viewSettings(){
       <select class="field" id="nr-t-${sid}"><option value="rep">Répertoire : des cases sans ordre</option><option value="prog">Progression : des étapes en ordre</option></select>
       <textarea class="field" id="nr-s-${sid}" placeholder="Un élément par ligne"></textarea>
       <div class="row-actions"><button class="btn primary" data-act="addCustRow" data-t="${tk}" data-s="${sid}">Ajouter la ligne</button></div></div></div></section>`});
-  return setColl(settingsTop(),"top")+setColl(h,tk+o.id);
+  return setColl(settingsTop(),"top")+regSettings()+setColl(h,tk+o.id);
 }
 function ageSheet(k,label){const ag=ageOf(k);const toYM=m=>m==null?"":(Math.floor(m/12)+"."+String(m%12).padStart(2,"0"));
   openSheet(`<h3>Âge attendu</h3><p class="muted small" style="margin:0">${esc(label)}</p><p class="muted small" style="margin:0">Notation années.mois, comme la Talbot : 2.06 = 2 ans 6 mois.</p>
@@ -1886,7 +1977,7 @@ function syntheseCore(cid,c){const sy=c.synth||{};const old=Object.entries(SPHER
   ${old?det("osy-"+cid,"Notes de synthèse écrites avant",old):""}</section>`;
   const L=cqm(c);
   h+=`<section class="card"><h3 style="font-size:1.3rem;margin-bottom:4px">Ce qui marche pour ${esc(c.name)}</h3><p class="muted small" style="margin:0 0 8px">Du plus fréquent au moins fréquent. Touchez pour les exemples.</p>
-  ${L.length?`<div class="cqml">${L.map(x=>`<button class="cqmi" data-act="cqmOpen" data-id="${cid}" data-k="${x.k}"><b>${esc(x.t)}</b>${x.sph?` <span class="kw force s-${x.sph}" style="font-size:.72rem">${esc(SPHERES[x.sph].nom)}</span>`:""}${x.peo?` <span class="tag">${PEON[x.peo]}</span>`:""}</button>`).join("")}</div>`:`<p class="muted small">Rien encore.</p>`}
+  ${L.length?`<div class="cqml">${L.map(x=>`<button class="cqmi" data-act="cqmOpen" data-id="${cid}" data-k="${x.k}"><b>${esc(x.t)}</b> <span class="muted small">${x.n} fois</span></button>`).join("")}</div>`:`<p class="muted small">Rien encore.</p>`}
   ${det("fac-"+cid,"Ajouter un facilitateur à la main",`<div class="steps">${facils().map(([k,t])=>{const on=((c.facil||{})[k]||[]).length>0;return `<button class="step${on?" on":""}" data-act="facil" data-id="${cid}" data-k="${k}" aria-pressed="${on}"><span class="t">${esc(t)}</span></button>`}).join("")}</div>`)}</section>`;
   const ex=(c.explore||[]).slice().sort((a,b)=>(a.done?1:0)-(b.done?1:0)||(b.date||"").localeCompare(a.date||""));
   h+=`<section class="card"><h3 style="font-size:1.3rem;margin-bottom:4px">À explorer et à surveiller</h3>
@@ -1985,6 +2076,13 @@ document.addEventListener("click",e=>{
   else if(a==="eclairs")eclairGroupSheet(id);
   else if(a==="notesMenu")notesMenu(id);
   else if(a==="scEdit")scSheet(id);
+  else if(a==="regG"){S.regG=k;render()}
+  else if(a==="qnSort")qnSortSheet(id,b.dataset.q);
+  else if(a==="qnDel"){mutGroup(id,x=>{x.inbox=(x.inbox||[]).filter(y=>y.id!==b.dataset.q)});render()}
+  else if(a==="qnClear"){if(b.dataset.sure){mutGroup(id,x=>{x.inbox=[]});render()}else{b.dataset.sure="1";b.textContent="Toucher encore pour confirmer"}}
+  else if(a==="qnAI"){const g=S.groups.get(id);const nm=k=>{const c=S.children.get(k);return c?c.name:""};copyText(`Voici des notes rapides prises en classe nature (groupe ${g.name}). Classe-les selon tes instructions et redonne-moi seulement le bloc carnet à importer.\n\n`+(g.inbox||[]).map(q=>`- ${q.date}${q.kids&&q.kids.length?" ("+q.kids.map(nm).join(", ")+")":""} : ${q.text}`).join("\n"),"Notes copiées : collez-les dans votre IA")}
+  else if(a==="cObjNote")objNote2Sheet(id,b.dataset.o);
+  else if(a==="gObjNote")gObjNoteSheet(id,b.dataset.o);
   else if(a==="scAll"){S.scOnly=null;render()}
   else if(a==="scGo"){const sec=k.split(".")[0];const o=occOf(sec);S.fromTerrain=id;const T=tpl(S.groups.get(id));const sc=T.sections.find(x=>x.id===sec);const r=sc&&rowIn(sc.rows,k.split(".")[1]);S.rowFilter={occ:o.id,row:r?sec+"."+r.id:"*"};S.scOnly=r?id:null;go("g-"+id+"--"+o.subs[0])}
   else if(a==="cqmOpen")cqmSheet(id,k);
@@ -2094,9 +2192,9 @@ function repairKeys(c){if(!c||!S.groups.get(c.groupId))return false;let ch=false
   return ch}
 const repaired=new Set();
 /* objectifs importés en blocs (« Objectifs à poursuivre : … ») : découpés une fois, doublons retirés, interventions → pistes */
-function fixObjs(c){if(c.objFix>=1)return false;c.objFix=1;const L=c.objectifs||[];if(!L.length)return true;const seen=new Map();const out=[];const pistes=c.pistes=c.pistes||[];const pSeen=new Set(pistes.map(p=>String(p.text||"").trim()));
+function fixObjs(c){if(c.objFix>=1)return false;c.objFix=1;const L=(c.objectifs||[]).map(o=>Object.assign({},o));if(!L.length)return true;const seen=new Map();const out=[];const pistes=c.pistes=c.pistes||[];const pSeen=new Set(pistes.map(p=>String(p.text||"").trim()));
   const addP=(t,o)=>{t=t.trim();if(!t||pSeen.has(t))return;pSeen.add(t);pistes.push({id:uid("p"),text:t,k:o.k||"",date:o.date||todayISO(),src:"groupe"})};
-  const addO=(o,lab,titre)=>{lab=lab.trim().replace(/\s+/g," ");const key=lab.toLowerCase();if(seen.has(key)){const e=seen.get(key);e.marks=Object.assign({},o.marks||{},e.marks||{});return}const n=Object.assign({},o,{label:lab});if(n!==o)n.id=o._used?uid("o"):o.id;o._used=1;if(titre)n.titre=titre;delete n._used;seen.set(key,n);out.push(n)};
+  const addO=(o,lab,titre)=>{lab=lab.trim().replace(/\s+/g," ");const key=lab.toLowerCase();if(seen.has(key)){const e=seen.get(key);if(!o._used)e.marks=Object.assign({},o.marks||{},e.marks||{});o._used=(o._used||0)+1;return}const k2=o._used||0;const n=Object.assign({},o,{label:lab,marks:k2?{}:Object.assign({},o.marks||{})});n.id=k2?o.id+"s"+k2:o.id;o._used=k2+1;if(titre)n.titre=titre;delete n._used;seen.set(key,n);out.push(n)};
   const sent=t=>t.split(/(?<=[.!?])\s+(?=[A-ZÀ-ÖÉÈÊ«])/).map(x=>x.trim()).filter(x=>x.length>3);
   L.forEach(o=>{const lab=String(o.label||"").trim();const m=lab.match(OBJHEAD);
     if(o.titre||(!m&&lab.length<=110)){addO(o,lab,o.titre);return}
