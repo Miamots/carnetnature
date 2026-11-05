@@ -210,14 +210,14 @@ label.btn{cursor:pointer}
 .objrow{padding:10px 0;border-top:1px solid var(--line)}
 .objrow:first-of-type{border-top:0}
 .objhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
-.kids{display:flex;flex-wrap:wrap;gap:8px}
-.kchip{display:flex;flex-direction:column;align-items:center;width:74px}
-.kmark{position:relative;width:56px;height:56px;border-radius:50%;border:2px solid var(--line);background:#fff;padding:3px;cursor:pointer}
+.kids{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px 4px}
+.kchip{display:flex;flex-direction:column;align-items:center;min-width:0}
+.kmark{position:relative;width:50px;height:50px;border-radius:50%;border:2px solid var(--line);background:#fff;padding:3px;cursor:pointer}
 .kmark img{width:100%;height:100%;object-fit:contain}
 .kmark .sym{position:absolute;right:-4px;bottom:-4px;min-width:22px;height:22px;border-radius:50%;font-weight:700;font-size:.85rem;line-height:22px;color:#fff}
 .kchip.ok .kmark{border-color:#4E8A5C;background:#E4F0E0}.kchip.ok .sym{background:#4E8A5C}
 .kchip.no .kmark{border-color:#C66A5A;background:#F8E3DE}.kchip.no .sym{background:#C66A5A}
-.kname{border:0;background:transparent;font-size:.8rem;font-weight:600;color:var(--forest);cursor:pointer;text-align:center;padding:3px 0;line-height:1.2;text-decoration:underline;text-decoration-color:var(--line)}
+.kname{border:0;background:transparent;font-size:.74rem;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;color:var(--forest);cursor:pointer;text-align:center;padding:3px 0;line-height:1.2;text-decoration:underline;text-decoration-color:var(--line)}
 .opill{font-size:.78rem;font-weight:600;border-radius:999px;padding:1px 8px}
 .opill.ok{background:#E4F0E0;color:#2C5A38}.opill.no{background:#F8E3DE;color:#8C3A2E}
 details.pdet>summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
@@ -310,8 +310,8 @@ details.pdet[open]>summary .ptitle::before{content:"▾ "}
 .afait{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;flex:none;font-weight:700;color:#888}.afait.on{background:#E6F2E1;border-color:#9CC596;color:#2C5A38}
 .tacts{margin-top:8px;font-size:.9rem;line-height:1.9}
 textarea.drop{outline:3px dashed var(--forest,#2C5A38);outline-offset:2px}
-.roue{display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"n n" "w e" "c c" "s s";gap:8px;margin-top:10px}
-@media(min-width:620px){.roue{grid-template-columns:1fr 150px 1fr;grid-template-areas:". n ." "w c e" ". s .";align-items:stretch}.roue .rN,.roue .rS{grid-column:1/-1}.roue{grid-template-areas:"n n n" "w c e" "s s s"}}
+.roue{display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"n n" "w e" "s s";gap:8px;margin-top:10px}
+@media(min-width:620px){.roue{grid-template-columns:1fr 150px 1fr;grid-template-areas:". n ." "w c e" ". s .";align-items:stretch}.roue .rN,.roue .rS{grid-column:1/-1}.roue{grid-template-columns:1fr 1fr;grid-template-areas:"n n" "w e" "s s"}}
 .rN{grid-area:n}.rS{grid-area:s}.rW{grid-area:w}.rE{grid-area:e}.rC{grid-area:c;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}.rC img{width:64px;height:64px}
 .rq{border-radius:16px;padding:10px 12px;min-height:70px;height:100%;box-sizing:border-box}
 .rq-tete{background:#F6F2EA;border:1px solid #DDD3BF}.rq-esprit{background:#FFF5D6;border:1px solid #F1CF63}.rq-coeur{background:#FDE8E8;border:1px solid #EBA0A2}.rq-corps{background:#ECECEC;border:1px solid #A9A9A9}
@@ -320,6 +320,13 @@ textarea.drop{outline:3px dashed var(--forest,#2C5A38);outline-offset:2px}
 .rq .kw{cursor:pointer;font-family:inherit}.rq .kw small{font-weight:400;opacity:.7}.rq .kw[disabled]{cursor:default}
 .aoi{display:flex;gap:8px;align-items:flex-start;padding:4px 0;font-size:.92rem}.aoic{flex:none;width:22px;text-align:center}
 .tm.prog.on{background:#FFF1C9;border-color:#E2B65A;color:#8A6500}.omark.prog{background:#FFF1C9;border-color:#E2B65A;color:#8A6500}.opill.prog{background:#FFF1C9;color:#8A6500}
+.cqml{display:flex;flex-direction:column;gap:6px}.cqmi{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 12px;font:inherit;cursor:pointer;line-height:1.5}
+.backbtn{display:flex;justify-content:center;margin:0 0 10px;font-weight:700;background:#fff;border:1.5px solid var(--forest,#2C5A38);color:var(--forest,#2C5A38)}
+.eclair .ehead{display:flex;align-items:center;gap:8px;margin-bottom:4px}.eclair .ehead img{width:34px;height:34px}.eclair .ehead b{font-size:1.1rem;flex:1}.eclair .el{font-size:.92rem;margin:3px 0;line-height:1.35}
+.eclairs{display:flex;flex-direction:column;gap:8px}.ecl{display:block;color:inherit;text-decoration:none;border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:#fff}
+.nmenu{display:flex;flex-direction:column;gap:8px}.nmi{display:flex;flex-direction:column;gap:2px;text-align:left;border:1px solid var(--line);background:#fff;border-radius:14px;padding:12px 14px;font:inherit;cursor:pointer}.nmi span{font-size:.85rem;color:#666}.nmi[disabled]{opacity:.5;cursor:default}
+.scl .chk{display:flex}
+.rcount{display:block;font-size:.75rem;color:#888;margin:2px 0 6px;text-align:right}.rcount.warn{color:#B5642B;font-weight:600}.rbox{border:1px solid var(--line);border-radius:12px;padding:6px 8px;margin:6px 0;background:#fff}.rmv{display:flex;gap:2px}.rti{margin:3px 0}
 .step.hid{opacity:.5;border-style:dashed;background:#F6F4EE}.hidlink{color:var(--muted,#777)}
 .step.ag-watch{box-shadow:inset 4px 0 0 #E2B65A;background:#FFFBF0}
 .step.ag-later .ag{opacity:.7}
@@ -771,12 +778,12 @@ function childrenOf(gid){return [...S.children.entries()].filter(([,c])=>c.group
 function lastDate(c){let m="";const up=d=>{if(d&&d>m)m=d};
   Object.values(c.checks||{}).forEach(a=>a.forEach(up));Object.values(c.sout||{}).forEach(a=>a.forEach(e=>up(e.d)));(c.notes||[]).forEach(n=>up(n.date));return m}
 
-function viewGroup(gid){
+function viewGroup(gid){S.fromTerrain=null;
   const g=S.groups.get(gid);if(!g){crumbs([]);return`<div class="card empty">Ce groupe n'existe plus. <a href="#accueil">Retour aux groupes</a></div>`}
   crumbs([`<span>${esc(g.name)}</span>`]);
   const em=EMBLEMS[g.emblem]||EMBLEMS.roue;const kids=childrenOf(gid);
   let h=`<section class="card"><div class="ghead"><img src="${img(em.img)}" alt=""><div style="flex:1"><h2>${esc(g.name)}</h2><div class="muted small">Fiche ${esc(tpl(g).nom)}${g.equipe?" · "+esc(g.equipe):""}</div></div><button class="btn ghost" data-act="editGroup" data-id="${gid}">Modifier</button></div>
-  <div class="row-actions" style="margin-top:12px"><button class="btn big primary" data-act="paste" data-id="${gid}"><img src="${img("icone-coller-notes")}" alt="">Importer une note</button><button class="btn" data-act="dayNotes" data-id="${gid}">Bilan du jour</button></div>
+  <div class="row-actions" style="margin-top:12px"><button class="btn big primary" data-act="notesMenu" data-id="${gid}"><img src="${img("icone-coller-notes")}" alt="">Notes</button></div>
   <a class="btn terrainbtn" href="#t-${gid}">${img?`<img src="${img("carnet")}" alt="">`:""} Mode terrain</a>
   ${tpl(g).objOnly?`<p class="muted small" style="margin:10px 0 0">Groupe 6-12 ans : le mode terrain montre les objectifs de chaque jeune (✓ réussi, ↗ en progrès, ✗ difficile).</p>`:`<div class="label" style="margin:14px 0 6px">Mode activité · une observation pour tous</div><div class="secnav wrap">${OCCS.map(o=>`<a href="#g-${gid}--${o.subs[0]}"><img src="${img(o.img)}" alt="">${esc(o.n)}. ${esc(shortT(o.titre))}</a>`).join("")}</div>`}
   </section>`;
@@ -815,7 +822,7 @@ function importInfo(gid,d){const g=S.groups.get(gid);const kids=childrenOf(gid);
   const jn=(g.journal||[]).filter(n=>n.date===d&&n.src==="groupe").length;return{notes,cases,jn,tagged:kids.some(([,c])=>(c.imports||{})[d])||!!(g.imports||{})[d]}}
 function undoImport(gid,d){const kids=childrenOf(gid);
   kids.forEach(([cid,c])=>{const x=JSON.parse(JSON.stringify(c));const im=(x.imports||{})[d];const rmD=(o,k)=>{if(o&&o[k]){o[k]=o[k].filter(v=>v!==d);if(!o[k].length)delete o[k]}};
-    x.notes=(x.notes||[]).filter(n=>!(n.date===d&&n.src==="groupe"));x.kw=(x.kw||[]).filter(n=>!(n.date===d&&n.src==="groupe"));x.explore=(x.explore||[]).filter(n=>!(n.date===d&&n.src==="groupe"));x.objectifs=(x.objectifs||[]).filter(n=>!(n.date===d&&n.src==="groupe"));
+    x.notes=(x.notes||[]).filter(n=>!(n.date===d&&n.src==="groupe"));x.kw=(x.kw||[]).filter(n=>!(n.date===d&&n.src==="groupe"));x.explore=(x.explore||[]).filter(n=>!(n.date===d&&n.src==="groupe"));x.objectifs=(x.objectifs||[]).filter(n=>!(n.date===d&&n.src==="groupe"));x.pistes=(x.pistes||[]).filter(n=>!(n.date===d&&n.src==="groupe"));
     if(x.free&&x.free["portrait.famille"])x.free["portrait.famille"]=x.free["portrait.famille"].filter(n=>!(n.date===d&&n.src==="groupe"));
     if(im){im.checks.forEach(k=>rmD(x.checks,k));im.ny.forEach(k=>rmD(x.notyet,k));im.facs.forEach(k=>rmD(x.facil,k));im.sout.forEach(v=>{const [r,t]=v.split("|");if(x.sout&&x.sout[r])x.sout[r]=x.sout[r].filter(e=>!(e.d===d&&e.t===t))});delete x.imports[d]}
     else{["checks","notyet","facil"].forEach(f=>Object.keys(x[f]||{}).forEach(k=>rmD(x[f],k)));Object.keys(x.sout||{}).forEach(r=>{x.sout[r]=x.sout[r].filter(e=>e.d!==d)})}
@@ -828,7 +835,7 @@ function undoImport(gid,d){const kids=childrenOf(gid);
 function dayTouched(c,d){return (c.notes||[]).some(n=>n.date===d)||(c.explore||[]).some(n=>n.date===d)||(c.photos||[]).some(p=>p.d===d)||childObjs(c).some(o=>(o.marks||{})[d])||Object.values(c.checks||{}).some(l=>l.includes(d))||Object.values(c.notyet||{}).some(l=>l.includes(d))}
 function lastOccDates(c){const m={};const up=(sec,d)=>{const o=occOf(sec);if(!o||!d)return;if(!m[o.id]||d>m[o.id])m[o.id]=d};
   (c.notes||[]).forEach(n=>up(n.section,n.date));["checks","notyet"].forEach(f=>Object.entries(c[f]||{}).forEach(([k,l])=>l.forEach(d=>up(k.split(".")[0],d))));(c.photos||[]).forEach(p=>up(String(p.k).split(".")[0],p.d));return m}
-function aObserver(c){const out=[];childObjs(c).filter(o=>!o.done).slice(0,2).forEach(o=>out.push({t:"obj",label:o.label}));
+function aObserver(c){const out=[];childObjs(c).filter(o=>!o.done).slice(0,2).forEach(o=>out.push({t:"obj",label:objShort(o)}));
   const secs=childSections(c);const last=lastOccDates(c);
   /* « pas encore » le plus récent, pas réussi depuis */
   let ny=null;Object.entries(c.notyet||{}).forEach(([k,l])=>{if(isHidStep(c,k))return;const d=l.slice().sort().pop();const ok=((c.checks||{})[k]||[]).some(x=>x>=d);if(!ok&&(!ny||d>ny.d))ny={k,d}});
@@ -853,7 +860,10 @@ function viewTerrain(gid){const g=S.groups.get(gid);if(!g){go("accueil");return 
   const d=S.obsDate;const pr=presOf(g,d)||[];const all=childrenOf(gid).slice().sort((x,y)=>x[1].name.localeCompare(y[1].name,"fr",{sensitivity:"base"}));
   const only=S.tOnly===true&&pr.length>0;const kids=only?all.filter(([id])=>pr.includes(id)):all;
   const nT=all.reduce((a,[,c])=>a+(c.notes||[]).filter(n=>n.date===d&&n.src==="terrain").length,0);
-  let h=`<section class="card tcard"><div class="ordhead"><h2 style="font-size:1.5rem">Terrain · ${esc(g.name)}</h2><label class="obsdate small"><input type="date" value="${d}" data-act="obsDate"></label></div>
+  const T=tpl(g);const scs=getSC().map(k=>{const sc=T.sections.find(x=>x.id===k.split(".")[0]);const r=sc&&rowIn(sc.rows,k.split(".")[1]);return r?{k,l:r.label.replace(/\s*\(.*?\)/,"")}:null}).filter(Boolean);
+  let h=`<a class="btn backbtn" href="#g-${gid}">← Retour au groupe</a>
+  ${T.objOnly?"":`<section class="card"><div class="ordhead"><span class="label">Mode groupe · un repère pour tous</span><button class="linkbtn small" data-act="scEdit" data-id="${gid}">modifier</button></div><div class="chips" style="margin-top:6px">${scs.map(x=>`<button class="chip" data-act="scGo" data-id="${gid}" data-k="${x.k}">${esc(x.l)}</button>`).join("")||'<span class="muted small">Aucun raccourci.</span>'}</div></section>`}
+  <section class="card tcard"><div class="ordhead"><h2 style="font-size:1.5rem">Terrain · ${esc(g.name)}</h2><label class="obsdate small"><input type="date" value="${d}" data-act="obsDate"></label></div>
   ${(()=>{const L=((g.activites||{})[d])||[];return `<div class="tacts"><span class="label">Activités du jour</span> ${L.length?L.map(a=>`<span class="tag">${esc(a.text)}</span>`).join(" "):`<span class="muted small">aucune</span>`} <button class="linkbtn" data-act="calDay" data-id="${gid}" data-d="${d}">${L.length?"modifier":"ajouter"}</button></div>`})()}
   ${pr.length?`<label class="chk" style="margin-top:6px"><input type="checkbox" data-act="tOnly" ${only?"checked":""}> Présents seulement (${pr.length})</label>`:`<p class="muted small" style="margin:6px 0 0">Touchez un enfant pour noter : il sera marqué présent.</p>`}</section>
   <div class="tgrid">${kids.map(([cid,c])=>{const done=dayTouched(c,d);const ao=aObserver(c);const isP=pr.includes(cid);
@@ -866,12 +876,13 @@ function terrainKid(gid,cid){const g=S.groups.get(gid);const c=S.children.get(ci
   const notesT=(c.notes||[]).filter(n=>n.date===d);const phT=photosOf(c,p=>p.d===d);
   const tri=isObjOnly(c);const mk=(v,cur,attrs)=>(v==="no"&&tri?`<button class="tm prog${cur==="prog"?" on":""}" ${attrs} data-v="prog" aria-pressed="${cur==="prog"}" title="En progrès">↗</button>`:"")+`<button class="tm ${v}${cur===v?" on":""}" ${attrs} data-v="${v}" aria-pressed="${cur===v}" title="${ONAME[v]}">${OMARK[v]}</button>`;
   openSheet(`<div class="thead"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><div><h3 style="margin:0">${esc(c.name)}</h3><span class="muted small">${esc(fmtD(d,true))}</span></div></div>
-  ${objs.length||gobjs.length?`<div class="tobjs">${objs.map(o=>{const v=(o.marks||{})[d]||"";return `<div class="tobj"><span>🎯 ${esc(o.label)}</span>${mk("ok",v,`data-co="${o.id}"`)}${mk("no",v,`data-co="${o.id}"`)}</div>`}).join("")}
+  ${objs.length||gobjs.length?`<div class="tobjs">${objs.map(o=>{const v=(o.marks||{})[d]||"";return `<div class="tobj"><span title="${esc(o.label)}">🎯 ${esc(objShort(o))}</span>${mk("ok",v,`data-co="${o.id}"`)}${mk("no",v,`data-co="${o.id}"`)}</div>`}).join("")}
     ${gobjs.map(o=>{const v=(res[o.id]||{})[cid]||"";return `<div class="tobj grp"><span>${esc(o.label)} <span class="muted small">(groupe)</span></span>${mk("ok",v,`data-go="${o.id}"`)}${mk("no",v,`data-go="${o.id}"`)}</div>`}).join("")}</div>`:""}
   ${ao.length?`<div class="small">${ao.map(x=>`<div>${AOI[x.t]} ${esc(x.label)}${x.t==="occ"?(x.since?` <span class="muted">(dernière fois ${fmtD(x.since)})</span>`:` <span class="muted">(jamais)</span>`):""}</div>`).join("")}</div>`:""}
   <textarea class="field" id="tText" style="min-height:110px" placeholder="Ce que vous observez, en vrac. Ça se range plus tard."></textarea>
   <div class="tbtns">${SR?`<button class="btn big" data-act="dictate" data-ta="tText">${MIC} Dicter</button>`:""}<button class="btn primary big" id="tSave">Enregistrer</button>${assets?`<label class="btn big">${CAM} Photo<input type="file" accept="image/*" capture="environment" hidden id="tPhoto"></label>`:""}</div>
   ${notesT.length||phT.length?`<div class="ttoday"><span class="label">Aujourd'hui</span>${notesT.map(n=>`<div class="small">• ${esc(n.text)}</div>`).join("")}${phT.length?thumbs(c,phT,cid):""}</div>`:""}
+  <details class="more"><summary>Fiche éclair</summary>${eclairHTML(cid,c,false)}</details>
   <div class="row-actions"><a class="btn ghost" href="#e-${cid}" id="tFiche">Fiche complète</a><button class="btn" id="tClose">Fermer</button></div>`,s=>{
     s.querySelector("#tClose").onclick=closeSheet;s.querySelector("#tFiche").onclick=closeSheet;
     s.querySelector("#tSave").onclick=()=>{const t=s.querySelector("#tText").value.trim();if(!t){s.querySelector("#tText").focus();return}
@@ -992,89 +1003,117 @@ ${ex||"(rien)"}
 Réponds SEULEMENT avec ce JSON :
 {"autonomie":"un paragraphe de 4 à 7 phrases","jeu":"…","apprentissage":"…","social":"…","facilitateurs":{"tete":"2 à 5 puces commençant par « • », concrètes, pour l'école","esprit":"…","coeur":"…","corps":"…"},"analyse":"3 à 5 paragraphes : forces principales, besoins de soutien, hypothèses cliniques prudentes, recommandations pour la transition et pour l'équipe-école"}
 Si une occupation n'a aucune observation, écris « Peu d'observations à ce sujet lors des rencontres. »`}
-function rapportSheet(cid){const c=S.children.get(cid);const R=Object.assign(rapportDefaults(cid),c.rapport||{});R.facil=Object.assign(rapportDefaults(cid).facil,(c.rapport||{}).facil||{});const ai=AIS[getAI()];const sg=getSign();
-  const ta=(id,v,h)=>`<textarea class="field" id="${id}" style="min-height:${h||110}px">${esc(v||"")}</textarea>`;
-  openSheet(`<h3>Rapport d'évaluation · ${esc(c.name)}</h3><p class="muted small" style="margin:0">Préparez les brouillons avec l'IA, corrigez chaque case, puis créez le rapport à imprimer ou enregistrer en PDF. Tout est gardé dans la fiche.</p>
-  <div class="cp"><b>1. Brouillons par l'IA</b><p class="muted small" style="margin:0">L'IA rédige les 4 cases d'occupations, les facilitateurs par sphère et l'analyse, à partir des notes, de « ce qui marche » et de la roue.</p>
+const RT_DEF={titre:"Rapport d'évaluation",sous:"en ergothérapie et en éducation spécialisée",ctx:"en contexte de groupe",facT:"Facilitateurs pour la participation scolaire",facI:"Les stratégies suivantes visent à soutenir la participation de l'enfant en s'appuyant sur ses forces et sur les conditions qui favorisent son équilibre.",datesT:"Dates d'évaluation",ctxT:"Mise en contexte",demT:"Démarche évaluative",occT:"Observations des occupations",o_autonomie:"L'autonomie dans les routines quotidiennes",o_jeu:"Le jeu et l'exploration sensorimotrice",o_apprentissage:"La participation aux activités de groupe et d'apprentissage",o_social:"Les interactions sociales et la vie en communauté",anaT:"Analyse"};
+function rModel(){try{return JSON.parse(localStorage.getItem("carnet-rapport-modele"))||{}}catch(e){return {}}}
+function rTitles(c){return Object.assign({},RT_DEF,rModel().t||{},(c.rapport||{}).t||{})}
+function rapportFull(cid){const c=S.children.get(cid);const D=rapportDefaults(cid);const M=rModel();const R=Object.assign({},D,M.contexte?{contexte:M.contexte.replace(/\{nom\}/g,c.name).replace(/\{age\}/g,c.dob?ageAt(c.dob):"")}:{},M.demarche?{demarche:M.demarche}:{},c.rapport||{});R.facil=Object.assign({},D.facil,(c.rapport||{}).facil||{});R.t=rTitles(c);
+  R.ordF=(R.ordF&&R.ordF.length===4)?R.ordF:["tete","esprit","coeur","corps"];R.ordO=(R.ordO&&R.ordO.length===4)?R.ordO:RBOX.map(x=>x[0]);return R}
+function rapportSheet(cid){const c=S.children.get(cid);const R=rapportFull(cid);const ai=AIS[getAI()];const sg=getSign();const T=R.t;
+  const cnt=id=>`<span class="rcount" data-for="${id}"></span>`;
+  const ta=(id,v,h)=>`<textarea class="field rta" id="${id}" style="min-height:${h||110}px">${esc(v||"")}</textarea>${cnt(id)}`;
+  const ti=(k)=>`<input class="field rti" data-t="${k}" value="${esc(T[k])}">`;
+  const mv=(grp,k,i,n)=>`<span class="rmv"><button class="btn ghost small" data-mv="${grp}|${k}|-1" ${i===0?"disabled":""} aria-label="Monter">↑</button><button class="btn ghost small" data-mv="${grp}|${k}|1" ${i===n-1?"disabled":""} aria-label="Descendre">↓</button></span>`;
+  openSheet(`<h3>Rapport d'évaluation · ${esc(c.name)}</h3><p class="muted small" style="margin:0">Tout est modifiable : titres, textes, ordre des cases. « Enregistrer comme modèle » garde vos titres, votre mise en contexte et votre démarche pour les prochains rapports.</p>
+  <div class="cp"><b>1. Brouillons par l'IA</b><p class="muted small" style="margin:0">Les 4 cases d'occupations, les facilitateurs par sphère et l'analyse, à partir des notes, de « ce qui marche » et des forces et défis.</p>
   <div class="row-actions">${sample?`<button class="btn primary" id="rpAI">Rédiger avec Claude</button>`:""}<button class="btn${sample?"":" primary"}" id="rpCopy">Copier pour ${ai.nom}</button></div><div id="rpPaste"></div></div>
-  <div class="cp"><b>2. Page 1 · couverture</b><p class="muted small" style="margin:0">La roue affiche les mots-clés de forces de la fiche « Roue ».</p><label class="chk"><input type="checkbox" id="rpDef" ${R.defis?"checked":""}> Afficher aussi les défis sur la roue</label></div>
-  <div class="cp"><b>3. Page 2 · facilitateurs pour la participation scolaire</b>${Object.entries(SPHERES).map(([k,v])=>`<label class="f">${v.nom} <span class="muted small">(${esc(v.desc.split(":")[0])})</span>${ta("rpF-"+k,R.facil[k],80)}</label>`).join("")}</div>
-  <div class="cp"><b>4. Page 3 · contexte</b><label class="f">Dates d'évaluation<input class="field" id="rpDates" value="${esc(R.dates)}"></label><label class="f">Mise en contexte${ta("rpCtx",R.contexte,140)}</label><label class="f">Démarche évaluative${ta("rpDem",R.demarche,140)}</label></div>
-  <div class="cp"><b>5. Page 4 · observations des occupations</b>${RBOX.map(([k,l])=>`<label class="f">${l}${ta("rpO-"+k,R[k],120)}</label>`).join("")}</div>
-  <div class="cp"><b>6. Page 5 · analyse</b>${ta("rpAn",R.analyse,220)}
+  <div class="cp"><b>2. Couverture</b>${ti("titre")}${ti("sous")}${ti("ctx")}<label class="chk"><input type="checkbox" id="rpDef" ${R.defis?"checked":""}> Afficher aussi les défis sur la roue</label></div>
+  <div class="cp"><b>3. Facilitateurs</b><label class="f">Titre de la page${ti("facT")}</label><label class="f">Phrase d'introduction<textarea class="field rti" data-t="facI" style="min-height:60px">${esc(T.facI)}</textarea></label>
+   <div id="rpFbox">${R.ordF.map((k,i)=>`<div class="rbox" data-k="${k}"><div class="ordhead"><b>${SPHERES[k].nom}</b>${mv("F",k,i,4)}</div>${ta("rpF-"+k,R.facil[k],80)}</div>`).join("")}</div></div>
+  <div class="cp"><b>4. Contexte</b><label class="f">${ti("datesT")}<input class="field" id="rpDates" value="${esc(R.dates)}"></label><label class="f">${ti("ctxT")}${ta("rpCtx",R.contexte,140)}</label><label class="f">${ti("demT")}${ta("rpDem",R.demarche,140)}</label></div>
+  <div class="cp"><b>5. Observations des occupations</b><label class="f">Titre de la page${ti("occT")}</label>
+   <div id="rpObox">${R.ordO.map((k,i)=>`<div class="rbox" data-k="${k}"><div class="ordhead"><span style="flex:1">${ti("o_"+k)}</span>${mv("O",k,i,4)}</div>${ta("rpO-"+k,R[k],120)}</div>`).join("")}</div></div>
+  <div class="cp"><b>6. Analyse</b><label class="f">Titre${ti("anaT")}</label>${ta("rpAn",R.analyse,220)}
   <details class="more"><summary>Signatures</summary>${sg.map((x,i)=>`<div class="addline" style="flex-wrap:wrap"><input class="field" id="sgN${i}" value="${esc(x.nom)}" placeholder="Nom"><input class="field" id="sgT${i}" value="${esc(x.titre)}" placeholder="Titre et numéro"><input class="field" id="sgC${i}" value="${esc(x.courriel)}" placeholder="Courriel"></div>`).join("")}</details></div>
-  <div class="row-actions"><button class="btn primary" id="rpMake">Enregistrer et créer le rapport</button><button class="btn" id="rpSave">Enregistrer</button><button class="btn" id="rpClose">Fermer</button></div>`,s=>{
-    const collect=()=>{const o={dates:s.querySelector("#rpDates").value.trim(),contexte:s.querySelector("#rpCtx").value.trim(),demarche:s.querySelector("#rpDem").value.trim(),analyse:s.querySelector("#rpAn").value.trim(),defis:s.querySelector("#rpDef").checked,facil:{},maj:todayISO()};
+  <div class="cp"><b>7. Mise en page</b><label class="chk"><input type="checkbox" id="rpOpt" ${R.opt?"checked":""}> Optimiser l'espace : remonter une case plus courte pour combler un trou (l'ordre peut changer)</label><p class="muted small" style="margin:0">Une case qui ne tient pas dans la page passe entière à la suivante.</p></div>
+  <div class="row-actions"><button class="btn primary" id="rpMake">Enregistrer et créer le rapport</button><button class="btn" id="rpSave">Enregistrer</button><button class="btn" id="rpModel">Enregistrer comme modèle</button><button class="btn" id="rpClose">Fermer</button></div>`,s=>{
+    const upd=el=>{const sp=s.querySelector(`.rcount[data-for="${el.id}"]`);if(!sp)return;const n=el.value.length;const pct=Math.round(n/3000*100);sp.textContent=`${n} caractères · environ ${pct} % d'une page`;sp.classList.toggle("warn",pct>85)};
+    s.querySelectorAll(".rta").forEach(el=>{upd(el);el.addEventListener("input",()=>upd(el))});
+    const collect=()=>{const t={};s.querySelectorAll(".rti").forEach(el=>t[el.dataset.t]=el.value.trim());
+      const o={t,dates:s.querySelector("#rpDates").value.trim(),contexte:s.querySelector("#rpCtx").value.trim(),demarche:s.querySelector("#rpDem").value.trim(),analyse:s.querySelector("#rpAn").value.trim(),defis:s.querySelector("#rpDef").checked,opt:s.querySelector("#rpOpt").checked,facil:{},maj:todayISO(),
+        ordF:[...s.querySelectorAll("#rpFbox .rbox")].map(x=>x.dataset.k),ordO:[...s.querySelectorAll("#rpObox .rbox")].map(x=>x.dataset.k)};
       Object.keys(SPHERES).forEach(k=>o.facil[k]=s.querySelector("#rpF-"+k).value.trim());RBOX.forEach(([k])=>o[k]=s.querySelector("#rpO-"+k).value.trim());
       try{localStorage.setItem("carnet-sign",JSON.stringify(sg.map((x,i)=>({nom:s.querySelector("#sgN"+i).value.trim(),titre:s.querySelector("#sgT"+i).value.trim(),courriel:s.querySelector("#sgC"+i).value.trim()}))))}catch(e){}
       mutChild(cid,x=>{x.rapport=o});return o};
-    const fill=res=>{if(!res)return toast("Je ne reconnais pas la réponse.");RBOX.forEach(([k])=>{if(res[k])s.querySelector("#rpO-"+k).value=res[k]});const f=res.facilitateurs||{};Object.keys(SPHERES).forEach(k=>{if(f[k])s.querySelector("#rpF-"+k).value=f[k]});if(res.analyse)s.querySelector("#rpAn").value=res.analyse;toast("Brouillons insérés : relisez et corrigez.")};
+    s.querySelectorAll("[data-mv]").forEach(b=>b.onclick=()=>{const [grp,k,dir]=b.dataset.mv.split("|");const box=s.querySelector(grp==="F"?"#rpFbox":"#rpObox");const el=box.querySelector(`.rbox[data-k="${k}"]`);
+      if(+dir<0&&el.previousElementSibling)box.insertBefore(el,el.previousElementSibling);else if(+dir>0&&el.nextElementSibling)box.insertBefore(el.nextElementSibling,el);
+      [...box.children].forEach((x,i,a)=>{const bs=x.querySelectorAll("[data-mv]");bs[0].disabled=i===0;bs[1].disabled=i===a.length-1})});
+    const fill=res=>{if(!res)return toast("Je ne reconnais pas la réponse.");RBOX.forEach(([k])=>{if(res[k])s.querySelector("#rpO-"+k).value=res[k]});const f=res.facilitateurs||{};Object.keys(SPHERES).forEach(k=>{if(f[k])s.querySelector("#rpF-"+k).value=f[k]});if(res.analyse)s.querySelector("#rpAn").value=res.analyse;s.querySelectorAll(".rta").forEach(upd);toast("Brouillons insérés : relisez et corrigez.")};
     s.querySelector("#rpClose").onclick=closeSheet;s.querySelector("#rpSave").onclick=()=>{collect();toast("Rapport enregistré")};
+    s.querySelector("#rpModel").onclick=()=>{const o=collect();const m={t:o.t,contexte:o.contexte.split(c.name).join("{nom}"),demarche:o.demarche};try{localStorage.setItem("carnet-rapport-modele",JSON.stringify(m))}catch(e){}toast("Modèle enregistré : titres, mise en contexte et démarche")};
     s.querySelector("#rpMake").onclick=async()=>{collect();const b=s.querySelector("#rpMake");b.disabled=true;b.innerHTML='<span class="spinner"></span> Préparation…';
       try{const html=await buildRapport(cid);const fn=`rapport-${(c.name||"enfant").replace(/[^\p{L}\p{N}]+/gu,"-").toLowerCase()}-${todayISO()}.html`;
         if(downloads)await downloads.save({filename:fn,data:new Blob([html],{type:"text/html"})});else{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([html],{type:"text/html"}));a.download=fn;a.click()}
-        toast("Rapport créé : ouvrez-le pour l'imprimer ou l'enregistrer en PDF")}catch(e){toast("Le rapport n'a pas pu être créé.")}b.disabled=false;b.textContent="Enregistrer et créer le rapport"};
+        toast("Rapport créé : ouvrez-le pour l'imprimer ou l'enregistrer en PDF")}catch(e){console.error(e);toast("Le rapport n'a pas pu être créé.")}b.disabled=false;b.textContent="Enregistrer et créer le rapport"};
     const ab=s.querySelector("#rpAI");if(ab)ab.onclick=async()=>{ab.disabled=true;ab.innerHTML='<span class="spinner"></span> Rédaction…';try{fill(await sample.json(rapportPrompt(cid),{modelTier:"default"}))}catch(e){toast("La rédaction n'a pas fonctionné.")}ab.disabled=false;ab.textContent="Rédiger avec Claude"};
     s.querySelector("#rpCopy").onclick=()=>{copyText(rapportPrompt(cid),"Demande copiée");const box=s.querySelector("#rpPaste");box.innerHTML=`<div class="cpstep">Collez ici la réponse de ${ai.nom} :</div><textarea class="field" id="rpAns" style="min-height:100px"></textarea><div class="row-actions"><a class="btn" href="${ai.url}" target="_blank" rel="noopener">Ouvrir ${ai.nom}</a><button class="btn primary" id="rpRead">Insérer les brouillons</button></div>`;
       box.querySelector("#rpRead").onclick=()=>{const raw=box.querySelector("#rpAns").value;const a=raw.indexOf("{"),z=raw.lastIndexOf("}");let o=null;try{o=JSON.parse(raw.slice(a,z+1))}catch(e){}fill(o)}};
   })}
-async function buildRapport(cid){const c=S.children.get(cid);const R=Object.assign(rapportDefaults(cid),c.rapport||{});const sg=getSign();const E=esc;
-  const A={};const need=["roue","logo-coclinique","logo-caal","hd-facil","hd-analyse"].concat(["tete","esprit","coeur","corps"].flatMap(k=>["sph-"+k,"spl-"+k,"br-"+k,"plume-"+k,"feuille-"+k,"ic-"+k]),RBOX.map(x=>x[2]),[1,2,3,4,5].map(i=>"frise-"+i));
+function wheelSVG(){const C=300,R=292,ri=78;const pt=(a,r)=>[C+r*Math.cos(a*Math.PI/180),C+r*Math.sin(a*Math.PI/180)];
+  const sec=(a0,a1,fill)=>{const [x0,y0]=pt(a0,R),[x1,y1]=pt(a1,R),[x2,y2]=pt(a1,ri),[x3,y3]=pt(a0,ri);return `<path d="M${x0},${y0} A${R},${R} 0 0 1 ${x1},${y1} L${x2},${y2} A${ri},${ri} 0 0 0 ${x3},${y3} Z" fill="${fill}"/>`};
+  return `<svg viewBox="0 0 600 600" class="wsvg" xmlns="http://www.w3.org/2000/svg">${sec(-135,-45,"#F4F1EA")}${sec(-45,45,"#FBEFCB")}${sec(45,135,"#F8DCDB")}${sec(135,225,"#E2E2E0")}
+  ${[-135,-45,45,135].map(a=>{const [x0,y0]=pt(a,ri),[x1,y1]=pt(a,R);return `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="#3a3a3a" stroke-width="2"/>`}).join("")}
+  <circle cx="${C}" cy="${C}" r="${R}" fill="none" stroke="#3a3a3a" stroke-width="2.5"/><circle cx="${C}" cy="${C}" r="${ri}" fill="#fff" stroke="#3a3a3a" stroke-width="2"/></svg>`}
+async function buildRapport(cid){const c=S.children.get(cid);const R=rapportFull(cid);const T=R.t;const sg=getSign();const E=esc;
+  const A={};const need=["logo-coclinique","logo-caal","hd-facil","hd-analyse"].concat(["tete","esprit","coeur","corps"].map(k=>"sph-"+k),RBOX.map(x=>x[2]));
   for(const n of need)A[n]=await toDataURL(`img/rapport/${n}.webp`);
-  const av=await toDataURL(img("avatar-"+(c.avatar||"renard")));
-  const age=c.dob?ageAt(c.dob):"";const tag=`<div class="tag"><img src="${A["plume-coeur"]}" alt=""><div><b>${E(c.name)}</b>${c.dob?`<span>${E(fmtD(c.dob,true))}</span><span>${E(age)}</span>`:""}</div></div>`;
-  const P=t=>E(t||"").replace(/\n/g,"<br>");const K=kwAgg(c);
-  const kws=sph=>{const F=K.filter(x=>x.sph===sph&&x.t==="force").sort((a,b)=>b.n-a.n).slice(0,6);const D=R.defis?K.filter(x=>x.sph===sph&&x.t==="defi"&&!x.became).sort((a,b)=>b.n-a.n).slice(0,3):[];return F.map(x=>`<span class="k">${E(x.mot)}</span>`).join("")+(D.length?`<span class="kd">À soutenir : ${D.map(x=>E(x.mot)).join(", ")}</span>`:"")};
-  const SC={tete:"#B9AC90",esprit:"#E3B23C",coeur:"#D9393E",corps:"#4A4A4A"},SB={tete:"#FAF8F3",esprit:"#FFF5DC",coeur:"#FDE6E5",corps:"#F1F1F0"};
-  const frise=i=>`<img class="frise" src="${A["frise-"+i]}" alt="">`;
-  const p1=`<section class="page cover"><header class="logos"><img src="${A["logo-coclinique"]}" class="lg1" alt=""><img src="${A["logo-caal"]}" class="lg2" alt=""></header>
-    <h1>Rapport d'évaluation</h1><p class="sub">en ergothérapie et en éducation spécialisée</p><div class="div"></div><p class="ctx">en contexte de groupe</p>
-    <div class="wheel"><img src="${A.roue}" class="wimg" alt=""><img src="${A["sph-tete"]}" class="wi n" alt=""><img src="${A["sph-esprit"]}" class="wi e" alt=""><img src="${A["sph-coeur"]}" class="wi s" alt=""><img src="${A["sph-corps"]}" class="wi w" alt="">
+  const age=c.dob?ageAt(c.dob):"";const P=t=>E(t||"").replace(/\n/g,"<br>");const K=kwAgg(c);
+  const kws=sph=>{const F=K.filter(x=>x.sph===sph&&x.t==="force").sort((a,b)=>b.n-a.n).slice(0,7);const D=R.defis?K.filter(x=>x.sph===sph&&x.t==="defi"&&!x.became).sort((a,b)=>b.n-a.n).slice(0,3):[];return F.map(x=>`<span class="k">${E(x.mot)}</span>`).join("")+(D.length?`<span class="kd">À soutenir : ${D.map(x=>E(x.mot)).join(", ")}</span>`:"")};
+  const SC={tete:"#A89878",esprit:"#D9A72B",coeur:"#C9393E",corps:"#555"},SB={tete:"#F7F5F0",esprit:"#FDF6E1",coeur:"#FCECEB",corps:"#F2F2F1"};
+  const cover=`<section class="page cover"><header class="logos"><img src="${A["logo-coclinique"]}" class="lg1" alt=""><img src="${A["logo-caal"]}" class="lg2" alt=""></header>
+    <div class="ttl"><h1>${E(T.titre)}</h1><p class="sub">${E(T.sous)}</p><p class="ctx">${E(T.ctx)}</p></div>
+    <div class="wheel">${wheelSVG()}<img src="${A["sph-tete"]}" class="wi n" alt=""><img src="${A["sph-esprit"]}" class="wi e" alt=""><img src="${A["sph-coeur"]}" class="wi s" alt=""><img src="${A["sph-corps"]}" class="wi w" alt="">
       <div class="q qn">${kws("tete")}</div><div class="q qe">${kws("esprit")}</div><div class="q qs">${kws("coeur")}</div><div class="q qw">${kws("corps")}</div>
       <div class="center"><b>${E(c.name)}</b>${c.dob?`<span>${E(fmtD(c.dob,true))}</span><span>${E(age)}</span>`:""}</div></div>
-    <div class="legend">${Object.entries(SPHERES).map(([k,v])=>`<div><i style="background:${SC[k]}"></i><b>${v.nom}</b><br><small>(${E(k==="tete"?"fonctions mentales":k==="esprit"?"affectif et social":k==="coeur"?"émotions et régulation":"sensoriel et moteur")})</small></div>`).join("")}</div>
-    <img src="${A["feuille-coeur"]}" class="deco-l" alt=""><p class="dc">Date de création : ${E(fmtD(todayISO(),true))}</p>${frise(1)}</section>`;
-  const p2=`<section class="page">${tag}<img src="${A["hd-facil"]}" class="hd" alt=""><h2 class="it">Facilitateurs<br>pour la participation scolaire</h2><div class="div"></div>
-    <p class="intro">Les stratégies suivantes visent à soutenir la participation de l'enfant en s'appuyant sur ses forces et sur les conditions qui favorisent son équilibre.</p>
-    ${["tete","esprit","coeur","corps"].map(k=>`<div class="fbox" style="background:${SB[k]};border-color:${SC[k]}"><img src="${A["sph-"+k]}" class="fi" alt=""><div class="ft"><b>${SPHERES[k].nom}</b><div>${P(R.facil&&R.facil[k])}</div></div><img src="${A["spl-"+k]}" class="spl" alt=""></div>`).join("")}${frise(2)}</section>`;
-  const p3=`<section class="page">${tag}<h2>Rapport d'évaluation</h2><p class="sub">en ergothérapie et en éducation spécialisée</p><div class="div"></div><p class="ctx">en contexte de groupe</p>
-    <div class="box"><h3>Dates d'évaluation</h3><p>${P(R.dates)}</p><img src="${A["feuille-esprit"]}" class="deco-r" alt=""></div>
-    <div class="box"><h3>Mise en contexte</h3><p class="just">${P(R.contexte)}</p></div>
-    <div class="box"><h3>Démarche évaluative</h3><p>${P(R.demarche)}</p><img src="${A["feuille-esprit"]}" class="deco-r2" alt=""></div>${frise(3)}</section>`;
-  const p4=`<section class="page">${tag}<div class="brush"><img src="${A["br-tete"]}" alt=""><h2 class="it">Observations des occupations</h2></div>
-    ${RBOX.map(([k,l,im])=>`<div class="obox"><img src="${A[im]}" class="oi" alt=""><h3>${E(l)}</h3><p class="just">${P(R[k])}</p></div>`).join("")}${frise(4)}</section>`;
-  const p5=`<section class="page">${tag}<div class="brush"><img src="${A["hd-analyse"]}" class="hda" alt=""><h2 class="it">Analyse</h2></div>
-    <div class="abox"><p class="just">${P(R.analyse)}</p><p class="dr">Date de rédaction : ${E(fmtD(todayISO(),true))}</p></div>
-    <div class="signs">${sg.map(x=>`<div><img src="${A["plume-tete"]}" alt=""><div class="line"></div><i>${E(x.nom)}</i><br><i>${E(x.titre)}</i><br><span>${E(x.courriel)}</span></div>`).join("")}</div>${frise(5)}</section>`;
-  return `<!DOCTYPE html><html lang="fr-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rapport d'évaluation · ${E(c.name)}</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <div class="legend">${["tete","esprit","coeur","corps"].map(k=>`<div><i style="background:${SC[k]}"></i><b>${SPHERES[k].nom}</b> <small>${E(k==="tete"?"fonctions mentales":k==="esprit"?"affectif et social":k==="coeur"?"émotions et régulation":"sensoriel et moteur")}</small></div>`).join("")}</div>
+    <p class="dc">Date de création : ${E(fmtD(todayISO(),true))}</p></section>`;
+  const sections=[
+    {head:`<div class="phead"><img src="${A["hd-facil"]}" class="hdi" alt=""><div><h2>${E(T.facT)}</h2><p class="intro">${P(T.facI)}</p></div></div>`,blocks:R.ordF.map(k=>`<div class="blk fbox" style="--c:${SC[k]};--b:${SB[k]}"><img src="${A["sph-"+k]}" class="bi" alt=""><div class="bt"><h3>${E(SPHERES[k].nom)}</h3><div>${P(R.facil[k])}</div></div></div>`)},
+    {head:`<div class="phead plain"><h2>${E(T.titre)}</h2><p class="sub">${E(T.sous)} · ${E(T.ctx)}</p></div>`,blocks:[[T.datesT,R.dates],[T.ctxT,R.contexte],[T.demT,R.demarche]].map(([h,t])=>`<div class="blk tbox"><h3>${E(h)}</h3><p>${P(t)}</p></div>`)},
+    {head:`<div class="phead plain"><h2>${E(T.occT)}</h2></div>`,blocks:R.ordO.map(k=>{const im=RBOX.find(x=>x[0]===k)[2];return `<div class="blk obox"><img src="${A[im]}" class="bi" alt=""><div class="bt"><h3>${E(T["o_"+k])}</h3><p>${P(R[k])}</p></div></div>`})},
+    {head:`<div class="phead"><img src="${A["hd-analyse"]}" class="hdi" alt=""><div><h2>${E(T.anaT)}</h2></div></div>`,blocks:[`<div class="blk tbox"><p>${P(R.analyse)}</p><p class="dr">Date de rédaction : ${E(fmtD(todayISO(),true))}</p></div>`,`<div class="blk signs">${sg.map(x=>`<div><div class="line"></div><i>${E(x.nom)}</i><br><i>${E(x.titre)}</i><br><span>${E(x.courriel)}</span></div>`).join("")}</div>`]}];
+  const data=JSON.stringify({sections,opt:!!R.opt,name:c.name+(c.dob?" · "+fmtD(c.dob,true)+" · "+age:"")}).replace(/</g,"\\u003c");
+  return `<!DOCTYPE html><html lang="fr-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${E(T.titre)} · ${E(c.name)}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
-@page{size:Letter;margin:0}*{box-sizing:border-box}body{margin:0;background:#e9e6df;font-family:Barlow,Arial,sans-serif;color:#2b2b2b;font-size:11.5pt;line-height:1.45}
-.page{position:relative;width:8.5in;min-height:11in;margin:20px auto;background:#fff;padding:.55in .6in .9in;box-shadow:0 2px 12px rgba(0,0,0,.12);page-break-after:always;break-after:page;overflow:hidden}
-h1,h2{font-family:Lora,Georgia,serif;font-weight:400;text-align:center;margin:0}h1{font-size:30pt}h2{font-size:24pt}h2.it{font-style:italic}
-.sub{text-align:center;font-size:14pt;margin:4px 0 0}.ctx{text-align:center;font-style:italic;font-size:13pt;margin:4px 0 14px}.div{width:180px;height:1px;background:#999;margin:8px auto}
-.logos{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.lg1{height:95px}.lg2{height:105px}
-.wheel{position:relative;width:5.2in;height:5.2in;margin:.5in auto 0}.wimg{width:100%;height:100%}
-.wi{position:absolute;width:1.05in}.wi.n{left:50%;top:-.42in;transform:translateX(-50%)}.wi.s{left:50%;bottom:-.42in;transform:translateX(-50%)}.wi.e{right:-.5in;top:50%;transform:translateY(-50%)}.wi.w{left:-.5in;top:50%;transform:translateY(-50%)}
-.q{position:absolute;display:flex;flex-wrap:wrap;gap:4px 6px;justify-content:center;align-content:center;text-align:center}
-.qn{left:24%;right:24%;top:11%;height:22%}.qs{left:24%;right:24%;bottom:11%;height:22%}.qe{right:6%;top:30%;width:21%;height:40%}.qw{left:6%;top:30%;width:21%;height:40%}
-.k{background:rgba(255,255,255,.85);border-radius:999px;padding:2px 9px;font-size:10.5pt;font-weight:600}.qw .k{background:rgba(255,255,255,.9)}.kd{display:block;width:100%;font-size:9pt;background:rgba(255,255,255,.8);border-radius:8px;padding:2px 6px}
-.center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:1.3in;text-align:center;display:flex;flex-direction:column;font-size:10pt}.center b{font-size:13pt}
-.legend{position:absolute;right:.5in;bottom:1.05in;font-size:10pt;line-height:1.15}.legend div{margin:6px 0;padding-left:22px;position:relative}.legend i{position:absolute;left:0;top:3px;width:14px;height:14px;border-radius:50%;border:1px solid #333}
-.deco-l{position:absolute;left:.4in;bottom:1.1in;width:1.3in;transform:rotate(-20deg)}.dc{position:absolute;left:.6in;bottom:.55in;margin:0}
-.frise{position:absolute;left:50%;bottom:.25in;transform:translateX(-50%);height:.42in}
-.tag{position:absolute;right:.45in;top:.4in;display:flex;align-items:center;gap:6px;border:2px solid #D9393E;border-right-color:#E3B23C;border-bottom-color:#222;border-radius:30px;padding:6px 18px 6px 4px;background:#fff;font-size:10pt;line-height:1.15}.tag img{height:58px;margin:-14px 0 -14px -24px}.tag div{display:flex;flex-direction:column;text-align:center}
-.hd{display:block;margin:0 auto 4px;height:1.25in}.intro{text-align:center;margin:6px 10px 14px}
-.fbox{position:relative;border:1.5px solid;border-radius:22px;padding:14px 18px 14px 1.25in;min-height:1.55in;margin:0 0 .17in;overflow:hidden}.fi{position:absolute;left:.08in;top:.06in;width:1.05in}.ft b{display:block;margin-bottom:2px}.spl{position:absolute;right:-6px;bottom:-6px;width:1.1in;opacity:.55}
-.box{position:relative;border:1.5px solid #E1B860;border-radius:22px;padding:12px 22px 16px;background:#FBF9F5;margin:.2in 0}.box h3,.obox h3{font-family:Lora,Georgia,serif;font-weight:400;font-size:15pt;margin:0 0 6px}
-.just{text-align:justify}.box{padding-right:.75in}.deco-r{position:absolute;right:-.2in;bottom:-.25in;width:.85in}.deco-r2{position:absolute;right:-.25in;bottom:-.3in;width:.95in}
-.brush{position:relative;text-align:center;margin:.05in 0 .15in}.brush img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:5.6in;height:.85in;opacity:.6}.brush h2{position:relative}
-.brush .hda{width:auto;height:1.15in;left:22%;opacity:1}
-.obox{position:relative;border:1.3px solid #333;border-radius:20px;padding:12px 18px 12px 1.45in;min-height:1.75in;margin:0 0 .16in;background:#FBF9F5}.obox .oi{position:absolute;left:.05in;top:.08in;width:1.3in}.obox h3{font-family:Barlow,Arial,sans-serif;font-weight:600;font-size:12.5pt}
-.abox{border:1.3px solid #E1B860;border-radius:22px;padding:18px 22px;min-height:6.2in;background:#FBF9F5;margin-top:.35in;position:relative}.dr{font-style:italic;margin-top:18px}
-.signs{display:flex;justify-content:space-between;margin-top:.45in;text-align:center;font-size:10.5pt}.signs>div{width:45%;position:relative}.signs img{position:absolute;left:0;top:-.55in;height:.7in}.signs .line{border-top:1.5px solid #9B7A3D;margin:.25in 0 4px}.signs span{color:#9B7A3D}
+@page{size:Letter;margin:0}*{box-sizing:border-box}body{margin:0;background:#e8e6e1;font-family:Barlow,Arial,sans-serif;color:#2a2a2a;font-size:10.5pt;line-height:1.5}
+.page{position:relative;width:8.5in;height:11in;margin:18px auto;background:#fff;padding:.7in .75in .95in;box-shadow:0 1px 10px rgba(0,0,0,.12);page-break-after:always;break-after:page;overflow:hidden;display:flex;flex-direction:column}
+.content{flex:1;display:flex;flex-direction:column;gap:.16in;min-height:0}
+h1,h2,h3{font-family:Lora,Georgia,serif;font-weight:500;margin:0;color:#262626}h1{font-size:26pt;letter-spacing:.2px}h2{font-size:17pt}h3{font-size:12pt;margin-bottom:4px}
+.sub{margin:3px 0 0;font-size:11.5pt;color:#555}.ctx{margin:2px 0 0;font-style:italic;color:#666}
+.tag{position:absolute;top:.38in;right:.75in;font-size:8.5pt;color:#777;letter-spacing:.3px}
+.cover .logos{display:flex;justify-content:space-between;align-items:center}.lg1{height:70px}.lg2{height:80px}
+.cover .ttl{text-align:center;margin:.15in 0 0}.cover .ttl .ctx{margin-top:4px}
+.wheel{position:relative;width:6.1in;height:6.1in;margin:.45in auto 0}.wsvg{width:100%;height:100%;display:block}
+.wi{position:absolute;width:.85in}.wi.n{left:50%;top:-.42in;transform:translateX(-50%)}.wi.s{left:50%;bottom:-.42in;transform:translateX(-50%)}.wi.e{right:-.45in;top:50%;transform:translateY(-50%)}.wi.w{left:-.45in;top:50%;transform:translateY(-50%)}
+.q{position:absolute;display:flex;flex-wrap:wrap;gap:4px 8px;justify-content:center;align-content:center;text-align:center}
+.qn{left:22%;right:22%;top:9%;height:23%}.qs{left:22%;right:22%;bottom:9%;height:23%}.qe{right:5%;top:30%;width:22%;height:40%}.qw{left:5%;top:30%;width:22%;height:40%}
+.k{font-size:10pt;font-weight:500;color:#2a2a2a}.k:not(:last-child)::after{content:"";}
+.kd{display:block;width:100%;font-size:8.5pt;color:#666;font-style:italic}
+.center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:1.35in;text-align:center;display:flex;flex-direction:column;font-size:9pt;color:#555}.center b{font-size:12.5pt;color:#222;font-family:Lora,Georgia,serif;font-weight:500}
+.legend{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:.5in;font-size:9pt}.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:0}.legend small{color:#777}
+.dc{position:absolute;left:.75in;bottom:.5in;margin:0;font-size:9pt;color:#666}
+.phead{display:flex;gap:.2in;align-items:center;padding-bottom:.12in;border-bottom:1px solid #e3ddd0;margin-bottom:.06in}.phead .hdi{height:.95in}.phead.plain{display:block;text-align:left}.phead .intro{margin:6px 0 0;color:#555;font-size:10pt}.phead.cont h2{font-size:13pt;color:#666}.phead.cont .hdi{height:.45in}
+.blk{break-inside:avoid;position:relative;border-radius:10px}
+.fbox{background:var(--b);border-left:4px solid var(--c);padding:.14in .2in .14in 1.15in;min-height:1.15in}
+.bi{position:absolute;left:.14in;top:.12in;width:.85in}
+.obox{border:1px solid #e3ddd0;background:#FCFBF8;padding:.14in .2in .14in 1.3in;min-height:1.2in}.obox .bi{width:1in;left:.12in}
+.tbox{border:1px solid #e3ddd0;background:#FCFBF8;padding:.14in .22in}.tbox p,.obox p{margin:0;text-align:justify}
+.dr{margin-top:.15in!important;font-style:italic;color:#555}
+.signs{display:flex;justify-content:space-between;margin-top:.3in;text-align:center;font-size:9.5pt}.signs>div{width:44%}.signs .line{border-top:1px solid #8a8a8a;margin:.35in 0 4px}.signs span{color:#7a6a3d}
+.foot{position:absolute;left:.75in;right:.75in;bottom:.4in;display:flex;align-items:center;justify-content:space-between;font-size:8pt;color:#888}
+.dots{display:flex;gap:6px;align-items:center}.dots i{width:16px;height:16px;border-radius:50%;font-style:normal;font-size:7.5pt;display:flex;align-items:center;justify-content:center;color:#666;border:1px solid #d6d0c4;background:#fff}.dots i.on{color:#fff;border-color:transparent}
 @media print{body{background:#fff}.page{margin:0;box-shadow:none}}
-</style></head><body>${p1}${p2}${p3}${p4}${p5}</body></html>`}
+</style></head><body><div id="out">${cover}</div><div id="meas" style="position:absolute;left:-9999px;top:0"></div>
+<script>window.addEventListener("load",function(){const D=${data};const out=document.getElementById("out");const COL=["#A89878","#D9A72B","#C9393E","#555","#8AA37B","#7A8FA8"];
+function newPage(head){const p=document.createElement("section");p.className="page";p.innerHTML='<div class="tag">'+D.name.replace(/&/g,"&amp;").replace(/</g,"&lt;")+'</div><div class="content"></div>';out.appendChild(p);const c=p.querySelector(".content");if(head)c.insertAdjacentHTML("beforeend",head);return c}
+function fits(c){return c.scrollHeight<=c.clientHeight+1}
+D.sections.forEach(sec=>{let c=newPage(sec.head);let q=sec.blocks.slice();
+  while(q.length){let placed=false;
+    for(let i=0;i<(D.opt?q.length:1);i++){c.insertAdjacentHTML("beforeend",q[i]);const el=c.lastElementChild;if(fits(c)){q.splice(i,1);placed=true;break}el.remove()}
+    if(!placed){if(c.children.length<=1){c.insertAdjacentHTML("beforeend",q.shift());continue}c=newPage(sec.head.replace('class="phead','class="phead cont').replace(/<p class="intro">[^]*?<\\/p>/,""))}}});
+const pages=[...out.querySelectorAll(".page")];const N=pages.length;
+pages.forEach((p,i)=>{const f=document.createElement("div");f.className="foot";f.innerHTML='<span></span><span class="dots">'+pages.map((_,j)=>'<i class="'+(j===i?"on":"")+'" style="'+(j===i?"background:"+COL[j%COL.length]:"")+'">'+(j+1)+'</i>').join("")+'</span>';p.appendChild(f)});
+});<\/script></body></html>`}
 function calDaySheet(gid,d){const g=S.groups.get(gid);const info=groupDays(gid).get(d)||{};const pl=(g.meetings||[]).includes(d);
   const items=dayItems(gid,d).filter(it=>it.kind!=="j");const jl=(g.journal||[]).filter(n=>n.date===d&&n.theme!=="source"&&n.theme!=="jour");const pr=(presOf(g,d)||[]).map(id=>(S.children.get(id)||{}).name).filter(Boolean);const cx=ctxOf(gid,d);
   const jn=(g.journal||[]).filter(n=>n.date===d&&(n.theme==="source"||n.theme==="jour"));
@@ -1106,7 +1145,7 @@ function calDaySheet(gid,d){const g=S.groups.get(gid);const info=groupDays(gid).
     s.querySelector("#cdPlan").onclick=()=>{mutGroup(gid,x=>{const l=x.meetings||[];x.meetings=pl?l.filter(v=>v!==d):l.concat(d).sort()});calDaySheet(gid,d)};
   })}
 function covHTML(gid,g,kids){let h="";const T=tpl(g);
-    h+=`<section class="card"><div class="ordhead"><h3 style="font-size:1.35rem">Récapitulatif du groupe</h3><span class="row-actions"><button class="btn primary small" data-act="cqmGroup" data-id="${gid}">Ce qui marche</button><button class="btn small" data-act="recap" data-id="${gid}">Tableau détaillé</button></span></div><h4 style="margin:12px 0 2px">Couverture des observations</h4><p class="muted small" style="margin:2px 0 10px">Jours depuis la dernière observation, par enfant et par occupation. Avec les présences, la couleur tient compte des rencontres où l'enfant était là : vert = rien de manqué, jaune = une rencontre sans observation, rose = plusieurs.</p>
+    h+=`<section class="card"><div class="ordhead"><h3 style="font-size:1.35rem">Récapitulatif du groupe</h3><span class="row-actions"><button class="btn primary small" data-act="cqmGroup" data-id="${gid}">Ce qui marche</button><button class="btn small" data-act="eclairs" data-id="${gid}">Fiches éclair</button></span></div><h4 style="margin:12px 0 2px">Couverture des observations</h4><p class="muted small" style="margin:2px 0 10px">Jours depuis la dernière observation, par enfant et par occupation. Avec les présences, la couleur tient compte des rencontres où l'enfant était là : vert = rien de manqué, jaune = une rencontre sans observation, rose = plusieurs.</p>
     <div class="cov-wrap"><table class="cov"><thead><tr><th></th>${OCCS.map(o=>`<th title="${esc(o.titre)}"><img src="${img(o.img)}" alt="${esc(o.titre)}"><span>${esc(shortT(o.titre))}</span></th>`).join("")}</tr></thead><tbody>
     ${kids.map(([cid,c])=>`<tr><th><a href="#e-${cid}">${esc(c.name)}</a></th>${OCCS.map(o=>{const last=o.subs.map(id=>secLast(c,{id})).sort().pop();const d=daysSince(last);const pd=presDates(g);let cls;
       if(pd.length){const missed=pd.filter(x=>(!last||x>last)&&g.presences[x].includes(cid)).length;cls=last?(missed===0?"c3":missed===1?"c2":"c1"):(missed?"c1":"c0")}else cls=d===null?"c0":d<=14?"c3":d<=35?"c2":"c1";return `<td class="${cls}"><a href="#e-${cid}--${o.subs[0]}">${d===null?"—":d===0?"auj.":d+" j"}</a></td>`}).join("")}</tr>`).join("")}
@@ -1127,7 +1166,7 @@ function presenceHTML(gid,g,kids){const p=presOf(g,S.obsDate)||[];S.prInit=S.prI
 function childObjs(c){return (c.objectifs||[])}
 function objMarksHTML(o){const m=Object.entries(o.marks||{}).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,10);return m.map(([d,v])=>`<span class="opill ${v}">${OMARK[v]||""} ${fmtD(d)}</span>`).join("")}
 function childObjHTML(cid,c,O,compact){const list=childObjs(c).filter(o=>!o.done&&(!O||O.subs.includes((o.k||o.occ||"").split(".")[0])));if(!list.length)return "";
-  return `<section class="${compact?"cobj compact":"card cobj"}">${compact?"":`<h3 style="font-size:1.25rem;margin-bottom:6px">Objectifs de ${esc(c.name)}</h3>`}${list.map(o=>{const v=(o.marks||{})[S.obsDate]||"";return `<div class="cobjrow"><button class="omark ${v}" data-act="cObjMark" data-id="${cid}" data-o="${o.id}" aria-label="${esc(o.label)} : ${ONAME[v]||"non noté"}">${OMARK[v]||""}</button><span class="txt"><b>${esc(o.label)}</b>${o.k?`<span class="muted small"> · ${esc(stepLabel(c,o.k)||"")}</span>`:""}<span class="ehist">${objMarksHTML(o)}</span></span></div>`}).join("")}</section>`}
+  return `<section class="${compact?"cobj compact":"card cobj"}">${compact?"":`<h3 style="font-size:1.25rem;margin-bottom:6px">Objectifs de ${esc(c.name)}</h3>`}${list.map(o=>{const v=(o.marks||{})[S.obsDate]||"";return `<div class="cobjrow"><button class="omark ${v}" data-act="cObjMark" data-id="${cid}" data-o="${o.id}" aria-label="${esc(o.label)} : ${ONAME[v]||"non noté"}">${OMARK[v]||""}</button><span class="txt"><b title="${esc(o.label)}">${esc(objShort(o))}</b>${o.k?`<span class="muted small"> · ${esc(stepLabel(c,o.k)||"")}</span>`:""}<span class="ehist">${objMarksHTML(o)}</span></span></div>`}).join("")}</section>`}
 function ordOn(){try{return localStorage.getItem("carnet-ord")==="1"}catch(e){return false}}
 function isHidStep(c,k){return (c.hideSteps||[]).includes(k)}
 function objSuggestions(c){const out=[];const mo=monthsAt(c.dob,todayISO());
@@ -1140,13 +1179,13 @@ function objSuggestions(c){const out=[];const mo=monthsAt(c.dob,todayISO());
     if(!pick&&hi>=0&&nx<r.steps.length){const st=r.steps[nx];const ag=ageOf(key+"."+stK(st,nx));pick={k:key,label:stT(st),why:ag&&mo!==null&&mo>=ag[0]?"prochaine étape, de son âge":"prochaine étape"}}
     if(pick&&!childObjs(c).some(o=>o.k===pick.k&&o.label===pick.label))out.push(pick)}));
   return out.slice(0,8)}
-function portraitObjHTML(cid,c){const T=TEMPLATES[baseTpl(c)];const all=childObjs(c).slice().sort((a,b)=>(a.done?1:0)-(b.done?1:0));const oo=isObjOnly(c);const sug=oo?OBJ612.filter(([l])=>!childObjs(c).some(o=>o.label===l)).slice(0,6).map(([l,sec])=>({k:sec,label:l,why:"suggestion 6-12 ans"})):objSuggestions(c);
+function portraitObjHTML(cid,c){const T=TEMPLATES[baseTpl(c)];const all=childObjs(c).slice().sort((a,b)=>(a.done?1:0)-(b.done?1:0));const longI=all.filter(o=>String(o.label||"").length>90&&!o.titre);const oo=isObjOnly(c);const sug=oo?OBJ612.filter(([l])=>!childObjs(c).some(o=>o.label===l)).slice(0,6).map(([l,sec])=>({k:sec,label:l,why:"suggestion 6-12 ans"})):objSuggestions(c);
   return `<section class="card"><h3 style="font-size:1.3rem">Objectifs de ${esc(c.name)}</h3><p class="muted small" style="margin:2px 0 10px">Deux ou trois objectifs prioritaires, liés à une occupation ou un repère. ${oo?"À chaque rencontre, touchez la case : ✓ réussi, ↗ en progrès, ✗ difficile.":"Ils s'affichent aussi dans l'occupation et en mode activité, où l'on coche ✓ ou ✗ à la date."}</p>
-  <div class="entries">${all.map(o=>`<div class="entry col${o.done?" done":""}"><div class="erow"><button class="omark ${(o.marks||{})[S.obsDate]||""}" data-act="cObjMark" data-id="${cid}" data-o="${o.id}" ${o.done?"disabled":""}>${OMARK[(o.marks||{})[S.obsDate]]||""}</button><span class="txt"><b>${esc(o.label)}</b><br><span class="muted small">${esc((occOf((o.k||o.occ||"").split(".")[0])||{titre:""}).titre)}${o.k?" · "+esc(stepLabel(c,o.k)||""):""}</span></span><button class="btn ghost small" data-act="cObjDone" data-id="${cid}" data-o="${o.id}">${o.done?"Rouvrir":"Atteint"}</button><button class="x" aria-label="Retirer" data-act="cObjDel" data-id="${cid}" data-o="${o.id}">✕</button></div><div class="ehist">${objMarksHTML(o)}</div></div>`).join("")||'<p class="muted small">Aucun objectif pour l\'instant.</p>'}</div>
+  ${longI.length?`<div class="hidebar" style="position:static;margin-bottom:8px"><span>${longI.length} objectif${longI.length>1?"s":""} importé${longI.length>1?"s":""} ressemble${longI.length>1?"nt":""} plutôt à des pistes (texte long).</span><button class="btn small primary" data-act="convPistes" data-id="${cid}">Convertir en pistes</button></div>`:""}<div class="entries">${all.map(o=>`<div class="entry col${o.done?" done":""}"><div class="erow"><button class="omark ${(o.marks||{})[S.obsDate]||""}" data-act="cObjMark" data-id="${cid}" data-o="${o.id}" ${o.done?"disabled":""}>${OMARK[(o.marks||{})[S.obsDate]]||""}</button><span class="txt"><b>${esc(objShort(o))}</b> <button class="linkbtn small" data-act="cObjRen" data-id="${cid}" data-o="${o.id}">renommer</button>${objShort(o)!==o.label?`<details class="more"><summary>texte complet</summary><span class="small">${esc(o.label)}</span></details>`:""}<span class="muted small">${esc((occOf((o.k||o.occ||"").split(".")[0])||{titre:""}).titre)}${o.k?" · "+esc(stepLabel(c,o.k)||""):""}</span></span><button class="btn ghost small" data-act="cObjDone" data-id="${cid}" data-o="${o.id}">${o.done?"Rouvrir":"Atteint"}</button><button class="x" aria-label="Retirer" data-act="cObjDel" data-id="${cid}" data-o="${o.id}">✕</button></div><div class="ehist">${objMarksHTML(o)}</div></div>`).join("")||'<p class="muted small">Aucun objectif pour l\'instant.</p>'}</div>
   <div class="addnote" style="margin-top:10px"><input class="field" id="coLabel" placeholder="Ex. : Attendre son tour à la balançoire avec le sablier">
   <select class="field" id="coLink"><option value="">Lier à une occupation ou un repère (facultatif)</option>${OCCS.map(o=>`<optgroup label="${esc(o.n+". "+o.titre)}"><option value="${o.subs[0]}">${esc(o.titre)} (général)</option>${occSecs(c,o).flatMap(sec=>sec.rows.filter(r=>!r.free).map(r=>`<option value="${sec.id}.${r.id}">${esc(r.label)}</option>`)).join("")}</optgroup>`).join("")}</select>
   <div class="row-actions"><button class="btn primary" data-act="cObjAdd" data-id="${cid}">Ajouter l'objectif</button></div></div>
-  ${sug.length?`<div style="margin-top:10px"><span class="label">Suggestions</span><div class="row-actions" style="margin-top:6px">${sug.map(x=>`<button class="sugchip" data-act="cObjSugg" data-id="${cid}" data-k="${x.k}" data-l="${esc(x.label)}" title="${esc(x.why)}">+ ${esc(x.label)}</button>`).join("")}</div></div>`:""}</section>`}
+  ${sug.length?det("osug-"+cid,`Suggestions (${sug.length})`,`<div class="row-actions" style="margin-top:6px">${sug.map(x=>`<button class="sugchip" data-act="cObjSugg" data-id="${cid}" data-k="${x.k}" data-l="${esc(x.label)}" title="${esc(x.why)}">+ ${esc(x.label)}</button>`).join("")}</div>`):""}</section>`}
 /* ---------- Objectifs de groupe ---------- */
 const OBJ_SUGG=[["Arrivée","groupe"],["Départ","groupe"],["Transition vers la collation","groupe"],["Transition vers le dîner","groupe"],["Dîner : rester assis","groupe"]];
 function objRes(g,d){return ((g.objRes||{})[d])||{}}
@@ -1190,7 +1229,7 @@ function viewActivity(gid,secId){
   const allRows=gsecs.flatMap(sec=>sec.rows.map(r=>({sec,r,v:sec.id+"."+r.id})));
   if(!S.rowFilter||S.rowFilter.occ!==O.id||(S.rowFilter.row!=="*"&&!allRows.some(x=>x.v===S.rowFilter.row)))S.rowFilter={occ:O.id,row:(allRows.find(x=>!x.r.free)||allRows[0]||{v:"*"}).v};
   const cur=S.rowFilter.row;const sel=allRows.find(x=>x.v===cur);
-  let h=`<section class="card"><div class="sechead"><img src="${img(O.img)}" alt=""><div style="flex:1"><h2>Mode activité · ${esc(O.titre)}</h2><div class="sph">Une observation simple pour tous les enfants de ${esc(g.name)}.</div></div></div>
+  let h=(S.fromTerrain===gid?`<a class="btn backbtn" href="#t-${gid}" data-act="backTerrain">← Retour au terrain</a>`:"")+`<section class="card"><div class="sechead"><img src="${img(O.img)}" alt=""><div style="flex:1"><h2>Mode activité · ${esc(O.titre)}</h2><div class="sph">Une observation simple pour tous les enfants de ${esc(g.name)}.</div></div></div>
   <div class="toolbar" style="margin-top:12px">
    <label class="obsdate small"><span class="label">Date d'observation</span><input type="date" value="${S.obsDate}" data-act="obsDate"></label>
    ${ctxInput(gid)}
@@ -1282,7 +1321,7 @@ function viewChild(cid,secId){ensureRepaired(cid);
     return `<div class="cpres"><span class="label">Présences</span> <b>${n} / ${pd.length}</b> rencontre${pd.length>1?"s":""}${n<pd.length?` · absent${n<pd.length-1?"":""} : ${pd.filter(d=>!g.presences[d].includes(cid)).slice(-4).map(d=>fmtD(d)).join(", ")}`:""}<div class="pdots">${last.map(d=>{const on=g.presences[d].includes(cid);return `<span class="${on?"on":""}" title="${fmtD(d,true)} : ${on?"présent":"absent"}">${parseISO(d).getDate()}</span>`}).join("")}</div></div>`})()}
   <div class="toolbar"><label class="obsdate small"><span class="label">Date d'observation</span><input type="date" id="obsDate" value="${S.obsDate}" data-act="obsDate"></label></div></section>`;
   const OO=orderedOccs(c);const hasSP=!!(c.prio&&c.prio.occs);
-  if(!secId&&isObjOnly(c)){h+=portraitObjHTML(cid,c);h+=notesHTML(cid,c,["portrait"],"Notes","Ce que vous observez…");h+=`<section class="card"><p class="muted small" style="margin:0">Fiche 6-12 ans : on suit 2 ou 3 objectifs, sans portrait complet. Les occupations et les repères restent disponibles au besoin.</p><div class="row-actions" style="margin-top:8px">${OCCS.map(o=>`<a class="btn small" href="#e-${cid}--${o.subs[0]}">${esc(shortT(o.titre))}</a>`).join("")}<a class="btn small" href="#e-${cid}--synthese">Roue</a></div></section>`;return h}
+  if(!secId&&isObjOnly(c)){h+=portraitObjHTML(cid,c);h+=notesHTML(cid,c,["portrait"],"Notes","Ce que vous observez…");h+=`<section class="card"><p class="muted small" style="margin:0">Fiche 6-12 ans : on suit 2 ou 3 objectifs, sans portrait complet. Les occupations et les repères restent disponibles au besoin.</p><div class="row-actions" style="margin-top:8px">${OCCS.map(o=>`<a class="btn small" href="#e-${cid}--${o.subs[0]}">${esc(shortT(o.titre))}</a>`).join("")}<a class="btn small" href="#e-${cid}--portrait">Forces et défis</a></div></section>`;return h}
   if(!secId){h+=aoHTML(c);
     const om=S.orderMode;
     h+=`<section class="card"><div class="ordhead"><h3 style="font-size:1.35rem">Occupations${hasSP?' <span class="muted small" style="font-family:var(--font-body);font-weight:400">par ordre de priorité</span>':""}</h3>${ordOn()||om?`<button class="btn${om?" primary":""}" data-act="orderMode">${om?"Terminer":"Ordonner par priorité"}</button>`:""}</div><p class="muted small" style="margin:4px 0 10px">${om?"Montez ou descendez les occupations. La première est la plus prioritaire. Masquez celles qui ne sont pas une priorité : elles restent accessibles plus bas.":"Touchez une occupation pour cocher les repères. Chaque case cochée garde la date d'observation choisie plus haut."}</p><div class="secgrid">`;
@@ -1295,15 +1334,14 @@ function viewChild(cid,secId){ensureRepaired(cid);
       <div class="meta">${adapted?`<b class="lvlbadge">adapté</b> `:""}${st.on}/${st.tot} repères${st.nn?" · "+st.nn+" note"+(st.nn>1?"s":""):""}${st.last?" · "+fmtD(st.last):""}</div><div class="bar-prog"><i style="width:${st.tot?Math.round(st.on/st.tot*100):0}%"></i></div></div></a>`;
       if(hid)hidHTML+=tileHTML;else h+=tileHTML});
     h+=`</div>${hidO.length&&!om?det("hs-"+cid,`Occupations masquées (${hidO.length})`,`<div class="secgrid" style="margin-top:8px">${hidHTML}</div>`):""}</section><section class="card"><div class="secgrid">
-      <a class="sectile" href="#e-${cid}--portrait"><img src="${img("roue-medecine")}" alt=""><div><h3>Portrait</h3><div class="meta">Intérêts, ce qui le calme, la famille</div></div></a>
-      <a class="sectile" href="#e-${cid}--synthese"><img src="${img("icone-synthese")}" alt=""><div><h3>Synthèse</h3><div class="meta">Roue de la médecine, facilitateurs, prochains pas</div></div></a></div>
+      <a class="sectile" href="#e-${cid}--portrait"><img src="${img("roue-medecine")}" alt=""><div><h3>Portrait</h3><div class="meta">Qui il est, objectifs, forces et défis, ce qui marche, rapport</div></div></a></div>
       <div class="row-actions" style="margin-top:12px"><button class="btn" data-act="exportChild" data-id="${cid}">Exporter la fiche</button></div></section>`;
     return h;
   }
-  const hf=x=>`#e-${cid}--${x}`;hf.extra=cur=>`<a href="#e-${cid}--portrait" class="${cur==="portrait"?"on":""}"><img src="${img("roue-medecine")}" alt="">Portrait</a>`;hf.tail=cur=>`<a href="#e-${cid}--synthese" class="${cur==="synthese"?"on":""}"><img src="${img("icone-synthese")}" alt="">Synthèse</a>`;
+  const hf=x=>`#e-${cid}--${x}`;hf.extra=cur=>`<a href="#e-${cid}--portrait" class="${cur==="portrait"?"on":""}"><img src="${img("roue-medecine")}" alt="">Portrait</a>`;
   h+=occNav(c,cid,secId,hf);
   if(secId==="portrait")return h+viewPortrait(cid,c);
-  if(secId==="synthese")return h+viewSynthese(cid,c,T);
+  if(secId==="synthese")return h+viewPortrait(cid,c);
   const O=occOf(secId);if(!O)return h+`<div class="card empty">Section introuvable.</div>`;
   const secs=occSecs(c,O);const s0=secs[0];const om=S.orderMode;const AON=ageOn();
   h+=`<section class="card"><div class="sechead"><img src="${img(O.img)}" alt=""><div style="flex:1"><h2>${esc(O.n)}. ${esc(O.titre)}</h2></div></div>
@@ -1690,14 +1728,15 @@ function notesHTML(cid,c,secIds,title,ph){const ids=Array.isArray(secIds)?secIds
 }
 
 function viewPortrait(cid,c){
-  let h=`<section class="card"><div class="sechead"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><div style="flex:1"><h2>Portrait</h2><div class="sph">On part de qui il est : ses intérêts guident les activités proposées.</div></div><button class="btn ghost" data-act="editChild" data-id="${cid}">Modifier l'identité</button></div>
-  <div class="small" style="margin-top:10px;display:grid;gap:4px">
-  <div><span class="label">Date de naissance</span> ${c.dob?fmtD(c.dob,true)+" ("+esc(ageAt(c.dob))+")":"—"}</div>
-  <div><span class="label">Langue(s) à la maison</span> ${esc(c.langues||"—")}</div></div></section>`;
+  let h=eclairHTML(cid,c,true);
+  h+=`<section class="card"><div class="ordhead"><h3 style="font-size:1.3rem">Qui il est</h3><button class="btn ghost small" data-act="editChild" data-id="${cid}">Réglages</button></div>
+  <div class="small" style="margin-top:6px;display:grid;gap:4px"><div><span class="label">Date de naissance</span> ${c.dob?fmtD(c.dob,true)+" ("+esc(ageAt(c.dob))+")":"—"}</div><div><span class="label">Langue(s) à la maison</span> ${esc(c.langues||"—")}</div></div>
+  ${PORTRAIT_ROWS.map(r=>rowHTML(cid,c,{id:"portrait"},Object.assign({free:true},r))).join("")}</section>`;
   h+=portraitObjHTML(cid,c);
-  h+=`<section class="card">${PORTRAIT_ROWS.map(r=>rowHTML(cid,c,{id:"portrait"},Object.assign({free:true},r))).join("")}</section>`;
+  h+=pistesHTML(cid,c);
+  h+=syntheseCore(cid,c);
   {const tp=photosOf(c,p=>p.k==="portrait").sort((a,b)=>(b.d||"").localeCompare(a.d||""));h+=notesHTML(cid,c,["portrait"],"Notes du terrain et notes libres","Note libre…");if(tp.length)h+=`<section class="card"><span class="label">Photos du terrain (${tp.length})</span>${thumbs(c,tp,cid)}</section>`}
-
+  h+=`<section class="card"><div class="row-actions"><button class="btn primary" data-act="rapport" data-id="${cid}">Rapport d'évaluation</button><button class="btn" data-act="exportChild" data-id="${cid}">Fiche d'équipe et exports</button></div></section>`;
   h+=`<section class="card"><button class="btn danger" data-act="delChild" data-id="${cid}">Supprimer cette fiche</button></section>`;
   return h;
 }
@@ -1708,9 +1747,9 @@ function cqm(c){const fa=c.facil||{};const F=Object.fromEntries(facils());
   return Object.entries(fa).filter(([k,l])=>F[k]&&l&&l.length).map(([k,l])=>{const ex=(c.notes||[]).filter(n=>(n.fac||[]).includes(k)).sort((a,b)=>(b.date||"").localeCompare(a.date||""));return {k,t:F[k],n:[...new Set(l)].length,last:l.slice().sort().pop(),sph:FACSPH[k]||"",peo:FACPEO[k]||"",ex}}).sort((a,b)=>b.n-a.n||(b.last||"").localeCompare(a.last||""))}
 function roueHTML(cid,c,opts){opts=opts||{};const L=kwAgg(c);const max=Math.max(1,...L.map(x=>x.n));
   const q=sph=>{const F=L.filter(x=>x.sph===sph&&x.t==="force").sort((a,b)=>b.n-a.n),D=L.filter(x=>x.sph===sph&&x.t==="defi"&&!x.became).sort((a,b)=>b.n-a.n);
-    const chip=x=>`<button class="kw ${x.t} s-${sph}" style="font-size:${(.78+.32*(x.n/max)).toFixed(2)}rem" ${opts.ro?"disabled":`data-act="kwOpen" data-id="${cid}" data-k="${esc(x.sph+"|"+x.t+"|"+x.mot)}"`} title="${x.n} fois · dernière : ${fmtD(x.last)}">${esc(x.mot)}${x.n>1?` <small>${x.n}</small>`:""}</button>`;
+    const chip=x=>`<button class="kw ${x.t} s-${sph}" style="font-size:${(.85+.35*(x.n/max)).toFixed(2)}rem" ${opts.ro?"disabled":`data-act="kwOpen" data-id="${cid}" data-k="${esc(x.sph+"|"+x.t+"|"+x.mot)}"`}>${esc(x.mot)}</button>`;
     return `<div class="rq rq-${sph}"><div class="rqh">${esc(SPHERES[sph].nom)}</div>${F.length?`<div class="rqf">${F.map(chip).join("")}</div>`:""}${D.length?`<div class="rqd"><span class="muted small">défis :</span> ${D.map(chip).join("")}</div>`:""}${!F.length&&!D.length?`<span class="muted small">—</span>`:""}</div>`};
-  return `<div class="roue"><div class="rN">${q("tete")}</div><div class="rW">${q("corps")}</div><div class="rC"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><b>${esc(c.name)}</b></div><div class="rE">${q("esprit")}</div><div class="rS">${q("coeur")}</div></div>`}
+  return `<div class="roue"><div class="rN">${q("tete")}</div><div class="rW">${q("corps")}</div><div class="rE">${q("esprit")}</div><div class="rS">${q("coeur")}</div></div>`}
 function cqmGroupSheet(gid){const kids=childrenOf(gid).slice().sort((x,y)=>x[1].name.localeCompare(y[1].name,"fr",{sensitivity:"base"}));
   openSheet(`<h3>Ce qui marche</h3><p class="muted small" style="margin:0">Les facilitateurs qui ont fonctionné pour chaque enfant, du plus fréquent au moins fréquent.</p>
   <div class="entries">${kids.map(([cid,c])=>{const L=cqm(c).slice(0,4);const F=kwAgg(c).filter(x=>x.t==="force").sort((a,b)=>b.n-a.n).slice(0,4);return `<div class="entry col"><div class="erow"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt="" style="width:28px;height:28px"><span class="txt"><b><a href="#e-${cid}--synthese">${esc(c.name)}</a></b></span></div>
@@ -1724,6 +1763,69 @@ function kwSheet(cid,key){const c=S.children.get(cid);const [sph,t,...mm]=key.sp
     s.querySelector("#kwClose").onclick=closeSheet;
     s.querySelectorAll("[data-kdel]").forEach(b=>b.onclick=()=>{mutChild(cid,x=>{x.kw=(x.kw||[]).filter(k=>k.id!==b.dataset.kdel)});const left=(S.children.get(cid).kw||[]).some(k=>k.sph===sph&&k.t===t&&norm(k.mot)===norm(mot));left?kwSheet(cid,key):closeSheet()});
     const bc=s.querySelector("#kwBecome");if(bc)bc.onclick=()=>{mutChild(cid,x=>{(x.kw=x.kw||[]).push({id:uid("w"),mot,sph,t:"force",date:S.obsDate,src:"manuel"})});closeSheet();toast("« "+mot+" » est maintenant une force")}})}
+function objShort(o){if(o.titre)return o.titre;let t=String(o.label||"").trim();const m=t.match(/^([^:]{3,60})\s*:\s*/);if(m&&t.length>70)t=m[1];else t=t.split(/(?<=[.!?])\s/)[0];const w=t.split(/\s+/);return w.length>9?w.slice(0,8).join(" ")+"…":t}
+function pistesHTML(cid,c){const L=(c.pistes||[]).slice().sort((a,b)=>(a.done?1:0)-(b.done?1:0)||(b.date||"").localeCompare(a.date||""));
+  return `<section class="card"><h3 style="font-size:1.3rem;margin-bottom:4px">Pistes et prochains pas</h3><p class="muted small" style="margin:0 0 8px">À lire et garder en tête, pas à cocher. Une piste peut devenir un objectif.</p>
+  <div class="addline"><input class="field" id="piNew" placeholder="Ex. : offrir le hamac avant le dîner"><button class="btn primary" data-act="piAdd" data-id="${cid}">Ajouter</button></div>
+  <div class="entries" style="margin-top:8px">${L.map(n=>`<div class="entry col${n.done?" done":""}"><div class="erow"><span class="when">${fmtD(n.date)}</span><span class="txt">${esc(n.text)}</span></div><div class="row-actions" style="margin-top:2px"><button class="btn ghost small" data-act="piObj" data-id="${cid}" data-n="${n.id}">→ Objectif</button><button class="btn ghost small" data-act="piDone" data-id="${cid}" data-n="${n.id}">${n.done?"Rouvrir":"Réglé"}</button><button class="x" aria-label="Supprimer" data-act="piDel" data-id="${cid}" data-n="${n.id}">✕</button></div></div>`).join("")||'<p class="muted small">Aucune piste pour l\'instant.</p>'}</div></section>`}
+function shortFac(t){return String(t).replace(/\s*\(.*?\)/g,"").split(/\s*[:,]\s*/)[0]}
+function eclairData(c){const g=S.groups.get(c.groupId)||{};const pd=presDates(g);const np=pd.filter(d=>(g.presences[d]||[]).includes(c.id||"")).length;
+  const objs=childObjs(c).filter(o=>!o.done).slice(0,2).map(o=>{const m=Object.entries(o.marks||{}).sort().pop();return {t:objShort(o),v:m?m[1]:""}});
+  const aide=cqm(c).slice(0,3).map(x=>shortFac(x.t));const K=kwAgg(c);
+  const surv=K.filter(x=>x.t==="defi"&&!x.became).sort((a,b)=>b.n-a.n||(b.last||"").localeCompare(a.last||"")).slice(0,3).map(x=>x.mot);
+  const kwF=(c.kw||[]).filter(k=>k.t==="force").sort((a,b)=>(b.date||"").localeCompare(a.date||""))[0];
+  const ao=aObserver(c).find(x=>x.t!=="obj");return {pd,objs,aide,surv,reussite:kwF,ao}}
+function eclairHTML(cid,c,inPage){const g=S.groups.get(c.groupId)||{};const pd=presDates(g);const np=pd.filter(d=>(g.presences[d]||[]).includes(cid)).length;const E=eclairData(c);
+  return `<section class="${inPage?"card ":""}eclair"><div class="ehead"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><b>${esc(c.name)}</b>${pd.length?`<span class="muted small">présent ${np}/${pd.length}</span>`:""}</div>
+  ${E.objs.length?`<div class="el">🎯 ${E.objs.map(o=>esc(o.t)+(o.v?` <span class="opill ${o.v}">${OMARK[o.v]}</span>`:"")).join(" · ")}</div>`:""}
+  ${E.aide.length?`<div class="el">✓ <b>Ce qui l'aide :</b> ${E.aide.map(esc).join(", ")}</div>`:""}
+  ${E.surv.length?`<div class="el">⚠️ <b>À surveiller :</b> ${E.surv.map(esc).join(", ")}</div>`:""}
+  ${E.reussite?`<div class="el">🌱 <b>Belle réussite :</b> ${esc(E.reussite.mot)} <span class="muted small">(${fmtD(E.reussite.date)})</span></div>`:""}
+  ${E.ao?`<div class="el">👀 <b>À observer :</b> ${esc(E.ao.label)}</div>`:""}
+  ${!E.objs.length&&!E.aide.length&&!E.surv.length&&!E.reussite?`<div class="el muted small">Pas encore assez d'observations pour un résumé.</div>`:""}</section>`}
+function eclairGroupSheet(gid){const kids=childrenOf(gid).slice().sort((x,y)=>x[1].name.localeCompare(y[1].name,"fr",{sensitivity:"base"}));
+  openSheet(`<h3>Fiches éclair</h3><p class="muted small" style="margin:0">L'essentiel de chaque enfant en 10 secondes. Touchez un nom pour ouvrir sa fiche.</p>
+  <div class="row-actions"><button class="btn primary small" id="ecPrint">Version imprimable</button><button class="btn small" id="ecClose">Fermer</button></div>
+  <div class="eclairs">${kids.map(([cid,c])=>`<a href="#e-${cid}--portrait" class="ecl">${eclairHTML(cid,c,false)}</a>`).join("")}</div>`,s=>{
+    s.querySelector("#ecClose").onclick=closeSheet;s.querySelectorAll(".ecl").forEach(a=>a.addEventListener("click",closeSheet));
+    s.querySelector("#ecPrint").onclick=async()=>{const g=S.groups.get(gid);const av={};for(const [cid,c] of kids)av[cid]=await toDataURL(img("avatar-"+(c.avatar||"renard")));
+      const cards=kids.map(([cid,c])=>eclairHTML(cid,c,false).replace(/src="img\/avatar-[^"]+"/,`src="${av[cid]}"`)).join("");
+      const html=`<!DOCTYPE html><html lang="fr-CA"><head><meta charset="utf-8"><title>Fiches éclair · ${esc(g.name)}</title><style>body{font-family:Barlow,Arial,sans-serif;color:#2E3830;margin:18px;font-size:10.5pt}h1{font-size:15pt;margin:0 0 10px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.eclair{border:1px solid #D9D2C3;border-radius:12px;padding:8px 10px;break-inside:avoid}.ehead{display:flex;align-items:center;gap:6px;margin-bottom:4px}.ehead img{width:30px;height:30px}.ehead b{font-size:12pt;flex:1}.el{margin:2px 0;line-height:1.3}.muted{color:#777}.small{font-size:9pt}.opill{font-size:8.5pt}@page{size:Letter;margin:.5in}</style></head><body><h1>Fiches éclair · ${esc(g.name)} · ${esc(fmtD(todayISO(),true))}</h1><div class="grid">${cards}</div></body></html>`;
+      const fn=`fiches-eclair-${todayISO()}.html`;if(downloads)await downloads.save({filename:fn,data:new Blob([html],{type:"text/html"})});toast("Version imprimable créée")}})}
+function notesMenu(gid){const g=S.groups.get(gid);const d=S.obsDate;const nT=childrenOf(gid).reduce((a,[,c])=>a+(c.notes||[]).filter(n=>n.date===d&&n.src==="terrain").length,0);const nD=dayItems(gid,d).length;
+  openSheet(`<h3>Notes</h3><label class="f">Date<input type="date" class="field" id="nmD" value="${d}"></label>
+  <div class="nmenu">
+   <button class="nmi" id="nmImp"><b>Importer une note faite ailleurs</b><span>Coller une note ou ouvrir un fichier (dictée, note de l'IA, bloc carnet). Elle est rangée dans la fiche de chaque enfant.</span></button>
+   <button class="nmi" id="nmRan" ${nT?"":"disabled"}><b>Ranger les notes du terrain${nT?" ("+nT+")":""}</b><span>Classer sous les bons repères les notes prises en vrac en mode terrain.</span></button>
+   <button class="nmi" id="nmBil"><b>Mettre au propre et rédiger la note de la journée</b><span>Ponctuation et répétitions, puis la note complète pour le dossier ou l'équipe. ${nD} note${nD>1?"s":""} ce jour-là.</span></button>
+  </div><button class="btn" id="nmC">Fermer</button>`,s=>{
+    const dd=()=>s.querySelector("#nmD").value||todayISO();
+    s.querySelector("#nmD").onchange=()=>{S.obsDate=dd();notesMenu(gid)};
+    s.querySelector("#nmC").onclick=closeSheet;s.querySelector("#nmImp").onclick=()=>pasteSheet(gid,dd());
+    s.querySelector("#nmRan").onclick=()=>{S.obsDate=dd();terrainRanger(gid)};s.querySelector("#nmBil").onclick=()=>daySheet(gid,dd())})}
+const SC_DEF=["dessiner.prise","dessiner.ciseaux","dessiner.main","groupe.transitions","groupe.attente"];
+function getSC(){try{return JSON.parse(localStorage.getItem("carnet-sc"))||SC_DEF}catch(e){return SC_DEF}}
+function scSheet(gid){const T=tpl(S.groups.get(gid));const cur=getSC();
+  openSheet(`<h3>Raccourcis du mode groupe</h3><p class="muted small" style="margin:0">Les repères qu'on observe souvent chez tout le monde. Ils s'affichent en haut du mode terrain.</p>
+  <div class="scl">${OCCS.map(o=>`<div class="label" style="margin-top:8px">${esc(shortT(o.titre))}</div>${o.subs.map(sid=>{const sec=T.sections.find(x=>x.id===sid);return sec?sec.rows.filter(r=>!r.free).map(r=>{const k=sid+"."+r.id.replace(/45$/,"");return `<label class="chk"><input type="checkbox" class="scK" value="${k}" ${cur.includes(k)?"checked":""}> ${esc(r.label)}</label>`}).join(""):""}).join("")}`).join("")}</div>
+  <div class="row-actions"><button class="btn primary" id="scOk">Enregistrer</button><button class="btn" id="scNo">Annuler</button></div>`,s=>{s.querySelector("#scNo").onclick=closeSheet;s.querySelector("#scOk").onclick=()=>{const v=[...s.querySelectorAll(".scK:checked")].map(x=>x.value);try{localStorage.setItem("carnet-sc",JSON.stringify(v))}catch(e){}closeSheet();render()}})}
+function syntheseCore(cid,c){const sy=c.synth||{};const old=Object.entries(SPHERES).map(([k,sp])=>{const v=sy[k]||{};const t=["forces","soutien","fonctionne"].map(f=>v[f]).filter(Boolean).join(" · ");return t?`<div class="small"><b>${sp.nom} :</b> ${esc(t)}</div>`:""}).join("");
+  let h=`<section class="card"><h3 style="font-size:1.3rem;margin-bottom:2px">Forces et défis</h3><p class="muted small" style="margin:0">Par sphère de la roue de la médecine. Plus gros = revient souvent. Touchez un mot pour le détail.</p>
+  ${roueHTML(cid,c)}
+  <div class="addline" style="margin-top:10px;flex-wrap:wrap"><input class="field" id="kwNew" placeholder="Mot-clé (ex. : persévérance)" style="flex:1 1 140px"><select class="field" id="kwSph" style="flex:0 0 auto">${Object.entries(SPHERES).map(([k,v])=>`<option value="${k}">${v.nom}</option>`).join("")}</select><select class="field" id="kwT" style="flex:0 0 auto"><option value="force">Force</option><option value="defi">Défi</option></select><button class="btn primary" data-act="kwAdd" data-id="${cid}">Ajouter</button></div>
+  ${old?det("osy-"+cid,"Notes de synthèse écrites avant",old):""}</section>`;
+  const L=cqm(c);
+  h+=`<section class="card"><h3 style="font-size:1.3rem;margin-bottom:4px">Ce qui marche pour ${esc(c.name)}</h3><p class="muted small" style="margin:0 0 8px">Du plus fréquent au moins fréquent. Touchez pour les exemples.</p>
+  ${L.length?`<div class="cqml">${L.map(x=>`<button class="cqmi" data-act="cqmOpen" data-id="${cid}" data-k="${x.k}"><b>${esc(x.t)}</b>${x.sph?` <span class="kw force s-${x.sph}" style="font-size:.72rem">${esc(SPHERES[x.sph].nom)}</span>`:""}${x.peo?` <span class="tag">${PEON[x.peo]}</span>`:""}</button>`).join("")}</div>`:`<p class="muted small">Rien encore.</p>`}
+  ${det("fac-"+cid,"Ajouter un facilitateur à la main",`<div class="steps">${facils().map(([k,t])=>{const on=((c.facil||{})[k]||[]).length>0;return `<button class="step${on?" on":""}" data-act="facil" data-id="${cid}" data-k="${k}" aria-pressed="${on}"><span class="t">${esc(t)}</span></button>`}).join("")}</div>`)}</section>`;
+  const ex=(c.explore||[]).slice().sort((a,b)=>(a.done?1:0)-(b.done?1:0)||(b.date||"").localeCompare(a.date||""));
+  h+=`<section class="card"><h3 style="font-size:1.3rem;margin-bottom:4px">À explorer et à surveiller</h3>
+  <div class="addline"><input class="field" id="exNew" placeholder="Hypothèse, question, élément à revoir"><button class="btn primary" data-act="addExplore" data-id="${cid}">Ajouter</button></div>
+  <div class="entries" style="margin-top:10px">${ex.map(n=>`<div class="entry${n.done?" done":""}"><span class="when">${fmtD(n.date)}</span><span class="txt">${esc(n.text)}${byTag(n)}</span><button class="btn ghost small" data-act="doneExplore" data-id="${cid}" data-n="${n.id}">${n.done?"Rouvrir":"Réglé"}</button><button class="x" aria-label="Supprimer" data-act="delExplore" data-id="${cid}" data-n="${n.id}">✕</button></div>`).join("")||'<p class="muted small">Rien pour l\'instant.</p>'}</div></section>`;
+  return h}
+function cqmSheet(cid,k){const c=S.children.get(cid);const x=cqm(c).find(z=>z.k===k);if(!x)return;const ds=[...new Set((c.facil||{})[k]||[])].sort().reverse();
+  openSheet(`<h3>${esc(x.t)}</h3><p class="muted small" style="margin:0">${x.n} fois · ${ds.map(d=>fmtD(d)).join(", ")}${x.sph?" · "+esc(SPHERES[x.sph].nom):""}${x.peo?" · "+PEON[x.peo]:""}</p>
+  <div class="entries">${x.ex.map(n=>`<div class="entry"><span class="when">${fmtD(n.date)}</span><span class="txt">${esc(n.text)}</span></div>`).join("")||'<p class="muted small">Pas d\'exemple lié à une note.</p>'}</div><button class="btn" id="cqC">Fermer</button>`,s=>{s.querySelector("#cqC").onclick=closeSheet})}
 function viewSynthese(cid,c,T){
   const sy=c.synth||{};
   let h=`<section class="card"><div class="sechead"><img src="${img("roue-medecine")}" alt=""><div><h2>Roue de ${esc(c.name)}</h2><div class="sph">Forces et défis par sphère, au fil des rencontres. Plus gros = revient souvent.</div></div></div>
@@ -1802,6 +1904,18 @@ document.addEventListener("click",e=>{
   else if(a==="rapport")rapportSheet(id);
   else if(a==="exportChild")exportSheet(id);
   else if(a==="cqmGroup")cqmGroupSheet(id);
+  else if(a==="piAdd"){const t=($("#piNew")||{}).value;if(!t||!t.trim())return;mutChild(id,x=>{(x.pistes=x.pistes||[]).push({id:uid("p"),text:t.trim(),date:S.obsDate,src:"manuel",by:getMe()})})}
+  else if(a==="piDel"){const n=b.dataset.n;mutChild(id,x=>{x.pistes=(x.pistes||[]).filter(p=>p.id!==n)})}
+  else if(a==="piDone"){const n=b.dataset.n;mutChild(id,x=>{const p=(x.pistes||[]).find(p=>p.id===n);if(p)p.done=!p.done})}
+  else if(a==="piObj"){const n=b.dataset.n;const c=S.children.get(id);const pi=(c.pistes||[]).find(p=>p.id===n);if(!pi)return;
+    openSheet(`<h3>Nouvel objectif</h3><p class="small muted" style="margin:0">${esc(pi.text)}</p><label class="f">Titre court (8 mots maximum)<input class="field" id="poT" value="${esc(objShort({label:pi.text}))}"></label><div class="row-actions"><button class="btn primary" id="poOk">Créer l'objectif</button><button class="btn" id="poNo">Annuler</button></div>`,s=>{s.querySelector("#poNo").onclick=closeSheet;s.querySelector("#poOk").onclick=()=>{const t=s.querySelector("#poT").value.trim();mutChild(id,x=>{(x.objectifs=x.objectifs||[]).push({id:uid("o"),titre:t,label:pi.text,k:pi.k||"",occ:(pi.k||"").split(".")[0],date:S.obsDate,marks:{}});const p=(x.pistes||[]).find(p=>p.id===n);if(p)p.done=true});closeSheet();toast("Objectif créé")}})}
+  else if(a==="cObjRen"){const o=childObjs(S.children.get(id)).find(z=>z.id===b.dataset.o);if(!o)return;openSheet(`<h3>Titre court</h3><input class="field" id="orT" value="${esc(objShort(o))}"><p class="muted small" style="margin:0">8 mots maximum. Le texte complet reste gardé.</p><div class="row-actions"><button class="btn primary" id="orOk">Enregistrer</button><button class="btn" id="orNo">Annuler</button></div>`,s=>{s.querySelector("#orNo").onclick=closeSheet;s.querySelector("#orOk").onclick=()=>{const t=s.querySelector("#orT").value.trim();mutChild(id,x=>{const z=(x.objectifs||[]).find(z=>z.id===o.id);if(z)z.titre=t});closeSheet()}})}
+  else if(a==="convPistes"){mutChild(id,x=>{const L=(x.objectifs||[]).filter(o=>String(o.label||"").length>90&&!o.titre);x.pistes=(x.pistes||[]).concat(L.map(o=>({id:uid("p"),text:o.label,k:o.k||"",date:o.date,src:"groupe"})));x.objectifs=(x.objectifs||[]).filter(o=>!L.includes(o))});toast("Convertis en pistes")}
+  else if(a==="eclairs")eclairGroupSheet(id);
+  else if(a==="notesMenu")notesMenu(id);
+  else if(a==="scEdit")scSheet(id);
+  else if(a==="scGo"){const sec=k.split(".")[0];const o=occOf(sec);S.fromTerrain=id;const T=tpl(S.groups.get(id));const sc=T.sections.find(x=>x.id===sec);const r=sc&&rowIn(sc.rows,k.split(".")[1]);S.rowFilter={occ:o.id,row:r?sec+"."+r.id:"*"};go("g-"+id+"--"+o.subs[0])}
+  else if(a==="cqmOpen")cqmSheet(id,k);
   else if(a==="kwOpen")kwSheet(id,k);
   else if(a==="kwAdd"){const m=($("#kwNew")||{}).value;if(!m||!m.trim()){$("#kwNew").focus();return}const sph=$("#kwSph").value,t=$("#kwT").value;mutChild(id,x=>{(x.kw=x.kw||[]).push({id:uid("w"),mot:m.trim().toLowerCase(),sph,t,date:S.obsDate,src:"manuel"})});toast("Mot-clé ajouté")}
   else if(a==="calDay")calDaySheet(id,b.dataset.d);
@@ -1926,8 +2040,9 @@ function thumbs(c,list,cid){return list.length?`<div class="thumbs">${list.map(p
 function photoSheet(cid,pid){const c=S.children.get(cid);const p=(c.photos||[]).find(x=>x.id===pid);if(!p)return;
   const cx=ctxOf(c.groupId,p.d);const lab=stepLabel(c,p.k)||secTitle(tpl(S.groups.get(c.groupId)),p.k.split(".")[0]);
   openSheet(`<img class="bigphoto" src="${blobSrc(p.id)}" data-pid="${p.id}" alt=""><div><b>${esc(c.name)}</b> · ${fmtD(p.d,true)}${cx?" · "+esc(cx):""}</div><div class="muted small">${esc(lab)}</div>
-  <div class="row-actions"><button class="btn" id="phClose">Fermer</button>${assets?`<button class="btn danger" id="phDel" style="margin-left:auto">Supprimer</button>`:""}</div>`,s=>{
-    s.querySelector("#phClose").onclick=closeSheet;const del=s.querySelector("#phDel");if(del)del.onclick=()=>delPhoto(cid,pid)})}
+  <label class="f">Ranger sous…<select class="field" id="phK"><option value="portrait">Portrait (photos du terrain)</option>${OCCS.map(o=>`<optgroup label="${esc(o.titre)}">${occSecs(c,o).flatMap(sec=>sec.rows.filter(r=>!r.free).map(r=>`<option value="${sec.id}.${r.id}" ${String(p.k).startsWith(sec.id+"."+r.id)?"selected":""}>${esc(r.label)}</option>`)).join("")}</optgroup>`).join("")}</select></label>
+  <div class="row-actions"><button class="btn primary" id="phMove">Ranger</button><button class="btn" id="phClose">Fermer</button>${assets?`<button class="btn danger" id="phDel" style="margin-left:auto">Supprimer</button>`:""}</div>`,s=>{
+    s.querySelector("#phClose").onclick=closeSheet;s.querySelector("#phMove").onclick=()=>{const v=s.querySelector("#phK").value;mutChild(cid,x=>{const q=(x.photos||[]).find(z=>z.id===pid);if(q)q.k=v});closeSheet();toast("Photo rangée")};const del=s.querySelector("#phDel");if(del)del.onclick=()=>delPhoto(cid,pid)})}
 function stepSheet(cid,k,label){
   const draw=()=>{const c=S.children.get(cid);const ok=((c.checks||{})[k]||[]),ny=((c.notyet||{})[k]||[]);
     const ent=ok.map(d=>({d,s:"ok"})).concat(ny.map(d=>({d,s:"ny"}))).sort((a,b)=>b.d.localeCompare(a.d));
@@ -2114,7 +2229,7 @@ function reviewItems(s,gid,date,bloc,kids,srcText,onNext){
   <select id="rc${i}" aria-label="Enfant">${childOpts}</select>
   <select id="rs${i}" aria-label="Occupation">${secOpts.map(o=>`<option value="${o[0]}">${esc(o[1])}</option>`).join("")}</select>
   <select id="rr${i}" aria-label="Repère">${rowOpts(r.sec)}</select>
-  <select id="rt${i}t" aria-label="Type"><option value="note">Note</option><option value="explorer">À explorer</option><option value="prochain">Objectif</option><option value="famille">Ce que dit la famille</option></select>
+  <select id="rt${i}t" aria-label="Type"><option value="note">Note</option><option value="explorer">À explorer</option><option value="prochain">Piste, prochain pas</option><option value="famille">Ce que dit la famille</option></select>
   <select id="rj${i}" aria-label="Thème">${Object.entries(JTHEMES).filter(([k])=>k!=="source").map(([k,v])=>`<option value="${k}">${v}</option>`).join("")}</select></div>
   <textarea class="field" id="rt${i}">${esc(r.text)}</textarea>
   ${r.reps.length||r.nys.length||r.eng.length||r.facs.length||r.obj?`<div class="sugg">${r.reps.map((k,j)=>`<label><input type="checkbox" id="rq${i}_${j}" class="rsug" checked> Cocher : ${esc(STEP[k].label)}${STEP[k].i!==undefined?", "+esc(STEP[k].t):""}</label>`).join("")}${r.nys.map((k,j)=>`<label><input type="checkbox" id="rn${i}_${j}" class="rsug" checked> Pas encore : ${esc(STEP[k].label)}, ${esc(STEP[k].t)}</label>`).join("")}
@@ -2139,7 +2254,7 @@ function reviewItems(s,gid,date,bloc,kids,srcText,onNext){
       if(cid==="__groupe"){toJournal.push({text,theme:s.querySelector("#rj"+i).value});return}
       const b=bucket(cid);
       if(type==="explorer")b.explore.push({id:uid("x"),date,text,by,src:"groupe"});
-      else if(type==="prochain")b.next.push({id:uid("o"),label:text,k:rk||"",occ:sec==="portrait"?"":sec,date,marks:{},src:"groupe"});
+      else if(type==="prochain")b.next.push({id:uid("p"),text,k:rk||"",date,src:"groupe",by});
       else if(type==="famille")b.famille.push({id:uid("f"),date,text,by,src:"groupe"});
       const fOn=r.facs.filter((k,j)=>s.querySelector(`#rf${i}_${j}`)?.checked);const nid=uid("n");
       if(type==="note")b.notes.push(Object.assign({id:nid,section:sec,date,text,src:"groupe",by},rk?{k:rk}:{},r.obj?{obj:r.obj.id}:{},fOn.length?{fac:fOn}:{}));
@@ -2153,7 +2268,7 @@ function reviewItems(s,gid,date,bloc,kids,srcText,onNext){
     });
     if(missing){toast(`Choisissez l'enfant pour ${missing} extrait${missing>1?"s":""}, ou décochez-le${missing>1?"s":""}.`);return}
     byChild.forEach((b,cid)=>{const c=S.children.get(cid);const x=JSON.parse(JSON.stringify(c));
-      x.notes=(x.notes||[]).concat(b.notes);x.kw=(x.kw||[]).concat(b.kw);x.explore=(x.explore||[]).concat(b.explore);x.objectifs=(x.objectifs||[]).concat(b.next);
+      x.notes=(x.notes||[]).concat(b.notes);x.kw=(x.kw||[]).concat(b.kw);x.explore=(x.explore||[]).concat(b.explore);x.pistes=(x.pistes||[]).concat(b.next);
       if(b.famille.length){x.free=x.free||{};x.free["portrait.famille"]=(x.free["portrait.famille"]||[]).concat(b.famille)}
       const im={checks:[],ny:[],sout:[],facs:[]};
       x.checks=x.checks||{};b.checks.forEach(k=>{const a=x.checks[k]||[];if(!a.includes(date)){a.push(date);im.checks.push(k)}x.checks[k]=a});
