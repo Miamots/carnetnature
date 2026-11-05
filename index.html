@@ -1245,7 +1245,7 @@ function portraitObjHTML(cid,c){const T=TEMPLATES[baseTpl(c)];const all=childObj
   <div class="addnote" style="margin-top:10px"><input class="field" id="coLabel" placeholder="Ex. : Attendre son tour à la balançoire avec le sablier">
   <select class="field" id="coLink"><option value="">Lier à une occupation ou un repère (facultatif)</option>${OCCS.map(o=>`<optgroup label="${esc(o.n+". "+o.titre)}"><option value="${o.subs[0]}">${esc(o.titre)} (général)</option>${occSecs(c,o).flatMap(sec=>sec.rows.filter(r=>!r.free).map(r=>`<option value="${sec.id}.${r.id}">${esc(r.label)}</option>`)).join("")}</optgroup>`).join("")}</select>
   <div class="row-actions"><button class="btn primary" data-act="cObjAdd" data-id="${cid}">Ajouter l'objectif</button></div></div>
-  ${sug.length?det("osug-"+cid,`Suggestions (${sug.length})`,`<div class="row-actions" style="margin-top:6px">${sug.map(x=>`<button class="sugchip" data-act="cObjSugg" data-id="${cid}" data-k="${x.k}" data-l="${esc(x.label)}" title="${esc(x.why)}">+ ${esc(x.label)}</button>`).join("")}</div>`):""}</section>`}
+  ${sug.length?det("osug-"+cid,`Suggestions (${sug.length})`,`<div class="row-actions" style="margin-top:6px">${sug.map(x=>`<button class="sugchip" data-act="cObjSugg" data-id="${cid}" data-k="${x.k}" data-l="${esc(x.label)}" title="${esc(x.why)}">+ ${esc(x.label)}</button>`).join("")}</div>`):""}${(c.pistes||[]).filter(n=>!n.done).length?det("opi-"+cid,`Pistes notées (${(c.pistes||[]).filter(n=>!n.done).length})`,`<div class="entries">${(c.pistes||[]).filter(n=>!n.done).map(n=>`<div class="entry col"><div class="erow"><span class="when">${fmtD(n.date)}</span><span class="txt">${esc(n.text)}</span></div><div class="row-actions" style="margin-top:2px"><button class="btn ghost small" data-act="piObj" data-id="${cid}" data-n="${n.id}">→ Objectif</button><button class="x" aria-label="Supprimer" data-act="piDel" data-id="${cid}" data-n="${n.id}">✕</button></div></div>`).join("")}</div>`):""}</section>`}
 /* ---------- Objectifs de groupe ---------- */
 const OBJ_SUGG=[["Arrivée","groupe"],["Départ","groupe"],["Transition vers la collation","groupe"],["Transition vers le dîner","groupe"],["Dîner : rester assis","groupe"]];
 function shortName(n){n=String(n||"").replace(/\s*-\s*/g,"-").trim();const f=n.split(/\s+/)[0];return f.length>9?f.slice(0,8)+"…":f}
@@ -1793,12 +1793,13 @@ function notesHTML(cid,c,secIds,title,ph){const ids=Array.isArray(secIds)?secIds
 
 function viewPortrait(cid,c){
   let h=eclairHTML(cid,c,true);
-  h+=`<section class="card"><div class="ordhead"><h3 style="font-size:1.3rem">Qui il est</h3><button class="btn ghost small" data-act="editChild" data-id="${cid}">Réglages</button></div>
+  const SC=syntheseCore(cid,c);const cut=SC.indexOf('<section class="card"><h3 style="font-size:1.3rem;margin-bottom:4px">Ce qui marche');
+  h+=cut>0?SC.slice(0,cut):"";
+  h+=`<section class="card"><details class="ogdet" data-dk="qui-${cid}" ${openDetails.has("qui-"+cid)?"open":""}><summary><h3 style="font-size:1.3rem;display:inline">Qui il est</h3></summary><div class="row-actions" style="margin-top:6px"><button class="btn ghost small" data-act="editChild" data-id="${cid}">Réglages</button></div>
   <div class="small" style="margin-top:6px;display:grid;gap:4px"><div><span class="label">Date de naissance</span> ${c.dob?fmtD(c.dob,true)+" ("+esc(ageAt(c.dob))+")":"—"}</div><div><span class="label">Langue(s) à la maison</span> ${esc(c.langues||"—")}</div></div>
-  ${PORTRAIT_ROWS.map(r=>rowHTML(cid,c,{id:"portrait"},Object.assign({free:true},r))).join("")}</section>`;
+  ${PORTRAIT_ROWS.map(r=>rowHTML(cid,c,{id:"portrait"},Object.assign({free:true},r))).join("")}</details></section>`;
   h+=portraitObjHTML(cid,c);
-  h+=pistesHTML(cid,c);
-  h+=syntheseCore(cid,c);
+  h+=cut>0?SC.slice(cut):SC;
   {const tp=photosOf(c,p=>p.k==="portrait").sort((a,b)=>(b.d||"").localeCompare(a.d||""));h+=notesHTML(cid,c,["portrait"],"Notes du terrain et notes libres","Note libre…");if(tp.length)h+=`<section class="card"><span class="label">Photos du terrain (${tp.length})</span>${thumbs(c,tp,cid)}</section>`}
   h+=`<section class="card"><div class="row-actions"><button class="btn primary" data-act="rapport" data-id="${cid}">Rapport d'évaluation</button><button class="btn" data-act="album" data-id="${cid}">Album photos</button><button class="btn" data-act="exportChild" data-id="${cid}">Fiche d'équipe et exports</button></div></section>`;
   h+=`<section class="card"><button class="btn danger" data-act="delChild" data-id="${cid}">Supprimer cette fiche</button></section>`;
@@ -1823,8 +1824,10 @@ function cqmGroupSheet(gid){const kids=childrenOf(gid).slice().sort((x,y)=>x[1].
 function kwSheet(cid,key){const c=S.children.get(cid);const [sph,t,...mm]=key.split("|");const mot=mm.join("|");const L=(c.kw||[]).filter(k=>k.sph===sph&&k.t===t&&norm(k.mot)===norm(mot)).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
   openSheet(`<h3><span class="kw ${t} s-${sph}">${esc(mot)}</span></h3><p class="muted small" style="margin:0">${t==="force"?"Force":"Défi"} · ${esc(SPHERES[sph].nom)} · ${L.length} fois</p>
   <div class="entries">${L.map(k=>{const n=k.n&&(c.notes||[]).find(x=>x.id===k.n);return `<div class="entry"><span class="when">${fmtD(k.date)}</span><span class="txt">${n?esc(n.text):`<span class="muted">${k.src==="manuel"?"ajouté à la main":"sans note liée"}</span>`}</span><button class="x" aria-label="Retirer" data-kdel="${k.id}">✕</button></div>`}).join("")}</div>
+  <details class="more"><summary>Modifier le mot</summary><div class="addnote" style="margin-top:6px"><input class="field" id="kwEdM" value="${esc(mot)}"><select class="field" id="kwEdS">${Object.entries(SPHERES).map(([k,v])=>`<option value="${k}" ${k===sph?"selected":""}>${v.nom}</option>`).join("")}</select><select class="field" id="kwEdT"><option value="force" ${t==="force"?"selected":""}>Force</option><option value="defi" ${t==="defi"?"selected":""}>Défi</option></select><button class="btn primary" id="kwEdOk">Enregistrer (${L.length} fois)</button></div></details>
   <div class="row-actions">${t==="defi"?`<button class="btn" id="kwBecome">Devenu une force aujourd'hui</button>`:""}<button class="btn" id="kwClose">Fermer</button></div>`,s=>{
     s.querySelector("#kwClose").onclick=closeSheet;
+    s.querySelector("#kwEdOk").onclick=()=>{const nm=s.querySelector("#kwEdM").value.trim(),ns=s.querySelector("#kwEdS").value,nt=s.querySelector("#kwEdT").value;if(!nm){toast("Écrivez un mot.");return}const ids=new Set(L.map(k=>k.id));mutChild(cid,x=>{(x.kw||[]).forEach(k=>{if(ids.has(k.id)){k.mot=nm;k.sph=ns;k.t=nt}})});closeSheet();toast("Mot modifié")};
     s.querySelectorAll("[data-kdel]").forEach(b=>b.onclick=()=>{mutChild(cid,x=>{x.kw=(x.kw||[]).filter(k=>k.id!==b.dataset.kdel)});const left=(S.children.get(cid).kw||[]).some(k=>k.sph===sph&&k.t===t&&norm(k.mot)===norm(mot));left?kwSheet(cid,key):closeSheet()});
     const bc=s.querySelector("#kwBecome");if(bc)bc.onclick=()=>{mutChild(cid,x=>{(x.kw=x.kw||[]).push({id:uid("w"),mot,sph,t:"force",date:S.obsDate,src:"manuel"})});closeSheet();toast("« "+mot+" » est maintenant une force")}})}
 const OBJHEAD=/^\s*(pistes d['’]accompagnement(\s+et\s+objectifs?(\s+à\s+poursuivre)?)?|pistes d['’]intervention|objectifs?(\s+(à\s+poursuivre|visés?|ciblés?|suggérés?))?|interventions?\s+à\s+privilégier|recommandations?|stratégies?\s+à\s+privilégier|moyens?\s+à\s+privilégier)\s*:\s*/i;
