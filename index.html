@@ -416,6 +416,8 @@ textarea.field{min-height:70px;resize:vertical;width:100%}
 .empty{text-align:center;padding:24px 12px;color:var(--muted)}
 .empty img{width:110px;margin:0 auto 8px}
 .toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:8px 14px;border-radius:999px;font-size:.92rem;z-index:60}
+.fdots{display:inline-flex;gap:3px;vertical-align:middle}.fd{width:8px;height:8px;border-radius:50%;border:1.3px dashed #c9bdb0;display:inline-block}.fd.a{background:#4E8A5C;border:1.3px solid #4E8A5C}.fd.e{background:#E0782F;border:1.3px solid #E0782F}.hic{width:18px;height:18px;vertical-align:-4px}.fbox{border-radius:12px;padding:8px 10px;margin:6px 0;background:#FDF1E6}.fbox.ail{background:#EEF5EC}.flab{font-size:.78rem;color:#6b6259;margin:4px 0;font-weight:600}.fpills{display:flex;flex-wrap:wrap;gap:5px}.fp{border:1.5px solid #E5DACB;background:#fff;border-radius:999px;padding:4px 10px;font:inherit;font-size:.82rem;cursor:pointer;color:inherit}.fp.on{background:#3D6A4A;border-color:#3D6A4A;color:#fff}.fp.fi.on{background:#FDF1E6;border-color:#E0782F;color:inherit;font-weight:600}.fp.fi .hic{width:20px;height:20px;vertical-align:-5px}.ail .fp.on{background:#4E8A5C;border-color:#4E8A5C}.fsteps{margin:8px 0 4px}.fst{display:flex;gap:10px;position:relative;padding-bottom:8px}.fst:not(:last-child):before{content:"";position:absolute;left:15px;top:32px;bottom:0;width:2px;background:#E5DACB}.fst.hid{opacity:.45}.fdot{width:32px;height:32px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;cursor:pointer;border:1.6px dashed #c9bdb0;background:#fff;padding:0}.fdot img{width:22px;height:22px;object-fit:contain}.fdot:not(.a):not(.e) img{opacity:.35}.fdot.a{background:#E2F0E0;border:1.6px solid #4E8A5C}.fdot.e{background:#FBE0CB;border:1.6px solid #E0782F}.fdot.td{box-shadow:0 0 0 3px #FDF1E6}.fsb{flex:1;min-width:0}.fstt{border:0;background:none;font:inherit;text-align:left;padding:5px 0;cursor:pointer;color:inherit;width:100%;line-height:1.35}.fstt.f{color:#8a8178}.flv{font-size:.72rem;border-radius:999px;padding:1px 7px;margin-left:4px;white-space:nowrap}.flv.l1{background:#FFF1C9;color:#7a5a00}.flv.l2{background:#FBE0CB;color:#8a3f0b}.flv.l3{background:#E2F0E0;color:#2f5e3a}.flv.ny{background:#eee;color:#666}.agl{font-size:.7rem;color:#8a8178;margin-left:4px}.cpills{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.cpw{display:inline-flex;align-items:center;gap:2px}.cpw.hid{opacity:.45}.cpill{border:1.5px solid #E5DACB;background:#fff;border-radius:999px;padding:6px 12px;font:inherit;font-size:.86rem;cursor:pointer;color:inherit;text-align:left}.cpill.on{background:#E2F0E0;border-color:#4E8A5C;color:#2f5e3a}.cpill.td{box-shadow:0 0 0 3px #FDF1E6}.cpi{border:0;background:none;color:#8a8178;cursor:pointer;padding:4px}
+.oim{width:18px;height:18px;vertical-align:-4px;object-fit:contain}.omark .oim{width:24px;height:24px}.kpill .sym .oim{width:17px;height:17px}.opill .oim{width:14px;height:14px}.tm .oim{width:22px;height:22px}.apills.adots{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.adot{width:34px;height:34px;border-radius:50%;flex:none;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;border:1.6px dashed #c9bdb0;background:#fff;padding:0;font:inherit}.adot img{width:24px;height:24px;object-fit:contain}.adot .an{font-size:.8rem;font-weight:700;color:#8a8178}.adot.a{background:#E2F0E0;border:1.6px solid #4E8A5C}.adot.e{background:#FBE0CB;border:1.6px solid #E0782F}.adot.td{box-shadow:0 0 0 3px #FDF1E6}.awide{display:flex;align-items:center;gap:8px;width:100%}.awide .tt{font-size:.85rem}
 </style>
 </head>
 <body>
@@ -606,6 +608,15 @@ const OCCS=[
 const occOf=secId=>OCCS.find(o=>o.subs.includes(secId));
 const stK=(st,i)=>typeof st==="string"?String(i):st.id;
 const stT=st=>typeof st==="string"?st:st.t;
+const CLV={1:"Commence",2:"En voie",3:"Acquis"};const CINT=["Pas encore","Ça l'intéresse","Il adore"];const CEXP=["Regarde les autres","Manipule","Imite","Demande","Invente"];const CCTX=["Forêt, terrain varié","Maison, famille","École ou CPE"];
+const ICW=n=>`img/ic/${n}.webp`;const chrt=(i,cl)=>`<img class="${cl||"hic"}" src="${ICW("int-"+i)}" alt="${CINT[i]}">`;
+function soutLvl(c,k,d){const rk=k.split(".").slice(0,2).join(".");const T=((c.sout||{})[rk]||[]).filter(e=>e.d===d).map(e=>e.t);return T.includes("physique")?1:T.length?2:3}
+function lvlOnC(c,k,d){const e=((c.lvl||{})[k]||[]).find(x=>x.d===d);if(e)return e.l;return ((c.checks||{})[k]||[]).includes(d)?soutLvl(c,k,d):0}
+function lvlOfC(c,k){const D=[...new Set([...((c.checks||{})[k]||[]),...(((c.lvl||{})[k]||[]).map(x=>x.d))])].sort();for(let i=D.length-1;i>=0;i--){const l=lvlOnC(c,k,D[i]);if(l)return l}return 0}
+function setLvlC(x,k,l,d){x.lvl=x.lvl||{};x.checks=x.checks||{};x.notyet=x.notyet||{};const L=(x.lvl[k]||[]).filter(e=>e.d!==d);if(l)L.push({d,l});if(L.length)x.lvl[k]=L;else delete x.lvl[k];
+  const C=(x.checks[k]||[]).filter(v=>v!==d);if(l)C.push(d);if(C.length)x.checks[k]=C.sort();else delete x.checks[k];if(l&&x.notyet[k]){x.notyet[k]=x.notyet[k].filter(v=>v!==d);if(!x.notyet[k].length)delete x.notyet[k]}}
+const omk=v=>v?`<img class="oim" src="${ICW("st-"+({no:0,prog:1,ok:2}[v]))}" alt="${ONAME[v]}">`:"";
+function cdots(c,key,r){return `<span class="fdots">${(r.steps||[]).map((st,i)=>{const l=lvlOfC(c,key+"."+stK(st,i));return `<i class="fd ${l===3?"a":l?"e":""}"></i>`}).join("")}</span>`}
 const LONG=5;
 
 /* ---------- Éléments ajoutés dans les Paramètres ---------- */
@@ -898,7 +909,7 @@ function viewTerrain(gid){const g=S.groups.get(gid);if(!g){go("accueil");return 
 function terrainKid(gid,cid){const g=S.groups.get(gid);const c=S.children.get(cid);const d=S.obsDate;if(!c)return;
   const objs=childObjs(c).filter(o=>!o.done);const gobjs=g.objectifs||[];const res=objRes(g,d);const ao=aObserver(c).filter(x=>x.t!=="obj");
   const notesT=(c.notes||[]).filter(n=>n.date===d);const phT=photosOf(c,p=>p.d===d);
-  const tri=isObjOnly(c);const mk=(v,cur,attrs)=>(v==="no"&&tri?`<button class="tm prog${cur==="prog"?" on":""}" ${attrs} data-v="prog" aria-pressed="${cur==="prog"}" title="En progrès">↗</button>`:"")+`<button class="tm ${v}${cur===v?" on":""}" ${attrs} data-v="${v}" aria-pressed="${cur===v}" title="${ONAME[v]}">${OMARK[v]}</button>`;
+  const tri=isObjOnly(c);const mk=(v,cur,attrs)=>(v==="no"&&tri?`<button class="tm prog${cur==="prog"?" on":""}" ${attrs} data-v="prog" aria-pressed="${cur==="prog"}" title="En progrès">↗</button>`:"")+`<button class="tm ${v}${cur===v?" on":""}" ${attrs} data-v="${v}" aria-pressed="${cur===v}" title="${ONAME[v]}">${omk(v)}</button>`;
   openSheet(`<div class="thead"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><div><h3 style="margin:0">${esc(c.name)}</h3><span class="muted small">${esc(fmtD(d,true))}</span></div></div>
   ${objs.length||gobjs.length?`<div class="tobjs">${objs.map(o=>{const v=(o.marks||{})[d]||"";return `<div class="tobj"><span title="${esc(o.label)}">🎯 ${esc(objShort(o))}</span>${mk("ok",v,`data-co="${o.id}"`)}${mk("no",v,`data-co="${o.id}"`)}</div>`}).join("")}
     ${gobjs.map(o=>{const v=(res[o.id]||{})[cid]||"";return `<div class="tobj grp"><span>${esc(o.label)} <span class="muted small">(groupe)</span></span>${mk("ok",v,`data-go="${o.id}"`)}${mk("no",v,`data-go="${o.id}"`)}</div>`}).join("")}</div>`:""}
@@ -1250,9 +1261,9 @@ function presenceHTML(gid,g,kids){const p=presOf(g,S.obsDate)||[];S.prInit=S.prI
     <tr class="psum"><th>Présents</th><td></td>${ds.map(d=>`<td>${g.presences[d].length}</td>`).join("")}</tr></tbody></table></div>`)})()}</details></section>`}
 /* ---------- Objectifs de l'enfant ---------- */
 function childObjs(c){return (c.objectifs||[])}
-function objMarksHTML(o){const m=Object.entries(o.marks||{}).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,10);return m.map(([d,v])=>`<span class="opill ${v}">${OMARK[v]||""} ${fmtD(d)}</span>`).join("")}
+function objMarksHTML(o){const m=Object.entries(o.marks||{}).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,10);return m.map(([d,v])=>`<span class="opill ${v}">${omk(v)} ${fmtD(d)}</span>`).join("")}
 function childObjHTML(cid,c,O,compact){const list=childObjs(c).filter(o=>!o.done&&(!O||O.subs.includes((o.k||o.occ||"").split(".")[0])));if(!list.length)return "";
-  return `<section class="${compact?"cobj compact":"card cobj"}">${compact?"":`<h3 style="font-size:1.25rem;margin-bottom:6px">Objectifs de ${esc(c.name)}</h3>`}${list.map(o=>{const v=(o.marks||{})[S.obsDate]||"";return `<div class="cobjrow"><button class="omark ${v}" data-act="cObjMark" data-id="${cid}" data-o="${o.id}" aria-label="${esc(o.label)} : ${ONAME[v]||"non noté"}">${OMARK[v]||""}</button><span class="txt"><b title="${esc(o.label)}">${esc(objShort(o))}</b>${o.k?`<span class="muted small"> · ${esc(stepLabel(c,o.k)||"")}</span>`:""}<span class="ehist">${objMarksHTML(o)}</span></span></div>`}).join("")}</section>`}
+  return `<section class="${compact?"cobj compact":"card cobj"}">${compact?"":`<h3 style="font-size:1.25rem;margin-bottom:6px">Objectifs de ${esc(c.name)}</h3>`}${list.map(o=>{const v=(o.marks||{})[S.obsDate]||"";return `<div class="cobjrow"><button class="omark ${v}" data-act="cObjMark" data-id="${cid}" data-o="${o.id}" aria-label="${esc(o.label)} : ${ONAME[v]||"non noté"}">${omk(v)}</button><span class="txt"><b title="${esc(o.label)}">${esc(objShort(o))}</b>${o.k?`<span class="muted small"> · ${esc(stepLabel(c,o.k)||"")}</span>`:""}<span class="ehist">${objMarksHTML(o)}</span></span></div>`}).join("")}</section>`}
 function ordOn(){try{return localStorage.getItem("carnet-ord")==="1"}catch(e){return false}}
 function isHidStep(c,k){return (c.hideSteps||[]).includes(k)}
 function objSuggestions(c){const out=[];const mo=monthsAt(c.dob,todayISO());
@@ -1292,10 +1303,10 @@ function objectivesHTML(gid,g,kids){
   if(ed){h+=`<div class="entries" style="margin-top:10px">${objs.map(o=>`<div class="entry"><span class="txt">${esc(o.label)}</span><button class="x" aria-label="Retirer" data-act="objDel" data-id="${gid}" data-o="${o.id}">✕</button></div>`).join("")}</div>
     <div class="addline" style="margin-top:8px"><input class="field" id="objNew" placeholder="Nouvel objectif (ex. : Ranger son matériel)"><button class="btn primary" data-act="objAdd" data-id="${gid}">Ajouter</button></div>
     </details></section>`;return h}
-  h+=`<div class="toolbar" style="margin:6px 0 4px"><label class="obsdate small"><span class="label">Date</span><input type="date" value="${S.obsDate}" data-act="obsDate"></label><span class="muted small">Touchez un prénom : réussi ✓, en cours ◐, pas encore ✗, puis vide. Appui long : une note.</span></div>`;
+  h+=`<div class="toolbar" style="margin:6px 0 4px"><label class="obsdate small"><span class="label">Date</span><input type="date" value="${S.obsDate}" data-act="obsDate"></label><span class="muted small">Touchez un prénom : réussi (arbre), en cours (pousse), pas encore (graine), puis vide. Appui long : une note.</span></div>`;
   objs.forEach(o=>{const r=res[o.id]||{};const ok=kids.filter(([cid])=>r[cid]==="ok").length,no=kids.filter(([cid])=>r[cid]==="no").length,pg=kids.filter(([cid])=>r[cid]==="prog").length;
     h+=`<div class="objrow"><div class="objhead"><b>${esc(o.label)}</b><span class="muted small">${ok} réussi${ok>1?"s":""}${pg?" · "+pg+" en cours":""}${no?" · "+no+" pas encore":""} <button class="onote" data-act="gObjNote" data-id="${gid}" data-o="${o.id}" aria-label="Note pour l'objectif">✎ Note${(g.objNotes||[]).some(n=>n.obj===o.id&&n.date===S.obsDate)?" •":""}</button></span></div><div class="kids kp">${kids.map(([cid,c])=>{const v=r[cid]||"";const hasNote=(c.notes||[]).some(n=>n.obj===o.id&&n.date===S.obsDate);
-      return `<button class="kpill ${v}" data-act="objMark" data-id="${gid}" data-o="${o.id}" data-c="${cid}" aria-label="${esc(c.name)} : ${ONAME[v]||"non noté"}"><span class="kn">${esc(shortName(c.name))}</span>${v?`<span class="sym">${OMARK[v]}</span>`:""}${hasNote?'<span class="nd"></span>':""}</button>`}).join("")}</div></div>`});
+      return `<button class="kpill ${v}" data-act="objMark" data-id="${gid}" data-o="${o.id}" data-c="${cid}" aria-label="${esc(c.name)} : ${ONAME[v]||"non noté"}"><span class="kn">${esc(shortName(c.name))}</span>${v?`<span class="sym">${omk(v)}</span>`:""}${hasNote?'<span class="nd"></span>':""}</button>`}).join("")}</div></div>`});
   const dates=Object.keys(g.objRes||{}).filter(d=>Object.values(g.objRes[d]||{}).some(x=>Object.keys(x).length)).sort().reverse();
   if(dates.length)h+=det("oh-"+gid,`Historique (${dates.length} jour${dates.length>1?"s":""})`,`<div class="cov-wrap"><table class="cov"><thead><tr><th></th>${objs.map(o=>`<th><span>${esc(o.label)}</span></th>`).join("")}</tr></thead><tbody>${dates.map(d=>`<tr><th>${fmtD(d)}</th>${objs.map(o=>{const r=(g.objRes[d]||{})[o.id]||{};const ok=Object.values(r).filter(v=>v==="ok").length,tot=Object.values(r).filter(Boolean).length;return `<td class="${tot?ok/tot>=.75?"c3":ok/tot>=.4?"c2":"c1":"c0"}"><span style="display:block;padding:6px 4px">${tot?ok+"/"+tot:"—"}</span></td>`}).join("")}</tr>`).join("")}</tbody></table></div>`);
   return h+`</details></section>`;
@@ -1358,7 +1369,7 @@ function objNoteSheet(gid,oid,cid){const g=S.groups.get(gid);const o=(g.objectif
 function objHistHTML(c,secId,cid){const g=S.groups.get(c.groupId);if(!g)return "";const objs=(g.objectifs||[]).filter(o=>(o.sec||"groupe")===secId);if(!objs.length)return "";
   const dates=Object.keys(g.objRes||{}).sort().reverse();
   const rows=objs.map(o=>{const marks=dates.map(d=>({d,v:((g.objRes[d]||{})[o.id]||{})[cid]})).filter(x=>x.v);return {o,marks}});
-  return `<section class="card"><h3 style="font-size:1.3rem;margin-bottom:6px">Objectifs de groupe</h3>${rows.map(({o,marks})=>`<div class="objrow"><div class="objhead"><b>${esc(o.label)}</b><span class="muted small">${marks.filter(m=>m.v==="ok").length}/${marks.length} réussi</span></div><div class="ehist">${marks.slice(0,12).map(m=>`<span class="opill ${m.v}">${OMARK[m.v]||""} ${fmtD(m.d)}</span>`).join("")||'<span class="muted small">Pas encore noté.</span>'}</div></div>`).join("")}</section>`}
+  return `<section class="card"><h3 style="font-size:1.3rem;margin-bottom:6px">Objectifs de groupe</h3>${rows.map(({o,marks})=>`<div class="objrow"><div class="objhead"><b>${esc(o.label)}</b><span class="muted small">${marks.filter(m=>m.v==="ok").length}/${marks.length} réussi</span></div><div class="ehist">${marks.slice(0,12).map(m=>`<span class="opill ${m.v}">${omk(m.v)} ${fmtD(m.d)}</span>`).join("")||'<span class="muted small">Pas encore noté.</span>'}</div></div>`).join("")}</section>`}
 function ctxInput(gid){const g=S.groups.get(gid)||{};return `<label class="obsdate small ctx"><span class="label">Contexte du jour</span><input type="text" value="${esc((g.ctx||{})[S.obsDate]||"")}" data-act="ctx" data-g="${gid}" placeholder="Ex. : parcours dans les roches"></label>`}
 const COMBOS=[{id:"ballon",label:"Habiletés de ballon",rows:["lancer","attraper"]}];
 const rb=id=>String(id).replace(/45$/,"");
@@ -1387,7 +1398,7 @@ function viewActivity(gid,secId){
   if(sel&&sel.r.combo){const {sec,r}=sel;
     h+=`<section class="card act-c"><h3 style="font-size:1.3rem;margin:0">${esc(r.label)}</h3>
     <div class="alegbox combo">${r.combo.map(m=>`<div><b class="alt">${esc(m.label)}</b><ol class="aleg">${m.steps.map(st=>`<li>${esc(stT(st))}</li>`).join("")}</ol></div>`).join("")}</div>
-    <p class="muted small" style="margin:6px 0 4px">Toucher un numéro : ✓ → ✗ → vide · appui long : historique</p>
+    <p class="muted small" style="margin:6px 0 4px">Toucher un rond : commence → en voie → acquis → vide · appui long : historique</p>
     <div class="akids">${kids.map(([cid,c])=>`<div class="akgrp"><a class="akname" href="#e-${cid}--${sec.id}"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><span>${esc(c.name)}</span></a>${r.combo.map(m=>actKidHTML(cid,c,sec,m,sec.id+"."+m.id,O,m.label)).join("")}</div>`).join("")}</div></section>`;
     return h}
   if(sel){const {sec,r}=sel;const key=sel.v;
@@ -1395,7 +1406,7 @@ function viewActivity(gid,secId){
     ${r.steps?`<div class="alegbox">`:""}${r.steps&&!r.rep?`<ol class="aleg">${r.steps.map(st=>`<li>${esc(stT(st))}</li>`).join("")}</ol>`:""}
     ${r.steps&&r.rep?`<ul class="aleg rep">${r.steps.map((st,i)=>`<li><b>${i+1}</b> ${esc(stT(st))}</li>`).join("")}</ul>`:""}${r.steps?`</div>`:""}
     ${/^(prise|ciseaux)/.test(r.id)?`<p class="small" style="margin:6px 0 0"><b>Main :</b> G, D ou 2 mains pour ${r.id.startsWith("prise")?"le crayon":"les ciseaux"} (va dans la préférence manuelle).</p>`:""}
-    <p class="muted small" style="margin:6px 0 4px">Toucher un numéro : ✓ → ✗ → vide · appui long : historique, cacher pour un enfant${assets?" · 📷 photo du jour":""}</p>
+    <p class="muted small" style="margin:6px 0 4px">${r.rep?"Toucher un numéro : noté aujourd'hui ✓ ou retiré":"Toucher un rond : commence → en voie → acquis → vide"} · appui long : historique, cacher pour un enfant${assets?" · 📷 photo du jour":""}</p>
     <div class="akids">${kids.map(([cid,c])=>actKidHTML(cid,c,sec,r,key,O)).join("")}</div></section>`;
     return h}
   const f="";const [fs,fr]=["",""];
@@ -1423,10 +1434,12 @@ function actKidHTML(cid,c,gsec,gr,gkey,O,lab){
     body+=`<div class="ahands">${r.hands.map(it=>{const cur=(hd[it]||[]).find(e=>e.d===d);const last=(hd[it]||[]).filter(e=>e.d!==d).sort((a,b)=>(b.d||"").localeCompare(a.d||""))[0];
       return `<span class="ahand"><span class="hn">${esc(it)}</span>${[["G","Gauche"],["D","Droite"],["2","2 mains"]].map(([v,l])=>`<button class="hbtn${cur&&cur.c===v?" on":""}" data-act="hand" data-id="${cid}" data-k="${key}" data-h="${esc(it)}" data-c="${v}" title="${l}" aria-pressed="${!!(cur&&cur.c===v)}">${v==="2"?"2":v}</button>`).join("")}${!cur&&last?`<span class="muted small">(${last.c==="2"?"2 mains":last.c} ${fmtD(last.d)})</span>`:""}</span>`}).join("")}</div>`}
   if(r.steps){const same=JSON.stringify(r.steps)===JSON.stringify(gr.steps);const AON=ageOn();const mo=AON?monthsAt(c.dob,d):null;
-    body+=`<div class="apills">${r.steps.map((st,i)=>{const sk=stK(st,i),kk=key+"."+sk;if(isHidStep(c,kk))return "";const t=stT(st);
-      const a=(c.checks||{})[kk]||[],ny=(c.notyet||{})[kk]||[];const okT=a.includes(d),nyT=ny.includes(d);const on=a.length>0,nyo=!on&&ny.length>0;
-      const ag=AON?ageOf(kk):null;const agc=ag?ageClass(ag,mo,on):"";
-      return `<div class="apill${okT?" okT":on?" ok":""}${nyT?" nyT":nyo?" ny":""}${agc?" "+agc:""}${same?"":" wide"}" role="button" tabindex="0" data-act="step" data-id="${cid}" data-k="${kk}" title="${esc(t)}" aria-label="${esc(c.name)} : ${esc(t)}${okT?", réussi aujourd'hui":nyT?", pas encore aujourd'hui":""}"><span class="n">${okT?"✓":nyT?"✗":i+1}</span>${same?"":`<span class="tt">${esc(t)}</span>`}<span class="t" hidden>${esc(t)}</span></div>`}).join("")}</div>`}
+    body+=`<div class="apills${r.rep?"":" adots"}">${r.steps.map((st,i)=>{const sk=stK(st,i),kk=key+"."+sk;if(isHidStep(c,kk))return "";const t=stT(st);
+      const a=(c.checks||{})[kk]||[];const okT=a.includes(d),on=a.length>0;const ag=AON?ageOf(kk):null;const agc=ag?ageClass(ag,mo,on):"";
+      if(r.rep)return `<div class="apill${okT?" okT":on?" ok":""}${agc?" "+agc:""}${same?"":" wide"}" role="button" tabindex="0" data-act="cRep" data-id="${cid}" data-k="${kk}" title="${esc(t)}" aria-label="${esc(c.name)} : ${esc(t)}${okT?", noté aujourd'hui":""}"><span class="n">${okT?"✓":i+1}</span>${same?"":`<span class="tt">${esc(t)}</span>`}<span class="t" hidden>${esc(t)}</span></div>`;
+      const l=lvlOfC(c,kk),now=lvlOnC(c,kk,d);
+      const dot=`<button class="adot ${l===3?"a":l?"e":""}${now?" td":""}${agc?" "+agc:""}" data-act="cLv" data-id="${cid}" data-k="${kk}" title="${esc(t)}" aria-label="${esc(c.name)} : ${esc(t)}${l?", "+CLV[l].toLowerCase():""}"><span class="t" hidden>${esc(t)}</span>${l?`<img src="${ICW("st-"+(l===3?2:1))}" alt="">`:`<span class="an">${i+1}</span>`}</button>`;
+      return same?dot:`<div class="awide">${dot}<span class="tt">${esc(t)}${l?` <span class="flv l${l}">${CLV[l].toLowerCase()}</span>`:""}</span></div>`}).join("")}</div>`}
   if(r.free){const fid=`free-${cid}-${key.replace(".","-")}`;const today=((c.free||{})[key]||[]).filter(n=>n.date===d);
     body+=`<div class="addline"><input class="field" id="${fid}" placeholder="Observation"><button class="btn small" data-act="addFree" data-id="${cid}" data-k="${key}">Ajouter</button></div>${today.map(n=>`<div class="muted small">${esc(n.text)}</div>`).join("")}`}
   const sh=((c.sout||{})[key]||[]).filter(e=>e.d===d).map(e=>e.t);
@@ -1527,7 +1540,7 @@ function rowHTML(cid,c,s,r,rank){
   const nOnRow=(r.steps||[]).filter((st,i)=>(((c.checks||{})[key+"."+stK(st,i)])||[]).length).length;
   const icons=r.free||s.id==="portrait"?"":`<span class="ricons"><button class="ico" data-act="toggleNote" data-k="${nk}" title="Écrire une note" aria-label="Écrire une note sur ce repère">${PEN}</button>${SR?`<button class="ico" data-act="noteDictate" data-k="${nk}" title="Dicter une note" aria-label="Dicter une note sur ce repère">${MIC}</button>`:""}</span>`;
   const rLast=(r.steps||[]).flatMap((st,i)=>[...(((c.checks||{})[key+"."+stK(st,i)])||[]),...(((c.notyet||{})[key+"."+stK(st,i)])||[])]).concat((c.notes||[]).filter(n=>n.k===key||String(n.k||"").startsWith(key+".")).map(n=>n.date)).sort().pop();
-  let h=`<div class="obsrow${r.rep?" rep":""}${isSch?" sch":""}${coll&&!isSch?" coll":""}${coll&&schOpen?" open":""}" id="row-${cid}-${key.replace(/\./g,"-")}"><div class="rhead">${coll?`<button class="schtog" data-act="schTog" data-k="s|${nk}" aria-expanded="${schOpen}"><span class="car">${schOpen?"▾":"▸"}</span><h4>${rank?`<span class="rank">${rank}</span>`:""}${esc(r.label.replace(/\s*\((répertoire)\)/,""))}</h4><span class="rsum">${r.steps?`${nOnRow}/${r.steps.length}`:""}${rLast?" · "+fmtD(rLast):""}</span></button>`:`<h4>${rank?`<span class="rank">${rank}</span>`:""}${esc(r.label)}${r.hint?`<button class="ibtn${openRows.has("i|"+nk)?" on":""}" data-act="toggleRow" data-k="i|${nk}" aria-label="Description" title="Description">i</button>`:""}</h4>`}${coll&&!schOpen?"":(coll&&r.hint?`<span class="ricons"><button class="ibtn${openRows.has("i|"+nk)?" on":""}" data-act="toggleRow" data-k="i|${nk}" aria-label="Description">i</button></span>`:"")+icons}</div>`;
+  let h=`<div class="obsrow${r.rep?" rep":""}${isSch?" sch":""}${coll&&!isSch?" coll":""}${coll&&schOpen?" open":""}" id="row-${cid}-${key.replace(/\./g,"-")}"><div class="rhead">${coll?`<button class="schtog" data-act="schTog" data-k="s|${nk}" aria-expanded="${schOpen}"><span class="car">${schOpen?"▾":"▸"}</span><h4>${rank?`<span class="rank">${rank}</span>`:""}${esc(r.label.replace(/\s*\((répertoire)\)/,""))}</h4><span class="rsum">${(()=>{const fi=(c.fint||{})[key]||{};return fi.int!=null&&!r.rep?chrt(fi.int)+" ":""})()}${r.steps?(r.rep?`${nOnRow}/${r.steps.length}`:cdots(c,key,r)):""}${rLast?" · "+fmtD(rLast):""}</span></button>`:`<h4>${rank?`<span class="rank">${rank}</span>`:""}${esc(r.label)}${r.hint?`<button class="ibtn${openRows.has("i|"+nk)?" on":""}" data-act="toggleRow" data-k="i|${nk}" aria-label="Description" title="Description">i</button>`:""}</h4>`}${coll&&!schOpen?"":(coll&&r.hint?`<span class="ricons"><button class="ibtn${openRows.has("i|"+nk)?" on":""}" data-act="toggleRow" data-k="i|${nk}" aria-label="Description">i</button></span>`:"")+icons}</div>`;
   if(coll&&!schOpen)return h+miniPh(c,cid,[key])+`</div>`;
   if(r.hint&&openRows.has("i|"+nk))h+=`<div class="hint">${esc(r.hint)}</div>`;
   if(r.free){
@@ -1547,9 +1560,20 @@ function rowHTML(cid,c,s,r,rank){
   const vis=r.steps.map((st,i)=>i).filter(i=>showHid||!hidK(i));const nHid=r.steps.filter((st,i)=>hidK(i)).length;
   const shown=open?vis:(nOn?vis.filter(i=>isOn(r.steps[i],i)):vis.slice(0,3));
   const AON=ageOn();const mo=AON?monthsAt(c.dob,S.obsDate):null;
-  h+=`<div class="steps">${shown.map(i=>{const st=r.steps[i];const t=stT(st);const sk=stK(st,i);const a=((c.checks||{})[key+"."+sk]||[]).slice().sort();const on=a.length>0;const nyd=((c.notyet||{})[key+"."+sk]||[]).slice().sort();const ny=!on&&nyd.length>0;const ag=AON?ageOf(key+"."+sk):null;const agc=ag?ageClass(ag,mo,on):"";
-    const todayS=a.includes(S.obsDate)?"ok":nyd.includes(S.obsDate)?"ny":"";const anyMark=a.length||nyd.length;
-    return `<div class="step${on?" on":""}${ny?" ny":""}${agc&&!hidK(i)?" "+agc:""}${hidK(i)?" hid":""}" role="button" tabindex="0" data-act="step" data-id="${cid}" data-k="${key}.${sk}" aria-label="${esc(t)}${todayS==="ok"?" : réussi aujourd'hui":todayS==="ny"?" : pas encore aujourd'hui":""}">${anyMark?`<button class="hist" data-act="stepHist" data-id="${cid}" data-k="${key}.${sk}" title="Historique, autres dates, photos" aria-label="Historique">${CLOCK}</button>`:""}${r.rep?"":`<span class="n">ÉTAPE ${i+1}</span>`}<span class="t">${esc(t)}</span>${on?a.map(d=>{const cx=ctxOf(c.groupId,d);return `<span class="d">${fmtD(d)}${cx?`<em> · ${esc(cx)}</em>`:""}</span>`}).join(""):""}${nyd.length?`<span class="dny">pas encore · ${nyd.map(d=>fmtD(d)).join(", ")}</span>`:""}${(()=>{const n=photosOf(c,p=>p.k===key+"."+sk).length;return n?`<span class="phc">${CAM} ${n}</span>`:""})()}</div>`}).join("")}${long&&!coll?`<button class="more-btn" data-act="toggleRow" data-k="${rk}">${open?"Réduire":nOn?`Voir tout (${r.steps.length})`:`Voir les ${r.steps.length} éléments`}</button>`:""}${nHid&&S.hideMode!==cid?`<button class="more-btn hidlink" data-act="toggleRow" data-k="h|${rk}">${showHid?"Masquer les étapes cachées":`${nHid} cachée${nHid>1?"s":""} · afficher`}</button>`:""}</div>`;
+  const hidLink=nHid&&S.hideMode!==cid?`<button class="more-btn hidlink" data-act="toggleRow" data-k="h|${rk}">${showHid?"Masquer les étapes cachées":`${nHid} cachée${nHid>1?"s":""} · afficher`}</button>`:"";
+  const phN=kk=>photosOf(c,p=>p.k===kk).length;
+  if(r.rep){
+    h+=`<div class="cpills">${vis.map(i=>{const st=r.steps[i];const kk=key+"."+stK(st,i);const a=((c.checks||{})[kk]||[]);const on=a.length>0;const td=a.includes(S.obsDate);const np=phN(kk);
+      return `<span class="cpw${hidK(i)?" hid":""}"><button class="cpill${on?" on":""}${td?" td":""}" data-act="cRep" data-id="${cid}" data-k="${kk}" aria-pressed="${on}">${esc(stT(st))}${a.length>1?` <small>×${a.length}</small>`:""}${np?` <small>${CAM}${np}</small>`:""}</button>${on?`<button class="cpi" data-act="cStep" data-id="${cid}" data-k="${kk}" data-l="${esc(stT(st))}" aria-label="Détails et historique">${CLOCK}</button>`:""}</span>`}).join("")}</div>${hidLink}`;
+  } else {
+    const fi=(c.fint||{})[key]||{};const LV=r.steps.map((st,i)=>lvlOfC(c,key+"."+stK(st,i)));
+    h+=`<div class="fbox"><div class="flab">Son intérêt</div><div class="fpills">${CINT.map((n,i)=>`<button class="fp fi${fi.int===i?" on":""}" data-act="cInt" data-id="${cid}" data-k="${key}" data-v="${i}">${chrt(i)} ${n}</button>`).join("")}</div>
+    <div class="flab">Comment il explore</div><div class="fpills">${CEXP.map(n=>`<button class="fp${(fi.exp||[]).includes(n)?" on":""}" data-act="cArr" data-z="exp" data-id="${cid}" data-k="${key}" data-v="${esc(n)}">${n}</button>`).join("")}</div></div>
+    <div class="flab" style="margin-top:8px">Où il est rendu <span style="font-weight:400">· touchez le rond pour le niveau, le texte pour les détails</span></div>
+    <div class="fsteps">${vis.map(i=>{const st=r.steps[i];const t=stT(st);const kk=key+"."+stK(st,i);const l=LV[i];const now=lvlOnC(c,kk,S.obsDate);const nyT=((c.notyet||{})[kk]||[]).includes(S.obsDate);const ag=AON?ageOf(kk):null;const agc=ag?ageClass(ag,mo,l>0):"";const np=phN(kk);
+      return `<div class="fst${hidK(i)?" hid":""}"><button class="fdot ${l===3?"a":l?"e":""}${now?" td":""}" data-act="cLv" data-id="${cid}" data-k="${kk}" aria-label="Changer le niveau : ${esc(t)}"><img src="${ICW("st-"+(l===3?2:l?1:0))}" alt=""></button><div class="fsb"><button class="fstt${l?"":" f"}" data-act="cStep" data-id="${cid}" data-k="${kk}" data-l="${esc(t)}">${esc(t)}${l?` <span class="flv l${l}">${CLV[l].toLowerCase()}</span>`:""}${nyT?` <span class="flv ny">pas encore</span>`:""}${np?` <span class="phc">${CAM} ${np}</span>`:""}${ag?` <span class="agl ${agc}">${ageLabel(ag)}</span>`:""}</button></div></div>`}).join("")}</div>${hidLink}`;
+    if(LV.some(l=>l>=2)||(fi.ctx||[]).length)h+=`<div class="fbox ail"><div class="flab">↗ Il l'utilise ailleurs</div><div class="fpills">${CCTX.map(n=>`<button class="fp${(fi.ctx||[]).includes(n)?" on":""}" data-act="cArr" data-z="ctx" data-id="${cid}" data-k="${key}" data-v="${esc(n)}">${n}</button>`).join("")}</div></div>`;
+  }
   if(r.nosout)return h+rowNotes(cid,c,key)+`</div>`;
   const sh=(c.sout||{})[key]||[];const today=new Set(sh.filter(e=>e.d===S.obsDate).map(e=>e.t));
   const byDate={};sh.forEach(e=>{(byDate[e.d]=byDate[e.d]||[]).push(e.t)});
@@ -1572,10 +1596,11 @@ async function draftPortrait(cid,secId,btn){
   const lines=[];
   SS.forEach(s=>s.rows.forEach(r=>{const key=s.id+"."+r.id;
     if(r.free){((c.free||{})[key]||[]).forEach(n=>lines.push(`- ${r.label} (${n.date}) : ${n.text}`));return}
-    const obs=[];(r.steps||[]).forEach((st,i)=>{const t=stT(st);((c.checks||{})[key+"."+stK(st,i)]||[]).forEach(d=>obs.push(`${t} — ${d}${ctxOf(c.groupId,d)?" ("+ctxOf(c.groupId,d)+")":""}`));((c.notyet||{})[key+"."+stK(st,i)]||[]).forEach(d=>obs.push(`pas encore : ${t} — ${d}`))});
+    const obs=[];(r.steps||[]).forEach((st,i)=>{const t=stT(st);((c.checks||{})[key+"."+stK(st,i)]||[]).forEach(d=>obs.push(`${t}${r.rep?"":" : "+CLV[lvlOnC(c,key+"."+stK(st,i),d)].toLowerCase()} — ${d}${ctxOf(c.groupId,d)?" ("+ctxOf(c.groupId,d)+")":""}`));((c.notyet||{})[key+"."+stK(st,i)]||[]).forEach(d=>obs.push(`pas encore : ${t} — ${d}`))});
     const so=((c.sout||{})[key]||[]).map(e=>`${SOUT[e.t]?SOUT[e.t].nom.toLowerCase():e.t} le ${e.d}`);
     const hd=Object.entries((c.hand||{})[key]||{}).map(([o,a])=>o+" : "+a.map(e=>(e.c==="2"?"2 mains":e.c==="G"?"gauche":"droite")+" le "+e.d).join(", "));
-    if(obs.length||so.length||hd.length)lines.push(`- ${r.label}${r.rep?" (répertoire, sans ordre)":" (progression)"} : ${obs.join(" ; ")||"aucune case"}${so.length?" | soutien : "+so.join(", "):""}${hd.length?" | main : "+hd.join(" ; "):""}`)}));
+    const fi=(c.fint||{})[key]||{};const fx=[fi.int!=null?"intérêt : "+CINT[fi.int].toLowerCase():"",(fi.exp||[]).length?"explore : "+fi.exp.join(", ").toLowerCase():"",(fi.ctx||[]).length?"l'utilise ailleurs : "+fi.ctx.join(", ").toLowerCase():""].filter(Boolean).join(" ; ");
+    if(obs.length||so.length||hd.length||fx)lines.push(`- ${r.label}${r.rep?" (répertoire, sans ordre)":" (progression)"} : ${obs.join(" ; ")||"aucune case"}${fx?" | "+fx:""}${so.length?" | soutien : "+so.join(", "):""}${hd.length?" | main : "+hd.join(" ; "):""}`)}));
   (c.notes||[]).filter(n=>(O?O.subs:[secId]).includes(n.section)).forEach(n=>lines.push(`- Note (${n.date})${n.k?" sur « "+stepLabel(c,n.k)+" »":""} : ${n.text}`));
   if(!lines.length){toast("Pas encore d'observations dans cette occupation.");return}
   const ta=document.getElementById("por-"+cid+"-"+secId);const old=btn.textContent;
@@ -1942,7 +1967,7 @@ function eclairData(c){const g=S.groups.get(c.groupId)||{};const pd=presDates(g)
   const ao=aObserver(c).find(x=>x.t!=="obj");return {pd,objs,aide,surv,reussite:kwF,ao}}
 function eclairHTML(cid,c,inPage){const g=S.groups.get(c.groupId)||{};const pd=presDates(g);const np=pd.filter(d=>(g.presences[d]||[]).includes(cid)).length;const E=eclairData(c);
   return `<section class="${inPage?"card ":""}eclair"><div class="ehead"><img src="${img("avatar-"+(c.avatar||"renard"))}" alt=""><b>${esc(c.name)}</b>${pd.length?`<span class="muted small">présent ${np}/${pd.length}</span>`:""}</div>
-  ${E.objs.map(o=>`<div class="el el1">🎯 ${esc(o.t)}${o.v?` <span class="opill ${o.v}">${OMARK[o.v]}</span>`:""}</div>`).join("")}
+  ${E.objs.map(o=>`<div class="el el1">🎯 ${esc(o.t)}${o.v?` <span class="opill ${o.v}">${omk(o.v)}</span>`:""}</div>`).join("")}
   ${E.aide.length?`<div class="el">✓ <b>Ce qui l'aide :</b> ${E.aide.map(esc).join(", ")}</div>`:""}
   ${E.surv.length?`<div class="el">⚠️ <b>À surveiller :</b> ${E.surv.map(esc).join(", ")}</div>`:""}
   ${E.reussite?`<div class="el">🌱 <b>Belle réussite :</b> ${esc(E.reussite.mot)} <span class="muted small">(${fmtD(E.reussite.date)})</span></div>`:""}
@@ -2024,10 +2049,17 @@ function mutGroup(gid,fn){const g=S.groups.get(gid);if(!g)return;const copy=JSON
 document.addEventListener("click",e=>{
   const b=e.target.closest("[data-act]");if(!b||b.tagName==="TEXTAREA"||b.tagName==="INPUT")return;
   const a=b.dataset.act,id=b.dataset.id,k=b.dataset.k;
-  if((a==="step"||a==="objMark")&&lpFired){lpFired=false;return}
+  if((a==="step"||a==="objMark"||a==="cLv"||a==="cRep")&&lpFired){lpFired=false;return}
   if(a==="step"&&S.hideMode&&S.hideMode===id&&b.classList.contains("step")){mutChild(id,x=>{const l=x.hideSteps||[];x.hideSteps=l.includes(k)?l.filter(v=>v!==k):l.concat(k)});return}
   if(a==="hideMode"){S.hideMode=S.hideMode===id?null:id;render();return}
   if(a==="jumpRow"){const el=document.getElementById(k);if(el){const y=el.getBoundingClientRect().top+scrollY-64;scrollTo({top:y,behavior:"smooth"})}return}
+  if(a==="cLv"){if(S.hideMode&&S.hideMode===id){mutChild(id,x=>{const l=x.hideSteps||[];x.hideSteps=l.includes(k)?l.filter(v=>v!==k):l.concat(k)});return}
+    const d=S.obsDate;const c0=S.children.get(id);const now=lvlOnC(c0,k,d),last=lvlOfC(c0,k);const nx=now?(now===3?0:now+1):(last?Math.min(last+1,3):1);mutChild(id,x=>setLvlC(x,k,nx,d));return}
+  if(a==="cRep"){if(S.hideMode&&S.hideMode===id){mutChild(id,x=>{const l=x.hideSteps||[];x.hideSteps=l.includes(k)?l.filter(v=>v!==k):l.concat(k)});return}
+    const d=S.obsDate;mutChild(id,x=>{x.checks=x.checks||{};const A=x.checks[k]||[];if(A.includes(d)){x.checks[k]=A.filter(v=>v!==d);if(!x.checks[k].length)delete x.checks[k]}else x.checks[k]=A.concat(d).sort()});return}
+  if(a==="cStep"){stepSheet(id,k,b.dataset.l||"");return}
+  if(a==="cInt"){const v=+b.dataset.v;mutChild(id,x=>{x.fint=x.fint||{};const f=x.fint[k]=x.fint[k]||{};if(f.int===v)delete f.int;else{f.int=v;f.intD=S.obsDate}});return}
+  if(a==="cArr"){const z=b.dataset.z,v=b.dataset.v;mutChild(id,x=>{x.fint=x.fint||{};const f=x.fint[k]=x.fint[k]||{};const A=f[z]=f[z]||[];const i=A.indexOf(v);i>=0?A.splice(i,1):A.push(v)});return}
   if(a==="stepHist"){e.stopPropagation();const st=b.closest('[data-act="step"]');stepSheet(id,k,st?st.querySelector(".t").textContent:"");return}
   if(a==="step"){const d=S.obsDate;mutChild(id,x=>{x.checks=x.checks||{};x.notyet=x.notyet||{};const ok=(x.checks[k]||[]).includes(d),ny=(x.notyet[k]||[]).includes(d);
       if(!ok&&!ny){x.checks[k]=(x.checks[k]||[]).concat(d)}else if(ok){x.checks[k]=x.checks[k].filter(v=>v!==d);x.notyet[k]=(x.notyet[k]||[]).concat(d)}else{x.notyet[k]=x.notyet[k].filter(v=>v!==d)}})}
@@ -2145,7 +2177,7 @@ document.addEventListener("click",e=>{
 });
 let lpTimer=null,lpFired=false;
 let lpX=0,lpY=0;
-document.addEventListener("pointerdown",e=>{const q=e.target.closest('.kpill[data-act="objMark"]');if(q){lpX=e.clientX;lpY=e.clientY;clearTimeout(lpTimer);lpTimer=setTimeout(()=>{lpFired=true;objNoteSheet(q.dataset.id,q.dataset.o,q.dataset.c);if(navigator.vibrate)try{navigator.vibrate(30)}catch(er){}},550);return}const b=e.target.closest('[data-act="step"]');if(!b||S.hideMode)return;lpX=e.clientX;lpY=e.clientY;clearTimeout(lpTimer);lpTimer=setTimeout(()=>{lpFired=true;stepSheet(b.dataset.id,b.dataset.k,(b.querySelector(".t")||{}).textContent||"");if(navigator.vibrate)try{navigator.vibrate(30)}catch(er){}},550)});
+document.addEventListener("pointerdown",e=>{const q=e.target.closest('.kpill[data-act="objMark"]');if(q){lpX=e.clientX;lpY=e.clientY;clearTimeout(lpTimer);lpTimer=setTimeout(()=>{lpFired=true;objNoteSheet(q.dataset.id,q.dataset.o,q.dataset.c);if(navigator.vibrate)try{navigator.vibrate(30)}catch(er){}},550);return}const b=e.target.closest('[data-act="step"],[data-act="cLv"],[data-act="cRep"]');if(!b||S.hideMode)return;lpX=e.clientX;lpY=e.clientY;clearTimeout(lpTimer);lpTimer=setTimeout(()=>{lpFired=true;stepSheet(b.dataset.id,b.dataset.k,(b.querySelector(".t")||{}).textContent||"");if(navigator.vibrate)try{navigator.vibrate(30)}catch(er){}},550)});
 ["pointerup","pointercancel"].forEach(ev=>document.addEventListener(ev,()=>{clearTimeout(lpTimer);if(lpFired)setTimeout(()=>{lpFired=false},350)},true));
 document.addEventListener("pointermove",e=>{if(Math.abs(e.clientX-lpX)+Math.abs(e.clientY-lpY)>12)clearTimeout(lpTimer)},true);
 document.addEventListener("contextmenu",e=>{if(e.target.closest('[data-act="step"],.kpill'))e.preventDefault()});
