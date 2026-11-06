@@ -423,6 +423,7 @@ img[data-face]{object-fit:cover;border-radius:50%;aspect-ratio:1/1}.facepick but
 .fint1{display:flex;flex-wrap:nowrap;gap:4px;margin:4px 0 6px;overflow-x:auto}.fint1 .fp{display:inline-flex;align-items:center;gap:3px;padding:3px 7px;font-size:.74rem;white-space:nowrap;flex:none}.objline{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--line)}.objline:last-child{border-bottom:0}.objline .ot{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.95rem}.objline .oh{display:flex;gap:2px;flex:none}.objline .oh .oim{width:20px;height:20px}.objline .oc{font-size:.78rem;color:#8a8178;flex:none}.opill{display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
 .scchips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.scchip{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:4px 12px 4px 6px;font:inherit;font-size:.86rem;cursor:pointer;color:inherit}.scchip .rowic{width:24px;height:24px;margin:0}.odot{width:38px;height:38px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;padding:0;border:1.6px dashed #c9bdb0;background:#fff;cursor:pointer}.odot.no{border:1.6px solid #c9bdb0;background:#F3EDE4}.odot.prog{border:1.6px solid #E0782F;background:#FBE0CB}.odot.ok{border:1.6px solid #4E8A5C;background:#E2F0E0}.odot .oim{width:24px;height:24px}
 .mainline{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:4px 0 6px}
+.tkw{position:relative;display:flex;flex-direction:column}.tkw .tkid{flex:1}.tpres{border:1.5px solid var(--line);background:#fff;border-radius:999px;font:inherit;font-size:.74rem;padding:2px 8px;margin:-14px auto 4px;position:relative;z-index:1;cursor:pointer;color:#8a8178}.tpres.on{background:#E2F0E0;border-color:#4E8A5C;color:#2f5e3a;font-weight:600}.tkw:not(.pres) .tkid{opacity:.8}
 </style>
 </head>
 <body>
@@ -785,7 +786,7 @@ document.addEventListener("focusout",()=>{if(pendingRender){setTimeout(()=>{cons
 
 /* ---------- Routage ---------- */
 function route(){const h=location.hash.slice(1);
-  if(h.startsWith("t-"))return{v:"terrain",gid:h.slice(2)};
+  if(h.startsWith("t-"))return{v:"group",gid:h.slice(2)};
   if(h.startsWith("g-")){const [gid,sec]=h.slice(2).split("--");return sec?{v:"activity",gid,sec}:{v:"group",gid}}
   if(h==="parametres")return{v:"settings"};
   if(h.startsWith("e-")){const [cid,sec]=h.slice(2).split("--");return{v:"child",cid,sec}}
@@ -842,13 +843,9 @@ function viewGroup(gid){S.fromTerrain=null;S.scOnly=null;
   const em=EMBLEMS[g.emblem]||EMBLEMS.roue;const kids=childrenOf(gid);
   let h=`<section class="card"><div class="ghead"><img src="${img(em.img)}" alt=""><div style="flex:1"><h2>${esc(g.name)}</h2><div class="muted small">Fiche ${esc(tpl(g).nom)}${g.equipe?" · "+esc(g.equipe):""}</div></div><button class="btn ghost" data-act="editGroup" data-id="${gid}">Modifier</button></div>
 
-  <a class="btn terrainbtn" href="#t-${gid}">${img?`<img src="${img("carnet")}" alt="">`:""} Mode terrain</a>
-  ${tpl(g).objOnly?`<p class="muted small" style="margin:10px 0 0">Groupe 6-12 ans : le mode terrain montre les objectifs de chaque jeune (✓ réussi, ↗ en progrès, ✗ difficile).</p>`:`<div class="label" style="margin:14px 0 6px">Mode activité · une observation pour tous</div>${scChips(gid)}<details class="sec" style="margin-top:6px"><summary class="small">Toutes les sections</summary><div class="secnav wrap">${OCCS.map(o=>`<a href="#g-${gid}--${o.subs[0]}"><img src="${img(o.img)}" alt="">${esc(shortT(o.titre))}</a>`).join("")}</div></details>`}
+  ${tpl(g).objOnly?`<p class="muted small" style="margin:10px 0 0">Groupe 6-12 ans : touchez un jeune ci-dessous pour noter ses objectifs.</p>`:`<div class="label" style="margin:14px 0 6px">Mode activité · une observation pour tous</div>${scChips(gid)}<details class="sec" style="margin-top:6px"><summary class="small">Toutes les sections</summary><div class="secnav wrap">${OCCS.map(o=>`<a href="#g-${gid}--${o.subs[0]}"><img src="${img(o.img)}" alt="">${esc(shortT(o.titre))}</a>`).join("")}</div></details>`}
   </section>`;
-  {const pd=presDates(g);const sk=kids.slice().sort((x,y)=>x[1].name.localeCompare(y[1].name,"fr",{sensitivity:"base"}));
-  h+=`<section class="card"><div class="ordhead"><h3 style="font-size:1.35rem">Enfants <span class="muted small" style="font-family:var(--font-body);font-weight:400">(${kids.length})</span></h3><span class="row-actions"><button class="btn small" data-act="newChild" data-id="${gid}">+ Un enfant</button><button class="btn small" data-act="bulkKids" data-id="${gid}">+ Plusieurs</button></span></div>
-  <div class="kpills">${sk.map(([id,c])=>`<a class="kpill" href="#e-${id}" title="${esc(c.name)}${c.dob?" · "+esc(ageAt(c.dob)):""}${pd.length?" · présences "+pd.filter(d=>g.presences[d].includes(id)).length+"/"+pd.length:""}"><img src="${avSrc(c)}"${avAt(c)} alt=""><span>${esc(c.name)}</span></a>`).join("")}</div>${kids.length?"":`<p class="muted small">Aucun enfant pour l'instant.</p>`}</section>`}
-  if(kids.length)h+=presenceHTML(gid,g,kids);
+  h+=todayHTML(gid,g,kids);
   h+=calendarHTML(gid,g);
   h+=objectivesHTML(gid,g,kids);
 
@@ -1158,7 +1155,7 @@ async function buildAlbum(cid,ids,caps,per,titre){const c=S.children.get(cid);co
   const N=pages.length;const d0=items.length?items[0].d:"",d1=items.length?items[items.length-1].d:"";
   const fig=p=>{const cx=ctxOf(c.groupId,p.d);const lab=photoLabel(c,p);return `<figure><div class="ph"><img src="${U[p.id]}" alt=""></div><figcaption><b>${E(fmtD(p.d,true))}</b>${cx?" · "+E(cx):""}${caps[p.id]?`<br>${E(caps[p.id])}`:lab?`<br><span>${E(lab)}</span>`:""}</figcaption></figure>`};
   const body=pages.map((pg,i)=>`<section class="page g${per}${i===0?" first":""}">${i===0?`<header class="logos"><img src="${A["logo-coclinique"]}" class="lg1" alt=""><img src="${A["logo-caal"]}" class="lg2" alt=""></header><div class="ttl"><h1>${E(titre)}</h1><p class="sub">${E(c.name)}${d0?` · ${E(fmtD(d0,true))}${d1&&d1!==d0?" au "+E(fmtD(d1,true)):""}`:""}</p></div>`:`<div class="tag">${E(c.name)} · ${E(titre)}</div>`}
-    <div class="grid">${pg.map(fig).join("")}</div><div class="foot">${N<=6&&A["frise-"+(i+1)]?`<img class="frise" src="${A["frise-"+(i+1)]}" alt="${i+1}">`:`<span>${i+1} / ${N}</span>`}</div></section>`).join("");
+    <div class="grid">${pg.map(fig).join("")}</div><div class="foot">${N<=6&&A["frise-"+(i+1)]?`<span class="friw" style="width:${(0.5*(N*70+8)/({1:128,2:112,3:120,4:118,5:130,6:114})[i+1]).toFixed(3)}in"><img class="frise" src="${A["frise-"+(i+1)]}" alt="${i+1} / ${N}"></span>`:`<span>${i+1} / ${N}</span>`}</div></section>`).join("");
   return `<!DOCTYPE html><html lang="fr-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${E(titre)} · ${E(c.name)}</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Lora:wght@400;500&display=swap" rel="stylesheet">
 <style>@page{size:Letter;margin:0}*{box-sizing:border-box}body{margin:0;background:#e8e6e1;font-family:Barlow,Arial,sans-serif;color:#2a2a2a;font-size:10pt}
@@ -1170,7 +1167,7 @@ async function buildAlbum(cid,ids,caps,per,titre){const c=S.children.get(cid);co
 figure{margin:0;display:flex;flex-direction:column;min-height:0;background:#FAF8F3;border:1px solid #ECE6DA;border-radius:10px;padding:.1in}
 .ph{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}.ph img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px}
 figcaption{margin-top:6px;font-size:9pt;line-height:1.35;color:#444}figcaption span{color:#777}
-.foot{position:absolute;left:0;right:0;bottom:.3in;display:flex;justify-content:center;font-size:9pt;color:#777}.foot .frise{height:.5in}
+.foot{position:absolute;left:0;right:0;bottom:.3in;display:flex;justify-content:center;font-size:9pt;color:#777}.foot .frise{height:.5in}.friw{display:inline-block;height:.5in;overflow:hidden;line-height:0}.friw .frise{height:.5in;max-width:none}
 @media print{body{background:#fff}.page{margin:0;box-shadow:none}}</style></head><body>${body}</body></html>`}
 async function buildRapport(cid,opt){opt=opt||{};const c=S.children.get(cid);const R=rapportFull(cid);const T=Object.assign({},R.t);if(opt.equipe){const g=S.groups.get(c.groupId)||{};T.titre="Fiche d'équipe";T.sous="Discussion d'équipe · "+(g.name||"");T.ctx="en ergothérapie et en éducation spécialisée";T.facT="Facilitateurs"}const sg=getSign();const E=esc;
   const A={};const need=["logo-coclinique","logo-caal","hd-facil","hd-analyse","frise-1","frise-2","frise-3","frise-4","frise-5","frise-6"].concat(["tete","esprit","coeur","corps"].map(k=>"sph-"+k),RBOX.map(x=>x[2]));
@@ -1191,7 +1188,7 @@ async function buildRapport(cid,opt){opt=opt||{};const c=S.children.get(cid);con
     {head:`<div class="phead plain"><h2>${E(T.occT)}</h2></div>`,blocks:R.ordO.map(k=>{const im=RBOX.find(x=>x[0]===k)[2];return `<div class="blk obox"><img src="${A[im]}" class="bi" alt=""><div class="bt"><h3>${E(T["o_"+k])}</h3><p>${P(R[k])}</p></div></div>`})},
     {head:`<div class="phead"><img src="${A["hd-analyse"]}" class="hdi" alt=""><div><h2>${E(T.anaT)}</h2></div></div>`,blocks:[`<div class="blk tbox"><p>${P(R.analyse)}</p><p class="dr">Date de rédaction : ${E(fmtD(todayISO(),true))}</p></div>`,`<div class="blk signs">${sg.map(x=>`<div><div class="line"></div><i>${E(x.nom)}</i><br><i>${E(x.titre)}</i><br><span>${E(x.courriel)}</span></div>`).join("")}</div>`]}];
   if(opt.equipe){if(!sections[0].blocks.length)sections[0].blocks=[`<div class="blk tbox"><p>Aucun facilitateur noté pour l'instant.</p></div>`];sections.splice(1,sections.length-1,...opt.equipe.sections)}
-  const data=JSON.stringify({sections,opt:!!R.opt,frise:[1,2,3,4,5,6].map(i=>A["frise-"+i]),name:c.name+(c.dob?" · "+fmtD(c.dob,true)+" · "+age:"")}).replace(/</g,"\\u003c");
+  const data=JSON.stringify({sections,opt:!!R.opt,frise:[1,2,3,4,5,6].map(i=>A["frise-"+i]),fh:[128,112,120,118,130,114],name:c.name+(c.dob?" · "+fmtD(c.dob,true)+" · "+age:"")}).replace(/</g,"\\u003c");
   return `<!DOCTYPE html><html lang="fr-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${E(T.titre)} · ${E(c.name)}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
@@ -1220,7 +1217,7 @@ h1,h2,h3{font-family:Lora,Georgia,serif;font-weight:500;margin:0;color:#262626}h
 .tbox{border:1px solid #e3ddd0;background:#FCFBF8;padding:.14in .22in}.eq ul{margin:4px 0 0;padding-left:18px}.eq li{margin:2px 0}.eq p{text-align:left}.eq .mut{color:#777}.eq .kv{display:flex;gap:10px;margin:3px 0}.eq .kv b{min-width:1.3in}.eq .notes .d{color:#777;font-size:9pt;margin-right:4px}.eq .ph{display:grid;grid-template-columns:1fr 1fr;gap:8px}.eq .ph figure{margin:0}.eq .ph img{width:100%;height:2.1in;object-fit:cover;border-radius:6px}.eq .ph figcaption{font-size:8.5pt;color:#777}.tbox p,.obox p{margin:0;text-align:justify}
 .dr{margin-top:.15in!important;font-style:italic;color:#555}
 .signs{display:flex;justify-content:space-between;margin-top:.3in;text-align:center;font-size:9.5pt}.signs>div{width:44%}.signs .line{border-top:1px solid #8a8a8a;margin:.35in 0 4px}.signs span{color:#7a6a3d}
-.foot{position:absolute;left:.75in;right:.75in;bottom:.3in;display:flex;align-items:center;justify-content:center;font-size:8pt;color:#888}.foot .frise{height:.5in}
+.foot{position:absolute;left:.75in;right:.75in;bottom:.3in;display:flex;align-items:center;justify-content:center;font-size:8pt;color:#888}.foot .frise{height:.5in}.friw{display:inline-block;height:.5in;overflow:hidden;line-height:0}.friw .frise{height:.5in;max-width:none}
 .dots{display:flex;gap:6px;align-items:center}.dots i{width:16px;height:16px;border-radius:50%;font-style:normal;font-size:7.5pt;display:flex;align-items:center;justify-content:center;color:#666;border:1px solid #d6d0c4;background:#fff}.dots i.on{color:#fff;border-color:transparent}
 @media print{body{background:#fff}.page{margin:0;box-shadow:none}}
 </style></head><body><div id="out">${cover}</div><div id="meas" style="position:absolute;left:-9999px;top:0"></div>
@@ -1232,7 +1229,7 @@ D.sections.forEach(sec=>{let c=newPage(sec.head);let q=sec.blocks.slice();
     for(let i=0;i<(D.opt?q.length:1);i++){c.insertAdjacentHTML("beforeend",q[i]);const el=c.lastElementChild;if(fits(c)){q.splice(i,1);placed=true;break}el.remove()}
     if(!placed){if(c.children.length<=1){c.insertAdjacentHTML("beforeend",q.shift());continue}c=newPage(sec.head.replace('class="phead','class="phead cont').replace(/<p class="intro">[^]*?<\\/p>/,""))}}});
 const pages=[...out.querySelectorAll(".page")];const N=pages.length;
-pages.forEach((p,i)=>{const f=document.createElement("div");f.className="foot";if(N<=6&&D.frise[i]){f.innerHTML='<img class="frise" src="'+D.frise[i]+'" alt="">'}else{f.innerHTML='<span class="dots">'+pages.map((_,j)=>'<i class="'+(j===i?"on":"")+'" style="'+(j===i?"background:"+COL[j%COL.length]:"")+'">'+(j+1)+'</i>').join("")+'</span>'}p.appendChild(f)});
+pages.forEach((p,i)=>{const f=document.createElement("div");f.className="foot";if(N<=6&&D.frise[i]){f.innerHTML='<span class="friw" style="width:'+(0.5*(N*70+8)/D.fh[i]).toFixed(3)+'in"><img class="frise" src="'+D.frise[i]+'" alt=""></span>'}else{f.innerHTML='<span class="dots">'+pages.map((_,j)=>'<i class="'+(j===i?"on":"")+'" style="'+(j===i?"background:"+COL[j%COL.length]:"")+'">'+(j+1)+'</i>').join("")+'</span>'}p.appendChild(f)});
 });<\/script></body></html>`}
 function calDaySheet(gid,d){const g=S.groups.get(gid);const info=groupDays(gid).get(d)||{};const pl=(g.meetings||[]).includes(d);
   const items=dayItems(gid,d).filter(it=>it.kind!=="j");const jl=(g.journal||[]).filter(n=>n.date===d&&n.theme!=="source"&&n.theme!=="jour");const pr=(presOf(g,d)||[]).map(id=>(S.children.get(id)||{}).name).filter(Boolean);const cx=ctxOf(gid,d);
@@ -1275,6 +1272,14 @@ const JTHEMES={climat:"Climat et dynamique",environnement:"Aménagement",ecole:"
 /* ---------- Présences ---------- */
 function presOf(g,d){return ((g.presences||{})[d])||null}
 function presDates(g){return Object.keys(g.presences||{}).filter(d=>(g.presences[d]||[]).length).sort()}
+function todayHTML(gid,g,kids){const d=S.obsDate;const pr=presOf(g,d)||[];const sk=kids.slice().sort((x,y)=>x[1].name.localeCompare(y[1].name,"fr",{sensitivity:"base"}));const nT=sk.filter(([,c])=>dayTouched(c,d)).length;const pd=presDates(g);
+  return `<section class="card"><div class="ordhead"><h3 style="font-size:1.35rem">Enfants <span class="muted small" style="font-family:var(--font-body);font-weight:400">${pr.length} présent${pr.length>1?"s":""} · ${nT} noté${nT>1?"s":""}</span></h3><label class="obsdate small"><input type="date" value="${d}" data-act="obsDate"></label></div>
+  <div class="tgrid">${sk.map(([cid,c])=>{const done=dayTouched(c,d);const ao=aObserver(c);const isP=pr.includes(cid);
+    return `<div class="tkw${isP?" pres":""}"><button class="tkid${done?" done":""}" data-act="tKid" data-id="${gid}" data-c="${cid}"><span class="tav"><img src="${avSrc(c)}"${avAt(c)} alt="">${done?`<i class="ok">✓</i>`:`<i class="todo"></i>`}</span><b>${esc(c.name)}</b><span class="tao">${ao.slice(0,2).map(x=>`<span class="${x.t}">${AOI[x.t]} ${esc(x.label.length>48?x.label.slice(0,46)+"…":x.label)}</span>`).join("")}</span></button><button class="tpres${isP?" on":""}" data-act="presMark" data-id="${gid}" data-c="${cid}" aria-pressed="${isP}" aria-label="${esc(c.name)} ${isP?"présent":"absent"}">${isP?"✓ présent":"présent ?"}</button></div>`}).join("")}</div>
+  ${kids.length?"":`<p class="muted small">Aucun enfant pour l'instant.</p>`}
+  <div class="row-actions" style="margin-top:10px"><button class="btn primary" data-act="tBilan" data-id="${gid}">Bilan de la journée</button><button class="btn small" data-act="newChild" data-id="${gid}">+ Un enfant</button><button class="btn small" data-act="bulkKids" data-id="${gid}">+ Plusieurs</button></div>
+  <p class="muted small" style="margin:6px 0 0">Touchez un enfant pour noter, dicter ou cocher ses objectifs. ✓ = déjà noté aujourd'hui · point orange = rien encore. 🎯 objectif · ↻ à revoir · 🌱 repère de son âge · 👀 section peu documentée.</p>
+  ${pd.length?det("pt-"+gid,`Tableau des présences (${pd.length} rencontre${pd.length>1?"s":""})`,`<div class="cov-wrap"><table class="cov ptab"><thead><tr><th></th><th>Total</th>${pd.slice().reverse().map(x=>`<th><span>${fmtD(x)}</span></th>`).join("")}</tr></thead><tbody>${kids.map(([cid,c])=>{const n=pd.filter(x=>g.presences[x].includes(cid)).length;return `<tr><th><a href="#e-${cid}">${esc(c.name)}</a></th><td class="ptot">${n}/${pd.length}</td>${pd.slice().reverse().map(x=>{const on=g.presences[x].includes(cid);return `<td class="${on?"pon":"poff"}">${on?"✓":"·"}</td>`}).join("")}</tr>`}).join("")}<tr class="psum"><th>Présents</th><td></td>${pd.slice().reverse().map(x=>`<td>${g.presences[x].length}</td>`).join("")}</tr></tbody></table></div>`):""}</section>`}
 function presenceHTML(gid,g,kids){const p=presOf(g,S.obsDate)||[];S.prInit=S.prInit||new Set();if(!S.prInit.has(gid)){openDetails.add("pr-"+gid);S.prInit.add(gid)}
   return `<section class="card"><details class="ogdet" data-dk="pr-${gid}" ${openDetails.has("pr-"+gid)?"open":""}><summary><h3 style="font-size:1.35rem;display:inline">Présences</h3> <span class="muted small">${p.length} le ${fmtD(S.obsDate)}</span></summary><div class="ordhead" style="margin-top:6px"><span></span><label class="obsdate small"><span class="label">Date</span><input type="date" value="${S.obsDate}" data-act="obsDate"></label></div>
   <div class="kids" style="margin-top:8px">${kids.map(([cid,c])=>{const on=p.includes(cid);return `<div class="kchip ${on?"ok":""}"><button class="kmark" data-act="presMark" data-id="${gid}" data-c="${cid}" aria-pressed="${on}" aria-label="${esc(c.name)} ${on?"présent":"absent"}"><img src="${avSrc(c)}"${avAt(c)} alt=""><span class="sym">${on?"✓":""}</span></button><span class="kname" style="text-decoration:none;color:var(--ink)">${esc(c.name)}</span></div>`}).join("")}</div>
@@ -1417,7 +1422,7 @@ function viewActivity(gid,secId){
   if(S.rowFilter&&S.rowFilter.row&&S.rowFilter.row!=="*"){const [rs,rr]=S.rowFilter.row.split(".");const cb=rr&&COMBOS.find(x=>x.rows.includes(rb(rr)));if(cb&&allRows.some(x=>x.v===rs+".@"+cb.id))S.rowFilter.row=rs+".@"+cb.id}
   if(!S.rowFilter||S.rowFilter.occ!==O.id||(S.rowFilter.row!=="*"&&!allRows.some(x=>x.v===S.rowFilter.row)))S.rowFilter={occ:O.id,row:(allRows.find(x=>!x.r.free)||allRows[0]||{v:"*"}).v};
   const cur=S.rowFilter.row;const sel=allRows.find(x=>x.v===cur);
-  let h=(S.fromTerrain===gid?`<a class="btn backbtn" href="#t-${gid}" data-act="backTerrain">← Retour au terrain</a>`:"")+`<section class="card"><div class="sechead"><img src="${img(O.img)}" alt=""><div style="flex:1"><h2>Mode activité · ${esc(O.titre)}</h2><div class="sph">Une observation simple pour tous les enfants de ${esc(g.name)}.</div></div></div>
+  let h=(S.fromTerrain===gid?`<a class="btn backbtn" href="#g-${gid}" data-act="backTerrain">← Retour au groupe</a>`:"")+`<section class="card"><div class="sechead"><img src="${img(O.img)}" alt=""><div style="flex:1"><h2>Mode activité · ${esc(O.titre)}</h2><div class="sph">Une observation simple pour tous les enfants de ${esc(g.name)}.</div></div></div>
   <div class="toolbar" style="margin-top:12px">
    <label class="obsdate small"><span class="label">Date d'observation</span><input type="date" value="${S.obsDate}" data-act="obsDate"></label>
    ${ctxInput(gid)}
