@@ -495,6 +495,12 @@ body:has(#ov) .tmr.big .tmface svg{width:32px;height:32px}body:has(#ov) .tmr.big
 #prt{display:none}
 @media print{body.printing>*:not(#prt){display:none!important}body.printing #prt{display:block;padding:0 6mm;font-size:11pt;color:#000}body.printing .oxk{border-bottom:1px solid #ccc}}
 .omark.ok{background:#EEF6E8!important;border-color:#8DB37A!important;color:inherit!important}.omark.prog{background:#FFF8E3!important;border-color:#E2B65A!important}.omark.no{background:#FBF6EA!important;border-color:#D9C49A!important;color:inherit!important}
+.tmr.big .tmhd{position:absolute;top:calc(10px + env(safe-area-inset-top));left:12px;right:12px;width:auto}
+.tmdial{touch-action:none;cursor:pointer}
+.tmhint{margin:-6px 0 0;font-size:.78rem;color:var(--muted)}
+.tmr.big .tmpre{max-width:360px}.tmr.big .tmm{font-size:1.05rem;padding:12px 0}
+.tmgo{min-width:180px;font-size:1.05rem}.tmgo:disabled{opacity:.5}
+.tmr:not(.big) .tmhd .tmb{padding:3px 8px;font-size:.78rem;min-width:28px}
 </style>
 </head>
 <body>
@@ -819,51 +825,61 @@ function objAllSheet(gid){let O=oxOpts();const draw=s=>{s.querySelector("#oxv").
     s.querySelector("#oxPrint").onclick=()=>{let d=document.getElementById("prt");if(!d){d=document.createElement("div");d.id="prt";document.body.appendChild(d)}d.innerHTML=objAllHTML(gid,O);document.body.classList.add("printing");const done=()=>{document.body.classList.remove("printing");d.innerHTML="";window.removeEventListener("afterprint",done)};window.addEventListener("afterprint",done);setTimeout(()=>{window.print();setTimeout(()=>{if(document.body.classList.contains("printing")&&!matchMedia("print").matches)done()},1500)},50)}})}
 /* ---------- Minuterie (Time Timer / sablier) ---------- */
 const TMP=(()=>{try{return JSON.parse(localStorage.getItem("carnet-tm")||"{}")}catch(e){return {}}})();
-const TM={open:false,dur:0,end:0,left:0,paused:false,style:TMP.style||"disque",snd:TMP.snd!==false,lg:!!TMP.lg,big:false,mini:false,done:false,last:TMP.last||5};
-let tmIv=null,tmLock=null;
-function tmSave(){try{localStorage.setItem("carnet-tm",JSON.stringify({style:TM.style,snd:TM.snd,lg:TM.lg,last:TM.last,run:TM.dur&&!TM.done?{dur:TM.dur,end:TM.end,left:TM.left,paused:TM.paused}:null}))}catch(e){}}
-function tmInit(){if(document.getElementById("tmfab"))return;const b=document.createElement("button");b.id="tmfab";b.className="tmfab";b.setAttribute("aria-label","Minuterie");b.innerHTML=TMSVG.sab;b.onclick=()=>{TM.open=true;TM.mini=false;tmDraw()};document.body.appendChild(b);
+const TM={open:false,dur:0,end:0,left:0,paused:false,style:TMP.style||"disque",snd:TMP.snd!==false,big:true,mini:false,done:false,last:TMP.last||5,set:TMP.last||5};
+let tmIv=null,tmLock=null,tmDrag=null;
+function tmSave(){try{localStorage.setItem("carnet-tm",JSON.stringify({style:TM.style,snd:TM.snd,last:TM.last,run:TM.dur&&!TM.done?{dur:TM.dur,end:TM.end,left:TM.left,paused:TM.paused,big:TM.big}:null}))}catch(e){}}
+function tmInit(){if(document.getElementById("tmfab"))return;const b=document.createElement("button");b.id="tmfab";b.className="tmfab";b.setAttribute("aria-label","Minuterie");b.innerHTML=TMSVG.sab;b.onclick=()=>{TM.open=true;TM.mini=false;TM.big=true;if(!TM.dur)TM.set=TM.last||5;tmDraw()};document.body.appendChild(b);
   const p=document.createElement("div");p.id="tmr";p.className="tmr";p.hidden=true;document.body.appendChild(p);
   p.addEventListener("click",e=>{const q=e.target.closest("[data-tm]");if(!q)return;const a=q.dataset.tm;
-    if(a==="go")tmStart(+q.dataset.m*60000);else if(a==="other"){const v=parseFloat((p.querySelector("#tmOther")||{}).value);if(v>0)tmStart(Math.round(v*60000))}
+    if(a==="go")tmStart(+q.dataset.m*60000);
+    else if(a==="start"){if(TM.set>0)tmStart(TM.set*60000)}
     else if(a==="pause"){if(TM.paused){TM.end=Date.now()+TM.left;TM.paused=false}else{TM.left=Math.max(0,TM.end-Date.now());TM.paused=true}tmSave();tmDraw()}
     else if(a==="plus"){if(TM.done){TM.done=false;TM.end=Date.now()+60000;TM.dur=60000;tmRun()}else if(TM.paused){TM.left+=60000;TM.dur+=60000}else{TM.end+=60000;TM.dur+=60000}tmSave();tmDraw()}
-    else if(a==="reset"){tmStop(false);tmDraw()}
-    else if(a==="close"){tmStop(false);TM.open=false;TM.big=false;tmDraw()}
-    else if(a==="mini"){TM.mini=!TM.mini;TM.big=false;tmDraw()}
+    else if(a==="reset"){tmStop();TM.big=true;tmDraw()}
+    else if(a==="close"){tmStop();TM.open=false;tmDraw()}
+    else if(a==="mini"){TM.mini=!TM.mini;tmDraw()}
     else if(a==="big"){TM.big=!TM.big;TM.mini=false;tmDraw()}
-    else if(a==="style"){TM.style=q.dataset.v;tmSave();tmDraw()}
-    else if(a==="snd"){TM.snd=!TM.snd;tmSave();tmDraw()}
-    else if(a==="size"){TM.lg=q.dataset.v==="lg";tmSave();tmDraw()}});
-  const sv=TMP.run;if(sv&&(sv.paused||sv.end>Date.now())){Object.assign(TM,{dur:sv.dur,end:sv.end,left:sv.left||0,paused:!!sv.paused,open:true,mini:true});tmRun();tmDraw()}}
-function tmStart(ms){TM.dur=ms;TM.end=Date.now()+ms;TM.left=ms;TM.paused=false;TM.done=false;TM.last=ms/60000;TM.mini=false;TM.big=TM.lg;tmSave();tmRun();tmDraw()}
+    else if(a==="style"){TM.style=TM.style==="sablier"?"disque":"sablier";tmSave();tmDraw()}
+    else if(a==="snd"){TM.snd=!TM.snd;tmSave();tmDraw()}});
+  /* régler avec le doigt sur l'horloge */
+  p.addEventListener("pointerdown",e=>{const f=e.target.closest(".tmdial");if(!f||TM.style==="sablier")return;e.preventDefault();tmDrag={el:f,prev:tmCur()};try{f.setPointerCapture(e.pointerId)}catch(er){}tmDragTo(e)});
+  p.addEventListener("pointermove",e=>{if(tmDrag)tmDragTo(e)});
+  const up=()=>{if(!tmDrag)return;tmDrag=null;if(TM.dur&&!TM.done){tmSave()}tmDraw()};p.addEventListener("pointerup",up);p.addEventListener("pointercancel",up);
+  const sv=TMP.run;if(sv&&(sv.paused||sv.end>Date.now())){Object.assign(TM,{dur:sv.dur,end:sv.end,left:sv.left||0,paused:!!sv.paused,open:true,big:false,mini:true});tmRun();tmDraw()}}
+function tmCur(){return TM.dur?tmRem()/60000:TM.set}
+function tmDragTo(e){const r=tmDrag.el.getBoundingClientRect();const dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);if(Math.hypot(dx,dy)<r.width*.06)return;
+  const cw=(Math.atan2(dx,-dy)*180/Math.PI+360)%360;let m=Math.round(cw/6);const pv=tmDrag.prev;if(pv>45&&m<15)m=60;else if(pv<15&&m>45&&pv<=1)m=0;m=Math.max(0,Math.min(60,m));tmDrag.prev=m;
+  if(TM.dur&&!TM.done){const ms=m*60000;if(TM.paused)TM.left=ms;else TM.end=Date.now()+ms;TM.dur=Math.max(ms,1)}else{TM.set=m}tmUpd(true)}
+function tmStart(ms){TM.dur=ms;TM.end=Date.now()+ms;TM.left=ms;TM.paused=false;TM.done=false;TM.last=Math.max(1,Math.round(ms/60000));TM.set=TM.last;TM.mini=false;tmSave();tmRun();tmDraw()}
 function tmRun(){clearInterval(tmIv);tmIv=setInterval(tmTick,250);try{if(navigator.wakeLock&&!tmLock)navigator.wakeLock.request("screen").then(l=>{tmLock=l}).catch(()=>{})}catch(e){}}
-function tmStop(){clearInterval(tmIv);tmIv=null;TM.dur=0;TM.done=false;TM.paused=false;TM.big=false;try{tmLock&&tmLock.release()}catch(e){}tmLock=null;tmSave()}
+function tmStop(){clearInterval(tmIv);tmIv=null;TM.dur=0;TM.done=false;TM.paused=false;try{tmLock&&tmLock.release()}catch(e){}tmLock=null;tmSave()}
 function tmRem(){return TM.paused?TM.left:Math.max(0,TM.end-Date.now())}
-function tmTick(){if(!TM.dur||TM.paused)return;const r=tmRem();if(r<=0&&!TM.done){TM.done=true;clearInterval(tmIv);tmIv=null;tmSave();tmEnd();tmDraw();return}tmUpd()}
+function tmTick(){if(!TM.dur||TM.paused||tmDrag)return;const r=tmRem();if(r<=0&&!TM.done){TM.done=true;clearInterval(tmIv);tmIv=null;tmSave();tmEnd();tmDraw();return}tmUpd()}
 function tmEnd(){try{navigator.vibrate&&navigator.vibrate([300,150,300,150,500])}catch(e){}
   if(TM.snd){try{const A=new (window.AudioContext||window.webkitAudioContext)();[[660,0],[880,.35],[660,.9],[880,1.25]].forEach(([f,t])=>{const o=A.createOscillator(),g=A.createGain();o.type="sine";o.frequency.value=f;g.gain.setValueAtTime(0,A.currentTime+t);g.gain.linearRampToValueAtTime(.25,A.currentTime+t+.03);g.gain.exponentialRampToValueAtTime(.001,A.currentTime+t+.5);o.connect(g);g.connect(A.destination);o.start(A.currentTime+t);o.stop(A.currentTime+t+.55)})}catch(e){}}}
 const tmFmt=ms=>{const t=Math.ceil(ms/1000),m=Math.floor(t/60),x=t%60;return m+":"+String(x).padStart(2,"0")};
 const TMSVG={sab:`<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 3h10M7 21h10M8 3c0 5 8 6 8 9s-8 4-8 9M16 3c0 5-8 6-8 9s8 4 8 9"/><path fill="currentColor" d="M10 18.5h4l-2-2.2z"/></svg>`};
-function tmFace(size){const r=tmRem(),f=TM.dur?Math.max(0,Math.min(1,r/TM.dur)):1;
-  if(TM.style==="sablier"){const h=size,w=size*.7,top=f,bot=1-f;return `<svg viewBox="0 0 70 100" width="${w}" height="${h}" class="tmsab" aria-hidden="true"><path d="M8 4h54M8 96h54" stroke="#8B6B43" stroke-width="5" stroke-linecap="round"/><path d="M14 8c0 22 18 28 18 42s-18 20-18 42h42c0-22-18-28-18-42s18-20 18-42z" fill="#FFFDF7" stroke="#B9A37E" stroke-width="2.5"/><clipPath id="tmct"><rect x="0" y="${8+42*(1-top)}" width="70" height="${42*top}"/></clipPath><clipPath id="tmcb"><rect x="0" y="${92-42*bot}" width="70" height="${42*bot}"/></clipPath><path clip-path="url(#tmct)" d="M16 8c0 21 17 27 17 41h4c0-14 17-20 17-41z" fill="#E3B65C"/><path clip-path="url(#tmcb)" d="M16 92c0-21 17-27 17-41h4c0 14 17 20 17 41z" fill="#E3B65C"/>${f>0&&f<1&&!TM.paused?'<rect x="34" y="49" width="2" height="40" fill="#E3B65C" opacity=".8"/>':""}</svg>`}
-  const a=f*360,R=45,x=50+R*Math.sin(a*Math.PI/180),y=50-R*Math.cos(a*Math.PI/180);const path=f>=1?`<circle cx="50" cy="50" r="${R}" fill="#D9473A"/>`:f<=0?"":`<path d="M50 50 L50 5 A${R} ${R} 0 ${a>180?1:0} 1 ${x.toFixed(2)} ${y.toFixed(2)} Z" fill="#D9473A"/>`;
-  return `<svg viewBox="0 0 100 100" width="${size}" height="${size}" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="#fff" stroke="#D8D0C2" stroke-width="2"/>${Array.from({length:12},(_,i)=>{const t=i*30*Math.PI/180;return `<line x1="${50+40*Math.sin(t)}" y1="${50-40*Math.cos(t)}" x2="${50+46*Math.sin(t)}" y2="${50-46*Math.cos(t)}" stroke="#B9B0A2" stroke-width="${i%3?1:2}"/>`}).join("")}${path}<circle cx="50" cy="50" r="5" fill="#5B5248"/></svg>`}
-function tmUpd(){const p=document.getElementById("tmr");if(!p||p.hidden)return;const f=p.querySelector(".tmface"),t=p.querySelector(".tmtime");if(f)f.innerHTML=tmFace(+f.dataset.s);if(t)t.textContent=tmFmt(tmRem())}
+/* Cadran sur 60 minutes, lu comme une horloge : la partie rouge part de midi vers la droite */
+function tmFace(size,labels){const ms=TM.dur?tmRem():TM.set*60000;
+  if(TM.style==="sablier"){const f=TM.dur?Math.max(0,Math.min(1,tmRem()/TM.dur)):1;const h=size,w=size*.7,top=f,bot=1-f;return `<svg viewBox="0 0 70 100" width="${w}" height="${h}" class="tmsab" aria-hidden="true"><path d="M8 4h54M8 96h54" stroke="#8B6B43" stroke-width="5" stroke-linecap="round"/><path d="M14 8c0 22 18 28 18 42s-18 20-18 42h42c0-22-18-28-18-42s18-20 18-42z" fill="#FFFDF7" stroke="#B9A37E" stroke-width="2.5"/><clipPath id="tmct"><rect x="0" y="${8+42*(1-top)}" width="70" height="${42*top}"/></clipPath><clipPath id="tmcb"><rect x="0" y="${92-42*bot}" width="70" height="${42*bot}"/></clipPath><path clip-path="url(#tmct)" d="M16 8c0 21 17 27 17 41h4c0-14 17-20 17-41z" fill="#E3B65C"/><path clip-path="url(#tmcb)" d="M16 92c0-21 17-27 17-41h4c0 14 17 20 17 41z" fill="#E3B65C"/>${TM.dur&&f>0&&f<1&&!TM.paused?'<rect x="34" y="49" width="2" height="40" fill="#E3B65C" opacity=".8"/>':""}</svg>`}
+  const f=Math.max(0,Math.min(1,ms/3600000)),a=f*360,R=labels?36:44;const pt=(deg,r)=>[50+r*Math.sin(deg*Math.PI/180),50-r*Math.cos(deg*Math.PI/180)];
+  const [x,y]=pt(a,R);const path=f>=1?`<circle cx="50" cy="50" r="${R}" fill="#D9473A"/>`:f<=0?"":`<path d="M50 50 L50 ${50-R} A${R} ${R} 0 ${a>180?1:0} 1 ${x.toFixed(2)} ${y.toFixed(2)} Z" fill="#D9473A"/>`;
+  const ticks=Array.from({length:60},(_,i)=>{const [x1,y1]=pt(i*6,R+(i%5?1.5:0)),[x2,y2]=pt(i*6,R+4);return `<line x1="${x1.toFixed(2)}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2.toFixed(2)}" stroke="#9C9284" stroke-width="${i%5?.4:.9}"/>`}).join("");
+  const nums=labels?Array.from({length:12},(_,i)=>{const [tx,ty]=pt(i*30,R+9.5);return `<text x="${tx.toFixed(2)}" y="${(ty+2.3).toFixed(2)}" text-anchor="middle" font-size="6.5" font-weight="700" fill="#5B5248">${i*5}</text>`}).join(""):"";
+  return `<svg viewBox="0 0 100 100" width="${size}" height="${size}" aria-hidden="true"><circle cx="50" cy="50" r="49" fill="#fff" stroke="#D8D0C2" stroke-width="1.5"/>${path}${ticks}${nums}${f>0&&f<1?(()=>{const [hx,hy]=pt(a,R);return `<circle cx="${hx.toFixed(2)}" cy="${hy.toFixed(2)}" r="${labels?3.2:0}" fill="#fff" stroke="#A8352B" stroke-width="1"/>`})():""}<circle cx="50" cy="50" r="5" fill="#5B5248"/></svg>`}
+function tmUpd(force){const p=document.getElementById("tmr");if(!p||p.hidden)return;p.querySelectorAll(".tmface").forEach(f=>{f.innerHTML=tmFace(+f.dataset.s,f.dataset.l==="1")});p.querySelectorAll(".tmtime").forEach(t=>{t.textContent=TM.dur?tmFmt(tmRem()):TM.set+" min"});if(force){const st=p.querySelector('[data-tm="start"]');if(st)st.disabled=!TM.set}}
 function tmDraw(){const p=document.getElementById("tmr"),b=document.getElementById("tmfab");if(!p)return;p.hidden=!TM.open;if(b)b.style.display=TM.open?"none":(document.getElementById("fab")||{style:{}}).style.display;
-  p.className="tmr"+(TM.big?" big":"")+(TM.mini?" mini":"")+(TM.done?" done":"");if(!TM.open){p.innerHTML="";return}
+  const run=TM.dur>0;p.className="tmr"+(TM.big&&!TM.mini?" big":"")+(TM.mini?" mini":"")+(TM.done?" done":"");if(!TM.open){p.innerHTML="";return}
   const btn=(a,l,x="")=>`<button class="tmb" data-tm="${a}" ${x}>${l}</button>`;
-  if(TM.mini){p.innerHTML=`<button class="tmpill" data-tm="mini" aria-label="Ouvrir la minuterie"><span class="tmface" data-s="30">${tmFace(30)}</span><b class="tmtime">${TM.dur?tmFmt(tmRem()):""}</b></button>`;return}
-  if(!TM.dur){p.innerHTML=`<div class="tmhd"><b>Minuterie</b>${btn("close","✕",'aria-label="Fermer"')}</div>
-   <div class="tmpre">${[1,2,3,5,10,15].map(m=>`<button class="tmm${m===TM.last?" on":""}" data-tm="go" data-m="${m}">${m} min</button>`).join("")}</div>
-   <div class="tmoth"><input id="tmOther" type="number" min="0.5" step="0.5" inputmode="decimal" placeholder="autre"><span>min</span>${btn("other","Go")}</div>
-   <div class="tmopt"><button class="tms${TM.style==="disque"?" on":""}" data-tm="style" data-v="disque">● Disque</button><button class="tms${TM.style==="sablier"?" on":""}" data-tm="style" data-v="sablier">⏳ Sablier</button><button class="tms${TM.snd?" on":""}" data-tm="snd" aria-pressed="${TM.snd}">${TM.snd?"🔔 Son":"🔕 Muet"}</button></div>
-   <div class="tmopt"><button class="tms${TM.lg?"":" on"}" data-tm="size" data-v="sm">Petite</button><button class="tms${TM.lg?" on":""}" data-tm="size" data-v="lg">⛶ Plein écran</button></div>`;return}
-  const S2=TM.big?Math.min(window.innerWidth*0.86,window.innerHeight*0.62):110;
-  p.innerHTML=`${TM.big?"":`<div class="tmhd"><b>${TM.done?"Terminé !":"Minuterie"}</b><span>${btn("big","⛶",'aria-label="Plein écran"')}${btn("mini","–",'aria-label="Réduire"')}${btn("close","✕",'aria-label="Arrêter et fermer"')}</span></div>`}
-   <button class="tmface" data-tm="big" data-s="${Math.round(S2)}" aria-label="${TM.big?"Réduire":"Agrandir pour le groupe"}">${tmFace(Math.round(S2))}</button>
-   <div class="tmtime">${tmFmt(tmRem())}</div>
-   <div class="tmctl">${TM.done?"":btn("pause",TM.paused?"▶":"⏸",`aria-label="${TM.paused?"Reprendre":"Pause"}"`)}${btn("plus","+1 min")}${btn("reset","↺",'aria-label="Recommencer"')}${TM.big?btn("big","Petite fenêtre"):""}</div>`}
+  if(TM.mini){p.innerHTML=`<button class="tmpill" data-tm="mini" aria-label="Ouvrir la minuterie"><span class="tmface" data-s="30">${tmFace(30)}</span><b class="tmtime">${run?tmFmt(tmRem()):""}</b></button>`;return}
+  const big=TM.big,S2=big?Math.round(Math.min(window.innerWidth*0.9,window.innerHeight*0.55)):130,lab=big?"1":"0";
+  const top=`<div class="tmhd"><b>${TM.done?"Terminé !":run?"":"Minuterie"}</b><span>${btn("style",TM.style==="sablier"?(big?"⏱ Horloge":"⏱"):(big?"⏳ Sablier":"⏳"),`aria-label="${TM.style==="sablier"?"Horloge":"Sablier"}"`)}${btn("snd",TM.snd?"🔔":"🔕",`aria-label="${TM.snd?"Son activé":"Muet"}"`)}${run?btn("big",big?"Petite":"⛶",`aria-label="${big?"Petite fenêtre":"Plein écran"}"`):""}${!big&&run?btn("mini","–",'aria-label="Réduire"'):""}${btn("close","✕",'aria-label="Fermer"')}</span></div>`;
+  const face=`<div class="tmface${TM.style==="sablier"?"":" tmdial"}" data-s="${S2}" data-l="${lab}">${tmFace(S2,big)}</div>`;
+  if(!run){p.innerHTML=`${top}${face}<div class="tmtime">${TM.set} min</div>${TM.style==="sablier"?"":`<p class="tmhint">Glissez le doigt sur l'horloge pour régler</p>`}
+    <div class="tmpre">${[1,5,10].map(m=>`<button class="tmm" data-tm="go" data-m="${m}">${m} min</button>`).join("")}</div>
+    <button class="btn primary tmgo" data-tm="start" ${TM.set?"":"disabled"}>▶ Démarrer</button>`;return}
+  p.innerHTML=`${top}${face}<div class="tmtime">${tmFmt(tmRem())}</div>
+   <div class="tmctl">${TM.done?"":btn("pause",TM.paused?"▶":"⏸",`aria-label="${TM.paused?"Reprendre":"Pause"}"`)}${btn("plus","+1 min")}${btn("reset","↺",'aria-label="Recommencer"')}</div>`}
 /* ---------- Utilitaires ---------- */
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
